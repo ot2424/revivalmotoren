@@ -54,6 +54,12 @@ img{display:block;max-width:100%}
   --whatsapp-bg: linear-gradient(180deg,rgba(234,255,241,.95) 0%,rgba(223,248,232,.85) 100%);
   --whatsapp-border: rgba(37,211,102,.22);
   --whatsapp-color: #215c3f;
+  --mob-bg: linear-gradient(180deg,rgba(248,246,241,.98) 0%,rgba(241,237,230,.98) 100%);
+  --mob-border: rgba(24,24,24,.12);
+  --mob-close-bg: rgba(0,0,0,.04);
+  --mob-close-color: #4c4c4c;
+  --mob-wa-bg: rgba(37,211,102,.12);
+  --mob-wa-color: #0f5132;
   --sans:     'Geist', system-ui, -apple-system, sans-serif;
   --rad:      14px;
   --rad2:     20px;
@@ -100,6 +106,14 @@ html[data-theme="dark"]{
   --whatsapp-bg: linear-gradient(180deg,rgba(31,68,49,.72) 0%,rgba(21,48,36,.84) 100%);
   --whatsapp-border: rgba(84,199,127,.22);
   --whatsapp-color: #d6f5df;
+  --mob-bg:
+    radial-gradient(circle at top center, rgba(198,163,109,.10), transparent 34%),
+    linear-gradient(180deg, rgba(13,14,16,.98) 0%, rgba(16,17,19,.98) 100%);
+  --mob-border: rgba(255,255,255,.10);
+  --mob-close-bg: rgba(255,255,255,.06);
+  --mob-close-color: #e4e0d7;
+  --mob-wa-bg: linear-gradient(180deg,rgba(31,68,49,.72) 0%,rgba(21,48,36,.84) 100%);
+  --mob-wa-color: #d6f5df;
 }
 
 body{
@@ -225,15 +239,20 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .hbg span{display:block;width:18px;height:1.5px;background:var(--ink);border-radius:2px}
 .mob{
   display:none;position:fixed;inset:0;
-  background:linear-gradient(180deg,rgba(248,246,241,.98) 0%,rgba(241,237,230,.98) 100%);
+  background:var(--mob-bg);
   z-index:399;flex-direction:column;padding:104px 24px 40px;gap:0;
 }
 .mob.open{display:flex}
-.mob a{font-size:24px;font-weight:700;color:var(--ink);text-decoration:none;padding:18px 0;border-bottom:1px solid var(--rule);letter-spacing:-.03em}
+.mob a{font-size:24px;font-weight:700;color:var(--ink);text-decoration:none;padding:18px 0;border-bottom:1px solid var(--mob-border);letter-spacing:-.03em}
 .mob a:hover{color:var(--mid)}
-.mob-cta{margin-top:28px;background:var(--ink);color:#fff;text-align:center;padding:16px;border-radius:40px;font-size:16px;font-weight:700;text-decoration:none}
-.mob-wa{margin-top:12px;background:rgba(37,211,102,.12);color:#0f5132;text-align:center;padding:16px;border-radius:40px;font-size:16px;font-weight:700;text-decoration:none;border:none}
-.mob-x{position:absolute;top:28px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--mid);font-family:var(--sans)}
+.mob-cta{margin-top:28px;background:var(--primary-btn-bg);color:var(--primary-btn-text);text-align:center;padding:16px;border-radius:40px;font-size:16px;font-weight:700;text-decoration:none}
+.mob-wa{margin-top:12px;background:var(--mob-wa-bg);color:var(--mob-wa-color);text-align:center;padding:16px;border-radius:40px;font-size:16px;font-weight:700;text-decoration:none;border:none}
+.mob-x{
+  position:absolute;top:28px;right:20px;
+  width:44px;height:44px;border-radius:14px;
+  background:var(--mob-close-bg);border:1px solid var(--mob-border);
+  font-size:22px;cursor:pointer;color:var(--mob-close-color);font-family:var(--sans)
+}
 
 /* ── HERO ─────────────────────────────── */
 #hero{padding:158px 0 24px;display:flex;flex-direction:column;align-items:center;min-height:100vh}
