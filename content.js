@@ -125,7 +125,7 @@ window.siteContent = {
   // Kleine Vorteile / Badges unter dem Hero
   heroPills: [
     '🛡️ 12 Monate Garantie',
-    '🚗 DE-weite Abholung',
+    '🚗 EU-weite Abholung',
     '⏱️ 7–15 Werktage',
     '🔩 OEM-Ersatzteile',
     '📋 Kostenloser Voranschlag',
@@ -279,7 +279,7 @@ window.siteContent = {
     { value: '12<em>M</em>', label: 'Garantie auf alle Reparaturen' },
     { value: '7–<em>15</em>', label: 'Werktage Reparaturdauer' },
     { value: '100<em>%</em>', label: 'OEM-Qualitätsstandard' },
-    { value: 'DE-<em style="font-size:.8em">weit</em>', label: 'Fahrzeugabholung', style: 'font-size:22px;letter-spacing:-.02em' }
+    { value: 'EU-<em style="font-size:.8em">weit</em>', label: 'Fahrzeugabholung', style: 'font-size:22px;letter-spacing:-.02em' }
   ],
   // Optionen im Motortyp-Dropdown
   engineOptions: ['R4 – Reihenmotor', 'R6 – Reihenmotor', 'V6 – V-Motor', 'V8 – V-Motor', 'V10 – V-Motor', 'V12 – V-Motor', 'Sonstiges'],
