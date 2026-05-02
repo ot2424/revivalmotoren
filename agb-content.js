@@ -9,7 +9,6 @@ window.agbContent = {
   hero: {
     eyebrow: 'Rechtliches',
     title: 'Allgemeine Geschäftsbedingungen und Kundeninformationen',
-    subtitle: 'Alle Inhalte dieser Seite sind zentral ausgelagert und können künftig direkt in der JS-Datei gepflegt werden, ohne die HTML-Struktur anfassen zu müssen.'
   },
   sections: [
     {
