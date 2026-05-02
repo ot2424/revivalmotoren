@@ -120,5 +120,4 @@ window.agbContent = {
       ]
     }
   ],
-  note: 'Hinweis: Bitte Straße, Ort, E-Mail und Telefonnummer vor der Veröffentlichung durch die echten Unternehmensdaten ersetzen und die AGB abschließend rechtlich prüfen lassen.'
 };
