@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden;width:100%;max-width:100%}
 img{display:block;max-width:100%}
 
 :root{
@@ -114,10 +114,13 @@ html[data-theme="dark"]{
 }
 
 body{
+  width:100%;
+  max-width:100%;
   font-family:var(--sans);color:var(--ink);overflow-x:hidden;
   background:var(--page-bg);
   transition:background .35s ease,color .25s ease;
 }
+#app{width:100%;max-width:100%;overflow-x:clip}
 ::selection{background:var(--ink);color:#fff}
 html::-webkit-scrollbar{width:3px}
 html::-webkit-scrollbar-thumb{background:var(--ink)}
@@ -142,7 +145,7 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   will-change:transform,opacity;
 }
 #nav.is-hidden{
-  transform:translateX(-50%) translateY(-132%);
+  transform:translateX(-50%) translateY(calc(-100% - 28px));
   opacity:0;
   pointer-events:none;
 }
@@ -1633,32 +1636,97 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     width:calc(100% - 16px);
   }
   .brands-preview-stage{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
     padding:10px;
     border-radius:28px;
-    min-height:500px;
+    min-height:auto;
   }
   .brands-preview-copy{
-    left:18px;
-    right:18px;
-    bottom:18px;
-    width:auto;
-    padding:20px;
+    position:relative;
+    left:auto;
+    right:auto;
+    bottom:auto;
+    width:100%;
+    order:2;
+    padding:18px 18px 18px;
     border-radius:22px;
+    background:linear-gradient(180deg, rgba(17,18,21,.94) 0%, rgba(11,12,14,.98) 100%);
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 16px 34px rgba(0,0,0,.24);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    gap:12px;
   }
-  .brands-preview-title{font-size:clamp(28px,8vw,40px)}
-  .brands-preview-text{font-size:14px;line-height:1.72}
+  .brands-preview-title{
+    font-size:clamp(26px,7.4vw,34px);
+    line-height:1.02;
+    margin:0 0 8px;
+    max-width:14ch;
+    text-wrap:pretty;
+  }
+  .brands-preview-text{
+    font-size:13px;
+    line-height:1.62;
+    max-width:none;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .brands-preview-list{
+    margin-top:12px;
+    gap:7px;
+  }
+  .brands-preview-list span{
+    min-height:30px;
+    padding:0 10px;
+    font-size:11px;
+  }
+  .brands-preview-list span:nth-child(n+6){
+    display:none;
+  }
   .brands-preview-collage{
-    min-height:480px;
+    order:1;
+    flex:0 0 auto;
+    min-height:300px;
+    height:300px;
+    max-height:300px;
     border-radius:22px;
   }
   .brands-preview-overlay{
-    padding:20px;
+    align-items:flex-end;
+    justify-content:flex-start;
+    padding:16px;
+    background:linear-gradient(180deg, rgba(9,10,12,.08) 0%, rgba(9,10,12,.12) 30%, rgba(10,10,12,.74) 100%);
   }
-  .brands-preview-overlay strong{font-size:28px}
+  .brands-preview-overlay strong{
+    font-size:22px;
+    margin-bottom:4px;
+  }
+  .brands-preview-overlay span{
+    font-size:12px;
+    line-height:1.45;
+    max-width:180px;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
   .brands-preview-slider-ui{
-    left:20px;
-    right:20px;
-    top:20px;
+    left:16px;
+    right:16px;
+    top:16px;
+    bottom:auto;
+    align-items:flex-start;
+  }
+  .brands-preview-dot{
+    width:8px;
+    height:8px;
+  }
+  .brands-preview-dot.is-active{
+    width:22px;
   }
   .brands-header .sec-label{margin-bottom:10px;font-size:11px}
   .brands-header .sec-h{
@@ -1951,23 +2019,51 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .brands-preview{
     width:calc(100% - 16px);
   }
-  .brands-preview-stage{min-height:440px}
+  .brands-preview-stage{
+    gap:10px;
+    min-height:auto;
+  }
   .brands-preview-copy{
-    left:14px;
-    right:14px;
-    bottom:14px;
-    width:auto;
-    padding:18px;
+    padding:16px 16px 16px;
   }
   .brands-preview-list{gap:8px}
   .brands-preview-list span{
-    min-height:32px;
+    min-height:30px;
     padding:0 10px;
-    font-size:12px;
+    font-size:11px;
   }
-  .brands-preview-collage{min-height:416px}
-  .brands-preview-overlay strong{font-size:24px}
-  .brands-preview-overlay span{font-size:13px}
+  .brands-preview-collage{
+    min-height:300px;
+    height:300px;
+    max-height:300px;
+  }
+  .brands-preview-title{
+    font-size:clamp(20px,7.8vw,28px);
+    line-height:1.02;
+    max-width:14ch;
+  }
+  .brands-preview-text{
+    font-size:12px;
+    line-height:1.56;
+    -webkit-line-clamp:2;
+  }
+  .brands-preview-list span:nth-child(n+5){
+    display:none;
+  }
+  .brands-preview-overlay{
+    padding:14px;
+  }
+  .brands-preview-overlay strong{font-size:18px}
+  .brands-preview-overlay span{
+    font-size:10px;
+    max-width:136px;
+  }
+  .brands-preview-link{
+    min-height:44px;
+    padding:11px 16px;
+    font-size:13px;
+    width:100%;
+  }
   #nav{width:calc(100% - 16px);top:8px;padding:8px}
   .nav-layout{gap:8px}
   .nav-brand{gap:8px;padding:5px 7px 5px 5px;border-radius:18px}
@@ -2075,6 +2171,14 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .hpill{width:100%}
   .mob a{font-size:20px}
 }
+
+
+
+
+
+
+
+
 </style>
 </head>
 <body>
@@ -2600,17 +2704,11 @@ function updateNavChrome(){
   const currentY = window.scrollY;
   const delta = currentY - lastNavScrollY;
   const mobileView = window.innerWidth <= 1180;
-  const compactThreshold = 80;
-  const hideThreshold = 180;
-  const directionThreshold = 10;
+  const compactThreshold = mobileView ? 48 : 80;
+  const hideThreshold = mobileView ? 96 : 180;
+  const directionThreshold = mobileView ? 6 : 10;
 
   nav.classList.toggle('is-compact', currentY > compactThreshold);
-
-  if(mobileView){
-    nav.classList.remove('is-hidden');
-    lastNavScrollY = currentY;
-    return;
-  }
   if(currentY <= 24){
     navHidden = false;
     nav.classList.remove('is-hidden');
