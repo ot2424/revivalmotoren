@@ -6,114 +6,457 @@
 <title>AGB – Revival Motoren</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:
+    radial-gradient(circle at top left, rgba(198,163,109,.12), transparent 26%),
+    radial-gradient(circle at 85% 18%, rgba(99,117,150,.10), transparent 24%),
+    linear-gradient(180deg,#0e0f11 0%,#131416 52%,#111214 100%);
+  --surface:rgba(18,19,21,.86);
+  --surface-solid:#14161a;
+  --surface-soft:#17191d;
+  --ink:#f2eee7;
+  --text:rgba(228,222,212,.78);
+  --muted:rgba(200,194,184,.66);
+  --line:rgba(255,255,255,.08);
+  --shadow:0 22px 60px rgba(0,0,0,.28);
+  --hero:#0d0e10;
+  --hero-text:#f6f2eb;
+  --hero-soft:rgba(244,239,231,.74);
+  --btn:#f3efe7;
+  --btn-text:#111214;
+}
 body{
   font-family:'Geist',system-ui,-apple-system,sans-serif;
-  color:#0d0d0d;
-  background:
-    radial-gradient(circle at top left, rgba(176,141,87,.12), transparent 28%),
-    linear-gradient(180deg,#f7f5f1 0%,#f1efea 100%);
-  line-height:1.7;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.72;
 }
+::selection{background:var(--ink);color:#111214}
 a{color:inherit}
-.wrap{max-width:980px;margin:0 auto;padding:24px}
-.topbar{
-  display:flex;justify-content:space-between;align-items:center;gap:16px;
-  padding:16px 20px;margin-top:12px;
-  background:rgba(255,255,255,.88);backdrop-filter:blur(18px);
-  border:1px solid #e0e0de;border-radius:999px;
+.page{
+  width:min(1380px, calc(100% - 24px));
+  margin:0 auto;
+  padding:16px 0 56px;
 }
-.brand{font-size:15px;font-weight:800;text-decoration:none}
-.back{
-  text-decoration:none;padding:10px 16px;border-radius:999px;
-  background:#0d0d0d;color:#fff;font-size:13px;font-weight:700;
+.topbar{
+  position:sticky;
+  top:12px;
+  z-index:30;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:16px;
+  padding:10px;
+  border-radius:28px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:var(--shadow);
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+  padding:9px 18px 9px 9px;
+  border-radius:24px;
+  text-decoration:none;
+  background:linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.02) 100%);
+  border:1px solid rgba(255,255,255,.06);
+  min-height:70px;
+}
+.brand-icon{
+  width:64px;
+  height:64px;
+  border-radius:18px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(49,51,55,.92), rgba(23,25,28,.92)),
+    linear-gradient(180deg,#1c1f23 0%,#121417 100%);
+  border:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 12px 28px rgba(0,0,0,.14);
+}
+.brand-icon img{width:80%;height:80%;object-fit:contain;padding:0;filter:drop-shadow(0 6px 12px rgba(0,0,0,.12))}
+.brand-copy{min-width:0}
+.brand-name{
+  display:block;
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:-.045em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.brand-tagline{
+  display:block;
+  font-size:12px;
+  font-weight:650;
+  color:var(--muted);
+  line-height:1.1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.topbar-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.topbar-center{
+  min-width:0;
+  display:flex;
+  justify-content:center;
+}
+.topbar-nav{
+  display:flex;
+  list-style:none;
+  gap:4px;
+  align-items:center;
+  padding:6px;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.02) 100%);
+  border:1px solid rgba(255,255,255,.06);
+  max-width:100%;
+  overflow:auto;
+}
+.topbar-nav a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:0 18px;
+  border-radius:999px;
+  text-decoration:none;
+  white-space:nowrap;
+  color:var(--muted);
+  font-size:14px;
+  font-weight:650;
+  transition:background .2s ease,color .2s ease,transform .2s ease;
+}
+.topbar-nav a:hover{
+  color:var(--ink);
+  background:rgba(255,255,255,.08);
+  transform:translateY(-1px);
+}
+.back-link{
+  min-height:48px;
+  padding:0 20px;
+  border-radius:999px;
+  border:1px solid transparent;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  font-weight:750;
+  background:var(--btn);
+  color:var(--btn-text);
+  letter-spacing:-.02em;
+}
+.nav-contact{
+  min-height:48px;
+  padding:0 20px;
+  border-radius:999px;
+  background:#f3efe7;
+  color:#111214;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  font-weight:750;
+  letter-spacing:-.02em;
 }
 .hero{
-  padding:72px 0 34px;
+  margin-top:18px;
+  padding:34px;
+  border-radius:34px;
+  background:linear-gradient(180deg, rgba(17,18,20,.98) 0%, rgba(12,13,15,.98) 100%);
+  border:1px solid rgba(255,255,255,.06);
+  color:var(--hero-text);
+  box-shadow:var(--shadow);
 }
-.label{
-  display:inline-flex;font-size:12px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:#8a8a8a;margin-bottom:16px;
+.eyebrow{
+  display:inline-flex;
+  margin-bottom:14px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(200,194,184,.58);
 }
-h1{
-  font-size:clamp(38px,7vw,76px);line-height:1;letter-spacing:-.05em;
+.hero h1{
+  font-size:clamp(34px,6vw,72px);
+  line-height:.95;
+  letter-spacing:-.06em;
+  max-width:900px;
   margin-bottom:16px;
 }
-.sub{max-width:680px;color:#676767;font-size:16px}
-.card{
-  background:#fff;border:1px solid #e0e0de;border-radius:24px;
-  padding:40px 32px;box-shadow:0 10px 30px rgba(0,0,0,.05);
+.hero p{
+  max-width:760px;
+  font-size:16px;
+  line-height:1.82;
+  color:var(--hero-soft);
 }
-.content h2{
-  font-size:22px;font-weight:800;letter-spacing:-.03em;
-  margin:28px 0 10px;
+.content-grid{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(280px,.58fr);
+  gap:18px;
+  align-items:start;
 }
-.content h2:first-child{margin-top:0}
-.content p,.content li{font-size:14px;color:#4e4e4e}
-.content ul{padding-left:18px}
+.content-card,
+.side-card{
+  border-radius:30px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+.content-card{padding:28px}
+.side-card{
+  position:sticky;
+  top:98px;
+  padding:24px;
+}
+.section-title{
+  font-size:28px;
+  line-height:1;
+  letter-spacing:-.04em;
+  margin-bottom:20px;
+}
+.legal-group + .legal-group{
+  margin-top:28px;
+  padding-top:28px;
+  border-top:1px solid var(--line);
+}
+.legal-group h3{
+  font-size:24px;
+  line-height:1.05;
+  letter-spacing:-.04em;
+  margin-bottom:18px;
+}
+.legal-block + .legal-block{margin-top:20px}
+.legal-block h4{
+  font-size:17px;
+  line-height:1.35;
+  letter-spacing:-.02em;
+  margin-bottom:10px;
+  color:var(--ink);
+}
+.legal-block p{
+  font-size:14px;
+  color:var(--text);
+}
+.legal-block p + p{margin-top:10px}
+.side-title{
+  font-size:22px;
+  line-height:1;
+  letter-spacing:-.04em;
+  margin-bottom:12px;
+}
+.side-copy{
+  font-size:14px;
+  color:var(--text);
+  line-height:1.75;
+  margin-bottom:18px;
+}
+.contact-list{
+  display:grid;
+  gap:10px;
+  margin-bottom:18px;
+}
+.contact-item{
+  padding:14px 16px;
+  border-radius:18px;
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+}
+.contact-item strong{
+  display:block;
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:4px;
+}
+.contact-item span,
+.contact-item a{
+  font-size:14px;
+  color:var(--ink);
+  text-decoration:none;
+}
 .note{
-  margin-top:24px;padding:16px 18px;border-radius:16px;
-  background:#f5f5f3;border:1px solid #e0e0de;color:#666;font-size:13px;
+  padding:16px 18px;
+  border-radius:18px;
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  font-size:13px;
+  color:var(--text);
+  line-height:1.75;
+}
+.floating-contact{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:35;
+  min-height:54px;
+  padding:0 20px;
+  border-radius:999px;
+  background:#f3efe7;
+  color:#111214;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:-.02em;
+  box-shadow:0 18px 42px rgba(0,0,0,.24);
+}
+@media(max-width:980px){
+  .content-grid{grid-template-columns:1fr}
+  .side-card{position:static}
+  .topbar{
+    grid-template-columns:1fr;
+  }
+  .topbar-center{
+    justify-content:flex-start;
+  }
 }
 @media(max-width:768px){
-  .wrap{padding:12px}
-  .topbar{padding:14px 16px}
-  .card{padding:28px 20px}
-  .hero{padding:52px 0 28px}
+  .page{width:calc(100% - 16px);padding-top:12px}
+  .topbar{grid-template-columns:1fr;gap:10px;border-radius:24px}
+  .topbar-actions{justify-content:space-between;flex-wrap:wrap}
+  .topbar-nav{
+    width:100%;
+    justify-content:flex-start;
+  }
+  .brand-name{font-size:18px}
+  .brand-tagline{font-size:11px}
+  .hero{padding:24px;border-radius:28px}
+  .content-card,.side-card{padding:22px;border-radius:24px}
+  .section-title{font-size:24px}
+  .legal-group h3{font-size:20px}
+  .back-link,.nav-contact{flex:1}
+  .floating-contact{
+    right:12px;
+    bottom:12px;
+    min-height:50px;
+    padding:0 16px;
+    font-size:13px;
+  }
 }
 </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="page">
     <div class="topbar">
-      <a class="brand" href="index.html">Revival Motoren</a>
-      <a class="back" href="index.html#kontakt">Zurück zur Anfrage</a>
+      <a href="index.html" class="brand">
+        <span class="brand-icon"><img id="brandLogo" src="logo-icon-gold.png" alt="Revival Motoren Logo"></span>
+        <span class="brand-copy">
+          <span class="brand-name">Revival Motoren</span>
+          <span class="brand-tagline">Wir beleben Ihren Motor</span>
+        </span>
+      </a>
+      <div class="topbar-center">
+        <ul class="topbar-nav" id="legalNav"></ul>
+      </div>
+      <div class="topbar-actions">
+        <a class="nav-contact" href="index.html#kontakt">Angebot anfragen</a>
+        <a class="back-link" href="index.html#kontakt">Zurück zur Anfrage</a>
+      </div>
     </div>
 
     <section class="hero">
-      <span class="label">Rechtliches</span>
-      <h1>Allgemeine<br>Geschäftsbedingungen</h1>
-      <p class="sub">Diese Vorlage dient als strukturierte Basis für die AGB von Revival Motoren. Für den rechtssicheren Live-Einsatz sollte der Text abschließend juristisch geprüft und an Ihre tatsächlichen Leistungen, Abläufe und Garantiebedingungen angepasst werden.</p>
+      <span class="eyebrow" id="heroEyebrow"></span>
+      <h1 id="heroTitle"></h1>
+      <p id="heroSubtitle"></p>
     </section>
 
-    <section class="card content">
-      <h2>1. Geltungsbereich</h2>
-      <p>Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen Revival Motoren und ihren Kunden über Diagnose, Motorinstandsetzung, Reparatur, Aufbereitung, Abholung, Lieferung sowie sonstige werkstattbezogene Leistungen.</p>
+    <section class="content-grid">
+      <article class="content-card">
+        <h2 class="section-title">AGB & Kundeninformationen</h2>
+        <div id="legalContent"></div>
+      </article>
 
-      <h2>2. Vertragsschluss</h2>
-      <p>Die Anfrage des Kunden über das Kontaktformular, telefonisch, per E-Mail oder auf anderem Wege stellt zunächst keine verbindliche Annahme dar. Ein Vertrag kommt erst durch ausdrückliche Auftragsbestätigung oder durch Beginn der Arbeiten nach Freigabe des Kostenvoranschlags zustande.</p>
-
-      <h2>3. Leistungen</h2>
-      <p>Der Leistungsumfang richtet sich nach dem individuell abgestimmten Auftrag. Zusätzliche Arbeiten, die im Rahmen der Diagnose oder Reparatur erforderlich werden, dürfen nur nach Rücksprache mit dem Kunden durchgeführt werden, sofern nicht Gefahr im Verzug besteht oder die Maßnahme zur Schadensvermeidung zwingend notwendig ist.</p>
-
-      <h2>4. Preise und Zahlung</h2>
-      <p>Es gelten die im Angebot oder in der Auftragsbestätigung genannten Preise. Soweit nicht anders vereinbart, sind Rechnungen sofort ohne Abzug fällig. Revival Motoren ist berechtigt, angemessene Abschlagszahlungen oder Vorauszahlungen zu verlangen, insbesondere bei umfangreichen Instandsetzungen oder bei der Bestellung spezieller Ersatzteile.</p>
-
-      <h2>5. Termine und Fertigstellung</h2>
-      <p>Angaben zu Reparaturdauer, Lieferzeiten oder Fertigstellungsterminen sind unverbindliche Richtwerte, sofern sie nicht ausdrücklich schriftlich als verbindlich vereinbart wurden. Verzögerungen aufgrund von Teileverfügbarkeit, unerwarteten technischen Befunden oder höherer Gewalt verlängern die Ausführungszeit angemessen.</p>
-
-      <h2>6. Mitwirkung des Kunden</h2>
-      <p>Der Kunde ist verpflichtet, alle für den Auftrag relevanten Informationen vollständig und wahrheitsgemäß anzugeben. Dazu gehören insbesondere bekannte Vorschäden, frühere Reparaturen, Warnmeldungen, Laufleistung und fahrzeugbezogene Unterlagen.</p>
-
-      <h2>7. Abholung und Lieferung</h2>
-      <p>Sofern eine Fahrzeugabholung oder Rücklieferung vereinbart wird, erfolgt diese nach individueller Absprache. Die Gefahr geht, soweit gesetzlich zulässig, mit Übergabe an den Transportdienstleister oder an den Kunden über, sofern nichts anderes vereinbart wurde.</p>
-
-      <h2>8. Gewährleistung</h2>
-      <p>Für Werkleistungen gelten die gesetzlichen Gewährleistungsrechte, soweit keine gesonderte Garantieerklärung abgegeben wurde. Eine etwaige freiwillige Garantie richtet sich ausschließlich nach den bei Auftragserteilung schriftlich mitgeteilten Garantiebedingungen.</p>
-
-      <h2>9. Haftung</h2>
-      <p>Revival Motoren haftet uneingeschränkt für Vorsatz und grobe Fahrlässigkeit sowie bei Verletzung von Leben, Körper oder Gesundheit. Bei leicht fahrlässiger Verletzung wesentlicher Vertragspflichten ist die Haftung auf den typischerweise vorhersehbaren Schaden begrenzt. Im Übrigen ist die Haftung ausgeschlossen, soweit gesetzlich zulässig.</p>
-
-      <h2>10. Eigentumsvorbehalt</h2>
-      <p>Gelieferte Teile, Komponenten und sonstige Waren bleiben bis zur vollständigen Bezahlung Eigentum von Revival Motoren.</p>
-
-      <h2>11. Schlussbestimmungen</h2>
-      <p>Es gilt das Recht der Bundesrepublik Deutschland. Sollten einzelne Bestimmungen dieser AGB ganz oder teilweise unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.</p>
-
-      <div class="note">Hinweis: Diese AGB-Seite ist eine inhaltliche Grundstruktur und ersetzt keine individuelle Rechtsberatung.</div>
+      <aside class="side-card">
+        <h2 class="side-title">Unternehmensdaten</h2>
+        <p class="side-copy">Die wichtigsten Angaben sowie der Hinweis zur Pflege dieser Seite sind separat ausgelagert und können direkt in der JS-Datei aktualisiert werden.</p>
+        <div class="contact-list" id="companyDetails"></div>
+        <div class="note" id="legalNote"></div>
+      </aside>
     </section>
   </div>
+
+  <a class="floating-contact" id="floatingContact" href="index.html#kontakt">Kontakt aufnehmen</a>
+
+  <script src="content.js"></script>
+  <script src="agb-content.js"></script>
+  <script>
+    const brandLogo = document.getElementById('brandLogo');
+    const legalNav = document.getElementById('legalNav');
+    const floatingContact = document.getElementById('floatingContact');
+    if(brandLogo && window.siteContent && window.siteContent.logo){
+      brandLogo.src = window.siteContent.logo.dark || window.siteContent.logo.light;
+    }
+
+    if(legalNav && window.siteContent && Array.isArray(window.siteContent.navItems)){
+      legalNav.innerHTML = window.siteContent.navItems.map(item => `
+        <li><a href="index.html${item.href}">${item.label}</a></li>
+      `).join('');
+    }
+
+    const whatsappNumber = window.siteContent && window.siteContent.business ? window.siteContent.business.whatsappNumber.replace(/\D/g,'') : '';
+    const whatsappMessage = window.siteContent && window.siteContent.business ? window.siteContent.business.whatsappMessage : '';
+    if(floatingContact && whatsappNumber){
+      floatingContact.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+      floatingContact.target = '_blank';
+      floatingContact.rel = 'noopener noreferrer';
+      floatingContact.textContent = 'WhatsApp Anfrage';
+    }
+
+    const data = window.agbContent;
+
+    document.getElementById('heroEyebrow').textContent = data.hero.eyebrow;
+    document.getElementById('heroTitle').textContent = data.hero.title;
+    document.getElementById('heroSubtitle').textContent = data.hero.subtitle;
+    document.getElementById('legalNote').textContent = data.note;
+
+    const companyDetails = [
+      { label: 'Unternehmen', value: data.company.name },
+      { label: 'Adresse', value: `${data.company.street}, ${data.company.city}` },
+      { label: 'E-Mail', value: data.company.email, href: data.company.email.startsWith('[') ? '' : `mailto:${data.company.email}` },
+      { label: 'Telefon', value: data.company.phone, href: data.company.phone.startsWith('[') ? '' : `tel:${data.company.phone.replace(/\s+/g,'')}` }
+    ];
+
+    document.getElementById('companyDetails').innerHTML = companyDetails.map(item => `
+      <div class="contact-item">
+        <strong>${item.label}</strong>
+        ${item.href ? `<a href="${item.href}">${item.value}</a>` : `<span>${item.value}</span>`}
+      </div>
+    `).join('');
+
+    document.getElementById('legalContent').innerHTML = data.sections.map(section => `
+      <section class="legal-group">
+        <h3>${section.title}</h3>
+        ${section.blocks.map(block => `
+          <div class="legal-block">
+            <h4>${block.heading}</h4>
+            ${block.paragraphs.map(paragraph => `<p>${paragraph}</p>`).join('')}
+          </div>
+        `).join('')}
+      </section>
+    `).join('');
+  </script>
 </body>
 </html>

@@ -10,7 +10,7 @@ window.siteContent = {
   // Hero-Bereich auf der Startseite
   hero: {
     title: 'Professionelle<br>Motorinstand&shy;setzung',
-    subtitle: 'Präzise PKW-Motorreparaturen in Bielefeld – mit modernster Diagnosetechnik und 12 Monaten Garantie.',
+    subtitle: 'Präzise PKW-Motorreparaturen in Bielefeld – mit modernster Diagnosetechnik und 12 Monaten Gewährleistung.',
     primaryAction: 'Kostenloses Angebot →',
     secondaryAction: 'Leistungen ansehen',
     image: {
@@ -45,6 +45,25 @@ window.siteContent = {
     title: 'Ingenieurskunst am Limit',
     subtitle: 'Wo Präzision auf rohe Gewalt trifft. Entdecke die Meilensteine der Motorenentwicklung, die Performance neu definiert haben.'
   },
+  // Kompakte Marken-Vorschau auf der Startseite
+  brandsPreview: {
+    label: 'Marken & Motoren',
+    title: 'Performance-Motoren kompakter entdecken',
+    body: 'Audi, BMW, Mercedes und Range Rover bekommen auf der Startseite nur noch eine kompakte Vorschau. Die ausführliche Motorenwelt mit allen Highlights, Bildern und Texten liegt auf einer eigenen Seite.',
+    button: 'Zu den Motoren →',
+    brands: [
+      'Audi',
+      'BMW',
+      'Mercedes',
+      'Range Rover',
+      'VW',
+      'Skoda',
+      'Toyota',
+      'Ford',
+      'Opel',
+      'Seat'
+    ]
+  },
   // Allgemeines Markenpanel unterhalb der Performance-Marken
   generalBrandsPanel: {
     label: 'Weitere Marken',
@@ -52,8 +71,8 @@ window.siteContent = {
     body: 'Neben den gezeigten Performance- und Oberklasse-Motoren betreuen wir selbstverständlich auch gängige Serienfahrzeuge und Alltagsmotoren. Ob VW Golf, Toyota, Ford, Opel, Skoda, Seat oder andere Modelle: Wir unterstützen Sie bei Diagnose, Instandsetzung und Reparatur mit derselben Sorgfalt, Präzision und OEM-orientierten Arbeitsweise.',
     button: 'Service anfragen →',
     images: [
-      { src: 'brands/golf.avif', alt: 'VW Golf' },
       { src: 'brands/gtr.jpg', alt: 'Nisan GTR' },
+      { src: 'brands/golf.avif', alt: 'VW Golf' },
       { src: 'brands/seat.jpg', alt: 'Seat Leon' },
       { src: 'brands/skoda.jpg', alt: 'Skoda Octavia VRS' },
       { src: 'brands/supra.jpg', alt: 'Toyota Supra' }
@@ -124,7 +143,7 @@ window.siteContent = {
   ],
   // Kleine Vorteile / Badges unter dem Hero
   heroPills: [
-    '🛡️ 12 Monate Garantie',
+    '🛡️ 12 Monate Gewährleistung',
     '🚗 EU-weite Abholung',
     '⏱️ 7–15 Werktage',
     '🔩 OEM-Ersatzteile',
@@ -134,7 +153,7 @@ window.siteContent = {
   // Vorteile im "Warum Revival Motoren"-Bereich
   whyFeatures: [
     { icon: '🔬', title: 'Präzise Diagnose', body: 'Modernste OBD-Messtechnik identifiziert jedes Problem exakt.' },
-    { icon: '🛡️', title: '12 Monate Garantie', body: 'Jede Reparatur ist vollständig abgesichert.' },
+    { icon: '🛡️', title: '12 Monate Gewährleistung', body: 'Jede Reparatur ist vollständig abgesichert.' },
     { icon: '🔩', title: 'OEM-Ersatzteile', body: 'Ausschließlich Original- und OEM-Qualitätsteile.' },
     { icon: '⚡', title: '7–15 Werktage', body: 'Schnelle Reparatur – Ihr Motor wieder einsatzbereit.' }
   ],
@@ -145,16 +164,18 @@ window.siteContent = {
     { src: 'Projects/Motor1.jpg', alt: 'Leistungsaggregat', speed: 12 },
     { src: 'Projects/Motorblock.jpg', alt: 'Motorraum Detail', speed: 16 }
   ],
+
+  //TODO !!!---------------------------------ICONS ---------------------------------!!!// 
   // Leistungs-Karten
   services: [
-    { icon: '🔬', title: 'Diagnose & Befund', body: 'Vollständige Fehleranalyse mit modernster OBD-Messtechnik. Transparenter Befundbericht und fester Kostenvoranschlag vor Beginn.', tags: ['Kompressionsprüfung', 'Öldruckkontrolle', 'Dichtigkeitsprüfung'] },
-    { icon: '🔩', title: 'Zylinderkopf-Instandsetzung', body: 'Druckprüfung, Ultraschallreinigung, Planen und vollständige Aufbereitung des Zylinderkopfes nach Herstellervorgaben.', tags: ['Ultraschall', 'Planen', 'Ventilsitze'] },
-    { icon: '⚙️', title: 'Kurbelwelle & Lager', body: 'Prüfung, Richten und Schleifen der Kurbelwelle. Austausch aller Haupt- und Pleuellager mit OEM-Teilen.', tags: ['Schleifen', 'Hauptlager', 'Pleuellager'] },
-    { icon: '🔗', title: 'Steuerkette & Timing', body: 'Austausch der Steuerkette inkl. Führungsschienen, Spanner und aller zugehörigen Komponenten.', tags: ['Führungsschienen', 'Spanner', 'Kettenkit'] },
-    { icon: '🏁', title: 'Honen & Kolbenringe', body: 'Professionelles Honen der Zylinder und Austausch aller Kolbenringe sowie Prüfung der Kolben.', tags: ['Honen', 'Kolbenringe', 'Ölpumpe'] },
-    { icon: '🚗', title: 'Abholung & Lieferung', body: 'Deutschlandweite Fahrzeugabholung direkt bei Ihnen zuhause – bequem, sicher und termingerecht.', tags: ['Deutschlandweit', 'Termintreu', 'Sicherer Transport'] }
+    { icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4h4"/><path d="M9 3h6"/><path d="M14.5 4 16 8"/><path d="M9.5 4 8 8"/><path d="M6 8h12"/><path d="M9 11a3 3 0 1 0 0 6"/><path d="M15 11a3 3 0 1 1 0 6"/><path d="M9 14h6"/></svg>', title: 'Diagnose & Befund', body: 'Vollständige Fehleranalyse mit modernster OBD-Messtechnik. Transparenter Befundbericht und fester Kostenvoranschlag vor Beginn.', tags: ['Kompressionsprüfung', 'Öldruckkontrolle', 'Dichtigkeitsprüfung'] },
+    { icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12"/><path d="M8 7v10"/><path d="M16 7v10"/><path d="M5 11h14"/><path d="M7 17h10"/><path d="M10 14h4"/></svg>', title: 'Zylinderkopf-Instandsetzung', body: 'Druckprüfung, Ultraschallreinigung, Planen und vollständige Aufbereitung des Zylinderkopfes nach Herstellervorgaben.', tags: ['Ultraschall', 'Planen', 'Ventilsitze'] },
+    { icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3"/><path d="M12 19v3"/><path d="m4.9 4.9 2.1 2.1"/><path d="m17 17 2.1 2.1"/><path d="M2 12h3"/><path d="M19 12h3"/><path d="m4.9 19.1 2.1-2.1"/><path d="m17 7 2.1-2.1"/></svg>', title: 'Kurbelwelle & Lager', body: 'Prüfung, Richten und Schleifen der Kurbelwelle. Austausch aller Haupt- und Pleuellager mit OEM-Teilen.', tags: ['Schleifen', 'Hauptlager', 'Pleuellager'] },
+    { icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7a2.5 2.5 0 1 0 0 5h3"/><path d="M14 12h3a2.5 2.5 0 1 0 0-5"/><path d="M10 9.5h4"/><path d="M9 14.5h6"/><path d="M8.5 17h7"/></svg>', title: 'Steuerkette & Timing', body: 'Austausch der Steuerkette inkl. Führungsschienen, Spanner und aller zugehörigen Komponenten.', tags: ['Führungsschienen', 'Spanner', 'Kettenkit'] },
+    { icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6v12"/><path d="M18 6v12"/><path d="M6 9h12"/><path d="M6 15h12"/><path d="M9.5 12h5"/></svg>', title: 'Honen & Kolbenringe', body: 'Professionelles Honen der Zylinder und Austausch aller Kolbenringe sowie Prüfung der Kolben.', tags: ['Honen', 'Kolbenringe', 'Ölpumpe'] },
+    { icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16h18"/><path d="M5 16l1.5-5h11L19 16"/><circle cx="8" cy="16" r="1.7"/><circle cx="16" cy="16" r="1.7"/><path d="M9 11V8h4"/></svg>', title: 'Abholung & Lieferung', body: 'Deutschlandweite Fahrzeugabholung direkt bei Ihnen zuhause – bequem, sicher und termingerecht.', tags: ['Deutschlandweit', 'Termintreu', 'Sicherer Transport'] }
   ],
-  // Projekt- / Referenzgalerie
+  // Projekt- / Referenzgalerie //------- Mehr Bilder zu bzgl projekt, vielleicht mit vorher nachher slider-------!!!//
   caseGallery: [
     { src: 'Projects/projekte/img-block.jpg', alt: 'Zylinderkopf', tag: 'Zylinderkopf', name: 'Druckprüfung & Planen', speed: 14 },
     { src: 'Projects/projekte/Motorblock.jpg', alt: 'Motorblock fertig', tag: 'Motorblock', name: 'OEM-Instandsetzung', speed: 12 },
@@ -276,7 +297,7 @@ window.siteContent = {
   ],
   // Kennzahlen im Über-uns-Bereich
   aboutSpecs: [
-    { value: '12<em>M</em>', label: 'Garantie auf alle Reparaturen' },
+    { value: '12<em>M</em>', label: 'Gewährleistung auf alle Reparaturen' },
     { value: '7–<em>15</em>', label: 'Werktage Reparaturdauer' },
     { value: '100<em>%</em>', label: 'OEM-Qualitätsstandard' },
     { value: 'EU-<em style="font-size:.8em">weit</em>', label: 'Fahrzeugabholung', style: 'font-size:22px;letter-spacing:-.02em' }

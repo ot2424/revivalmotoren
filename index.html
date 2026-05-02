@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -159,7 +159,6 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 #nav.is-compact .brand-tagline{font-size:11px}
 #nav.is-compact .navl{padding:5px}
 #nav.is-compact .navl a{padding:11px 16px;font-size:13px}
-#nav.is-compact .theme-toggle,#nav.is-compact .nav-tel{width:44px;height:44px}
 #nav.is-compact .nav-whatsapp{min-height:44px;padding:10px 16px;font-size:13px}
 #nav.is-compact .nav-btn{min-height:46px;padding:11px 20px;font-size:14px}
 
@@ -201,7 +200,7 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 }
 .navl a:hover,.navl a.on{color:var(--nav-active-color);background:var(--nav-active-bg)}
 .navl a:hover{transform:translateY(-1px)}
-.nav-end{display:flex;align-items:center;gap:10px;margin-left:0;flex-shrink:0}
+.nav-end{display:flex;align-items:center;gap:12px;margin-left:0;flex-shrink:0}
 .theme-toggle{
   border:1px solid var(--theme-btn-border);background:var(--theme-btn-bg);color:var(--theme-btn-color);
   width:48px;height:48px;border-radius:999px;display:flex;align-items:center;justify-content:center;
@@ -209,14 +208,6 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 }
 .theme-toggle:hover{transform:translateY(-1px);background:var(--theme-btn-hover)}
 .theme-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
-.nav-tel{
-  font-size:13px;font-weight:650;color:var(--mid);text-decoration:none;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  width:48px;height:48px;border-radius:999px;
-  border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.025);transition:all .2s;
-}
-.nav-tel svg{width:14px;height:14px;stroke:currentColor;fill:none}
-.nav-tel:hover{color:var(--ink);background:rgba(0,0,0,.06)}
 .nav-whatsapp{
   font-size:14px;font-weight:700;color:var(--whatsapp-color);text-decoration:none;
   display:flex;align-items:center;gap:7px;min-height:48px;padding:12px 20px;
@@ -328,7 +319,8 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .leistung-grid{display:flex;flex-direction:column;gap:2px}
 .lcard{background:var(--white);border:1px solid var(--rule);border-radius:var(--rad);padding:28px 28px;display:flex;align-items:flex-start;gap:18px;transition:all .3s;cursor:default}
 .lcard:hover{box-shadow:0 8px 32px rgba(0,0,0,.08);transform:translateY(-2px);border-color:var(--rule2)}
-.lcard-icon{width:44px;height:44px;flex-shrink:0;border-radius:12px;background:var(--bg);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font-size:20px}
+.lcard-icon{width:44px;height:44px;flex-shrink:0;border-radius:12px;background:var(--bg);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.lcard-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .lcard-title{font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--ink);margin-bottom:6px}
 .lcard-body{font-size:13px;color:var(--mid);line-height:1.7}
 .lcard-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
@@ -388,6 +380,181 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   margin:0 auto 28px;
 }
 .brand-scroll-list{display:flex;flex-direction:column;gap:0}
+.brands-preview{
+  width:calc(100% - 24px);
+  margin:0 auto;
+}
+.brands-preview-stage{
+  position:relative;
+  padding:14px;
+  border-radius:34px;
+  background:linear-gradient(180deg, rgba(17,18,20,.98) 0%, rgba(12,13,15,.98) 100%);
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 24px 60px rgba(0,0,0,.18);
+  overflow:hidden;
+  min-height:640px;
+}
+.brands-preview-stage::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(198,163,109,.14), transparent 32%),
+    radial-gradient(circle at 82% 86%, rgba(198,163,109,.08), transparent 34%);
+  pointer-events:none;
+}
+.brands-preview-copy{
+  position:absolute;
+  left:34px;
+  bottom:34px;
+  z-index:3;
+  width:min(460px, calc(100% - 68px));
+  padding:26px 26px 24px;
+  border-radius:26px;
+  background:linear-gradient(180deg, rgba(247,243,236,.78) 0%, rgba(255,255,255,.88) 100%);
+  border:1px solid rgba(255,255,255,.36);
+  box-shadow:0 18px 42px rgba(0,0,0,.18);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:18px;
+  min-height:auto;
+}
+.brands-preview-title{
+  font-size:clamp(30px,3.5vw,52px);
+  line-height:.96;
+  letter-spacing:-.05em;
+  color:#171411;
+  margin-bottom:10px;
+}
+.brands-preview-text{
+  font-size:15px;
+  line-height:1.72;
+  color:rgba(34,28,23,.8);
+  max-width:380px;
+}
+.brands-preview-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+.brands-preview-list span{
+  display:inline-flex;
+  align-items:center;
+  min-height:34px;
+  padding:0 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.46);
+  border:1px solid rgba(23,19,16,.08);
+  color:#171411;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:-.02em;
+}
+.brands-preview-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:12px 20px;
+  border-radius:999px;
+  background:#111214;
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  transition:transform .18s ease, opacity .2s ease;
+}
+.brands-preview-link:hover{opacity:.88;transform:translateY(-1px)}
+.brands-preview-collage{
+  position:relative;
+  z-index:1;
+  overflow:hidden;
+  border-radius:26px;
+  background:#131416;
+  min-height:612px;
+  height:100%;
+}
+.brands-preview-slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transform:scale(1.025);
+  transition:opacity .85s ease, transform 1.2s ease;
+  pointer-events:none;
+}
+.brands-preview-slide.is-active{
+  opacity:1;
+  transform:scale(1);
+}
+.brands-preview-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.78) saturate(.94);
+}
+.brands-preview-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding:28px;
+  background:linear-gradient(180deg, rgba(9,10,12,.16) 0%, rgba(9,10,12,.28) 34%, rgba(10,10,12,.72) 100%);
+}
+.brands-preview-overlay strong{
+  display:block;
+  color:#fff;
+  font-size:28px;
+  letter-spacing:-.04em;
+  margin-bottom:6px;
+}
+.brands-preview-overlay span{
+  display:block;
+  color:rgba(255,255,255,.74);
+  line-height:1.62;
+  font-size:13px;
+  max-width:320px;
+}
+.brands-preview-slider-ui{
+  position:absolute;
+  left:28px;
+  right:28px;
+  top:28px;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  pointer-events:none;
+}
+.brands-preview-meta{
+  max-width:420px;
+}
+.brands-preview-dots{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.brands-preview-dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.3);
+  border:1px solid rgba(255,255,255,.18);
+  transition:transform .25s ease, background .25s ease, width .25s ease;
+}
+.brands-preview-dot.is-active{
+  width:28px;
+  background:#fff;
+  transform:translateY(-1px);
+}
 .brand-general-panel{
   width:100%;
   margin:0;
@@ -729,6 +896,80 @@ html[data-theme="dark"] .brand-intro-text,
 html[data-theme="dark"] .motor-copy{color:var(--brand-text-soft)}
 html[data-theme="dark"] .brand-detail-title,
 html[data-theme="dark"] .motor-name{color:var(--brand-text-main)}
+html[data-theme="dark"] .brands-preview-copy{
+  background:linear-gradient(180deg, rgba(23,25,28,.72) 0%, rgba(18,20,23,.84) 100%);
+  border-color:rgba(255,255,255,.1);
+  box-shadow:0 18px 42px rgba(0,0,0,.24);
+}
+html[data-theme="dark"] .brands-preview-list span{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.08);
+  color:#f1ede6;
+}
+html[data-theme="dark"] .brands-preview-title{color:#f1ede6}
+html[data-theme="dark"] .brands-preview-text{color:rgba(226,220,210,.76)}
+html[data-theme="dark"] .brands-preview-link{
+  background:#f3f1ec;
+  color:#111214;
+}
+html[data-theme="dark"] .sticky-contact-toggle,
+html[data-theme="dark"] .sticky-contact-panel{
+  background:rgba(18,20,23,.88);
+  border-color:rgba(255,255,255,.08);
+  box-shadow:0 20px 48px rgba(0,0,0,.28);
+}
+html[data-theme="dark"] .sticky-contact-head strong{color:#f1ede6}
+html[data-theme="dark"] .sticky-contact-head span,
+html[data-theme="dark"] .sticky-contact-line span:last-child,
+html[data-theme="dark"] .sticky-contact-ping .kt-ping-txt{color:rgba(226,220,210,.76)}
+html[data-theme="dark"] .sticky-contact-ping,
+html[data-theme="dark"] .sticky-contact-line{
+  background:rgba(255,255,255,.05);
+  border-color:rgba(255,255,255,.07);
+}
+html[data-theme="dark"] .sticky-contact-line{color:#f1ede6}
+html[data-theme="dark"] .sticky-contact-toggle{color:#f1ede6}
+html[data-theme="dark"] .sticky-contact-btn{
+  background:#f3f1ec;
+  color:#111214;
+}
+html[data-theme="dark"] .sticky-contact-wa{
+  background:rgba(29,74,41,.26);
+  border-color:rgba(108,181,128,.14);
+  color:#e6f4ea;
+}
+html[data-theme="dark"] .mobile-contact-toggle{
+  background:#f3efe7;
+  color:#111214;
+}
+html[data-theme="dark"] .mobile-contact-backdrop{
+  background:rgba(4,5,7,.58);
+}
+html[data-theme="dark"] .mobile-contact-sheet{
+  background:linear-gradient(180deg, rgba(18,20,23,.98) 0%, rgba(14,15,18,.98) 100%);
+  box-shadow:0 20px 42px rgba(0,0,0,.4);
+}
+html[data-theme="dark"] .mobile-contact-sheet::before{background:rgba(255,255,255,.18)}
+html[data-theme="dark"] .mobile-contact-sheet-head strong{color:#f1ede6}
+html[data-theme="dark"] .mobile-contact-sheet-head span,
+html[data-theme="dark"] .mobile-contact-line span:last-child{color:rgba(226,220,210,.76)}
+html[data-theme="dark"] .mobile-contact-close{
+  background:rgba(255,255,255,.08);
+  color:#f1ede6;
+}
+html[data-theme="dark"] .mobile-contact-line{
+  background:rgba(255,255,255,.05);
+  color:#f1ede6;
+}
+html[data-theme="dark"] .mobile-contact-btn{
+  background:#f3efe7;
+  color:#111214;
+}
+html[data-theme="dark"] .mobile-contact-wa{
+  background:rgba(29,74,41,.26);
+  border-color:rgba(108,181,128,.14);
+  color:#e6f4ea;
+}
 html[data-theme="dark"] .brand-general-panel{
   box-shadow:none;
 }
@@ -803,6 +1044,325 @@ html[data-theme="dark"] .brand-general-cta{
 .map-frame{min-height:420px;background:var(--bg2)}
 .map-frame iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.1) contrast(1.03)}
 
+/* ── STICKY CONTACT CARD ───────────────── */
+.sticky-contact{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:26;
+  width:58px;
+  opacity:0;
+  pointer-events:none;
+  transform:translate3d(0,18px,0) scale(.98);
+  transition:opacity .28s ease, transform .32s cubic-bezier(.22,1,.36,1);
+}
+.sticky-contact.is-visible{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate3d(0,0,0) scale(1);
+}
+.sticky-contact-toggle{
+  margin-left:auto;
+  width:58px;
+  height:58px;
+  border:none;
+  border-radius:20px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 20px 48px rgba(0,0,0,.16);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#111214;
+  cursor:pointer;
+  transition:transform .18s ease, opacity .2s ease, border-radius .2s ease;
+}
+.sticky-contact-toggle:hover{opacity:.9;transform:translateY(-1px)}
+.sticky-contact-toggle svg{
+  width:26px;
+  height:26px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.9;
+}
+.sticky-contact-panel{
+  position:absolute;
+  right:0;
+  bottom:72px;
+  width:min(360px, calc(100vw - 48px));
+  padding:18px;
+  border-radius:24px;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 20px 48px rgba(0,0,0,.16);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  opacity:0;
+  pointer-events:none;
+  transform:translate3d(0,10px,0) scale(.98);
+  transition:opacity .24s ease, transform .28s cubic-bezier(.22,1,.36,1);
+}
+.sticky-contact.is-open .sticky-contact-panel{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate3d(0,0,0) scale(1);
+}
+.sticky-contact.is-open .sticky-contact-toggle{border-radius:18px}
+.sticky-contact-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:14px;
+}
+.sticky-contact-head strong{
+  display:block;
+  font-size:20px;
+  line-height:1;
+  letter-spacing:-.04em;
+  color:var(--ink);
+  margin-bottom:6px;
+}
+.sticky-contact-head span{
+  display:block;
+  font-size:13px;
+  line-height:1.65;
+  color:var(--mid);
+}
+.sticky-contact-ping{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:30px;
+  padding:0 10px;
+  border-radius:999px;
+  background:rgba(16,18,20,.05);
+  border:1px solid rgba(16,18,20,.06);
+  white-space:nowrap;
+}
+.sticky-contact-ping .kt-ping-dot{margin:0}
+.sticky-contact-ping .kt-ping-txt{
+  color:var(--mid);
+  font-size:11px;
+}
+.sticky-contact-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+.sticky-contact-btn,
+.sticky-contact-wa{
+  min-height:46px;
+  border-radius:999px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  transition:transform .16s ease, opacity .2s ease;
+}
+.sticky-contact-btn:hover,
+.sticky-contact-wa:hover{
+  opacity:.88;
+  transform:translateY(-1px);
+}
+.sticky-contact-btn{
+  background:#111214;
+  color:#fff;
+}
+.sticky-contact-wa{
+  background:#eff7f0;
+  color:#17361f;
+  border:1px solid rgba(23,54,31,.08);
+}
+.sticky-contact-lines{
+  display:grid;
+  gap:8px;
+}
+.sticky-contact-line{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:42px;
+  padding:0 12px;
+  border-radius:16px;
+  background:rgba(16,18,20,.04);
+  text-decoration:none;
+  color:var(--ink);
+}
+.sticky-contact-line span:first-child{font-size:14px}
+.sticky-contact-line span:last-child{
+  font-size:13px;
+  color:var(--mid);
+  line-height:1.5;
+}
+
+.mobile-contact{
+  position:fixed;
+  inset:0;
+  z-index:60;
+  display:none;
+  pointer-events:none;
+}
+.mobile-contact.is-visible{
+  display:block !important;
+}
+.mobile-contact-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(7,8,10,.44);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .24s ease;
+}
+.mobile-contact.is-open .mobile-contact-backdrop{
+  opacity:1;
+  pointer-events:auto;
+}
+.mobile-contact-toggle{
+  position:fixed;
+  right:16px;
+  bottom:calc(16px + env(safe-area-inset-bottom));
+  min-height:54px;
+  padding:0 18px;
+  border:none;
+  border-radius:999px;
+  background:#111214;
+  color:#fff;
+  box-shadow:0 18px 42px rgba(0,0,0,.22);
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font:inherit;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  cursor:pointer;
+  z-index:62;
+  pointer-events:auto;
+  transition:transform .18s ease, opacity .2s ease;
+}
+.mobile-contact-toggle:hover{opacity:.92;transform:translateY(-1px)}
+.mobile-contact-toggle svg{
+  width:20px;
+  height:20px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2;
+}
+.mobile-contact-sheet{
+  position:fixed;
+  left:12px;
+  right:12px;
+  bottom:12px;
+  z-index:61;
+  width:auto;
+  padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+  max-height:min(78vh, 560px);
+  overflow:auto;
+  background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(247,243,236,.98) 100%);
+  border-radius:24px;
+  box-shadow:0 20px 42px rgba(0,0,0,.24);
+  transform:translate3d(0,100%,0);
+  transition:transform .34s cubic-bezier(.22,1,.36,1);
+  pointer-events:auto;
+}
+.mobile-contact.is-open .mobile-contact-sheet{
+  transform:translate3d(0,0,0);
+}
+.mobile-contact-sheet::before{
+  content:'';
+  display:block;
+  width:46px;
+  height:5px;
+  border-radius:999px;
+  background:rgba(17,18,20,.16);
+  margin:0 auto 14px;
+}
+.mobile-contact-sheet-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:14px;
+}
+.mobile-contact-sheet-head strong{
+  display:block;
+  font-size:20px;
+  line-height:1;
+  letter-spacing:-.04em;
+  color:var(--ink);
+  margin-bottom:6px;
+}
+.mobile-contact-sheet-head span{
+  display:block;
+  font-size:13px;
+  line-height:1.65;
+  color:var(--mid);
+}
+.mobile-contact-close{
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:14px;
+  background:rgba(17,18,20,.06);
+  color:var(--ink);
+  font:inherit;
+  font-size:20px;
+  cursor:pointer;
+}
+.mobile-contact-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+.mobile-contact-btn,
+.mobile-contact-wa{
+  min-height:48px;
+  border-radius:999px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-.02em;
+}
+.mobile-contact-btn{
+  background:#111214;
+  color:#fff;
+}
+.mobile-contact-wa{
+  background:#eff7f0;
+  color:#17361f;
+  border:1px solid rgba(23,54,31,.08);
+}
+.mobile-contact-lines{
+  display:grid;
+  gap:8px;
+}
+.mobile-contact-line{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:44px;
+  padding:0 12px;
+  border-radius:16px;
+  background:rgba(16,18,20,.04);
+  text-decoration:none;
+  color:var(--ink);
+}
+.mobile-contact-line span:last-child{
+  font-size:13px;
+  color:var(--mid);
+}
+
 /* ── CONTACT ──────────────────────────── */
 #kontakt{margin:0 24px 24px;display:grid;grid-template-columns:1fr 1fr;border-radius:var(--rad2);overflow:hidden;border:1px solid var(--rule);box-shadow:0 4px 24px rgba(0,0,0,.05)}
 .kt-left{background:var(--ink2);padding:64px 52px;display:flex;flex-direction:column;justify-content:space-between}
@@ -850,7 +1410,7 @@ html[data-theme="dark"] .brand-general-cta{
 .fnote{font-size:11px;color:var(--muted);text-align:right;margin-top:8px}
 
 /* ── DARK MODE OVERRIDES ──────────────── */
-html[data-theme="dark"] .navl a:hover,html[data-theme="dark"] .navl a.on,html[data-theme="dark"] .nav-tel:hover{background:rgba(255,255,255,.07)}
+html[data-theme="dark"] .navl a:hover,html[data-theme="dark"] .navl a.on{background:rgba(255,255,255,.07)}
 html[data-theme="dark"] .hero-pill-row .hpill,html[data-theme="dark"] .lcard,html[data-theme="dark"] .spec-item,html[data-theme="dark"] .ba-card,html[data-theme="dark"] .fcheck,html[data-theme="dark"] footer,html[data-theme="dark"] #why,html[data-theme="dark"] #cases,html[data-theme="dark"] #map-section,html[data-theme="dark"] #kontakt{background:var(--white)}
 html[data-theme="dark"] .ba-footer,html[data-theme="dark"] .kt-right{background:var(--white)}
 html[data-theme="dark"] .fi,html[data-theme="dark"] .fta,html[data-theme="dark"] .fsel{background:#121417;color:var(--ink);border-color:var(--rule2)}
@@ -947,6 +1507,28 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     grid-template-columns:1fr;
     width:calc(100% - 40px);
   }
+  .brands-preview{
+    width:calc(100% - 20px);
+  }
+  .brands-preview-stage{
+    padding:12px;
+    min-height:580px;
+  }
+  .brands-preview-copy{
+    left:24px;
+    bottom:24px;
+    width:min(430px, calc(100% - 48px));
+    padding:24px;
+  }
+  .brands-preview-collage{
+    min-height:556px;
+  }
+  .brands-preview-overlay{
+    padding:24px;
+  }
+  .brands-preview-overlay strong{
+    font-size:30px;
+  }
   .brand-scroll-chapter{min-height:520vh}
   .brand-scroll-content{margin-top:calc(-1 * min(106vh,1080px));padding:0 0 72px}
   .brand-detail-top{
@@ -981,6 +1563,23 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   #kontakt{grid-template-columns:1fr}
   .map-wrap{grid-template-columns:1fr}
   .kt-left,.kt-right{padding:48px 36px}
+  .sticky-contact{display:none !important}
+  .mobile-contact{
+    display:block !important;
+  }
+  .mobile-contact-toggle{
+    min-height:52px;
+    padding:0 16px;
+    font-size:13px;
+    right:12px;
+    bottom:calc(12px + env(safe-area-inset-bottom));
+  }
+  .mobile-contact-sheet{
+    left:12px;
+    right:12px;
+    bottom:calc(12px + env(safe-area-inset-bottom));
+    max-height:min(72vh, 560px);
+  }
   .ft-top{grid-template-columns:1fr 1fr;gap:32px}
   footer{padding:44px 32px 28px}
   #prozess{padding:52px 32px;margin:0 16px 16px}
@@ -1007,6 +1606,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .brand-copy{max-width:170px}
   .brand-name{font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .brand-tagline{font-size:10px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sticky-contact{display:none !important}
   #hero{padding:128px 0 20px}
   .hero-card img{height:52vh;min-height:320px}
   .why-mosaic{grid-template-columns:repeat(2,1fr)}
@@ -1028,6 +1628,37 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     margin:0 auto 24px;
     width:calc(100% - 32px);
     padding:0 4px;
+  }
+  .brands-preview{
+    width:calc(100% - 16px);
+  }
+  .brands-preview-stage{
+    padding:10px;
+    border-radius:28px;
+    min-height:500px;
+  }
+  .brands-preview-copy{
+    left:18px;
+    right:18px;
+    bottom:18px;
+    width:auto;
+    padding:20px;
+    border-radius:22px;
+  }
+  .brands-preview-title{font-size:clamp(28px,8vw,40px)}
+  .brands-preview-text{font-size:14px;line-height:1.72}
+  .brands-preview-collage{
+    min-height:480px;
+    border-radius:22px;
+  }
+  .brands-preview-overlay{
+    padding:20px;
+  }
+  .brands-preview-overlay strong{font-size:28px}
+  .brands-preview-slider-ui{
+    left:20px;
+    right:20px;
+    top:20px;
   }
   .brands-header .sec-label{margin-bottom:10px;font-size:11px}
   .brands-header .sec-h{
@@ -1317,6 +1948,26 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 }
 
 @media(max-width:560px){
+  .brands-preview{
+    width:calc(100% - 16px);
+  }
+  .brands-preview-stage{min-height:440px}
+  .brands-preview-copy{
+    left:14px;
+    right:14px;
+    bottom:14px;
+    width:auto;
+    padding:18px;
+  }
+  .brands-preview-list{gap:8px}
+  .brands-preview-list span{
+    min-height:32px;
+    padding:0 10px;
+    font-size:12px;
+  }
+  .brands-preview-collage{min-height:416px}
+  .brands-preview-overlay strong{font-size:24px}
+  .brands-preview-overlay span{font-size:13px}
   #nav{width:calc(100% - 16px);top:8px;padding:8px}
   .nav-layout{gap:8px}
   .nav-brand{gap:8px;padding:5px 7px 5px 5px;border-radius:18px}
@@ -1325,6 +1976,65 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .brand-name{font-size:16px}
   .brand-tagline{font-size:9px}
   .theme-toggle,.hbg{width:42px;height:42px;border-radius:13px}
+  .mobile-contact-backdrop{
+    background:rgba(7,8,10,.52);
+  }
+  .mobile-contact-toggle{
+    min-height:50px;
+    padding:0 14px;
+    gap:8px;
+    border-radius:18px;
+    font-size:13px;
+    right:10px;
+    bottom:calc(10px + env(safe-area-inset-bottom));
+  }
+  .mobile-contact-toggle svg{
+    width:18px;
+    height:18px;
+  }
+  .mobile-contact-sheet{
+    left:10px;
+    right:10px;
+    bottom:calc(10px + env(safe-area-inset-bottom));
+    padding:12px 12px calc(12px + env(safe-area-inset-bottom));
+    max-height:min(80vh, 520px);
+    width:auto;
+    border-radius:22px;
+  }
+  .mobile-contact-sheet-head{
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .mobile-contact-sheet-head strong{
+    font-size:18px;
+  }
+  .mobile-contact-sheet-head span{
+    font-size:12px;
+    line-height:1.6;
+  }
+  .mobile-contact-close{
+    width:36px;
+    height:36px;
+    border-radius:12px;
+    font-size:18px;
+    flex-shrink:0;
+  }
+  .mobile-contact-actions{
+    grid-template-columns:1fr;
+  }
+  .mobile-contact-btn,
+  .mobile-contact-wa{
+    min-height:46px;
+    font-size:13px;
+  }
+  .mobile-contact-line{
+    min-height:42px;
+    padding:0 10px;
+  }
+  .mobile-contact-line span:last-child{
+    font-size:12px;
+    line-height:1.45;
+  }
   #hero{padding:112px 0 16px;min-height:auto}
   .hero-h{font-size:clamp(34px,11vw,48px);line-height:.98;margin-bottom:16px;padding:0 14px}
   .hero-sub{font-size:14px;line-height:1.65;margin-bottom:28px;padding:0 18px}
@@ -1374,7 +2084,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <nav id="nav">
   <div class="nav-layout">
     <a href="#hero" class="nav-brand">
-      <span class="brand-icon"><img :src="logo.light" :alt="logo.alt" decoding="async" fetchpriority="high"></span>
+      <span class="brand-icon"><img :src="logo.dark || logo.light" :alt="logo.alt" decoding="async" fetchpriority="high"></span>
       <span class="brand-copy">
         <span class="brand-name">{{ logo.name }}</span>
         <span class="brand-tagline">{{ logo.tagline }}</span>
@@ -1386,12 +2096,6 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
       </ul>
     </div>
     <div class="nav-end">
-      <button class="theme-toggle" id="themeToggle" data-theme-toggle type="button" aria-label="Darstellung wechseln">
-        <svg viewBox="0 0 24 24"><path d="M12 3v2.2M12 18.8V21M5.64 5.64l1.56 1.56M16.8 16.8l1.56 1.56M3 12h2.2M18.8 12H21M5.64 18.36l1.56-1.56M16.8 7.2l1.56-1.56"/><circle cx="12" cy="12" r="4.2"/></svg>
-      </button>
-      <a href="tel:+4952189739151" class="nav-tel">
-        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l1-1.01a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      </a>
       <a href="#kontakt" class="nav-whatsapp js-whatsapp-link" aria-label="WhatsApp Anfrage">
         <svg viewBox="0 0 32 32"><path d="M19.11 17.34c-.29-.15-1.71-.84-1.97-.93-.26-.1-.45-.15-.64.15s-.74.93-.91 1.12c-.17.2-.33.22-.62.08-.29-.15-1.22-.45-2.32-1.45-.86-.76-1.44-1.7-1.61-1.99-.17-.29-.02-.45.13-.59.13-.12.29-.33.44-.49.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.52-.08-.15-.64-1.55-.87-2.13-.23-.55-.47-.48-.64-.49h-.55c-.2 0-.52.08-.79.37s-1.03 1.01-1.03 2.45 1.06 2.84 1.21 3.03c.15.2 2.09 3.19 5.06 4.47.71.31 1.27.49 1.71.63.72.23 1.38.2 1.9.12.58-.09 1.71-.7 1.95-1.38.24-.67.24-1.25.17-1.37-.07-.12-.26-.2-.55-.34Z"/><path d="M16.03 3.2c-7.05 0-12.76 5.72-12.76 12.77 0 2.25.59 4.45 1.71 6.39L3 29l6.83-1.79a12.75 12.75 0 0 0 6.2 1.59h.01c7.05 0 12.77-5.72 12.77-12.77S23.09 3.2 16.03 3.2Zm0 23.44h-.01a10.6 10.6 0 0 1-5.39-1.47l-.39-.23-4.05 1.06 1.08-3.95-.26-.41a10.56 10.56 0 0 1-1.63-5.63c0-5.85 4.76-10.61 10.62-10.61 2.84 0 5.5 1.11 7.5 3.11a10.54 10.54 0 0 1 3.11 7.5c0 5.85-4.76 10.61-10.61 10.61Z"/></svg>
         WhatsApp
@@ -1399,9 +2103,6 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
       <a href="#kontakt" class="nav-btn">Angebot anfragen</a>
     </div>
     <div class="nav-mobile-tools">
-      <button class="theme-toggle" id="themeToggleMobile" data-theme-toggle type="button" aria-label="Darstellung wechseln">
-        <svg viewBox="0 0 24 24"><path d="M12 3v2.2M12 18.8V21M5.64 5.64l1.56 1.56M16.8 16.8l1.56 1.56M3 12h2.2M18.8 12H21M5.64 18.36l1.56-1.56M16.8 7.2l1.56-1.56"/><circle cx="12" cy="12" r="4.2"/></svg>
-      </button>
       <button class="hbg" id="menuToggle" onclick="mobToggle()" aria-label="Menü öffnen" aria-controls="mobMenu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -1410,10 +2111,72 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <div class="mob" id="mobMenu" aria-hidden="true">
   <button class="mob-x" onclick="mobToggle()">✕</button>
   <a v-for="item in navItems" :key="item.href + '-mobile'" :href="item.href" onclick="mobToggle()">{{ item.label }}</a>
-  <a href="#" onclick="toggleTheme(); mobToggle(); return false;">Dark / Light Mode</a>
   <a href="#kontakt" class="mob-wa js-whatsapp-link" onclick="mobToggle()">WhatsApp Anfrage</a>
   <a href="#kontakt" class="mob-cta" onclick="mobToggle()">Angebot anfragen</a>
 </div>
+
+<aside class="sticky-contact" id="stickyContact" aria-label="Schneller Kontakt">
+  <button class="sticky-contact-toggle" id="stickyContactToggle" type="button" aria-label="Kontaktkarte öffnen" aria-expanded="false">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg>
+  </button>
+  <div class="sticky-contact-panel">
+    <div class="sticky-contact-head">
+      <div>
+        <strong>Direkt Kontakt aufnehmen</strong>
+        <span>Wenn Sie schon wissen, was Sie brauchen, ist der schnellste Weg nur einen Klick entfernt.</span>
+      </div>
+      <div class="sticky-contact-ping">
+        <span class="kt-ping-dot"></span>
+        <span class="kt-ping-txt">{{ contactSection.responseHint }}</span>
+      </div>
+    </div>
+    <div class="sticky-contact-actions">
+      <a href="#kontakt" class="sticky-contact-btn">Anfrage starten</a>
+      <a href="#kontakt" class="sticky-contact-wa js-whatsapp-link">WhatsApp</a>
+    </div>
+    <div class="sticky-contact-lines">
+      <a class="sticky-contact-line" :href="contactItems[1].href">
+        <span>{{ contactItems[1].icon }}</span>
+        <span>{{ contactItems[1].value }}</span>
+      </a>
+      <a class="sticky-contact-line" :href="contactItems[3].href">
+        <span>{{ contactItems[3].icon }}</span>
+        <span>{{ contactItems[3].value }}</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+<aside class="mobile-contact" id="mobileContact" aria-label="Mobiler Kontakt">
+  <div class="mobile-contact-backdrop" id="mobileContactBackdrop"></div>
+  <button class="mobile-contact-toggle" id="mobileContactToggle" type="button" aria-label="Kontakt öffnen" aria-expanded="false">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg>
+    Kontakt
+  </button>
+  <div class="mobile-contact-sheet">
+    <div class="mobile-contact-sheet-head">
+      <div>
+        <strong>Direkt Kontakt aufnehmen</strong>
+        <span>Kurzer Weg zu WhatsApp, Telefon oder dem kompletten Anfrageformular.</span>
+      </div>
+      <button class="mobile-contact-close" id="mobileContactClose" type="button" aria-label="Kontakt schließen">×</button>
+    </div>
+    <div class="mobile-contact-actions">
+      <a href="#kontakt" class="mobile-contact-btn">Anfrage</a>
+      <a href="#kontakt" class="mobile-contact-wa js-whatsapp-link">WhatsApp</a>
+    </div>
+    <div class="mobile-contact-lines">
+      <a class="mobile-contact-line" :href="contactItems[1].href">
+        <span>{{ contactItems[1].icon }}</span>
+        <span>{{ contactItems[1].value }}</span>
+      </a>
+      <a class="mobile-contact-line" :href="contactItems[3].href">
+        <span>{{ contactItems[3].icon }}</span>
+        <span>{{ contactItems[3].value }}</span>
+      </a>
+    </div>
+  </div>
+</aside>
 
 <!-- ════ HERO ════════════════════════════ -->
 <section id="hero">
@@ -1466,12 +2229,34 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     </div>
     <div class="leistung-grid rv stagger glow-section float-card" style="transition-delay:.1s" data-float="16">
       <div class="lcard" v-for="service in services" :key="service.title">
-        <div class="lcard-icon">{{ service.icon }}</div>
+        <div class="lcard-icon" v-html="service.icon"></div>
         <div>
           <div class="lcard-title">{{ service.title }}</div>
           <p class="lcard-body">{{ service.body }}</p>
           <div class="lcard-tags"><span class="ltag" v-for="tag in service.tags" :key="service.title + tag">{{ tag }}</span></div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ RESULTS / WORKSHOP ══════════ -->
+<section id="results">
+  <div class="results-header rv">
+    <span class="sec-label">{{ resultsSection.label }}</span>
+    <h2 class="sec-h" v-html="resultsSection.title"></h2>
+    <p class="sec-sub">{{ resultsSection.subtitle }}</p>
+  </div>
+  <div class="ba-grid rv" style="transition-delay:.1s">
+    <div class="ba-card" v-for="card in workshopCards" :key="card.title">
+      <div class="ba-img-row" style="grid-template-columns:1fr">
+        <div class="ba-img">
+          <img :src="card.src" :alt="card.alt" class="parallax-media" :data-parallax-speed="card.speed" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <div class="ba-footer">
+        <div class="ba-title">{{ card.title }}</div>
+        <div class="ba-sub">{{ card.sub }}</div>
       </div>
     </div>
   </div>
@@ -1500,103 +2285,53 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <!-- ════ BRANDS ═══════════════════════════ -->
 <section id="brands">
   <div class="brands-shell glow-section">
-    <div class="brands-header rv">
-      <div>
-        <span class="sec-label">{{ brandsSection.label }}</span>
-        <h2 class="sec-h">{{ brandsSection.title }}</h2>
-        <p class="sec-sub">{{ brandsSection.subtitle }}</p>
-      </div>
-    </div>
-
-    <div class="brand-scroll-list">
-      <article class="brand-scroll-chapter" v-for="brand in brandScenes" :key="brand.sceneId" :id="brand.sceneId" data-brand-scene>
-        <div class="brand-scroll-stage">
-          <picture class="brand-scroll-media">
-            <source media="(max-width: 768px)" :srcset="brand.mobileImage">
-            <img :src="brand.heroImage" :alt="brand.heroAlt" class="brand-hero-media" loading="eager" decoding="async" fetchpriority="high">
-          </picture>
-          <div class="brand-scroll-veil"></div>
+    <div class="brands-preview rv glow-section">
+      <div class="brands-preview-stage">
+        <div class="brands-preview-copy">
+          <div>
+            <span class="sec-label">{{ brandsPreview.label }}</span>
+            <h3 class="brands-preview-title">{{ brandsPreview.title }}</h3>
+            <p class="brands-preview-text">{{ brandsPreview.body }}</p>
+            <div class="brands-preview-list">
+              <span v-for="brand in brandsPreview.brands" :key="brand + '-chip'">{{ brand }}</span>
+            </div>
+          </div>
+          <div>
+            <a href="motoren.html" class="brands-preview-link">{{ brandsPreview.button }}</a>
+          </div>
         </div>
-        <section class="brand-scroll-content">
-          <div class="brand-detail-top brand-observe">
-            <div class="brand-detail-copy">
-              <div class="brand-detail-title">{{ brand.title }}</div>
-              <div class="brand-detail-subtitle">{{ brand.subtitle }}</div>
-            </div>
-          </div>
-          <div class="brand-intro-block">
-            <div class="brand-intro-copy">
-              <div class="brand-intro-kicker">Brand Story</div>
-              <p class="brand-intro-text">{{ brand.intro }}</p>
-            </div>
-          </div>
-          <div class="brand-detail-body">
-            <div class="brand-flow-row brand-observe" v-for="(motor,index) in brand.motors" :key="brand.sceneId + motor.name">
-              <div class="brand-back-copy">
-                <article class="motor-card brand-observe">
-                  <div class="motor-summary">
-                    <div class="motor-summary-copy">
-                      <div class="motor-name">{{ motor.name }}</div>
-                      <div class="motor-meta">{{ motor.meta }}</div>
-                    </div>
-                  </div>
-                  <div class="motor-body">
-                    <p class="motor-copy">{{ motor.copy }}</p>
-                  </div>
-                </article>
-              </div>
-              <div class="brand-slideshow">
-                <div class="brand-slide brand-observe" v-if="brand.slides[index]">
-                  <img :src="brand.slides[index].src" :alt="brand.name + ' Motorbild ' + (index + 1)" loading="lazy" decoding="async" fetchpriority="low">
-                  <span class="brand-slide-caption">{{ brand.slides[index].caption }}</span>
+        <div class="brands-preview-collage">
+          <article
+            class="brands-preview-slide"
+            v-for="(brand, index) in brandScenes"
+            :key="brand.sceneId + '-preview'"
+            :class="{ 'is-active': currentBrandSlide === index }"
+          >
+              <img :src="brand.heroImage" :alt="brand.heroAlt" :loading="index === 0 ? 'eager' : 'lazy'" decoding="async">
+              <div class="brands-preview-overlay">
+                <div class="brands-preview-meta">
+                <strong>{{ brand.name }}</strong>
+                <span>{{ brand.subtitle }}</span>
                 </div>
               </div>
+          </article>
+          <div class="brands-preview-slider-ui" v-if="brandScenes.length > 1">
+            <div></div>
+            <div class="brands-preview-dots" aria-hidden="true">
+              <span
+                class="brands-preview-dot"
+                v-for="(brand, index) in brandScenes"
+                :key="brand.sceneId + '-dot'"
+                :class="{ 'is-active': currentBrandSlide === index }"
+              ></span>
             </div>
-            <div class="brand-scroll-scene-tail" aria-hidden="true"></div>
           </div>
-        </section>
-      </article>
-    </div>
-
-    <div class="brand-general-panel rv glow-section">
-      <div class="brand-general-bg">
-        <div class="cg" v-for="image in generalBrandsPanel.images" :key="image.src + image.alt">
-          <img :src="image.src" :alt="image.alt" loading="eager" decoding="async" fetchpriority="low">
-        </div>
-      </div>
-      <div class="brand-general-grid">
-        <div class="brand-general-copy">
-          <span class="sec-label">{{ generalBrandsPanel.label }}</span>
-          <h3 class="brand-general-title">{{ generalBrandsPanel.title }}</h3>
-          <p class="brand-general-text">{{ generalBrandsPanel.body }}</p>
-          <a href="#kontakt" class="brand-general-cta">{{ generalBrandsPanel.button }}</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════ RESULTS / WORKSHOP ══════════ -->
-<section id="results">
-  <div class="results-header rv">
-    <span class="sec-label">{{ resultsSection.label }}</span>
-    <h2 class="sec-h" v-html="resultsSection.title"></h2>
-    <p class="sec-sub">{{ resultsSection.subtitle }}</p>
-  </div>
-  <div class="ba-grid rv" style="transition-delay:.1s">
-    <div class="ba-card" v-for="card in workshopCards" :key="card.title">
-      <div class="ba-img-row" style="grid-template-columns:1fr">
-        <div class="ba-img">
-          <img :src="card.src" :alt="card.alt" class="parallax-media" :data-parallax-speed="card.speed" loading="lazy" decoding="async">
-        </div>
-      </div>
-      <div class="ba-footer">
-        <div class="ba-title">{{ card.title }}</div>
-        <div class="ba-sub">{{ card.sub }}</div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ════ PROZESS ══════════════════════════ -->
 <div id="prozess" class="rv glow-section">
@@ -1739,7 +2474,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   <div class="ft-top">
     <div>
       <div class="ft-brand-row">
-        <span class="brand-icon"><img :src="logo.light" :alt="logo.alt" loading="lazy" decoding="async"></span>
+        <span class="brand-icon"><img :src="logo.dark || logo.light" :alt="logo.alt" loading="lazy" decoding="async"></span>
         <div class="brand-copy">
           <div class="brand-name">{{ logo.name }}</div>
           <div class="brand-tagline">{{ logo.tagline }}</div>
@@ -1764,11 +2499,36 @@ const { createApp } = Vue;
 
 createApp({
   data(){
-    return window.siteContent;
+    return {
+      ...window.siteContent,
+      currentBrandSlide: 0,
+      brandSlideTimer: null
+    };
+  },
+  methods:{
+    startBrandPreviewSlider(){
+      if(!Array.isArray(this.brandScenes) || this.brandScenes.length <= 1) return;
+      this.stopBrandPreviewSlider();
+      this.brandSlideTimer = window.setInterval(()=>{
+        this.currentBrandSlide = (this.currentBrandSlide + 1) % this.brandScenes.length;
+      }, 3400);
+    },
+    stopBrandPreviewSlider(){
+      if(this.brandSlideTimer){
+        window.clearInterval(this.brandSlideTimer);
+        this.brandSlideTimer = null;
+      }
+    }
   },
   mounted(){
     this.$nextTick(()=>{
-      if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if(!reducedMotion){
+        this.startBrandPreviewSlider();
+      }
+
+      if(reducedMotion){
         document.querySelectorAll('.brand-observe').forEach(el=>el.classList.add('is-visible'));
         return;
       }
@@ -1787,6 +2547,9 @@ createApp({
 
       document.querySelectorAll('.brand-observe').forEach(el => observer.observe(el));
     });
+  },
+  beforeUnmount(){
+    this.stopBrandPreviewSlider();
   }
 }).mount('#app');
 </script>
@@ -1794,9 +2557,32 @@ createApp({
 <script>
 /* ── NAV SCROLL ──────────────────────────── */
 const nav = document.getElementById('nav');
+const stickyContact = document.getElementById('stickyContact');
+const stickyContactToggle = document.getElementById('stickyContactToggle');
+const mobileContact = document.getElementById('mobileContact');
+const mobileContactBackdrop = document.getElementById('mobileContactBackdrop');
+const mobileContactToggle = document.getElementById('mobileContactToggle');
+const mobileContactClose = document.getElementById('mobileContactClose');
 let lastNavScrollY = window.scrollY;
+let lastStickyScrollY = window.scrollY;
+let lastMobileContactScrollY = window.scrollY;
 let navHidden = false;
 let navScrollTicking = false;
+
+function setStickyContactOpenState(isOpen){
+  if(!stickyContact || !stickyContactToggle) return;
+  stickyContact.classList.toggle('is-open', isOpen);
+  stickyContactToggle.setAttribute('aria-expanded', String(isOpen));
+  stickyContactToggle.setAttribute('aria-label', isOpen ? 'Kontaktkarte schließen' : 'Kontaktkarte öffnen');
+}
+
+function setMobileContactOpenState(isOpen){
+  if(!mobileContact || !mobileContactToggle) return;
+  mobileContact.classList.toggle('is-open', isOpen);
+  mobileContactToggle.setAttribute('aria-expanded', String(isOpen));
+  mobileContactToggle.setAttribute('aria-label', isOpen ? 'Kontakt schließen' : 'Kontakt öffnen');
+  document.body.style.overflow = isOpen && window.innerWidth <= 1180 ? 'hidden' : '';
+}
 
 function updateActiveNavLink(currentY){
   let currentSection = '';
@@ -1841,11 +2627,81 @@ function updateNavChrome(){
   lastNavScrollY = currentY;
 }
 
+function updateStickyContactCard(){
+  if(!stickyContact) return;
+  if(window.innerWidth <= 1180){
+    stickyContact.classList.remove('is-visible');
+    setStickyContactOpenState(false);
+    return;
+  }
+
+  const currentY = window.scrollY;
+  const contactSection = document.getElementById('kontakt');
+  const showThreshold = 560;
+  let shouldShow = currentY > showThreshold;
+
+  if(contactSection){
+    const rect = contactSection.getBoundingClientRect();
+    if(rect.top <= window.innerHeight * 0.72){
+      shouldShow = false;
+    }
+  }
+
+  stickyContact.classList.toggle('is-visible', shouldShow);
+  if(!shouldShow){
+    setStickyContactOpenState(false);
+  }
+
+  const scrollDelta = Math.abs(currentY - lastStickyScrollY);
+  if(scrollDelta > 18){
+    setStickyContactOpenState(false);
+  }
+  lastStickyScrollY = currentY;
+}
+
+function updateMobileContact(){
+  if(!mobileContact) return;
+  if(window.innerWidth > 1180){
+    mobileContact.classList.remove('is-visible');
+    setMobileContactOpenState(false);
+    return;
+  }
+
+  const currentY = window.scrollY;
+  const contactSection = document.getElementById('kontakt');
+  const showThreshold = 0;
+  let shouldShow = currentY > showThreshold;
+
+  if(contactSection){
+    const rect = contactSection.getBoundingClientRect();
+    if(rect.top <= window.innerHeight * 0.82){
+      shouldShow = false;
+    }
+  }
+
+  if(currentY <= 24){
+    shouldShow = true;
+  }
+
+  mobileContact.classList.toggle('is-visible', shouldShow);
+  if(!shouldShow){
+    setMobileContactOpenState(false);
+  }
+
+  const scrollDelta = Math.abs(currentY - lastMobileContactScrollY);
+  if(scrollDelta > 18){
+    setMobileContactOpenState(false);
+  }
+  lastMobileContactScrollY = currentY;
+}
+
 function handleNavScroll(){
   navScrollTicking = false;
   const currentY = window.scrollY;
   updateActiveNavLink(currentY);
   updateNavChrome();
+  updateStickyContactCard();
+  updateMobileContact();
 }
 
 window.addEventListener('scroll', ()=>{
@@ -1856,6 +2712,8 @@ window.addEventListener('scroll', ()=>{
 window.addEventListener('resize', ()=>{
   updateActiveNavLink(window.scrollY);
   updateNavChrome();
+  updateStickyContactCard();
+  updateMobileContact();
   if(window.innerWidth > 1180){
     const m = document.getElementById('mobMenu');
     const menuToggle = document.getElementById('menuToggle');
@@ -1868,11 +2726,45 @@ window.addEventListener('resize', ()=>{
       menuToggle.setAttribute('aria-expanded', 'false');
       menuToggle.setAttribute('aria-label', 'Menü öffnen');
     }
-    document.body.style.overflow = '';
+    if(!mobileContact || !mobileContact.classList.contains('is-open')){
+      document.body.style.overflow = '';
+    }
   }
 });
 updateActiveNavLink(window.scrollY);
 updateNavChrome();
+updateStickyContactCard();
+updateMobileContact();
+
+if(stickyContactToggle){
+  stickyContactToggle.addEventListener('click', ()=>{
+    if(!stickyContact || !stickyContact.classList.contains('is-visible')) return;
+    setStickyContactOpenState(!stickyContact.classList.contains('is-open'));
+  });
+}
+if(mobileContactToggle){
+  mobileContactToggle.addEventListener('click', ()=>{
+    if(!mobileContact || !mobileContact.classList.contains('is-visible')) return;
+    setMobileContactOpenState(!mobileContact.classList.contains('is-open'));
+  });
+}
+if(mobileContactClose){
+  mobileContactClose.addEventListener('click', ()=>{
+    setMobileContactOpenState(false);
+  });
+}
+if(mobileContactBackdrop){
+  mobileContactBackdrop.addEventListener('click', ()=>{
+    setMobileContactOpenState(false);
+  });
+}
+if(mobileContact){
+  mobileContact.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click', ()=>{
+      setMobileContactOpenState(false);
+    });
+  });
+}
 
 /* ── MOBILE MENU ──────────────────────────── */
 function mobToggle(){
@@ -1916,30 +2808,6 @@ function setupWhatsAppLinks(){
   });
 }
 setupWhatsAppLinks();
-
-/* ── THEME ──────────────────────────── */
-const themeToggles = Array.from(document.querySelectorAll('[data-theme-toggle]'));
-const themeRoot = document.documentElement;
-const logoImages = Array.from(document.querySelectorAll('.brand-icon img'));
-
-function applyTheme(theme){
-  themeRoot.dataset.theme = theme;
-  localStorage.setItem('revival-theme', theme);
-  logoImages.forEach(img=>{
-    img.src = theme === 'dark' ? window.siteContent.logo.dark : window.siteContent.logo.light;
-  });
-  themeToggles.forEach(toggle=>{
-    toggle.setAttribute('aria-label', theme === 'dark' ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln');
-    toggle.title = theme === 'dark' ? 'Heller Modus' : 'Dunkler Modus';
-  });
-}
-function toggleTheme(){
-  applyTheme(themeRoot.dataset.theme === 'dark' ? 'light' : 'dark');
-}
-const storedTheme = localStorage.getItem('revival-theme');
-const preferredDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-applyTheme(storedTheme || (preferredDark ? 'dark' : 'light'));
-themeToggles.forEach(toggle => toggle.addEventListener('click', toggleTheme));
 
 function applyImageLoadingStrategy(){
   document.querySelectorAll('img').forEach(img=>{

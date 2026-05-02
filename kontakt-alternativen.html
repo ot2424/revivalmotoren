@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt Alternativen – Revival Motoren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Geist',system-ui,-apple-system,sans-serif;
+  color:#161411;
+  background:
+    radial-gradient(circle at top left, rgba(176,141,87,.14), transparent 28%),
+    linear-gradient(180deg,#f6f2eb 0%,#efe9df 100%);
+}
+a{color:inherit}
+.page{padding:18px 16px 64px}
+.topbar{
+  position:sticky;
+  top:12px;
+  z-index:20;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:12px 14px;
+  margin:0 auto 20px;
+  width:min(1380px,100%);
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:24px;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(16px);
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+.brand img{
+  width:52px;
+  height:52px;
+  object-fit:contain;
+  padding:6px;
+  border-radius:16px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+}
+.brand strong{
+  display:block;
+  font-size:18px;
+  letter-spacing:-.04em;
+}
+.brand span{
+  display:block;
+  font-size:12px;
+  color:#6d665f;
+}
+.topbar-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.pill,.pill-dark{
+  min-height:44px;
+  padding:12px 18px;
+  border-radius:999px;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.pill{background:#fff;border:1px solid rgba(0,0,0,.08)}
+.pill-dark{background:#111214;color:#fff}
+.intro{
+  width:min(1380px,100%);
+  margin:0 auto 22px;
+  padding:28px;
+  border-radius:32px;
+  background:linear-gradient(180deg, rgba(18,19,21,.98) 0%, rgba(11,12,14,.98) 100%);
+  color:#f6f1e9;
+  box-shadow:0 28px 70px rgba(0,0,0,.16);
+}
+.eyebrow{
+  display:inline-flex;
+  margin-bottom:14px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#c7a66b;
+}
+.intro h1{
+  font-size:clamp(34px,6vw,74px);
+  line-height:.94;
+  letter-spacing:-.06em;
+  max-width:820px;
+  margin-bottom:14px;
+}
+.intro p{
+  max-width:760px;
+  font-size:16px;
+  line-height:1.78;
+  color:rgba(244,239,231,.8);
+}
+.intro-note{
+  margin-top:16px;
+  display:inline-flex;
+  padding:12px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:13px;
+  font-weight:700;
+}
+.grid{
+  width:min(1380px,100%);
+  margin:0 auto;
+  display:grid;
+  gap:20px;
+}
+.concept{
+  border-radius:32px;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 20px 56px rgba(0,0,0,.08);
+}
+.concept-head{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  padding:22px 24px;
+  border-bottom:1px solid rgba(0,0,0,.08);
+  background:linear-gradient(180deg, rgba(248,244,236,.95) 0%, rgba(255,255,255,.98) 100%);
+}
+.concept-head strong{
+  display:block;
+  font-size:24px;
+  letter-spacing:-.04em;
+  margin-bottom:6px;
+}
+.concept-head p{
+  max-width:760px;
+  font-size:14px;
+  line-height:1.7;
+  color:#6d665f;
+}
+.concept-tag{
+  display:inline-flex;
+  align-self:flex-start;
+  min-height:36px;
+  padding:0 14px;
+  border-radius:999px;
+  background:#111214;
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  align-items:center;
+}
+.concept-body{padding:24px}
+
+.hero-sample{
+  position:relative;
+  min-height:520px;
+  border-radius:28px;
+  overflow:hidden;
+  background:#0f1012;
+}
+.hero-sample img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.58) saturate(.9);
+}
+.hero-sample::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(7,8,10,.18) 0%, rgba(7,8,10,.64) 100%);
+}
+.hero-copy{
+  position:relative;
+  z-index:1;
+  padding:34px;
+  display:flex;
+  align-items:flex-end;
+  min-height:520px;
+}
+.floating-form{
+  width:min(470px,100%);
+  padding:24px;
+  border-radius:26px;
+  background:rgba(247,243,236,.82);
+  border:1px solid rgba(255,255,255,.34);
+  backdrop-filter:blur(12px);
+  box-shadow:0 20px 46px rgba(0,0,0,.18);
+}
+.floating-form h3,
+.side-form h3,
+.inline-form h3,
+.page-form h3{
+  font-size:26px;
+  line-height:1;
+  letter-spacing:-.05em;
+  margin-bottom:10px;
+}
+.floating-form p,
+.side-form p,
+.inline-form p,
+.page-form p{
+  color:#59544d;
+  font-size:14px;
+  line-height:1.7;
+  margin-bottom:16px;
+}
+.mini-grid{
+  display:grid;
+  gap:10px;
+  grid-template-columns:1fr 1fr;
+}
+.field,.textarea{
+  width:100%;
+  border:none;
+  outline:none;
+  border-radius:16px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  padding:14px 15px;
+  font:inherit;
+}
+.textarea{
+  min-height:104px;
+  resize:vertical;
+  grid-column:1 / -1;
+}
+.submit{
+  min-height:48px;
+  border:none;
+  border-radius:999px;
+  background:#111214;
+  color:#fff;
+  padding:0 18px;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.split-layout{
+  display:grid;
+  grid-template-columns:1.08fr .72fr;
+  gap:18px;
+}
+.content-card{
+  min-height:520px;
+  border-radius:28px;
+  padding:28px;
+  background:linear-gradient(180deg, rgba(18,19,21,.98) 0%, rgba(12,13,15,.98) 100%);
+  color:#f7f3ec;
+}
+.content-card h3{
+  font-size:clamp(32px,5vw,56px);
+  line-height:.95;
+  letter-spacing:-.05em;
+  margin-bottom:14px;
+  max-width:620px;
+}
+.content-card p{
+  max-width:560px;
+  line-height:1.8;
+  color:rgba(245,240,232,.78);
+}
+.quick-actions{
+  display:grid;
+  gap:12px;
+  margin-top:28px;
+  max-width:520px;
+}
+.quick-actions div{
+  padding:16px 18px;
+  border-radius:18px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+}
+.quick-actions strong{
+  display:block;
+  font-size:15px;
+  margin-bottom:4px;
+}
+.quick-actions span{
+  color:rgba(245,240,232,.72);
+  font-size:13px;
+  line-height:1.6;
+}
+.side-form{
+  border-radius:28px;
+  padding:24px;
+  background:#f8f4ed;
+  border:1px solid rgba(0,0,0,.08);
+}
+
+.dock-sample{
+  position:relative;
+  min-height:480px;
+  border-radius:28px;
+  overflow:hidden;
+  background:#111214;
+}
+.dock-sample img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.54) saturate(.88);
+}
+.dock-copy{
+  position:relative;
+  z-index:1;
+  padding:30px;
+  min-height:480px;
+}
+.dock-copy h3{
+  font-size:clamp(34px,5vw,60px);
+  line-height:.94;
+  letter-spacing:-.05em;
+  color:#fff;
+  max-width:620px;
+  margin-bottom:14px;
+}
+.dock-copy p{
+  max-width:620px;
+  color:rgba(245,240,232,.82);
+  line-height:1.8;
+}
+.contact-dock{
+  position:absolute;
+  left:22px;
+  right:22px;
+  bottom:22px;
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:12px;
+  padding:16px;
+  border-radius:24px;
+  background:rgba(247,243,236,.82);
+  border:1px solid rgba(255,255,255,.28);
+  backdrop-filter:blur(14px);
+}
+.dock-info strong{
+  display:block;
+  font-size:18px;
+  letter-spacing:-.03em;
+  margin-bottom:4px;
+}
+.dock-info span{
+  color:#5c564f;
+  font-size:13px;
+  line-height:1.6;
+}
+
+.inline-section{
+  display:grid;
+  gap:18px;
+  grid-template-columns:.92fr 1.08fr;
+  align-items:start;
+}
+.inline-copy{
+  padding:8px 6px;
+}
+.inline-copy h3{
+  font-size:clamp(32px,5vw,54px);
+  line-height:.96;
+  letter-spacing:-.05em;
+  margin-bottom:12px;
+}
+.inline-copy p{
+  color:#605a53;
+  line-height:1.82;
+}
+.inline-points{
+  display:grid;
+  gap:10px;
+  margin-top:22px;
+}
+.inline-points div{
+  padding:14px 16px;
+  border-radius:18px;
+  background:#f4efe6;
+  border:1px solid rgba(0,0,0,.06);
+  font-size:14px;
+  line-height:1.65;
+}
+.inline-form{
+  padding:24px;
+  border-radius:28px;
+  background:#111214;
+  color:#fff;
+}
+.inline-form p{color:rgba(245,240,232,.72)}
+.inline-form .field,
+.inline-form .textarea{
+  background:rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.08);
+  color:#fff;
+}
+.inline-form .field::placeholder,
+.inline-form .textarea::placeholder{color:rgba(255,255,255,.5)}
+.inline-form .submit{
+  background:#f3efe7;
+  color:#111214;
+}
+
+.page-concept{
+  display:grid;
+  gap:18px;
+  grid-template-columns:.82fr 1.18fr;
+}
+.page-side{
+  padding:26px;
+  border-radius:28px;
+  background:linear-gradient(180deg, rgba(18,19,21,.98) 0%, rgba(11,12,14,.98) 100%);
+  color:#fff;
+}
+.page-side h3{
+  font-size:clamp(30px,5vw,52px);
+  line-height:.96;
+  letter-spacing:-.05em;
+  margin-bottom:12px;
+}
+.page-side p{
+  color:rgba(245,240,232,.76);
+  line-height:1.8;
+}
+.page-side ul{
+  margin-top:18px;
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+.page-side li{
+  padding:14px 16px;
+  border-radius:18px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:14px;
+  line-height:1.6;
+}
+.page-form{
+  padding:24px;
+  border-radius:28px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+}
+.contact-lines{
+  display:grid;
+  gap:10px;
+  margin-top:16px;
+}
+.contact-lines a,.contact-lines div{
+  text-decoration:none;
+  color:#5f5952;
+  font-size:14px;
+}
+
+@media(max-width:1024px){
+  .split-layout,
+  .inline-section,
+  .page-concept{
+    grid-template-columns:1fr;
+  }
+  .contact-dock{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:768px){
+  .page{padding:14px 12px 48px}
+  .topbar{padding:10px 12px;border-radius:20px}
+  .brand img{width:46px;height:46px}
+  .intro,
+  .concept-head,
+  .concept-body{padding:20px}
+  .hero-sample,
+  .hero-copy,
+  .content-card,
+  .dock-sample,
+  .dock-copy{min-height:auto}
+  .hero-copy{padding:20px;align-items:flex-end}
+  .floating-form{
+    width:100%;
+    padding:20px;
+  }
+  .mini-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="app" class="page">
+  <div class="topbar">
+    <a href="index.html" class="brand">
+      <img :src="logo.light" :alt="logo.alt">
+      <div>
+        <strong>{{ logo.name }}</strong>
+        <span>{{ logo.tagline }}</span>
+      </div>
+    </a>
+    <div class="topbar-actions">
+      <a href="index.html" class="pill">Zur Startseite</a>
+      <a href="motoren.html" class="pill-dark">Motoren-Seite</a>
+    </div>
+  </div>
+
+  <section class="intro">
+    <span class="eyebrow">Kontakt Alternativen</span>
+    <h1>Kontakt deutlich weiter oben platzieren, ohne die Hauptseite zu ueberladen</h1>
+    <p>Ja, das geht sehr gut. Fuer diese Art von Seite ist das Kontaktformular nicht zwingend nur ganz unten sinnvoll. Oft funktioniert eine fruehe, kompakte Anfrage-Loesung besser, damit Interessenten schneller handeln koennen. Unten siehst du mehrere Richtungen, ohne dass wir deine bestehende Startseite ueberschreiben.</p>
+    <div class="intro-note">Empfehlung: Kontakt frueh sichtbar machen und das grosse Detailformular optional spaeter oder auf eigener Seite vertiefen.</div>
+  </section>
+
+  <main class="grid">
+    <section class="concept">
+      <div class="concept-head">
+        <div>
+          <strong>Variante A: Hero Overlay Formular</strong>
+          <p>Direkt weit oben nach dem Hero. Das Bild bleibt emotional, das Formular sitzt als kleine Premium-Karte darueber. Sehr gut, wenn der Kunde moechte, dass Anfragen schnell moeglich sind.</p>
+        </div>
+        <span class="concept-tag">Startseite</span>
+      </div>
+      <div class="concept-body">
+        <div class="hero-sample">
+          <img src="Projects/Motorblock1.jpg" alt="Werkstatt Hintergrund">
+          <div class="hero-copy">
+            <div class="floating-form">
+              <h3>{{ contactSection.title.replace(/<br>/g, ' ') }}</h3>
+              <p>{{ contactSection.subtitle }}</p>
+              <div class="mini-grid">
+                <input class="field" type="text" placeholder="Name">
+                <input class="field" type="email" placeholder="E-Mail">
+                <input class="field" type="text" placeholder="Fahrzeug">
+                <input class="field" type="text" placeholder="Telefon">
+                <textarea class="textarea" placeholder="Kurze Beschreibung zum Schaden"></textarea>
+              </div>
+              <div style="margin-top:12px">
+                <button class="submit" type="button">{{ contactSection.submitLabel }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept">
+      <div class="concept-head">
+        <div>
+          <strong>Variante B: Startseite mit rechter Schnell-Anfrage</strong>
+          <p>Links bleibt deine Hauptbotschaft, rechts sitzt schon frueh ein kompaktes Formular. Weniger dominant als ein Full-Hero-Formular, aber viel schneller erreichbar als ganz unten.</p>
+        </div>
+        <span class="concept-tag">Startseite</span>
+      </div>
+      <div class="concept-body">
+        <div class="split-layout">
+          <div class="content-card">
+            <span class="eyebrow">Frueher Kontakt</span>
+            <h3>Die Anfrage ist sofort sichtbar, ohne den Inhalt zu stoeren</h3>
+            <p>Diese Variante eignet sich gut, wenn der Kunde eine klassische Startseite behalten moechte, aber das Kontaktformular nicht erst nach vielen Abschnitten erreichbar sein soll.</p>
+            <div class="quick-actions">
+              <div><strong>Sofort greifbar</strong><span>Das Formular erscheint schon im oberen Drittel der Seite.</span></div>
+              <div><strong>Serioes</strong><span>Mehr Firmenwebseite, weniger Landingpage-Feeling.</span></div>
+              <div><strong>Ausgewogen</strong><span>Content und Conversion bleiben im Gleichgewicht.</span></div>
+            </div>
+          </div>
+          <div class="side-form">
+            <h3>Kurz anfragen</h3>
+            <p>Ideal fuer erste Daten, waehrend das lange Formular spaeter oder auf eigener Seite folgt.</p>
+            <div class="mini-grid">
+              <input class="field" type="text" placeholder="Name">
+              <input class="field" type="text" placeholder="Telefon">
+              <input class="field" type="text" placeholder="Marke / Modell">
+              <input class="field" type="text" placeholder="Motortyp">
+              <textarea class="textarea" placeholder="Worum geht es?"></textarea>
+            </div>
+            <div style="margin-top:12px">
+              <button class="submit" type="button">Schnellanfrage senden</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept">
+      <div class="concept-head">
+        <div>
+          <strong>Variante C: Floating Contact Dock</strong>
+          <p>Kein grosses Formular weit oben, sondern ein sehr stark sichtbares Kontakt-Dock auf dem Hero oder direkt darunter. Von dort aus kann man per Klick das komplette Formular oeffnen oder zu einer Kontaktsektion springen.</p>
+        </div>
+        <span class="concept-tag">Startseite</span>
+      </div>
+      <div class="concept-body">
+        <div class="dock-sample">
+          <img src="Projects/Motor1.jpg" alt="Motor Projekt">
+          <div class="dock-copy">
+            <span class="eyebrow">Kontakt Dock</span>
+            <h3>Kontakt sichtbar, ohne direkt die ganze Seite mit Formularfeldern zu fuellen</h3>
+            <p>Das ist ein guter Mittelweg, wenn der Kunde zwar fruehen Kontakt moechte, die Startseite aber trotzdem elegant und reduziert bleiben soll.</p>
+          </div>
+          <div class="contact-dock">
+            <div class="dock-info">
+              <strong>Anfrage direkt starten</strong>
+              <span>Kurzer Weg zu Telefon, WhatsApp oder vollstaendigem Formular.</span>
+            </div>
+            <a href="#!" class="pill">WhatsApp</a>
+            <a href="#!" class="pill-dark">Formular oeffnen</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept">
+      <div class="concept-head">
+        <div>
+          <strong>Variante D: Inline Formular nach dem ersten Inhaltsblock</strong>
+          <p>Das Formular erscheint nicht im Hero, aber schon sehr weit oben, zum Beispiel direkt nach Hero oder Leistungen. Das wirkt oft am ruhigsten und ist fuer viele Betriebe die vernuenftigste Loesung.</p>
+        </div>
+        <span class="concept-tag">Empfohlen</span>
+      </div>
+      <div class="concept-body">
+        <div class="inline-section">
+          <div class="inline-copy">
+            <span class="eyebrow">Fruehe Einbindung</span>
+            <h3>Das Formular kommt frueh genug, ohne den ersten Eindruck zu uebernehmen</h3>
+            <p>Wenn dein Kunde das aktuelle ganz unten stoerend findet, ist das hier meistens die sicherste Zielrichtung. Man erzaehlt kurz, warum man vertrauen kann, und bietet direkt danach die Anfrage an.</p>
+            <div class="inline-points">
+              <div>Weniger Scrollweg bis zur Conversion</div>
+              <div>Kein ueberladenes Hero</div>
+              <div>Passt gut zu einer hochwertigen Werkstattseite</div>
+            </div>
+          </div>
+          <div class="inline-form">
+            <h3>Anfrage frueh platzieren</h3>
+            <p>Eine kompakte Variante des Formulars, die spaeter optional in die grosse Vollversion uebergeht.</p>
+            <div class="mini-grid">
+              <input class="field" type="text" placeholder="Name">
+              <input class="field" type="email" placeholder="E-Mail">
+              <input class="field" type="text" placeholder="Telefon">
+              <input class="field" type="text" placeholder="Fahrzeug">
+              <textarea class="textarea" placeholder="Beschreibe dein Anliegen kurz"></textarea>
+            </div>
+            <div style="margin-top:12px">
+              <button class="submit" type="button">Anfrage starten</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept">
+      <div class="concept-head">
+        <div>
+          <strong>Variante E: Eigene Kontaktseite</strong>
+          <p>Wenn die Startseite bewusst schlank, edel und fokusiert bleiben soll, kann das grosse Formular auch auf eine eigene Seite ausgelagert werden. Auf der Startseite arbeitet man dann mit Buttons, Docks oder kleinen Kurzformularen.</p>
+        </div>
+        <span class="concept-tag">Separate Seite</span>
+      </div>
+      <div class="concept-body">
+        <div class="page-concept">
+          <div class="page-side">
+            <span class="eyebrow">Kontakt Seite</span>
+            <h3>Ideal fuer ein ausfuehrliches Formular mit klarer Conversion</h3>
+            <p>Das lohnt sich besonders, wenn viele Felder, Uploads und technische Angaben gebraucht werden. Die Startseite bleibt kompakt, waehrend die Kontaktseite voll auf Anfrage optimiert ist.</p>
+            <ul>
+              <li>Perfekt fuer lange Formulare mit VIN, Uploads und Details</li>
+              <li>Die Startseite kann oben nur einen starken CTA zeigen</li>
+              <li>Sehr gut fuer spaetere Ads- oder Kampagnenlinks</li>
+            </ul>
+          </div>
+          <div class="page-form">
+            <h3>Kontakt als eigene Zielseite</h3>
+            <p>Hier wuerde dann das komplette Anfrageformular in voller Ausfuehrung sitzen, zusammen mit Telefonnummer, WhatsApp und Reaktionszeit.</p>
+            <div class="mini-grid">
+              <input class="field" type="text" placeholder="Name">
+              <input class="field" type="email" placeholder="E-Mail">
+              <input class="field" type="text" placeholder="Telefon">
+              <input class="field" type="text" placeholder="Fahrzeugmarke">
+              <input class="field" type="text" placeholder="Motortyp">
+              <input class="field" type="text" placeholder="VIN">
+              <textarea class="textarea" placeholder="Detaillierte Problembeschreibung"></textarea>
+            </div>
+            <div style="margin-top:12px">
+              <button class="submit" type="button">{{ contactSection.submitLabel }}</button>
+            </div>
+            <div class="contact-lines">
+              <a v-for="item in contactItems" :key="item.label" :href="item.href || '#!'">{{ item.label }}: {{ item.value }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept">
+      <div class="concept-head">
+        <div>
+          <strong>Variante F: Angebotsleiste direkt unter dem Hero</strong>
+          <p>Keine komplette Formularflaeche weit oben, sondern eine starke Angebotsleiste mit drei Einstiegen: Anrufen, WhatsApp, Anfrageformular. Sehr sauber und conversion-stark.</p>
+        </div>
+        <span class="concept-tag">Kompakt</span>
+      </div>
+      <div class="concept-body">
+        <div class="dock-sample" style="min-height:360px">
+          <img src="Projects/ueber-uns/block-floor.jpg" alt="Werkstatt">
+          <div class="dock-copy" style="min-height:360px">
+            <span class="eyebrow">Angebotsleiste</span>
+            <h3 style="max-width:760px">Nach dem ersten Eindruck sofort einen klaren Kontaktweg anbieten</h3>
+            <p>Wenn der Kunde kein grosses Formular gleich am Anfang will, ist diese Leiste oft ideal. Sie holt Interessenten frueh ab und fuehlt sich trotzdem leicht an.</p>
+          </div>
+          <div class="contact-dock" style="grid-template-columns:1.2fr auto auto auto">
+            <div class="dock-info">
+              <strong>Kurz und direkt</strong>
+              <span>Angebot anfragen, WhatsApp oder Rueckruf in wenigen Sekunden.</span>
+            </div>
+            <a href="#!" class="pill">Anrufen</a>
+            <a href="#!" class="pill">WhatsApp</a>
+            <a href="#!" class="pill-dark">Formular</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept">
+      <div class="concept-head">
+        <div>
+          <strong>Variante G: Zwei-Stufen-Kontakt</strong>
+          <p>Oben nur ein sehr kurzes Formular mit 2 bis 3 Feldern, danach bei Bedarf die grosse Vollversion. Das senkt die Huerde deutlich und passt gut zu mobilen Nutzern.</p>
+        </div>
+        <span class="concept-tag">Conversion</span>
+      </div>
+      <div class="concept-body">
+        <div class="split-layout">
+          <div class="side-form" style="background:#111214;color:#fff">
+            <h3 style="color:#fff">Schritt 1: Schnellkontakt</h3>
+            <p style="color:rgba(245,240,232,.72)">Nur die wichtigsten Daten zuerst. Danach wird auf das grosse Formular oder eine persoenliche Rueckmeldung uebergeleitet.</p>
+            <div class="mini-grid">
+              <input class="field" type="text" placeholder="Name" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08);color:#fff">
+              <input class="field" type="text" placeholder="Telefon" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08);color:#fff">
+              <input class="field" type="text" placeholder="Fahrzeug" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08);color:#fff">
+              <textarea class="textarea" placeholder="Was ist passiert?" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08);color:#fff"></textarea>
+            </div>
+            <div style="margin-top:12px">
+              <button class="submit" type="button" style="background:#f3efe7;color:#111214">Schnell absenden</button>
+            </div>
+          </div>
+          <div class="content-card">
+            <span class="eyebrow">Niedrige Huerde</span>
+            <h3>Weniger Felder zuerst, mehr Details erst spaeter</h3>
+            <p>Diese Richtung ist stark, wenn viele Nutzer auf dem Handy kommen oder wenn du merkst, dass ein langes Formular zu frueh abschreckt.</p>
+            <div class="quick-actions">
+              <div><strong>Mobile freundlich</strong><span>Kurze Eingabe, weniger Abbruch.</span></div>
+              <div><strong>Flexibel</strong><span>Details koennen spaeter nachgereicht werden.</span></div>
+              <div><strong>Praxisnah</strong><span>Gut fuer Werkstattanfragen mit Rueckrufprozess.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept">
+      <div class="concept-head">
+        <div>
+          <strong>Variante H: Sticky Kontaktkarte beim Scrollen</strong>
+          <p>Der Inhalt bleibt normal, aber rechts oder unten bleibt immer eine kleine Kontaktkarte sichtbar. So muss das Formular nicht komplett weit oben stehen und ist trotzdem nie weit weg.</p>
+        </div>
+        <span class="concept-tag">Hybrid</span>
+      </div>
+      <div class="concept-body">
+        <div class="inline-section">
+          <div class="content-card" style="min-height:440px">
+            <span class="eyebrow">Sticky Kontakt</span>
+            <h3>Eine kleine Anfragekarte begleitet den Nutzer durch die Seite</h3>
+            <p>Besonders sinnvoll, wenn ihr die Startseite inhaltlich behalten wollt, der Kontakt aber jederzeit sichtbar sein soll. Das ist weniger aggressiv als ein Hero-Formular und praktischer als nur ein Footer-Formular.</p>
+          </div>
+          <div class="side-form" style="position:sticky;top:92px">
+            <h3>Immer griffbereit</h3>
+            <p>Kleine feste Karte mit den wichtigsten Kontaktwegen und einem Button zur Vollanfrage.</p>
+            <div class="quick-actions" style="margin-top:0;max-width:none">
+              <div style="background:#f4efe6;border-color:rgba(0,0,0,.06)"><strong>Telefon</strong><span>{{ contactItems[0].value }}</span></div>
+              <div style="background:#f4efe6;border-color:rgba(0,0,0,.06)"><strong>E-Mail</strong><span>{{ contactItems[1].value }}</span></div>
+              <div style="background:#f4efe6;border-color:rgba(0,0,0,.06)"><strong>Antwortzeit</strong><span>{{ contactSection.responseHint }}</span></div>
+            </div>
+            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+              <a href="#!" class="pill">WhatsApp</a>
+              <a href="#!" class="pill-dark">Vollformular</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept">
+      <div class="concept-head">
+        <div>
+          <strong>Variante I: Anfrage vor Referenzen</strong>
+          <p>Das Formular sitzt nicht ganz oben, aber deutlich frueher als bisher: direkt nach Hero und Leistungen, noch vor Referenzen, Motoren und Ueber uns. Sehr ausgewogen fuer klassische Betriebe.</p>
+        </div>
+        <span class="concept-tag">Struktur</span>
+      </div>
+      <div class="concept-body">
+        <div class="page-concept">
+          <div class="page-side">
+            <span class="eyebrow">Neue Reihenfolge</span>
+            <h3>Hero, Leistungen, fruehe Anfrage, danach erst die restlichen Inhalte</h3>
+            <p>Das ist keine neue Designkomponente, sondern eine neue Seitenlogik. Oft reicht das schon, damit sich die Seite viel direkter anfuehlt.</p>
+            <ul>
+              <li>Erst Vertrauen aufbauen</li>
+              <li>Dann direkt Kontakt anbieten</li>
+              <li>Danach weiter mit Referenzen und Marken</li>
+            </ul>
+          </div>
+          <div class="page-form">
+            <h3>Kontaktblock als fruehes Hauptmodul</h3>
+            <p>Hier koennte genau dein bestehendes Formular stehen, nur viel frueher auf der Seite platziert.</p>
+            <div class="mini-grid">
+              <input class="field" type="text" placeholder="Name">
+              <input class="field" type="email" placeholder="E-Mail">
+              <input class="field" type="text" placeholder="Telefon">
+              <input class="field" type="text" placeholder="Fahrzeug">
+              <textarea class="textarea" placeholder="Dein Anliegen"></textarea>
+            </div>
+            <div style="margin-top:12px">
+              <button class="submit" type="button">Kontaktblock frueh einsetzen</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept">
+      <div class="concept-head">
+        <div>
+          <strong>Variante J: Eigene Kontakt-Landingpage plus Mini-Formular auf Startseite</strong>
+          <p>Die Startseite bekommt nur eine kleine kompakte Anfrage, waehrend das komplette Formular auf einer extra Seite lebt. Das ist die sauberste Trennung zwischen Image-Seite und Conversion-Seite.</p>
+        </div>
+        <span class="concept-tag">Landingpage</span>
+      </div>
+      <div class="concept-body">
+        <div class="hero-sample" style="min-height:460px">
+          <img src="Projects/Motorblock1.jpg" alt="Kontakt Landingpage">
+          <div class="hero-copy" style="justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap">
+            <div style="max-width:620px;color:#fff;position:relative;z-index:1">
+              <span class="eyebrow">Getrennte Conversion</span>
+              <h3 style="font-size:clamp(34px,5vw,62px);line-height:.94;letter-spacing:-.05em;margin-bottom:12px">Die Startseite verkauft das Vertrauen, die Kontaktseite holt die Anfrage</h3>
+              <p style="max-width:560px;color:rgba(245,240,232,.8);line-height:1.8">Auf der Startseite bleibt alles kompakt. Wer wirklich anfragen will, geht ueber CTA oder Mini-Formular auf eine speziell optimierte Kontaktseite.</p>
+            </div>
+            <div class="floating-form" style="width:min(390px,100%)">
+              <h3>Mini-Anfrage</h3>
+              <p>Nur Kurzinfos sammeln und dann auf die volle Kontaktseite weiterleiten.</p>
+              <div class="mini-grid">
+                <input class="field" type="text" placeholder="Name">
+                <input class="field" type="text" placeholder="Telefon">
+                <textarea class="textarea" placeholder="Kurzes Anliegen"></textarea>
+              </div>
+              <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+                <button class="submit" type="button">Kurz absenden</button>
+                <a href="#!" class="pill">Volles Formular</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="content.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script>
+const { createApp } = Vue;
+createApp({
+  data(){
+    return window.siteContent;
+  }
+}).mount('#app');
+</script>
+</body>
+</html>
