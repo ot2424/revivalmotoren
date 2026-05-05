@@ -3,80 +3,89 @@ window.projectsPageContent = {
   hero: {
     label: 'Referenzen & Projekte',
     title: 'Abgeschlossene Projekte aus unserer Werkstatt',
-    body: 'Auf dieser Seite können frühere Motorprojekte, Instandsetzungen und technische Arbeiten ausführlicher gezeigt werden, ohne die Hauptseite zu lang zu machen. Die unten aufgeführten Projekte sind Platzhalter und können später einfach durch echte Fälle, Bilder und Beschreibungen ersetzt werden.',
+    body: 'Bilder sagen mehr als tausend Worte – besonders wenn es um Technik geht. In unserer Projektgalerie dokumentieren wir ausgewählte Motor-Instandsetzungen und technische Generalüberholungen. Erleben Sie Schritt für Schritt, wie wir defekte Motoren mit Präzision und Originalteilen zu neuem Leben erwecken. Von der ersten Diagnose über die mechanische Bearbeitung bis hin zum finalen Testlauf zeigen wir Ihnen hier unsere Leidenschaft für Motorentechnik.',
     primaryAction: 'Anfrage senden',
     secondaryAction: 'Zur Startseite'
   },
 
   // Einleitung für das Projekt-Grid
   intro: {
-    title: 'Einblicke in bisherige Arbeiten',
-    body: 'Von Zylinderkopf-Aufbereitung über Motorblock-Instandsetzung bis zu kompletten Revisionsarbeiten. Diese Übersicht ist bewusst separat angelegt, damit Sie Ihre fertigen Projekte später sauber und strukturiert zeigen können.'
+    title: 'Projekt-Highlights',
+    body: 'Wir lassen Ergebnisse sprechen. Hier finden Sie Einblicke in unsere tägliche Arbeit an Zylinderköpfen, Motorblöcken und kompletten Aggregaten. Jedes Bild steht für eine erfolgreiche Rückkehr auf die Straße.'
   },
 
-  // Projektkarten / Platzhalter
-  projects: [
+  // Projekt-Sektionen
+  // Pro Eintrag kann entweder ein einzelnes `image` genutzt werden
+  // oder mehrere Bilder über `images`. Bei mehreren Bildern wird
+  // auf der Projekte-Seite automatisch eine Slideshow aufgebaut.
+  showcases: [
     {
       slug: 'projekt-01',
+      placement: 'bottom-right',
       category: 'Zylinderkopf',
       title: 'Druckprüfung, Reinigung und Planen',
       excerpt: 'Platzhalter für ein reales Kundenprojekt mit kurzer Beschreibung des Schadensbilds, der Diagnose und der durchgeführten Arbeiten.',
-      image: 'Projects/projekte/img-block.jpg',
-      imageAlt: 'Projektbild Zylinderkopf',
+      images: [
+        {
+          src: 'Projects/projekte/img-block.jpg',
+          alt: 'Projektbild Zylinderkopf'
+        },
+        {
+          src: 'Projects/projekte/Motorblock.jpg',
+          alt: 'Projektbild Motorblock'
+        }
+      ],
       stats: ['Diagnose', 'Reinigung', 'Planen']
     },
-    {
+    /*{
       slug: 'projekt-02',
+      placement: 'top-right',
       category: 'Motorblock',
       title: 'Motorblock OEM-Instandsetzung',
       excerpt: 'Platzhalter für einen Motorblock-Fall inklusive Vermessung, Bearbeitung und dokumentierter Endkontrolle nach der Instandsetzung.',
-      image: 'Projects/projekte/Motorblock.jpg',
-      imageAlt: 'Projektbild Motorblock',
+      images: [
+        {
+          src: 'Projects/projekte/Motorblock.jpg',
+          alt: 'Projektbild Motorblock'
+        },
+        {
+          src: 'Projects/projekte/Motor.jpg',
+          alt: 'Projektbild Reihenmotor'
+        }
+      ],
       stats: ['Vermessung', 'Bearbeitung', 'Endkontrolle']
+    },*/
+  ],
+
+  // Fallback-/Kollagenbilder für den Abschlussbereich
+  closingImages: [
+    {
+      src: 'Projects/projekte/img-block.jpg',
+      alt: 'Projektbild Zylinderkopf'
     },
     {
-      slug: 'projekt-03',
-      category: 'Reihenmotor',
-      title: 'Reihenmotor Teilrevision',
-      excerpt: 'Platzhalter für ein Projekt mit Teilzerlegung, Prüfung verschlissener Komponenten und gezielter Instandsetzung des Aggregats.',
-      image: 'Projects/projekte/Motor.jpg',
-      imageAlt: 'Projektbild Reihenmotor',
-      stats: ['Teilzerlegung', 'Prüfung', 'Revision']
+      src: 'Projects/projekte/Motorblock.jpg',
+      alt: 'Projektbild Motorblock'
     },
     {
-      slug: 'projekt-04',
-      category: 'V-Motor',
-      title: 'V-Motor Aufbereitung und Zusammenbau',
-      excerpt: 'Platzhalter für ein größeres Projekt mit mehreren Arbeitsschritten, Dokumentation und finalem Wiederaufbau des Motors.',
-      image: 'Projects/projekte/Motor1.jpg',
-      imageAlt: 'Projektbild V-Motor',
-      stats: ['Aufbereitung', 'Zusammenbau', 'Dokumentation']
+      src: 'Projects/projekte/Motor.jpg',
+      alt: 'Projektbild Reihenmotor'
     },
     {
-      slug: 'projekt-05',
-      category: 'Oberklasse',
-      title: 'Komplette Instandsetzung eines Oberklasse-Motors',
-      excerpt: 'Platzhalter für ein umfangreiches Projekt mit Fokus auf Präzision, hochwertige Bauteile und langlebige Instandsetzung.',
-      image: 'Projects/Motor1.jpg',
-      imageAlt: 'Projektbild Oberklasse-Motor',
-      stats: ['Komplettrevision', 'OEM-Qualität', 'Abnahme']
+      src: 'Projects/projekte/Motor1.jpg',
+      alt: 'Projektbild V-Motor'
     },
     {
-      slug: 'projekt-06',
-      category: 'Werkstatt',
-      title: 'Mess- und Prüfprozess in der Werkstatt',
-      excerpt: 'Platzhalter für einen Projekt- oder Prozessbeitrag, der eher den Werkstattablauf, die Diagnose und die Qualitätssicherung zeigt.',
-      image: 'Projects/messen.png',
-      imageAlt: 'Projektbild Messprozess',
-      stats: ['Messung', 'Befund', 'Qualität']
+      src: 'Projects/messen.png',
+      alt: 'Projektbild Messprozess'
     }
   ],
 
   // CTA-Bereich am Ende
   closing: {
     label: 'Nächstes Projekt',
-    title: 'Ihr Motorprojekt könnte das nächste sein',
-    body: 'Wenn Sie bereits einen konkreten Motorschaden, eine Diagnose oder ein Projekt mit Bildern und Daten haben, schicken Sie uns Ihre Anfrage. Wir prüfen den Fall und melden uns mit einer transparenten Einschätzung zurück.',
-    action: 'Jetzt Anfrage senden'
+    title: 'Bringen wir Ihren Motor gemeinsam zurück auf die Straße',
+    body: 'Haben Sie bereits eine Diagnose, Fotos vom Schaden oder ein Video der Motorgeräusche? Senden Sie uns Ihre Daten und die Fahrgestellnummer (VIN) zu. Unser Expertenteam analysiert Ihren Fall und erstellt Ihnen eine transparente, fachgerechte Einschätzung für Ihre Instandsetzung.',
+    action: 'Jetzt unverbindlich anfragen'
   }
 };

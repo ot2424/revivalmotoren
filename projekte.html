@@ -22,7 +22,7 @@
     img{display:block;max-width:100%}
 
     .page{padding:18px 0 88px}
-    .shell{width:min(calc(100% - 36px), 1420px);margin:0 auto}
+    .shell{width:min(calc(100% - 24px), 1560px);margin:0 auto}
 
     .topbar{
       position:sticky;top:14px;z-index:40;
@@ -99,30 +99,65 @@
     .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
 
     .section{
-      margin-top:22px;padding:30px;border-radius:34px;
-      border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:0 24px 80px rgba(0,0,0,.2);
+      margin-top:22px;
     }
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:24px}
+    .section-head{
+      display:flex;align-items:end;justify-content:space-between;gap:18px;
+      margin-bottom:24px;padding:0 10px;
+    }
     .section-head h2{margin:8px 0 0;font-size:clamp(2rem,4vw,3.4rem);line-height:.95;letter-spacing:-.06em}
     .section-head p{margin:0;max-width:720px;color:#b7b2a8;line-height:1.72}
 
-    .projects-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-    .project-card{
-      overflow:hidden;border-radius:28px;border:1px solid rgba(255,255,255,.08);
+    .projects-stack{display:flex;flex-direction:column;gap:18px}
+    .project-band{
+      position:relative;overflow:hidden;min-height:76vh;
+      border-radius:36px;border:1px solid rgba(255,255,255,.08);
       background:#111418;
+      box-shadow:0 24px 80px rgba(0,0,0,.26);
+      isolation:isolate;
     }
-    .project-media{aspect-ratio:1.08/1;overflow:hidden}
-    .project-media img{width:100%;height:100%;object-fit:cover;filter:brightness(.82) saturate(.92)}
-    .project-copy{padding:22px}
+    .project-media{
+      position:absolute;inset:0;
+    }
+    .project-frame{
+      position:absolute;inset:0;
+      opacity:0;
+      transition:opacity .9s ease;
+    }
+    .project-frame.is-active{opacity:1}
+    .project-frame img{
+      width:100%;height:100%;object-fit:cover;
+      filter:brightness(.54) saturate(.9);
+      transform:scale(1.02);
+    }
+    .project-band::after{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(90deg, rgba(7,9,12,.24) 0%, rgba(7,9,12,.16) 34%, rgba(7,9,12,.74) 100%),
+        linear-gradient(180deg, rgba(7,9,12,.08) 0%, rgba(7,9,12,.68) 100%);
+    }
+    .project-band.is-top-right::after{
+      background:
+        linear-gradient(90deg, rgba(7,9,12,.18) 0%, rgba(7,9,12,.14) 46%, rgba(7,9,12,.76) 100%),
+        linear-gradient(180deg, rgba(7,9,12,.64) 0%, rgba(7,9,12,.18) 38%, rgba(7,9,12,.58) 100%);
+    }
+    .project-copy{
+      position:absolute;z-index:1;right:26px;bottom:26px;
+      width:min(100%, 480px);
+      padding:26px 28px;border-radius:30px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(12,14,18,.72);
+      backdrop-filter:blur(18px);
+      box-shadow:0 16px 48px rgba(0,0,0,.28);
+    }
+    .project-band.is-top-right .project-copy{top:26px;bottom:auto}
     .project-category{display:inline-flex;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b7b2a8;margin-bottom:10px}
-    .project-copy h3{font-size:1.5rem;letter-spacing:-.05em;line-height:1.02}
-    .project-copy p{margin-top:12px;color:#b7b2a8;line-height:1.72;font-size:14px}
-    .project-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+    .project-copy h3{font-size:clamp(1.8rem,3.1vw,3rem);letter-spacing:-.06em;line-height:.96;max-width:12ch}
+    .project-copy p{margin-top:14px;color:#d0cbc2;line-height:1.74;font-size:15px}
+    .project-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
     .project-tags span{
       padding:10px 12px;border-radius:999px;font-size:12px;font-weight:700;
-      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
     }
 
     .closing{
@@ -149,17 +184,69 @@
     .closing-card h2{margin:0;font-size:clamp(2rem,4vw,3.5rem);line-height:.96;letter-spacing:-.06em}
     .closing-card p{margin-top:14px;color:#b7b2a8;line-height:1.76}
 
+    @media(max-width:1360px){
+      .shell{width:min(calc(100% - 18px), 1560px)}
+      .hero{min-height:72vh}
+      .hero-copy{min-height:72vh;padding:34px}
+      .project-band{min-height:68vh}
+      .project-copy{width:min(100%, 452px)}
+    }
     @media(max-width:1180px){
       .topbar-nav{display:none}
-      .projects-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .hero{min-height:66vh}
+      .hero-copy{min-height:66vh}
+      .project-band{min-height:62vh}
+      .project-copy{width:min(100%, 440px)}
       .closing-bg{grid-template-columns:1fr 1fr;grid-template-rows:220px 160px 160px}
       .closing-bg .tile:first-child{grid-column:span 2;grid-row:auto}
     }
+    @media(max-width:980px){
+      .page{padding:12px 0 72px}
+      .topbar{
+        width:min(calc(100% - 16px), 1450px);
+        margin:0 auto 18px;
+        padding:10px;
+      }
+      .topbar-layout{grid-template-columns:minmax(0,1fr) auto;gap:10px}
+      .topbar-actions{display:none}
+      .topbar-brand{
+        padding:7px 12px 7px 7px;
+        gap:10px;
+      }
+      .topbar-brand-icon{width:52px;height:52px;border-radius:16px}
+      .topbar-brand-copy strong{font-size:18px}
+      .topbar-brand-copy span{font-size:11px}
+      .hero{min-height:58vh;border-radius:32px}
+      .hero-copy{
+        min-height:58vh;
+        max-width:640px;
+        padding:28px;
+      }
+      .hero-text{max-width:560px}
+      .section-head{
+        display:grid;
+        gap:10px;
+      }
+      .project-band{
+        min-height:54vh;
+        border-radius:30px;
+      }
+      .project-copy,
+      .project-band.is-top-right .project-copy{
+        right:20px;
+        top:auto;
+        bottom:20px;
+        width:min(calc(100% - 40px), 420px);
+        padding:22px 22px;
+      }
+      .project-copy h3{font-size:clamp(1.7rem,4vw,2.5rem)}
+      .closing{min-height:58vh;border-radius:32px}
+      .closing-copy{min-height:58vh;padding:24px}
+    }
     @media(max-width:760px){
-      .shell{width:min(calc(100% - 16px), 1420px)}
+      .shell{width:min(calc(100% - 12px), 1560px)}
       .topbar{top:8px;width:min(calc(100% - 16px), 1450px);padding:10px}
       .topbar-layout{grid-template-columns:1fr auto}
-      .topbar-actions{display:none}
       .topbar-brand{padding:6px 10px 6px 6px;border-radius:18px;gap:8px}
       .topbar-brand-icon{width:46px;height:46px;border-radius:14px}
       .topbar-brand-copy strong{font-size:16px}
@@ -168,12 +255,133 @@
       .hero-copy{padding:20px}
       .hero-title{font-size:clamp(2.4rem,11vw,4rem)}
       .hero-text{font-size:14px}
-      .section{padding:20px}
-      .section-head{display:grid}
-      .projects-grid{grid-template-columns:1fr}
+      .section-head{display:grid;padding:0 6px}
+      .project-band{
+        min-height:auto;
+        display:flex;flex-direction:column;
+      }
+      .project-media{
+        position:relative;
+        height:340px;
+      }
+      .project-frame img{
+        transform:none;
+      }
+      .project-band::after{
+        background:
+          linear-gradient(180deg, rgba(7,9,12,.18) 0%, rgba(7,9,12,.54) 100%);
+      }
+      .project-copy,
+      .project-band.is-top-right .project-copy{
+        position:relative;right:auto;top:auto;bottom:auto;
+        width:calc(100% - 28px);
+        margin:-54px 14px 14px;
+        padding:22px 20px;
+      }
+      .project-copy h3{max-width:none;font-size:clamp(1.7rem,8vw,2.3rem)}
+      .project-copy p{font-size:14px}
       .closing-bg{grid-template-columns:1fr 1fr;grid-template-rows:180px 120px 120px}
       .closing-copy{padding:16px}
       .closing-card{padding:20px}
+    }
+    @media(max-width:560px){
+      .page{padding:10px 0 56px}
+      .shell{width:min(calc(100% - 10px), 1560px)}
+      .topbar{
+        top:6px;
+        width:min(calc(100% - 10px), 1450px);
+        margin:0 auto 14px;
+        padding:8px;
+        border-radius:24px;
+      }
+      .topbar-brand{
+        padding:5px 8px 5px 5px;
+        border-radius:16px;
+      }
+      .topbar-brand-icon{width:42px;height:42px;border-radius:12px}
+      .topbar-brand-copy strong{font-size:14px}
+      .topbar-brand-copy span{font-size:8px}
+      .hero,
+      .hero-copy{
+        min-height:560px;
+        border-radius:28px;
+      }
+      .hero-copy{padding:16px}
+      .hero-text{
+        margin-top:12px;
+        font-size:13px;
+        line-height:1.7;
+      }
+      .hero-actions{
+        display:grid;
+        gap:10px;
+      }
+      .hero-actions a{
+        width:100%;
+      }
+      .section-head{padding:0 2px}
+      .section-head p{font-size:14px;line-height:1.68}
+      .project-band{border-radius:24px}
+      .project-media{height:290px}
+      .project-copy,
+      .project-band.is-top-right .project-copy{
+        width:calc(100% - 20px);
+        margin:-38px 10px 10px;
+        padding:18px 16px;
+        border-radius:22px;
+      }
+      .project-category{margin-bottom:8px}
+      .project-copy h3{font-size:clamp(1.45rem,8.4vw,2rem);line-height:1}
+      .project-copy p{
+        margin-top:10px;
+        font-size:13px;
+        line-height:1.68;
+      }
+      .project-tags{
+        gap:6px;
+        margin-top:14px;
+      }
+      .project-tags span{
+        padding:8px 10px;
+        font-size:11px;
+      }
+      .closing{
+        min-height:52vh;
+        border-radius:28px;
+      }
+      .closing-bg{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:150px 95px 95px;
+        gap:6px;
+        padding:6px;
+      }
+      .closing-copy{
+        min-height:52vh;
+        padding:12px;
+      }
+      .closing-card{
+        padding:18px 16px;
+        border-radius:22px;
+      }
+      .closing-card p{font-size:13px;line-height:1.68}
+    }
+    @media(max-width:420px){
+      .hero,
+      .hero-copy{
+        min-height:520px;
+      }
+      .hero-title{font-size:clamp(2.1rem,11.5vw,3.2rem)}
+      .project-media{height:250px}
+      .project-copy,
+      .project-band.is-top-right .project-copy{
+        margin:-30px 8px 8px;
+        width:calc(100% - 16px);
+        padding:16px 14px;
+      }
+      .project-copy h3{font-size:clamp(1.35rem,9vw,1.8rem)}
+      .closing-bg{
+        grid-template-rows:132px 86px 86px;
+      }
     }
   </style>
 </head>
@@ -228,7 +436,7 @@
           </div>
           <p id="projectsIntroBody"></p>
         </div>
-        <div class="projects-grid" id="projectsGrid"></div>
+        <div class="projects-stack" id="projectsGrid"></div>
       </section>
 
       <section class="closing">
@@ -252,7 +460,20 @@
   <script>
     const site = window.siteContent || {};
     const page = window.projectsPageContent || {};
-    const projects = Array.isArray(page.projects) ? page.projects : [];
+    const legacyProjects = Array.isArray(page.projects) ? page.projects : [];
+    const projects = Array.isArray(page.showcases) && page.showcases.length
+      ? page.showcases
+      : legacyProjects;
+
+    const normalizeImages = project => {
+      if (Array.isArray(project.images) && project.images.length) {
+        return project.images;
+      }
+      if (project.image) {
+        return [{ src: project.image, alt: project.imageAlt || project.title || 'Projektbild' }];
+      }
+      return [];
+    };
 
     document.getElementById('projectsHeroLabel').textContent = page.hero?.label || '';
     document.getElementById('projectsHeroTitle').textContent = page.hero?.title || '';
@@ -266,10 +487,17 @@
     document.getElementById('projectsClosingBody').textContent = page.closing?.body || '';
     document.getElementById('projectsClosingAction').textContent = page.closing?.action || 'Jetzt Anfrage senden';
 
-    document.getElementById('projectsGrid').innerHTML = projects.map(project => `
-      <article class="project-card">
-        <div class="project-media">
-          <img src="${project.image}" alt="${project.imageAlt}" loading="lazy" decoding="async">
+    document.getElementById('projectsGrid').innerHTML = projects.map((project, index) => {
+      const images = normalizeImages(project);
+      const placement = project.placement === 'top-right' ? 'is-top-right' : 'is-bottom-right';
+      return `
+      <article class="project-band ${placement}">
+        <div class="project-media ${images.length > 1 ? 'has-slideshow' : ''}" ${images.length > 1 ? `data-slideshow-interval="${project.interval || 4200}"` : ''}>
+          ${images.map((image, imageIndex) => `
+            <div class="project-frame ${imageIndex === 0 ? 'is-active' : ''}">
+              <img src="${image.src}" alt="${image.alt || project.title || 'Projektbild'}" loading="${index === 0 && imageIndex === 0 ? 'eager' : 'lazy'}" decoding="async">
+            </div>
+          `).join('')}
         </div>
         <div class="project-copy">
           <span class="project-category">${project.category}</span>
@@ -280,13 +508,30 @@
           </div>
         </div>
       </article>
-    `).join('');
+    `;
+    }).join('');
 
-    document.getElementById('closingBg').innerHTML = projects.slice(0, 5).map(project => `
+    const closingImages = Array.isArray(page.closingImages) && page.closingImages.length
+      ? page.closingImages
+      : projects.flatMap(project => normalizeImages(project)).slice(0, 5);
+
+    document.getElementById('closingBg').innerHTML = closingImages.slice(0, 5).map(image => `
       <div class="tile">
-        <img src="${project.image}" alt="${project.imageAlt}" loading="lazy" decoding="async">
+        <img src="${image.src}" alt="${image.alt || 'Projektbild'}" loading="lazy" decoding="async">
       </div>
     `).join('');
+
+    document.querySelectorAll('.project-media.has-slideshow').forEach(media => {
+      const frames = Array.from(media.querySelectorAll('.project-frame'));
+      if (frames.length < 2) return;
+      const interval = Number(media.dataset.slideshowInterval) || 4200;
+      let activeIndex = 0;
+      window.setInterval(() => {
+        frames[activeIndex].classList.remove('is-active');
+        activeIndex = (activeIndex + 1) % frames.length;
+        frames[activeIndex].classList.add('is-active');
+      }, interval);
+    });
 
     const number = site.business?.whatsappNumber || '';
     const message = site.business?.whatsappMessage || 'Hallo Revival Motoren';
