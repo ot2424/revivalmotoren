@@ -124,7 +124,7 @@ window.siteContent = {
   // Footer-Inhalte
   footer: {
     description: 'Spezialisierte Motorinstandsetzung in Bielefeld – präzise, zuverlässig und transparent.',
-    copyright: '© 2025 Revival Motoren'
+    copyright: '© 2026 Revival Motoren'
   },
   // Globale Unternehmensdaten für Funktionen
   business: {
@@ -343,8 +343,8 @@ window.siteContent = {
   ],
   // Stichpunkte im Karten-/Standortbereich
   mapPoints: [
-    { title: 'Adresse', body: 'Artur-Ladebeck-Straße 181<br>33647 Bielefeld' },
-    { title: 'Anfahrt', body: 'Ideal für lokale Kunden, Fahrzeuganlieferung und schnelle Orientierung per Google Maps.' }
+    { title: 'Adresse', body: 'Artur-Ladebeck-Straße 181<br>33647 Bielefeld' }
+    //{ title: 'Anfahrt', body: 'Ideal für lokale Kunden, Fahrzeuganlieferung und schnelle Orientierung per Google Maps.' }
   ],
   // Footer-Navigation
   footerNav: [
@@ -362,8 +362,8 @@ window.siteContent = {
   // Kontaktlinks im Footer
   footerContact: [
     { label: '+49 521 897 391 51', href: 'tel:+4952189739151' },
-    { label: 'info@revivalmotoren.de', href: 'mailto:info@revivalmotoren.de' },
-    { label: 'Bielefeld, DE', href: '#kontakt' },
+    { label: 'info@revivalmotoren.de', href: 'mailto:info@revivalmotoren.de' }
+    //{ label: 'Bielefeld, DE', href: '#kontakt' },
     // Instagram im Footer bei Bedarf aktivieren:
     // { label: 'Instagram', href: 'https://instagram.com/deinprofil' }
   ]
