@@ -248,8 +248,37 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .mob.open{display:flex}
 .mob a{font-size:clamp(20px,5.5vw,28px);font-weight:750;color:var(--mobile-menu-link);text-decoration:none;padding:18px 0;border-bottom:1px solid var(--mobile-menu-border);letter-spacing:-.03em}
 .mob a:hover{color:var(--mobile-menu-link-muted)}
-.mob-cta{margin-top:28px;background:var(--primary-btn-bg);color:var(--primary-btn-text);text-align:center;padding:16px;border-radius:40px;font-size:16px;font-weight:700;text-decoration:none;border:1px solid transparent}
-.mob-wa{margin-top:12px;background:var(--whatsapp-bg);color:var(--whatsapp-color);text-align:center;padding:16px;border-radius:40px;font-size:16px;font-weight:700;text-decoration:none;border:1px solid var(--whatsapp-border)}
+.mob a.mob-cta,
+.mob a.mob-wa{
+  align-self:stretch;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-width:0;
+  max-width:none;
+  padding:15px 18px;
+  border-radius:40px;
+  font-size:16px;
+  font-weight:700;
+  text-decoration:none;
+  letter-spacing:-.02em;
+  border-bottom:none;
+}
+.mob a.mob-cta{
+  margin-top:28px;
+  background:#f3f1ec;
+  color:#101215 !important;
+  text-align:center;
+  border:1px solid rgba(255,255,255,.08);
+}
+.mob a.mob-wa{
+  margin-top:12px;
+  background:var(--whatsapp-bg);
+  color:#f3f1ec !important;
+  text-align:center;
+  border:1px solid var(--whatsapp-border);
+}
 .mob-x{position:absolute;top:22px;right:20px;background:var(--mobile-menu-surface);border:1px solid var(--mobile-menu-border);width:48px;height:48px;border-radius:16px;font-size:22px;cursor:pointer;color:var(--mobile-menu-link-muted);font-family:var(--sans)}
 
 /* ── HERO ─────────────────────────────── */
@@ -1126,7 +1155,7 @@ html[data-theme="dark"] .brand-general-cta{
   position:absolute;
   right:0;
   bottom:72px;
-  width:min(360px, calc(100vw - 48px));
+  width:min(440px, calc(100vw - 48px));
   padding:18px;
   border-radius:24px;
   background:rgba(255,255,255,.9);
@@ -1146,9 +1175,9 @@ html[data-theme="dark"] .brand-general-cta{
 }
 .sticky-contact.is-open .sticky-contact-toggle{border-radius:18px}
 .sticky-contact-head{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:start;
   gap:14px;
   margin-bottom:14px;
 }
@@ -1165,6 +1194,7 @@ html[data-theme="dark"] .brand-general-cta{
   font-size:13px;
   line-height:1.65;
   color:var(--mid);
+  max-width:280px;
 }
 .sticky-contact-ping{
   display:inline-flex;
@@ -1176,6 +1206,7 @@ html[data-theme="dark"] .brand-general-cta{
   background:rgba(16,18,20,.05);
   border:1px solid rgba(16,18,20,.06);
   white-space:nowrap;
+  justify-self:end;
 }
 .sticky-contact-ping .kt-ping-dot{margin:0}
 .sticky-contact-ping .kt-ping-txt{
@@ -2339,7 +2370,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .kt-form-title{font-size:18px}
   .mob{padding:96px 18px 28px}
   .mob a{padding:16px 0}
-  .mob-cta,.mob-wa{padding:15px}
+  .mob a.mob-cta,.mob a.mob-wa{padding:14px 18px;font-size:15px}
 }
 
 @media(max-width:400px){
