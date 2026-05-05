@@ -37,7 +37,7 @@ window.siteContent = {
     label: 'Referenzarbeiten',
     title: 'Unsere<br>Motorprojekte',
     subtitle: 'Präzise Instandsetzung und Reparatur für alle führenden Fahrzeughersteller.',
-    action: 'Projekt anfragen →'
+    action: 'Zu den Projekten →'
   },
   // Einleitung für den Marken- und Motorenbereich
   brandsSection: {
@@ -109,14 +109,12 @@ window.siteContent = {
     submitLabel: 'Angebot anfragen →',
     note: 'Kostenlos & unverbindlich · Keine Datenweitergabe',
     successTitle: 'Anfrage gesendet!',
-    successText: 'Wir melden uns innerhalb von 24 Stunden mit Ihrem Angebot.'
+    successText: 'Vielen Dank für Ihre Kontaktanfrage. Wir prüfen Ihr Anliegen und melden uns schnellstmöglich bei Ihnen zurück.'
   },
   // Standort- und Kartenbereich
   mapSection: {
     label: 'Standort',
     title: 'Werkstatt in<br>Bielefeld finden',
-    subtitle: 'Revival Motoren finden Sie direkt an der Artur-Ladebeck-Straße. Die Karte unten hilft Ihren Kunden bei der schnellen Navigation zur Werkstatt.',
-    note: 'Telefon, E-Mail und vollständige Kontaktdaten finden Sie direkt im Anfragebereich darunter, damit die Informationen nicht doppelt erscheinen.',
     routeLabel: 'Route planen',
     whatsappLabel: 'WhatsApp',
     routeHref: 'https://www.google.com/maps/dir/?api=1&destination=Artur-Ladebeck-Stra%C3%9Fe+181,+33647+Bielefeld',
@@ -168,12 +166,42 @@ window.siteContent = {
   //TODO !!!---------------------------------ICONS ---------------------------------!!!// 
   // Leistungs-Karten
   services: [
-    { icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4h4"/><path d="M9 3h6"/><path d="M14.5 4 16 8"/><path d="M9.5 4 8 8"/><path d="M6 8h12"/><path d="M9 11a3 3 0 1 0 0 6"/><path d="M15 11a3 3 0 1 1 0 6"/><path d="M9 14h6"/></svg>', title: 'Diagnose & Befund', body: 'Vollständige Fehleranalyse mit modernster OBD-Messtechnik. Transparenter Befundbericht und fester Kostenvoranschlag vor Beginn.', tags: ['Kompressionsprüfung', 'Öldruckkontrolle', 'Dichtigkeitsprüfung'] },
-    { icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12"/><path d="M8 7v10"/><path d="M16 7v10"/><path d="M5 11h14"/><path d="M7 17h10"/><path d="M10 14h4"/></svg>', title: 'Zylinderkopf-Instandsetzung', body: 'Druckprüfung, Ultraschallreinigung, Planen und vollständige Aufbereitung des Zylinderkopfes nach Herstellervorgaben.', tags: ['Ultraschall', 'Planen', 'Ventilsitze'] },
-    { icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3"/><path d="M12 19v3"/><path d="m4.9 4.9 2.1 2.1"/><path d="m17 17 2.1 2.1"/><path d="M2 12h3"/><path d="M19 12h3"/><path d="m4.9 19.1 2.1-2.1"/><path d="m17 7 2.1-2.1"/></svg>', title: 'Kurbelwelle & Lager', body: 'Prüfung, Richten und Schleifen der Kurbelwelle. Austausch aller Haupt- und Pleuellager mit OEM-Teilen.', tags: ['Schleifen', 'Hauptlager', 'Pleuellager'] },
-    { icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7a2.5 2.5 0 1 0 0 5h3"/><path d="M14 12h3a2.5 2.5 0 1 0 0-5"/><path d="M10 9.5h4"/><path d="M9 14.5h6"/><path d="M8.5 17h7"/></svg>', title: 'Steuerkette & Timing', body: 'Austausch der Steuerkette inkl. Führungsschienen, Spanner und aller zugehörigen Komponenten.', tags: ['Führungsschienen', 'Spanner', 'Kettenkit'] },
-    { icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6v12"/><path d="M18 6v12"/><path d="M6 9h12"/><path d="M6 15h12"/><path d="M9.5 12h5"/></svg>', title: 'Honen & Kolbenringe', body: 'Professionelles Honen der Zylinder und Austausch aller Kolbenringe sowie Prüfung der Kolben.', tags: ['Honen', 'Kolbenringe', 'Ölpumpe'] },
-    { icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16h18"/><path d="M5 16l1.5-5h11L19 16"/><circle cx="8" cy="16" r="1.7"/><circle cx="16" cy="16" r="1.7"/><path d="M9 11V8h4"/></svg>', title: 'Abholung & Lieferung', body: 'Deutschlandweite Fahrzeugabholung direkt bei Ihnen zuhause – bequem, sicher und termingerecht.', tags: ['Deutschlandweit', 'Termintreu', 'Sicherer Transport'] }
+    {
+      icon: 'assets/icons/services/analyse.png',
+      title: 'Diagnose & Befund',
+      body: 'Vollständige Fehleranalyse mit modernster OBD-Messtechnik. Transparenter Befundbericht und fester Kostenvoranschlag vor Beginn.',
+      tags: ['Kompressionsprüfung', 'Öldruckkontrolle', 'Dichtigkeitsprüfung']
+    },
+    {
+      icon: 'assets/icons/services/cylinder.png',
+      title: 'Zylinderkopf-Instandsetzung',
+      body: 'Druckprüfung, Ultraschallreinigung, Planen und vollständige Aufbereitung des Zylinderkopfes nach Herstellervorgaben.',
+      tags: ['Ultraschall', 'Planen', 'Ventilsitze']
+    },
+    {
+      icon: 'assets/icons/services/crankshaft.png',
+      title: 'Kurbelwelle & Lager',
+      body: 'Prüfung, Richten und Schleifen der Kurbelwelle. Austausch aller Haupt- und Pleuellager mit OEM-Teilen.',
+      tags: ['Schleifen', 'Hauptlager', 'Pleuellager']
+    },
+    {
+      icon: 'assets/icons/services/chain.png',
+      title: 'Steuerkette & Timing',
+      body: 'Austausch der Steuerkette inkl. Führungsschienen, Spanner und aller zugehörigen Komponenten.',
+      tags: ['Führungsschienen', 'Spanner', 'Kettenkit']
+    },
+    {
+      icon: 'assets/icons/services/piston.png',
+      title: 'Honen & Kolbenringe',
+      body: 'Professionelles Honen der Zylinder und Austausch aller Kolbenringe sowie Prüfung der Kolben.',
+      tags: ['Honen', 'Kolbenringe', 'Ölpumpe']
+    },
+    {
+      icon: 'assets/icons/services/fast-delivery.png',
+      title: 'Abholung & Lieferung',
+      body: 'Deutschlandweite Fahrzeugabholung direkt bei Ihnen zuhause – bequem, sicher und termingerecht.',
+      tags: ['Deutschlandweit', 'Termintreu', 'Sicherer Transport']
+    }
   ],
   // Projekt- / Referenzgalerie //------- Mehr Bilder zu bzgl projekt, vielleicht mit vorher nachher slider-------!!!//
   caseGallery: [
@@ -307,9 +335,11 @@ window.siteContent = {
   // Kontaktdaten links neben dem Formular
   contactItems: [
     { icon: '📍', label: 'Adresse', value: 'Artur-Ladebeck-Straße 181, 33647 Bielefeld' },
-    { icon: '📞', label: 'Telefon', value: '+49 521 897 391 51', href: 'tel:+4952189739151' },
+    { icon: '📞', label: 'Telefon', value: '+49 521 923 735 19', href: 'tel:+4952192373519' },
     { icon: '💬', label: 'WhatsApp', value: 'Direkt Anfrage senden', href: '#kontakt', className: 'js-whatsapp-link' },
-    { icon: '✉️', label: 'E-Mail', value: 'info@revivalmotoren.de', href: 'mailto:info@revivalmotoren.de' }
+    { icon: '✉️', label: 'E-Mail', value: 'info@revivalmotoren.de', href: 'mailto:info@revivalmotoren.de' },
+    // Instagram bei Bedarf aktivieren:
+    // { icon: '📷', label: 'Instagram', value: '@revivalmotoren', href: 'https://instagram.com/deinprofil' }
   ],
   // Stichpunkte im Karten-/Standortbereich
   mapPoints: [
@@ -333,6 +363,8 @@ window.siteContent = {
   footerContact: [
     { label: '+49 521 897 391 51', href: 'tel:+4952189739151' },
     { label: 'info@revivalmotoren.de', href: 'mailto:info@revivalmotoren.de' },
-    { label: 'Bielefeld, DE', href: '#kontakt' }
+    { label: 'Bielefeld, DE', href: '#kontakt' },
+    // Instagram im Footer bei Bedarf aktivieren:
+    // { label: 'Instagram', href: 'https://instagram.com/deinprofil' }
   ]
 };

@@ -1,10 +1,10 @@
 window.agbContent = {
   company: {
     name: 'Revival Motoren',
-    street: '[Deine Straße / Hausnummer]',
-    city: '[PLZ / Ort]',
-    email: '[Deine E-Mail]',
-    phone: '[Deine Telefonnummer]'
+    street: 'Artur-Ladebeck-Straße 181',
+    city: '33647 Bielefeld',
+    email: 'info@revivalmotoren.de',
+    phone: '0521 92 37 35 19'
   },
   hero: {
     eyebrow: 'Rechtliches',
@@ -93,10 +93,10 @@ window.agbContent = {
           heading: '1. Identität des Anbieters',
           paragraphs: [
             'Revival Motoren',
-            '[Deine Straße / Hausnummer]',
-            '[PLZ / Ort]',
-            'E-Mail: [Deine E-Mail]',
-            'Telefon: [Deine Telefonnummer]'
+            'Artur-Ladebeck-Straße 181',
+            '33647 Bielefeld',
+            'E-Mail: info@revivalmotoren.de',
+            'Telefon: 0521 92 37 35 19'
           ]
         },
         {

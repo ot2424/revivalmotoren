@@ -294,9 +294,18 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 /* ── WHY SECTION ──────────────────────── */
 #why{margin:24px 24px 0;background:var(--white);border-radius:var(--rad2);border:1px solid var(--rule);overflow:hidden}
 .why-top{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--rule)}
-.why-top-left{padding:58px 48px 52px;border-right:1px solid var(--rule)}
-.why-top-right{padding:52px 48px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
-.why-h{font-size:clamp(28px,3.5vw,40px);font-weight:800;letter-spacing:-.04em;color:var(--ink);line-height:1.14;margin-bottom:14px;padding-top:4px}
+.why-top-left{
+  padding:52px 48px 52px;
+  border-right:1px solid var(--rule);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+.why-top-left > div:first-child{
+  margin-top:53px;
+}
+.why-top-right{padding:120px 48px;display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.why-h{display:block;font-size:clamp(28px,3.5vw,40px);font-weight:800;letter-spacing:-.04em;color:var(--ink);line-height:1.18;margin-bottom:14px;padding-top:0}
 .why-sub{font-size:14px;color:var(--mid);line-height:1.75;max-width:300px}
 .why-feat-icon{font-size:18px;margin-bottom:10px}
 .why-feat-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:-.02em}
@@ -322,12 +331,35 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .leistung-grid{display:flex;flex-direction:column;gap:2px}
 .lcard{background:var(--white);border:1px solid var(--rule);border-radius:var(--rad);padding:28px 28px;display:flex;align-items:flex-start;gap:18px;transition:all .3s;cursor:default}
 .lcard:hover{box-shadow:0 8px 32px rgba(0,0,0,.08);transform:translateY(-2px);border-color:var(--rule2)}
-.lcard-icon{width:44px;height:44px;flex-shrink:0;border-radius:12px;background:var(--bg);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;color:var(--ink)}
-.lcard-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.lcard-icon{
+  width:44px;height:44px;flex-shrink:0;border-radius:12px;background:var(--bg);border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;color:var(--ink);position:relative;overflow:hidden;
+}
+.lcard-icon-mark{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+.lcard-icon-mark img{width:20px;height:20px;object-fit:contain;display:block;filter:brightness(0) invert(1)}
 .lcard-title{font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--ink);margin-bottom:6px}
 .lcard-body{font-size:13px;color:var(--mid);line-height:1.7}
 .lcard-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .ltag{font-size:11px;font-weight:500;color:var(--mid);background:var(--bg2);border-radius:40px;padding:3px 10px}
+.service-reveal{
+  opacity:0;
+  transform:translate3d(0,42px,0) scale(.985);
+  transition:
+    opacity .72s cubic-bezier(.22,1,.36,1),
+    transform .72s cubic-bezier(.22,1,.36,1),
+    box-shadow .3s ease,
+    border-color .3s ease;
+}
+.service-reveal:nth-child(odd){
+  transform:translate3d(-18px,42px,0) scale(.985);
+}
+.service-reveal:nth-child(even){
+  transform:translate3d(18px,42px,0) scale(.985);
+}
+.service-reveal.is-visible{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+}
 
 /* ── CASES ────────────────────────────── */
 #cases{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);border:1px solid var(--rule);overflow:hidden}
@@ -1390,12 +1422,86 @@ html[data-theme="dark"] .brand-general-cta{
 .ff{display:flex;flex-direction:column;gap:5px}
 .fl{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 .fl em{color:var(--ink);font-style:normal}
+.fl-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.field-help{
+  position:relative;
+  width:18px;
+  height:18px;
+  border:none;
+  border-radius:999px;
+  background:rgba(17,18,20,.08);
+  color:var(--ink);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font:inherit;
+  font-size:11px;
+  font-weight:800;
+  line-height:1;
+  cursor:help;
+  flex-shrink:0;
+}
+.field-help-tip{
+  position:absolute;
+  left:50%;
+  bottom:calc(100% + 10px);
+  transform:translateX(-50%) translateY(6px);
+  width:min(220px, 62vw);
+  padding:10px 12px;
+  border-radius:12px;
+  background:#111214;
+  color:#fff;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0;
+  text-transform:none;
+  line-height:1.55;
+  box-shadow:0 16px 30px rgba(0,0,0,.22);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease;
+  z-index:4;
+}
+.field-help-tip::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:100%;
+  transform:translateX(-50%);
+  border-width:6px 6px 0 6px;
+  border-style:solid;
+  border-color:#111214 transparent transparent transparent;
+}
+.field-help:hover .field-help-tip,
+.field-help:focus-visible .field-help-tip{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
 .fi,.fta,.fsel{border:1.5px solid var(--rule);border-radius:10px;padding:11px 14px;font-family:var(--sans);font-size:14px;color:var(--ink);outline:none;width:100%;background:#fff;transition:border-color .2s}
 .fi:focus,.fta:focus,.fsel:focus{border-color:var(--ink)}
 .fi::placeholder,.fta::placeholder{color:var(--muted)}
 .fsel{color:var(--mid);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
 .fsel.ch{color:var(--ink)}
 .fta{resize:vertical;min-height:100px}
+.fi:required,.fta:required,.fsel:required{box-shadow:none}
+#kForm.is-attempted .fi:required:invalid,
+#kForm.is-attempted .fta:required:invalid,
+#kForm.is-attempted .fsel:required:invalid{
+  border-color:#d94b4b;
+  box-shadow:0 0 0 3px rgba(217,75,75,.12);
+  background:rgba(217,75,75,.04);
+}
+#kForm.is-attempted .fcheck:has(input:required:invalid){
+  border-color:#d94b4b;
+  box-shadow:0 0 0 3px rgba(217,75,75,.10);
+  background:rgba(217,75,75,.04);
+}
+#kForm.is-attempted .fcheck:has(input:required:invalid) label,
+#kForm.is-attempted .ff:has(.fi:required:invalid) .fl,
+#kForm.is-attempted .ff:has(.fta:required:invalid) .fl,
+#kForm.is-attempted .ff:has(.fsel:required:invalid) .fl{
+  color:#c94a4a;
+}
 .fupload{border:1.5px dashed var(--rule2);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:all .3s;background:var(--bg)}
 .fupload:hover{border-color:var(--ink);background:var(--bg2)}
 .fupload input{display:none}
@@ -1497,7 +1603,8 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   #hero{padding:142px 0 24px}
   .hero-card img{height:min(62vh,540px)}
   .why-top{grid-template-columns:1fr}
-  .why-top-left{border-right:none;border-bottom:1px solid var(--rule);padding:46px 32px 40px}
+  .why-top-left{border-right:none;border-bottom:1px solid var(--rule);padding:40px 32px}
+  .why-top-left > div:first-child{margin-top:28px}
   .why-top-right{padding:40px 32px}
   .why-mosaic{grid-template-columns:repeat(2,1fr);height:220px}
   .leistung-layout{grid-template-columns:1fr}
@@ -2150,6 +2257,11 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .sec-sub,.lst-intro-body,.map-copy,.kt-sub{font-size:13px}
   .lcard{padding:22px 18px;gap:14px}
   .lcard-icon{width:40px;height:40px}
+  .service-reveal,
+  .service-reveal:nth-child(odd),
+  .service-reveal:nth-child(even){
+    transform:translate3d(0,24px,0) scale(.992);
+  }
   #prozess{padding:44px 20px}
   .pz-step{padding:28px 20px}
   .about-imgs-wrap{grid-template-columns:1fr;grid-template-rows:220px 180px 180px}
@@ -2332,8 +2444,12 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
       <a href="#kontakt" class="lst-all-link">{{ servicesSection.action }}</a>
     </div>
     <div class="leistung-grid rv stagger glow-section float-card" style="transition-delay:.1s" data-float="16">
-      <div class="lcard" v-for="service in services" :key="service.title">
-        <div class="lcard-icon" v-html="service.icon"></div>
+      <div class="lcard service-reveal" v-for="service in services" :key="service.title">
+        <div class="lcard-icon">
+          <div class="lcard-icon-mark">
+            <img :src="service.icon" :alt="service.title + ' Icon'" loading="lazy" decoding="async">
+          </div>
+        </div>
         <div>
           <div class="lcard-title">{{ service.title }}</div>
           <p class="lcard-body">{{ service.body }}</p>
@@ -2375,7 +2491,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
       <p class="sec-sub">{{ casesSection.subtitle }}</p>
     </div>
     <div class="cases-right">
-      <a href="#kontakt" class="btn-pill">{{ casesSection.action }}</a>
+      <a href="projekte.html" class="btn-pill">{{ casesSection.action }}</a>
     </div>
   </div>
   <div class="cases-gallery stagger rv" style="transition-delay:.08s">
@@ -2440,7 +2556,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <!-- ════ PROZESS ══════════════════════════ -->
 <div id="prozess" class="rv glow-section">
   <span class="sec-label">{{ processSection.label }}</span>
-  <h2 class="sec-h" style="margin-bottom:48px" v-html="processSection.title"></h2>
+  <h2 class="sec-h" style="margin-bottom:42px; margin-top:40px" v-html="processSection.title"></h2>
   <div class="pz-grid rv stagger" style="transition-delay:.08s">
     <div class="pz-step" v-for="step in processSteps" :key="step.n" :data-step="step.step">
       <div class="pz-n">{{ step.n }}</div>
@@ -2459,7 +2575,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
       <div class="a-img" style="align-self:end"><img :src="about.images[2].src" :alt="about.images[2].alt" class="parallax-media" :data-parallax-speed="about.images[2].speed" :style="about.images[2].style"></div>
     </div>
     <div class="about-text">
-      <span class="sec-label">{{ about.label }}</span>
+      <span class="sec-label" style="padding-top: 94px !important">{{ about.label }}</span>
       <h2 class="sec-h" style="margin-bottom:14px" v-html="about.title"></h2>
       <p class="sec-sub">{{ about.subtitle }}</p>
       <div class="spec-list">
@@ -2506,17 +2622,34 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
         <div class="ff"><label class="fl">E-Mail <em>*</em></label><input type="email" class="fi" placeholder="ihre@email.de" required></div>
       </div>
       <div class="frow">
-        <div class="ff"><label class="fl">Telefon</label><input type="tel" class="fi" placeholder="+49 ..."></div>
+        <div class="ff"><label class="fl">Telefon <em>*</em></label><input type="tel" class="fi" placeholder="+49 ..." required></div>
         <div class="ff"><label class="fl">Fahrzeugmarke</label><input type="text" class="fi" placeholder="BMW, Mercedes ..."></div>
       </div>
       <div class="frow">
-        <div class="ff"><label class="fl">Motortyp</label>
-          <select class="fsel" id="mtyp" onchange="this.classList.add('ch')">
-            <option value="" disabled selected>Bitte wählen…</option>
-            <option v-for="option in engineOptions" :key="option">{{ option }}</option>
-          </select>
+        <div class="ff"><label class="fl">Kilometerstand</label><input type="text" class="fi" placeholder="z. B. 148.000 km"></div>
+        <div class="ff">
+          <div class="fl-row">
+            <label class="fl" for="vin">Fahrgestellnummer (VIN) <em>*</em></label>
+            <button class="field-help" type="button" aria-label="Info zur Fahrgestellnummer">
+              ?
+              <span class="field-help-tip">Zu finden im Fahrzeugschein unter Feld E.</span>
+            </button>
+          </div>
+          <input id="vin" type="text" class="fi" placeholder="17-stellige VIN" maxlength="17" required>
         </div>
-        <div class="ff"><label class="fl">Fahrgestellnummer (VIN)</label><input type="text" class="fi" placeholder="17-stellige VIN" maxlength="17"></div>
+      </div>
+      <div class="frow">
+        <div class="ff">
+          <div class="fl-row">
+            <label class="fl" for="hsn-tsn">Schlüsselnummern (HSN/TSN)</label>
+            <button class="field-help" type="button" aria-label="Info zu HSN und TSN">
+              ?
+              <span class="field-help-tip">Zu finden im Fahrzeugschein in den Feldern 2.1 und 2.2.</span>
+            </button>
+          </div>
+          <input id="hsn-tsn" type="text" class="fi" placeholder="z. B. 1234 / ABC00001">
+        </div>
+        <div class="ff"><label class="fl">Fahrzeugmodell</label><input type="text" class="fi" placeholder="z. B. A4, Golf, C-Klasse"></div>
       </div>
       <div class="frow one">
         <div class="ff"><label class="fl">Problembeschreibung <em>*</em></label><textarea class="fta" placeholder="Beschreiben Sie den Motorschaden detailliert …" required></textarea></div>
@@ -3037,6 +3170,19 @@ const ro = new IntersectionObserver(en=>{
 }, {threshold:.05, rootMargin:'0px 0px -20px 0px'});
 document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
+const serviceRevealObserver = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('is-visible');
+      serviceRevealObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold:.14, rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.service-reveal').forEach((el, index)=>{
+  el.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
+  serviceRevealObserver.observe(el);
+});
+
 /* ── PARALLAX / FLOAT ──────────────────────────── */
 const parallaxItems = Array.from(document.querySelectorAll('[data-parallax-speed]'));
 const floatItems = Array.from(document.querySelectorAll('[data-float]'));
@@ -3085,6 +3231,23 @@ function submitForm(e){
   e.preventDefault();
   document.getElementById('kForm').style.display = 'none';
   document.getElementById('kOk').style.display = 'block';
+}
+const contactForm = document.getElementById('kForm');
+if(contactForm){
+  contactForm.addEventListener('invalid', ()=>{
+    contactForm.classList.add('is-attempted');
+  }, true);
+  contactForm.addEventListener('submit', ()=>{
+    contactForm.classList.add('is-attempted');
+  }, true);
+  contactForm.querySelectorAll('input, textarea, select').forEach(field=>{
+    field.addEventListener('input', ()=>{
+      if(field.checkValidity()) field.closest('.ff')?.classList.remove('is-invalid');
+    });
+    field.addEventListener('change', ()=>{
+      if(field.checkValidity()) field.closest('.ff')?.classList.remove('is-invalid');
+    });
+  });
 }
 document.querySelectorAll('input[type="file"]').forEach(fi => fi.addEventListener('change', function(){
   const t = this.closest('label').querySelector('.fupload-t');

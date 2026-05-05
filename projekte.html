@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projekte & Referenzen – Revival Motoren</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{
+      font-family:'Geist',system-ui,-apple-system,sans-serif;
+      color:#f3f1ec;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.05), transparent 32%),
+        linear-gradient(180deg,#0a0c0f 0%, #090b0e 100%);
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+
+    .page{padding:18px 0 88px}
+    .shell{width:min(calc(100% - 36px), 1420px);margin:0 auto}
+
+    .topbar{
+      position:sticky;top:14px;z-index:40;
+      width:min(calc(100% - 24px), 1450px);
+      margin:0 auto 24px;
+      padding:12px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:32px;
+      background:rgba(13,15,18,.82);
+      backdrop-filter:blur(18px);
+      box-shadow:0 24px 80px rgba(0,0,0,.35);
+    }
+    .topbar-layout{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center}
+    .topbar-brand{
+      display:flex;align-items:center;gap:12px;min-width:0;
+      padding:8px 16px 8px 8px;border-radius:24px;
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+    }
+    .topbar-brand-icon{
+      width:58px;height:58px;border-radius:18px;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(180deg,#1b2027,#111418);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 12px 28px rgba(0,0,0,.18);
+    }
+    .topbar-brand-icon img{width:80%;height:80%;object-fit:contain}
+    .topbar-brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+    .topbar-brand-copy strong{font-size:20px;line-height:1;letter-spacing:-.045em}
+    .topbar-brand-copy span{font-size:12px;color:#b7b2a8;line-height:1.1}
+    .topbar-nav{display:flex;justify-content:center;min-width:0}
+    .topbar-nav ul{
+      list-style:none;display:flex;gap:4px;align-items:center;
+      padding:6px;margin:0;border-radius:999px;
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+      max-width:100%;
+    }
+    .topbar-nav a{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:46px;padding:0 18px;border-radius:999px;
+      color:#b7b2a8;font-size:14px;font-weight:650;white-space:nowrap;
+    }
+    .topbar-nav a.is-active,.topbar-nav a:hover{background:rgba(255,255,255,.08);color:#f3f1ec}
+    .topbar-actions{display:flex;align-items:center;gap:10px}
+    .ghost-btn,.solid-btn{
+      min-height:50px;padding:0 20px;border-radius:999px;
+      display:inline-flex;align-items:center;justify-content:center;
+      font-size:14px;font-weight:750;border:1px solid rgba(255,255,255,.08);
+    }
+    .ghost-btn{background:rgba(255,255,255,.04);color:#f3f1ec}
+    .solid-btn{background:#f3f1ec;color:#101215;border-color:transparent}
+
+    .hero{
+      position:relative;overflow:hidden;min-height:78vh;
+      border-radius:40px;border:1px solid rgba(255,255,255,.08);
+      background:#0e1014;box-shadow:0 24px 80px rgba(0,0,0,.35);
+    }
+    .hero img{
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+      filter:brightness(.5) saturate(.84);
+    }
+    .hero::after{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(90deg, rgba(9,11,14,.86) 0%, rgba(9,11,14,.62) 42%, rgba(9,11,14,.2) 100%),
+        linear-gradient(180deg, rgba(9,11,14,.08) 0%, rgba(9,11,14,.74) 100%);
+    }
+    .hero-copy{
+      position:relative;z-index:1;max-width:760px;min-height:78vh;
+      display:flex;align-items:flex-end;padding:42px;
+    }
+    .eyebrow{display:inline-flex;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#b7b2a8;margin-bottom:12px}
+    .hero-title{font-size:clamp(3rem,7vw,6.2rem);line-height:.92;letter-spacing:-.08em}
+    .hero-text{margin-top:16px;max-width:680px;color:#b7b2a8;line-height:1.8;font-size:15px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+
+    .section{
+      margin-top:22px;padding:30px;border-radius:34px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:0 24px 80px rgba(0,0,0,.2);
+    }
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:24px}
+    .section-head h2{margin:8px 0 0;font-size:clamp(2rem,4vw,3.4rem);line-height:.95;letter-spacing:-.06em}
+    .section-head p{margin:0;max-width:720px;color:#b7b2a8;line-height:1.72}
+
+    .projects-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .project-card{
+      overflow:hidden;border-radius:28px;border:1px solid rgba(255,255,255,.08);
+      background:#111418;
+    }
+    .project-media{aspect-ratio:1.08/1;overflow:hidden}
+    .project-media img{width:100%;height:100%;object-fit:cover;filter:brightness(.82) saturate(.92)}
+    .project-copy{padding:22px}
+    .project-category{display:inline-flex;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b7b2a8;margin-bottom:10px}
+    .project-copy h3{font-size:1.5rem;letter-spacing:-.05em;line-height:1.02}
+    .project-copy p{margin-top:12px;color:#b7b2a8;line-height:1.72;font-size:14px}
+    .project-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+    .project-tags span{
+      padding:10px 12px;border-radius:999px;font-size:12px;font-weight:700;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+    }
+
+    .closing{
+      position:relative;overflow:hidden;min-height:64vh;margin-top:22px;
+      border-radius:40px;border:1px solid rgba(255,255,255,.08);
+      background:#0e1014;
+    }
+    .closing-bg{
+      position:absolute;inset:0;display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:repeat(2,1fr);gap:8px;padding:8px;
+    }
+    .closing-bg .tile:first-child{grid-row:span 2}
+    .closing-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.58) saturate(.86)}
+    .closing::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(180deg, rgba(9,11,14,.08) 0%, rgba(9,11,14,.78) 100%);
+    }
+    .closing-copy{
+      position:relative;z-index:1;min-height:64vh;display:flex;align-items:flex-end;padding:34px;
+    }
+    .closing-card{
+      max-width:620px;padding:28px;border-radius:30px;
+      border:1px solid rgba(255,255,255,.08);background:rgba(11,13,16,.78);backdrop-filter:blur(16px);
+    }
+    .closing-card h2{margin:0;font-size:clamp(2rem,4vw,3.5rem);line-height:.96;letter-spacing:-.06em}
+    .closing-card p{margin-top:14px;color:#b7b2a8;line-height:1.76}
+
+    @media(max-width:1180px){
+      .topbar-nav{display:none}
+      .projects-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .closing-bg{grid-template-columns:1fr 1fr;grid-template-rows:220px 160px 160px}
+      .closing-bg .tile:first-child{grid-column:span 2;grid-row:auto}
+    }
+    @media(max-width:760px){
+      .shell{width:min(calc(100% - 16px), 1420px)}
+      .topbar{top:8px;width:min(calc(100% - 16px), 1450px);padding:10px}
+      .topbar-layout{grid-template-columns:1fr auto}
+      .topbar-actions{display:none}
+      .topbar-brand{padding:6px 10px 6px 6px;border-radius:18px;gap:8px}
+      .topbar-brand-icon{width:46px;height:46px;border-radius:14px}
+      .topbar-brand-copy strong{font-size:16px}
+      .topbar-brand-copy span{font-size:9px}
+      .hero,.hero-copy{min-height:620px}
+      .hero-copy{padding:20px}
+      .hero-title{font-size:clamp(2.4rem,11vw,4rem)}
+      .hero-text{font-size:14px}
+      .section{padding:20px}
+      .section-head{display:grid}
+      .projects-grid{grid-template-columns:1fr}
+      .closing-bg{grid-template-columns:1fr 1fr;grid-template-rows:180px 120px 120px}
+      .closing-copy{padding:16px}
+      .closing-card{padding:20px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="topbar">
+      <div class="topbar-layout">
+        <a href="index.html" class="topbar-brand">
+          <span class="topbar-brand-icon"><img src="logo-icon.png" alt="Revival Motoren Logo"></span>
+          <span class="topbar-brand-copy">
+            <strong>Revival Motoren</strong>
+            <span>Wir beleben Ihren Motor</span>
+          </span>
+        </a>
+        <div class="topbar-nav">
+          <ul>
+            <li><a href="index.html#leistungen">Leistungen</a></li>
+            <li><a href="index.html#cases" class="is-active">Referenzen</a></li>
+            <li><a href="motoren.html">Motoren</a></li>
+            <li><a href="index.html#ueber-uns">Über uns</a></li>
+            <li><a href="index.html#kontakt">Kontakt</a></li>
+          </ul>
+        </div>
+        <div class="topbar-actions">
+          <a class="ghost-btn js-whatsapp-link" href="#kontakt">WhatsApp</a>
+          <a class="solid-btn" href="index.html#kontakt">Angebot anfragen</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="shell">
+      <section class="hero">
+        <img src="Projects/projekte/Motorblock.jpg" alt="Projektübersicht Revival Motoren" loading="eager" decoding="async">
+        <div class="hero-copy">
+          <div>
+            <span class="eyebrow" id="projectsHeroLabel"></span>
+            <h1 class="hero-title" id="projectsHeroTitle"></h1>
+            <p class="hero-text" id="projectsHeroText"></p>
+            <div class="hero-actions">
+              <a class="solid-btn" href="index.html#kontakt" id="projectsHeroPrimary"></a>
+              <a class="ghost-btn" href="index.html#cases" id="projectsHeroSecondary"></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Projektübersicht</span>
+            <h2 id="projectsIntroTitle"></h2>
+          </div>
+          <p id="projectsIntroBody"></p>
+        </div>
+        <div class="projects-grid" id="projectsGrid"></div>
+      </section>
+
+      <section class="closing">
+        <div class="closing-bg" id="closingBg"></div>
+        <div class="closing-copy">
+          <div class="closing-card">
+            <span class="eyebrow" id="projectsClosingLabel"></span>
+            <h2 id="projectsClosingTitle"></h2>
+            <p id="projectsClosingBody"></p>
+            <div class="hero-actions">
+              <a class="solid-btn" href="index.html#kontakt" id="projectsClosingAction"></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="content.js"></script>
+  <script src="projekte-content.js"></script>
+  <script>
+    const site = window.siteContent || {};
+    const page = window.projectsPageContent || {};
+    const projects = Array.isArray(page.projects) ? page.projects : [];
+
+    document.getElementById('projectsHeroLabel').textContent = page.hero?.label || '';
+    document.getElementById('projectsHeroTitle').textContent = page.hero?.title || '';
+    document.getElementById('projectsHeroText').textContent = page.hero?.body || '';
+    document.getElementById('projectsHeroPrimary').textContent = page.hero?.primaryAction || 'Anfrage senden';
+    document.getElementById('projectsHeroSecondary').textContent = page.hero?.secondaryAction || 'Zur Startseite';
+    document.getElementById('projectsIntroTitle').textContent = page.intro?.title || '';
+    document.getElementById('projectsIntroBody').textContent = page.intro?.body || '';
+    document.getElementById('projectsClosingLabel').textContent = page.closing?.label || '';
+    document.getElementById('projectsClosingTitle').textContent = page.closing?.title || '';
+    document.getElementById('projectsClosingBody').textContent = page.closing?.body || '';
+    document.getElementById('projectsClosingAction').textContent = page.closing?.action || 'Jetzt Anfrage senden';
+
+    document.getElementById('projectsGrid').innerHTML = projects.map(project => `
+      <article class="project-card">
+        <div class="project-media">
+          <img src="${project.image}" alt="${project.imageAlt}" loading="lazy" decoding="async">
+        </div>
+        <div class="project-copy">
+          <span class="project-category">${project.category}</span>
+          <h3>${project.title}</h3>
+          <p>${project.excerpt}</p>
+          <div class="project-tags">
+            ${project.stats.map(stat => `<span>${stat}</span>`).join('')}
+          </div>
+        </div>
+      </article>
+    `).join('');
+
+    document.getElementById('closingBg').innerHTML = projects.slice(0, 5).map(project => `
+      <div class="tile">
+        <img src="${project.image}" alt="${project.imageAlt}" loading="lazy" decoding="async">
+      </div>
+    `).join('');
+
+    const number = site.business?.whatsappNumber || '';
+    const message = site.business?.whatsappMessage || 'Hallo Revival Motoren';
+    const cleaned = number.replace(/\D/g, '');
+    const href = cleaned ? `https://wa.me/${cleaned}?text=${encodeURIComponent(message)}` : 'index.html#kontakt';
+    document.querySelectorAll('.js-whatsapp-link').forEach(link => {
+      link.setAttribute('href', href);
+      if (cleaned) {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
+  </script>
+</body>
+</html>
