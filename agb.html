@@ -37,7 +37,7 @@ body{
 ::selection{background:var(--ink);color:#111214}
 a{color:inherit}
 .page{
-  width:min(1380px, calc(100% - 24px));
+  width:calc(100% - 24px);
   margin:0 auto;
   padding:16px 0 56px;
 }
@@ -84,7 +84,15 @@ a{color:inherit}
   flex-shrink:0;
   box-shadow:0 12px 28px rgba(0,0,0,.14);
 }
-.brand-icon img{width:88%;height:88%;object-fit:contain;padding:0;filter:drop-shadow(0 8px 16px rgba(0,0,0,.22))}
+.brand-icon img{
+  width:112%;
+  height:112%;
+  object-fit:cover;
+  object-position:center 44%;
+  padding:0;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.22));
+  transform:translateY(10%) scale(1.4);
+}
 .brand-copy{min-width:0}
 .brand-name{
   display:block;
@@ -334,7 +342,7 @@ a{color:inherit}
   }
 }
 @media(max-width:768px){
-  .page{width:calc(100% - 16px);padding-top:12px}
+  .page{width:calc(100% - 12px);padding-top:12px}
   .topbar{grid-template-columns:1fr;gap:10px;border-radius:24px}
   .topbar-actions{justify-content:space-between;flex-wrap:wrap}
   .topbar-nav{
@@ -365,7 +373,7 @@ a{color:inherit}
         <span class="brand-icon"><img id="brandLogo" src="assets/branding/teuto-logo-symbol.png" alt="Teuto Motoren Logo"></span>
         <span class="brand-copy">
           <span class="brand-name">Teuto Motoren</span>
-          <span class="brand-tagline">Wir beleben Motoren</span>
+          <span class="brand-tagline">Wir leben Motoren</span>
         </span>
       </a>
       <div class="topbar-center">

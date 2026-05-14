@@ -3,10 +3,10 @@ window.siteContent = {
   logo: {
     light: 'assets/branding/teuto-logo-symbol.png',
     dark: 'assets/branding/teuto-logo-symbol.png',
-    full: 'assets/branding/teuto-logo-full.png',
+    full: 'assets/branding/teuto-logo-full-final.png',
     alt: 'Teuto Motoren Logo Symbol',
     name: 'Teuto Motoren',
-    tagline: 'Wir beleben Motoren'
+    tagline: 'Wir leben Motoren'
   },
   // Hero-Bereich auf der Startseite
   hero: {
@@ -97,7 +97,7 @@ window.siteContent = {
     subtitle: 'Spezialisierte Werkstatt für Motorinstandsetzung und Motorreparatur. Traditionelles Handwerk trifft modernste Technik – für langlebige und zuverlässige Ergebnisse.',
     images: [
       { src: 'Projects/ueber-uns/block-floor.jpg', alt: 'Werkstatt', speed: 14, style: 'height:100%;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)' },
-      { src: 'Projects/ueber-uns/Motorblock1.jpg', alt: 'Zylinderkopf', speed: 10, style: 'height:200px;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)' },
+      { src: 'assets/branding/teuto-logo-full-final.png', alt: 'Teuto Motoren Logo', speed: 10, style: 'height:200px;width:100%;object-fit:contain;object-position:center center;filter:none;padding:2px;background:linear-gradient(180deg,#15171a 0%,#101215 100%)' },
       { src: 'Projects/Motor1.jpg', alt: 'Motor fertig', speed: 12, style: 'height:280px;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)' }
     ]
   },
