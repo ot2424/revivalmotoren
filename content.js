@@ -1,11 +1,12 @@
 window.siteContent = {
   // Logo, Markenname und Theme-Logos
   logo: {
-    light: 'logo-icon-gold.png',
-    dark: 'logo-icon.png',
-    alt: 'Revival Motoren Logo Symbol',
-    name: 'Revival Motoren',
-    tagline: 'Wir beleben Ihren Motor'
+    light: 'assets/branding/teuto-logo-symbol.png',
+    dark: 'assets/branding/teuto-logo-symbol.png',
+    full: 'assets/branding/teuto-logo-full.png',
+    alt: 'Teuto Motoren Logo Symbol',
+    name: 'Teuto Motoren',
+    tagline: 'Wir beleben Motoren'
   },
   // Hero-Bereich auf der Startseite
   hero: {
@@ -15,14 +16,14 @@ window.siteContent = {
     secondaryAction: 'Leistungen ansehen',
     image: {
       src: 'Projects/Motorblock1.jpg',
-      alt: 'Motorblock Werkstatt Revival Motoren'
+      alt: 'Motorblock Werkstatt Teuto Motoren'
     },
     overlayTitle: 'Zuverlässige<br>Motorreparatur',
     overlaySubtitle: 'Modernste Diagnosetechnik · Bielefeld & deutschlandweit'
   },
-  // Warum-Revival-Abschnitt
+  // Warum-Teuto-Abschnitt
   why: {
-    title: 'Warum Revival Motoren<br>überzeugt',
+    title: 'Warum Teuto Motoren<br>überzeugt',
     subtitle: 'Modernste Diagnosetechnik, erfahrene Motorenbauer und höchste Qualitätsstandards – für jede Reparatur.'
   },
   // Einleitung für den Leistungsbereich
@@ -92,7 +93,7 @@ window.siteContent = {
   // Über-uns-Bereich inklusive Bilder
   about: {
     label: 'Über uns',
-    title: 'Revival Motoren –<br>Bielefeld',
+    title: 'Teuto Motoren –<br>Bielefeld',
     subtitle: 'Spezialisierte Werkstatt für Motorinstandsetzung und Motorreparatur. Traditionelles Handwerk trifft modernste Technik – für langlebige und zuverlässige Ergebnisse.',
     images: [
       { src: 'Projects/ueber-uns/block-floor.jpg', alt: 'Werkstatt', speed: 14, style: 'height:100%;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)' },
@@ -118,18 +119,18 @@ window.siteContent = {
     routeLabel: 'Route planen',
     whatsappLabel: 'WhatsApp',
     routeHref: 'https://www.google.com/maps/dir/?api=1&destination=Artur-Ladebeck-Stra%C3%9Fe+181,+33647+Bielefeld',
-    iframeTitle: 'Google Maps Standort Revival Motoren',
+    iframeTitle: 'Google Maps Standort Teuto Motoren',
     iframeSrc: 'https://www.google.com/maps?q=Artur-Ladebeck-Stra%C3%9Fe%20181,%2033647%20Bielefeld&z=15&output=embed'
   },
   // Footer-Inhalte
   footer: {
     description: 'Spezialisierte Motorinstandsetzung in Bielefeld – präzise, zuverlässig und transparent.',
-    copyright: '© 2026 Revival Motoren'
+    copyright: '© 2026 Teuto Motoren'
   },
   // Globale Unternehmensdaten für Funktionen
   business: {
     whatsappNumber: '',
-    whatsappMessage: 'Hallo Revival Motoren, ich möchte eine Anfrage zur Motorinstandsetzung stellen.'
+    whatsappMessage: 'Hallo Teuto Motoren, ich möchte eine Anfrage zur Motorinstandsetzung stellen.'
   },
   // Navigation im Header und Mobile-Menü
   navItems: [
@@ -148,7 +149,7 @@ window.siteContent = {
     '📋 Kostenloser Voranschlag',
     '✅ Verfügbar 24/7'
   ],
-  // Vorteile im "Warum Revival Motoren"-Bereich
+  // Vorteile im "Warum Teuto Motoren"-Bereich
   whyFeatures: [
     { icon: '🔬', title: 'Präzise Diagnose', body: 'Modernste OBD-Messtechnik identifiziert jedes Problem exakt.' },
     { icon: '🛡️', title: '12 Monate Gewährleistung', body: 'Jede Reparatur ist vollständig abgesichert.' },
@@ -337,9 +338,9 @@ window.siteContent = {
     { icon: '📍', label: 'Adresse', value: 'Artur-Ladebeck-Straße 181, 33647 Bielefeld' },
     { icon: '📞', label: 'Telefon', value: '+49 521 923 735 19', href: 'tel:+4952192373519' },
     { icon: '💬', label: 'WhatsApp', value: 'Direkt Anfrage senden', href: '#kontakt', className: 'js-whatsapp-link' },
-    { icon: '✉️', label: 'E-Mail', value: 'info@revivalmotoren.de', href: 'mailto:info@revivalmotoren.de' },
+    { icon: '✉️', label: 'E-Mail', value: 'info@teutomotoren.de', href: 'mailto:info@teutomotoren.de' },
     // Instagram bei Bedarf aktivieren:
-    // { icon: '📷', label: 'Instagram', value: '@revivalmotoren', href: 'https://instagram.com/deinprofil' }
+    // { icon: '📷', label: 'Instagram', value: '@teutomotoren', href: 'https://instagram.com/deinprofil' }
   ],
   // Stichpunkte im Karten-/Standortbereich
   mapPoints: [
@@ -362,7 +363,7 @@ window.siteContent = {
   // Kontaktlinks im Footer
   footerContact: [
     { label: '+49 521 897 391 51', href: 'tel:+4952189739151' },
-    { label: 'info@revivalmotoren.de', href: 'mailto:info@revivalmotoren.de' }
+    { label: 'info@teutomotoren.de', href: 'mailto:info@teutomotoren.de' }
     //{ label: 'Bielefeld, DE', href: '#kontakt' },
     // Instagram im Footer bei Bedarf aktivieren:
     // { label: 'Instagram', href: 'https://instagram.com/deinprofil' }

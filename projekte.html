@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projekte & Referenzen – Revival Motoren</title>
+  <title>Projekte & Referenzen – Teuto Motoren</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
       border:1px solid rgba(255,255,255,.08);
       box-shadow:0 12px 28px rgba(0,0,0,.18);
     }
-    .topbar-brand-icon img{width:80%;height:80%;object-fit:contain}
+    .topbar-brand-icon img{width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,.22))}
     .topbar-brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
     .topbar-brand-copy strong{font-size:20px;line-height:1;letter-spacing:-.045em}
     .topbar-brand-copy span{font-size:12px;color:#b7b2a8;line-height:1.1}
@@ -390,10 +390,10 @@
     <nav class="topbar">
       <div class="topbar-layout">
         <a href="index.html" class="topbar-brand">
-          <span class="topbar-brand-icon"><img src="logo-icon.png" alt="Revival Motoren Logo"></span>
+          <span class="topbar-brand-icon"><img src="assets/branding/teuto-logo-symbol.png" alt="Teuto Motoren Logo"></span>
           <span class="topbar-brand-copy">
-            <strong>Revival Motoren</strong>
-            <span>Wir beleben Ihren Motor</span>
+            <strong>Teuto Motoren</strong>
+            <span>Wir beleben Motoren</span>
           </span>
         </a>
         <div class="topbar-nav">
@@ -414,7 +414,7 @@
 
     <main class="shell">
       <section class="hero">
-        <img src="Projects/projekte/Motorblock.jpg" alt="Projektübersicht Revival Motoren" loading="eager" decoding="async">
+        <img src="Projects/projekte/Motorblock.jpg" alt="Projektübersicht Teuto Motoren" loading="eager" decoding="async">
         <div class="hero-copy">
           <div>
             <span class="eyebrow" id="projectsHeroLabel"></span>
@@ -534,7 +534,7 @@
     });
 
     const number = site.business?.whatsappNumber || '';
-    const message = site.business?.whatsappMessage || 'Hallo Revival Motoren';
+    const message = site.business?.whatsappMessage || 'Hallo Teuto Motoren';
     const cleaned = number.replace(/\D/g, '');
     const href = cleaned ? `https://wa.me/${cleaned}?text=${encodeURIComponent(message)}` : 'index.html#kontakt';
     document.querySelectorAll('.js-whatsapp-link').forEach(link => {

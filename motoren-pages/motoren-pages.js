@@ -8,7 +8,7 @@
   const support = site.generalBrandsPanel || {};
   const contactItems = site.contactItems || [];
   const whatsappNumber = site.business?.whatsappNumber || '';
-  const whatsappMessage = site.business?.whatsappMessage || 'Hallo Revival Motoren';
+  const whatsappMessage = site.business?.whatsappMessage || 'Hallo Teuto Motoren';
 
   const asset = (path) => {
     if (!path) return '';
@@ -85,7 +85,7 @@
   const renderOverview = () => {
     content.innerHTML = `
       <section class="mpg-hero">
-        <img src="${asset('range/range rover.jpg')}" alt="Motorenwelt Revival Motoren">
+        <img src="${asset('range/range rover.jpg')}" alt="Motorenwelt Teuto Motoren">
         <div class="mpg-hero-copy">
           <div class="mpg-hero-card">
             <span class="mpg-eyebrow">Motorenwelt</span>

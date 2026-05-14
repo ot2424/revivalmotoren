@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revival Motoren – Professionelle Motorinstandsetzung Bielefeld</title>
+<title>Teuto Motoren – Professionelle Motorinstandsetzung Bielefeld</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -157,7 +157,7 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 }
 #nav.is-compact .nav-layout{gap:12px}
 #nav.is-compact .nav-brand{padding:8px 16px 8px 8px}
-#nav.is-compact .brand-icon{width:52px;height:52px;border-radius:16px}
+#nav.is-compact .brand-icon{width:60px;height:60px;border-radius:18px}
 #nav.is-compact .brand-name{font-size:18px}
 #nav.is-compact .brand-tagline{font-size:11px}
 #nav.is-compact .navl{padding:5px}
@@ -181,12 +181,19 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   min-height:70px;
 }
 .brand-icon{
-  width:64px;height:64px;border-radius:18px;overflow:hidden;
+  width:74px;height:74px;border-radius:20px;overflow:hidden;
   border:1px solid var(--brand-border);background:var(--brand-surface);
   flex-shrink:0;box-shadow:0 12px 28px rgba(0,0,0,.14);
   display:flex;align-items:center;justify-content:center;
 }
-.brand-icon img{width:80%;height:80%;object-fit:contain;object-position:center center;filter:drop-shadow(0 6px 12px rgba(0,0,0,.12))}
+.brand-icon img{
+  width:112%;
+  height:112%;
+  object-fit:cover;
+  object-position:center 44%;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.22));
+  transform: translateY(10%) scale(1.4);
+}
 .brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
 .brand-name{font-size:20px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.045em}
 .brand-tagline{font-size:12px;font-weight:650;color:var(--brand-tag);line-height:1.1;letter-spacing:0}
@@ -1564,7 +1571,19 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 .ft-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;margin-bottom:40px}
 .ft-brand-name{font-size:18px;font-weight:800;letter-spacing:-.04em;color:var(--ink);margin-bottom:10px}
 .ft-brand-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.ft-brand-row .brand-icon{width:46px;height:46px;border-color:var(--rule);box-shadow:none}
+.ft-brand-row .brand-icon{
+  width:66px;
+  height:66px;
+  border-radius:18px;
+  border-color:var(--rule);
+  box-shadow:none;
+}
+.ft-brand-row .brand-icon img{
+  width:112%;
+  height:112%;
+  object-fit:cover;
+  object-position:center 44%;
+}
 .ft-brand-row .brand-name{font-size:18px}
 .ft-brand-row .brand-tagline{font-size:11px}
 .ft-brand-desc{font-size:13px;color:var(--muted);line-height:1.75;max-width:240px}
@@ -1604,7 +1623,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   #nav{width:calc(100% - 28px);top:12px;padding:10px}
   .nav-layout{gap:12px}
   .nav-brand{padding:8px 14px 8px 8px}
-  .brand-icon{width:58px;height:58px;border-radius:18px}
+  .brand-icon{width:64px;height:64px;border-radius:18px}
   .brand-name{font-size:18px}
   .brand-tagline{font-size:11px}
   .navl{padding:5px;gap:2px}
@@ -1621,7 +1640,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .nav-layout{grid-template-columns:minmax(0,1fr) auto;gap:10px}
   #nav{width:calc(100% - 20px);top:10px;padding:10px;border-radius:28px}
   .nav-brand{min-width:0;gap:10px;padding:6px 8px 6px 6px;background:var(--nav-inner-surface);border:1px solid rgba(255,255,255,.06);border-radius:20px;flex:1;min-height:auto}
-  .brand-icon{width:52px;height:52px;border-radius:16px}
+  .brand-icon{width:58px;height:58px;border-radius:16px}
   .brand-copy{gap:3px;max-width:220px}
   .brand-name{font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .brand-tagline{font-size:10px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -2266,7 +2285,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   #nav{width:calc(100% - 16px);top:8px;padding:8px}
   .nav-layout{gap:8px}
   .nav-brand{gap:8px;padding:5px 7px 5px 5px;border-radius:18px}
-  .brand-icon{width:46px;height:46px;border-radius:14px}
+  .brand-icon{width:52px;height:52px;border-radius:14px}
   .brand-copy{max-width:178px}
   .brand-name{
     font-size:15px;

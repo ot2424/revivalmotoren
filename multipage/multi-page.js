@@ -18,13 +18,13 @@
     return `../${path}`;
   };
   const whatsappNumber = site.business?.whatsappNumber || '';
-  const whatsappMessage = site.business?.whatsappMessage || 'Hallo Revival Motoren';
+  const whatsappMessage = site.business?.whatsappMessage || 'Hallo Teuto Motoren';
   const whatsappHref = whatsappNumber
     ? `https://wa.me/${whatsappNumber.replace(/[^\d]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`
     : 'kontakt.html';
 
   const brandMarkup = `
-    <a class="mp-brand" href="index-multipage.html" aria-label="${logo.name || 'Revival Motoren'}">
+    <a class="mp-brand" href="index-multipage.html" aria-label="${logo.name || 'Teuto Motoren'}">
       <span class="mp-brand-icon"><img src="${asset(logo.dark || logo.light || '')}" alt="${logo.alt || ''}"></span>
       <span class="mp-brand-copy">
         <span class="mp-brand-name">${logo.name || ''}</span>
@@ -107,7 +107,7 @@
         <img src="${asset(site.hero?.image?.src || '')}" alt="${site.hero?.image?.alt || ''}">
         <div class="mp-home-hero-copy">
           <div>
-            <div class="mp-eyebrow">${site.logo?.tagline || 'Revival Motoren'}</div>
+            <div class="mp-eyebrow">${site.logo?.tagline || 'Teuto Motoren'}</div>
             <h1 class="mp-title">${site.hero?.title || ''}</h1>
             <p class="mp-sub">${site.hero?.subtitle || ''}</p>
           </div>

@@ -1,9 +1,9 @@
 window.agbContent = {
   company: {
-    name: 'Revival Motoren',
+    name: 'Teuto Motoren',
     street: 'Artur-Ladebeck-Straße 181',
     city: '33647 Bielefeld',
-    email: 'info@revivalmotoren.de',
+    email: 'info@teutomotoren.de',
     phone: '0521 92 37 35 19'
   },
   hero: {
@@ -17,7 +17,7 @@ window.agbContent = {
         {
           heading: '§ 1 Grundlegende Bestimmungen und Geltungsbereich',
           paragraphs: [
-            '(1) Diese Geschäftsbedingungen gelten für alle Verträge zwischen Revival Motoren (nachfolgend „Anbieter“) und dem Kunden über die Diagnose, Instandsetzung, Reparatur und Aufbereitung von Motoren sowie die Abholung und Lieferung von Fahrzeugen oder Motoren.',
+            '(1) Diese Geschäftsbedingungen gelten für alle Verträge zwischen Teuto Motoren (nachfolgend „Anbieter“) und dem Kunden über die Diagnose, Instandsetzung, Reparatur und Aufbereitung von Motoren sowie die Abholung und Lieferung von Fahrzeugen oder Motoren.',
             '(2) Verbraucher im Sinne dieser AGB ist jede natürliche Person, die ein Rechtsgeschäft zu Zwecken abschließt, die überwiegend weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit zugerechnet werden können. Unternehmer ist jede natürliche oder juristische Person, die bei Abschluss eines Rechtsgeschäfts in Ausübung ihrer gewerblichen oder selbständigen beruflichen Tätigkeit handelt.',
             '(3) Abweichende Bedingungen des Kunden werden nicht anerkannt, es sei denn, der Anbieter stimmt ihrer Geltung ausdrücklich schriftlich zu.'
           ]
@@ -57,7 +57,7 @@ window.agbContent = {
         {
           heading: '§ 6 Eigentumsvorbehalt und Pfandrecht',
           paragraphs: [
-            '(1) Alle verbauten Teile und Komponenten bleiben bis zur vollständigen Bezahlung Eigentum von Revival Motoren.',
+            '(1) Alle verbauten Teile und Komponenten bleiben bis zur vollständigen Bezahlung Eigentum von Teuto Motoren.',
             '(2) Dem Anbieter steht wegen seiner Forderung aus dem Auftrag ein vertragliches Pfandrecht an den in seinen Besitz gelangten Gegenständen (Motor/Fahrzeug) zu.'
           ]
         },
@@ -81,7 +81,7 @@ window.agbContent = {
           heading: '§ 9 Rechtswahl und Gerichtsstand',
           paragraphs: [
             '(1) Es gilt deutsches Recht unter Ausschluss des UN-Kaufrechts.',
-            '(2) Ist der Kunde Kaufmann, ist der Sitz von Revival Motoren der ausschließliche Gerichtsstand.'
+            '(2) Ist der Kunde Kaufmann, ist der Sitz von Teuto Motoren der ausschließliche Gerichtsstand.'
           ]
         }
       ]
@@ -92,10 +92,10 @@ window.agbContent = {
         {
           heading: '1. Identität des Anbieters',
           paragraphs: [
-            'Revival Motoren',
+            'Teuto Motoren',
             'Artur-Ladebeck-Straße 181',
             '33647 Bielefeld',
-            'E-Mail: info@revivalmotoren.de',
+            'E-Mail: info@teutomotoren.de',
             'Telefon: 0521 92 37 35 19'
           ]
         },
