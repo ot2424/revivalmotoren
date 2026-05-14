@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Datenschutz – Teuto Motoren</title>
+<title>Impressum – Teuto Motoren</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -182,13 +182,7 @@ a{color:inherit}
   border:1px solid rgba(255,255,255,.06);
   color:var(--hero-text);
   box-shadow:var(--shadow);
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(240px, 420px);
-  align-items:center;
-  gap:28px;
-  overflow:hidden;
 }
-.hero-copy{min-width:0}
 .eyebrow{
   display:inline-flex;
   margin-bottom:14px;
@@ -210,19 +204,6 @@ a{color:inherit}
   font-size:16px;
   line-height:1.82;
   color:var(--hero-soft);
-}
-.hero-art{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  min-width:0;
-}
-.hero-art img{
-  width:min(100%, 380px);
-  height:auto;
-  display:block;
-  object-fit:contain;
-  filter:drop-shadow(0 18px 38px rgba(0,0,0,.28));
 }
 .content-card{
   margin-top:18px;
@@ -264,17 +245,7 @@ a{color:inherit}
 }
 @media(max-width:768px){
   .page{width:calc(100% - 12px);padding:12px 0 44px}
-  .hero{
-    padding:24px;
-    grid-template-columns:1fr;
-    gap:22px;
-  }
-  .hero-art{
-    justify-content:center;
-  }
-  .hero-art img{
-    width:min(100%, 300px);
-  }
+  .hero{padding:24px}
   .content-card{padding:24px 20px}
   .topbar{padding:8px}
   .brand{min-height:62px}
@@ -289,8 +260,8 @@ a{color:inherit}
 <body>
   <div class="page">
     <header class="topbar">
-      <a class="brand" href="index.html">
-        <span class="brand-icon"><img src="assets/branding/teuto-logo-symbol.png" alt="Teuto Motoren Logo"></span>
+      <a class="brand" href="../index.html">
+        <span class="brand-icon"><img src="../assets/branding/teuto-logo-symbol.png" alt="Teuto Motoren Logo"></span>
         <span class="brand-copy">
           <span class="brand-name">Teuto Motoren</span>
           <span class="brand-tagline">Wir leben Motoren</span>
@@ -298,73 +269,50 @@ a{color:inherit}
       </a>
       <div class="topbar-center">
         <ul class="topbar-nav">
-          <li><a href="index.html#leistungen">Leistungen</a></li>
-          <li><a href="index.html#cases">Referenzen</a></li>
+          <li><a href="../index.html#leistungen">Leistungen</a></li>
+          <li><a href="../index.html#cases">Referenzen</a></li>
           <li><a href="motoren.html">Motoren</a></li>
-          <li><a href="index.html#ueber-uns">Über uns</a></li>
-          <li><a href="index.html#kontakt">Kontakt</a></li>
+          <li><a href="../index.html#ueber-uns">Über uns</a></li>
+          <li><a href="../index.html#kontakt">Kontakt</a></li>
         </ul>
       </div>
       <div class="topbar-actions">
-        <a class="back-link" href="index.html">Zur Startseite</a>
-        <a class="nav-contact" href="index.html#kontakt">Angebot anfragen</a>
+        <a class="back-link" href="../index.html">Zur Startseite</a>
+        <a class="nav-contact" href="../index.html#kontakt">Angebot anfragen</a>
       </div>
     </header>
 
     <section class="hero">
-      <div class="hero-copy">
-        <span class="eyebrow">Rechtliches</span>
-        <h1>Datenschutz&shy;erklärung</h1>
-        <p>Diese Datenschutzseite ist eine sauber strukturierte Vorlage für Teuto Motoren. Für den produktiven Einsatz sollten die Inhalte mit den tatsächlichen Prozessen, Tools, Kontaktwegen und Hosting-Daten abgeglichen und rechtlich geprüft werden.</p>
-      </div>
-      <div class="hero-art" aria-hidden="true">
-        <img src="assets/branding/teuto-logo-full-final.png" alt="">
-      </div>
+      <span class="eyebrow">Rechtliches</span>
+      <h1>Impressum</h1>
     </section>
 
     <section class="content-card">
-      <h2>1. Verantwortlicher</h2>
-      <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist Teuto Motoren, Artur-Ladebeck-Straße 181, 33647 Bielefeld, E-Mail: info@teutomotoren.de, Telefon: +49 521 897 391 51.</p>
+      <h2>Angaben gemäß § 5 TMG</h2>
+      <p>Teuto Motoren<br>Artur-Ladebeck-Straße 181<br>33647 Bielefeld<br>Deutschland</p>
 
-      <h2>2. Allgemeine Hinweise zur Datenverarbeitung</h2>
-      <p>Wir verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung einer funktionsfähigen Website, zur Bearbeitung von Anfragen, zur Vertragsanbahnung und zur Durchführung unserer Leistungen erforderlich ist.</p>
+      <h2>Kontakt</h2>
+      <p>Telefon: +49 521 897 391 51<br>E-Mail: info@teutomotoren.de</p>
 
-      <h2>3. Kontaktformular</h2>
-      <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Formular inklusive der von Ihnen dort angegebenen Kontaktdaten zum Zweck der Bearbeitung Ihrer Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.</p>
-      <p>Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, soweit Ihre Anfrage auf den Abschluss eines Vertrages gerichtet ist, oder auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO bei sonstigen Anfragen.</p>
+      <h2>Vertreten durch</h2>
+      <p>Bitte hier den vollständigen Namen der vertretungsberechtigten Person eintragen.</p>
 
-      <h2>4. Telefon, E-Mail und WhatsApp</h2>
-      <p>Wenn Sie uns telefonisch, per E-Mail oder über WhatsApp kontaktieren, verarbeiten wir die von Ihnen übermittelten Daten zur Bearbeitung Ihrer Anfrage. Bei der Nutzung von WhatsApp können Daten auch durch den jeweiligen Anbieter verarbeitet werden. Es gelten ergänzend die Datenschutzbestimmungen des eingesetzten Kommunikationsdienstes.</p>
+      <h2>Umsatzsteuer-ID</h2>
+      <p>Bitte hier die Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz eintragen, falls vorhanden.</p>
 
-      <h2>5. Hochgeladene Dateien</h2>
-      <p>Übermittelte Dateien und Dokumente, zum Beispiel Fotos, PDFs oder technische Unterlagen, werden ausschließlich zur Prüfung und Bearbeitung Ihrer Anfrage verwendet, sofern keine gesetzliche Aufbewahrungspflicht entgegensteht.</p>
+      <h2>Registereintrag</h2>
+      <p>Falls ein Handelsregistereintrag besteht, bitte hier Registergericht und Registernummer ergänzen.</p>
 
-      <h2>6. Google Maps</h2>
-      <p>Auf unserer Website kann eine Karte von Google Maps eingebunden sein, um unseren Standort darzustellen. Bei Nutzung der Karte können personenbezogene Daten, insbesondere Ihre IP-Adresse, an Google übermittelt werden. Die Einbindung erfolgt im Interesse einer ansprechenden Darstellung unserer Online-Angebote und einer leichten Auffindbarkeit unseres Standorts.</p>
+      <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+      <p>Bitte hier Name und Anschrift der inhaltlich verantwortlichen Person eintragen.</p>
 
-      <h2>7. Hosting und Server-Logfiles</h2>
-      <p>Beim Besuch dieser Website können technisch erforderliche Daten in sogenannten Server-Logfiles verarbeitet werden. Dazu zählen beispielsweise Browsertyp, Betriebssystem, Referrer-URL, Uhrzeit des Zugriffs und IP-Adresse. Diese Verarbeitung dient der technischen Stabilität und Sicherheit der Website.</p>
+      <h2>EU-Streitschlichtung</h2>
+      <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>. Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
 
-      <h2>8. Speicherdauer</h2>
-      <p>Wir speichern personenbezogene Daten nur so lange, wie dies zur Bearbeitung Ihrer Anfrage, zur Vertragsabwicklung oder aufgrund gesetzlicher Aufbewahrungspflichten erforderlich ist. Anschließend werden die Daten gelöscht, sofern keine weitere Rechtsgrundlage für die Speicherung besteht.</p>
+      <h2>Verbraucherstreitbeilegung</h2>
+      <p>Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen, sofern keine gesetzliche Verpflichtung besteht.</p>
 
-      <h2>9. Ihre Rechte</h2>
-      <ul>
-        <li>Recht auf Auskunft über Ihre gespeicherten Daten</li>
-        <li>Recht auf Berichtigung unrichtiger Daten</li>
-        <li>Recht auf Löschung nach Maßgabe der gesetzlichen Vorgaben</li>
-        <li>Recht auf Einschränkung der Verarbeitung</li>
-        <li>Recht auf Datenübertragbarkeit</li>
-        <li>Recht auf Widerspruch gegen bestimmte Verarbeitungen</li>
-        <li>Beschwerderecht bei einer zuständigen Aufsichtsbehörde</li>
-      </ul>
-
-      <h2>10. SSL- bzw. TLS-Verschlüsselung</h2>
-      <p>Zur sicheren Übertragung vertraulicher Inhalte sollte diese Website eine SSL- bzw. TLS-Verschlüsselung verwenden. Eine verschlüsselte Verbindung erkennen Sie in der Regel an der Adresszeile Ihres Browsers.</p>
-
-      <h2>11. Aktualität dieser Erklärung</h2>
-      <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, wenn sich rechtliche, technische oder organisatorische Änderungen ergeben.</p>
-
+      <div class="note">Hinweis: Bitte diese Vorlage vor der Live-Schaltung mit den echten Unternehmens- und Pflichtangaben vervollständigen.</div>
     </section>
   </div>
 </body>

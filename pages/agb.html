@@ -369,8 +369,8 @@ a{color:inherit}
 <body>
   <div class="page">
     <div class="topbar">
-      <a href="index.html" class="brand">
-        <span class="brand-icon"><img id="brandLogo" src="assets/branding/teuto-logo-symbol.png" alt="Teuto Motoren Logo"></span>
+      <a href="../index.html" class="brand">
+        <span class="brand-icon"><img id="brandLogo" src="../assets/branding/teuto-logo-symbol.png" alt="Teuto Motoren Logo"></span>
         <span class="brand-copy">
           <span class="brand-name">Teuto Motoren</span>
           <span class="brand-tagline">Wir leben Motoren</span>
@@ -380,8 +380,8 @@ a{color:inherit}
         <ul class="topbar-nav" id="legalNav"></ul>
       </div>
       <div class="topbar-actions">
-        <a class="nav-contact" href="index.html#kontakt">Angebot anfragen</a>
-        <a class="back-link" href="index.html#kontakt">Zurück zur Anfrage</a>
+        <a class="nav-contact" href="../index.html#kontakt">Angebot anfragen</a>
+        <a class="back-link" href="../index.html#kontakt">Zurück zur Anfrage</a>
       </div>
     </div>
 
@@ -406,10 +406,10 @@ a{color:inherit}
     </section>
   </div>
 
-  <a class="floating-contact" id="floatingContact" href="index.html#kontakt">Kontakt aufnehmen</a>
+  <a class="floating-contact" id="floatingContact" href="../index.html#kontakt">Kontakt aufnehmen</a>
 
-  <script src="content.js"></script>
-  <script src="agb-content.js"></script>
+  <script src="../content.js"></script>
+  <script src="../content/agb-content.js"></script>
   <script>
     const brandLogo = document.getElementById('brandLogo');
     const legalNav = document.getElementById('legalNav');
@@ -420,7 +420,7 @@ a{color:inherit}
 
     if(legalNav && window.siteContent && Array.isArray(window.siteContent.navItems)){
       legalNav.innerHTML = window.siteContent.navItems.map(item => `
-        <li><a href="index.html${item.href}">${item.label}</a></li>
+        <li><a href="../index.html${item.href}">${item.label}</a></li>
       `).join('');
     }
 

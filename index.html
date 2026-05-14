@@ -23,6 +23,7 @@ if ('scrollRestoration' in history) {
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;overflow-x:hidden;width:100%;max-width:100%}
 img{display:block;max-width:100%}
+[v-cloak]{visibility:hidden}
 
 :root{
   --bg:       #f5f5f3;
@@ -2612,7 +2613,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 </style>
 </head>
 <body>
-<div id="app">
+<div id="app" v-cloak>
 
 <!-- NAV -->
 <nav id="nav">
@@ -2818,7 +2819,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
       <p class="sec-sub">{{ casesSection.subtitle }}</p>
     </div>
     <div class="cases-right">
-      <a href="projekte.html" class="btn-pill">{{ casesSection.action }}</a>
+      <a href="pages/projekte.html" class="btn-pill">{{ casesSection.action }}</a>
     </div>
   </div>
   <div class="cases-gallery stagger rv" style="transition-delay:.08s">
@@ -2844,7 +2845,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
             </div>
           </div>
           <div>
-            <a href="motoren.html" class="brands-preview-link">{{ brandsPreview.button }}</a>
+            <a href="pages/motoren.html" class="brands-preview-link">{{ brandsPreview.button }}</a>
           </div>
         </div>
         <div class="brands-preview-collage">
@@ -2991,7 +2992,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
       <div class="fcheck-row">
         <div class="fcheck">
           <input type="checkbox" id="consent-agb" required>
-          <label for="consent-agb">Ich habe die <a href="agb.html" target="_blank" rel="noopener noreferrer">AGB</a> und die <a href="datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu. <em>*</em></label>
+          <label for="consent-agb">Ich habe die <a href="pages/agb.html" target="_blank" rel="noopener noreferrer">AGB</a> und die <a href="pages/datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu. <em>*</em></label>
         </div>
       </div>
       <div class="fsub-row"><button type="submit" class="fsubmit">{{ contactSection.submitLabel }}</button></div>

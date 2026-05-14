@@ -15,7 +15,7 @@ window.siteContent = {
     primaryAction: 'Kostenloses Angebot →',
     secondaryAction: 'Leistungen ansehen',
     image: {
-      src: 'Projects/Motorblock1.jpg',
+      src: 'assets/images/projects/Motorblock1.jpg',
       alt: 'Motorblock Werkstatt Teuto Motoren'
     },
     overlayTitle: 'Zuverlässige<br>Motorreparatur',
@@ -72,11 +72,11 @@ window.siteContent = {
     body: 'Neben den gezeigten Performance- und Oberklasse-Motoren betreuen wir selbstverständlich auch gängige Serienfahrzeuge und Alltagsmotoren. Ob VW Golf, Toyota, Ford, Opel, Skoda, Seat oder andere Modelle: Wir unterstützen Sie bei Diagnose, Instandsetzung und Reparatur mit derselben Sorgfalt, Präzision und OEM-orientierten Arbeitsweise.',
     button: 'Service anfragen →',
     images: [
-      { src: 'brands/gtr.jpg', alt: 'Nisan GTR' },
-      { src: 'brands/golf.avif', alt: 'VW Golf' },
-      { src: 'brands/seat.jpg', alt: 'Seat Leon' },
-      { src: 'brands/skoda.jpg', alt: 'Skoda Octavia VRS' },
-      { src: 'brands/supra.jpg', alt: 'Toyota Supra' }
+      { src: 'assets/images/brands/general/gtr.jpg', alt: 'Nisan GTR' },
+      { src: 'assets/images/brands/general/golf.avif', alt: 'VW Golf' },
+      { src: 'assets/images/brands/general/seat.jpg', alt: 'Seat Leon' },
+      { src: 'assets/images/brands/general/skoda.jpg', alt: 'Skoda Octavia VRS' },
+      { src: 'assets/images/brands/general/supra.jpg', alt: 'Toyota Supra' }
     ]
   },
   // Einleitung für Werkstatt / Ergebnisse
@@ -96,9 +96,9 @@ window.siteContent = {
     title: 'Teuto Motoren –<br>Bielefeld',
     subtitle: 'Spezialisierte Werkstatt für Motorinstandsetzung und Motorreparatur. Traditionelles Handwerk trifft modernste Technik – für langlebige und zuverlässige Ergebnisse.',
     images: [
-      { src: 'Projects/ueber-uns/block-floor.jpg', alt: 'Werkstatt', speed: 14, style: 'height:100%;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)' },
+      { src: 'assets/images/projects/ueber-uns/block-floor.jpg', alt: 'Werkstatt', speed: 14, style: 'height:100%;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)' },
       { src: 'assets/branding/teuto-logo-full-final.png', alt: 'Teuto Motoren Logo', speed: 10, style: 'height:200px;width:100%;object-fit:contain;object-position:center center;filter:none;padding:2px;background:linear-gradient(180deg,#15171a 0%,#101215 100%)' },
-      { src: 'Projects/Motor1.jpg', alt: 'Motor fertig', speed: 12, style: 'height:280px;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)' }
+      { src: 'assets/images/projects/Motor1.jpg', alt: 'Motor fertig', speed: 12, style: 'height:280px;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)' }
     ]
   },
   // Kontaktbereich und Formulartexte
@@ -158,10 +158,10 @@ window.siteContent = {
   ],
   // Bilder-Mosaik im Warum-Bereich
   whyMosaic: [
-    { src: 'Projects/img-block.jpg', alt: 'Motorblock Detail', speed: 10 },
-    { src: 'Projects/Motor.jpg', alt: 'Werkstattmotor', speed: 14 },
-    { src: 'Projects/Motor1.jpg', alt: 'Leistungsaggregat', speed: 12 },
-    { src: 'Projects/Motorblock.jpg', alt: 'Motorraum Detail', speed: 16 }
+    { src: 'assets/images/projects/img-block.jpg', alt: 'Motorblock Detail', speed: 10 },
+    { src: 'assets/images/projects/Motor.jpg', alt: 'Werkstattmotor', speed: 14 },
+    { src: 'assets/images/projects/Motor1.jpg', alt: 'Leistungsaggregat', speed: 12 },
+    { src: 'assets/images/projects/Motorblock.jpg', alt: 'Motorraum Detail', speed: 16 }
   ],
 
   //TODO !!!---------------------------------ICONS ---------------------------------!!!// 
@@ -206,18 +206,18 @@ window.siteContent = {
   ],
   // Projekt- / Referenzgalerie //------- Mehr Bilder zu bzgl projekt, vielleicht mit vorher nachher slider-------!!!//
   caseGallery: [
-    { src: 'Projects/projekte/img-block.jpg', alt: 'Zylinderkopf', tag: 'Zylinderkopf', name: 'Druckprüfung & Planen', speed: 14 },
-    { src: 'Projects/projekte/Motorblock.jpg', alt: 'Motorblock fertig', tag: 'Motorblock', name: 'OEM-Instandsetzung', speed: 12 },
-    { src: 'Projects/projekte/Motor.jpg', alt: 'BMW R4', tag: 'BMW · R4', name: 'Reihenmotor', speed: 16 },
-    { src: 'Projects/projekte/Motor1.jpg', alt: 'Maserati V6', tag: 'Maserati · V6', name: 'V-Motor', speed: 10 },
-    { src: 'Projects/Motor1.jpg', alt: 'Mercedes V12', tag: 'Mercedes · V12', name: 'Oberklasse', speed: 18 }
+    { src: 'assets/images/projects/projekte/img-block.jpg', alt: 'Zylinderkopf', tag: 'Zylinderkopf', name: 'Druckprüfung & Planen', speed: 14 },
+    { src: 'assets/images/projects/projekte/Motorblock.jpg', alt: 'Motorblock fertig', tag: 'Motorblock', name: 'OEM-Instandsetzung', speed: 12 },
+    { src: 'assets/images/projects/projekte/Motor.jpg', alt: 'BMW R4', tag: 'BMW · R4', name: 'Reihenmotor', speed: 16 },
+    { src: 'assets/images/projects/projekte/Motor1.jpg', alt: 'Maserati V6', tag: 'Maserati · V6', name: 'V-Motor', speed: 10 },
+    { src: 'assets/images/projects/Motor1.jpg', alt: 'Mercedes V12', tag: 'Mercedes · V12', name: 'Oberklasse', speed: 18 }
   ],
   // Markenwelten mit Hero-Bildern, Slides und Motortexten
   brandScenes: [
     {
       sceneId: 'brandAudiScene',
-      mobileImage: 'audi/mobile.jpg',
-      heroImage: 'audi/Audi R8-optimized.jpg',
+      mobileImage: 'assets/images/brands/audi/mobile.jpg',
+      heroImage: 'assets/images/brands/audi/Audi R8-optimized.jpg',
       heroAlt: 'Audi R8 Performance Fahrzeug',
       chip: 'Germany · Audi',
       name: 'Audi',
@@ -226,10 +226,10 @@ window.siteContent = {
       subtitle: 'Vier Hochleistungsaggregate von FSI bis BiTDI.',
       intro: 'Vom ikonischen Fünfzylinder bis zum hochdrehenden V10 zeigt diese Auswahl die charakterstarken Audi-Performance-Motoren mit Fokus auf Klang, Drehmoment, Aufladung und technische Eigenständigkeit.',
       slides: [
-        { src: 'audi/motoren/2.5 TFSI R5 TURBO.jpg', caption: 'EA855 EVO' },
-        { src: 'audi/motoren/4.0 TFSI V8 BITURBO.jpg', caption: 'EA825' },
-        { src: 'audi/motoren/Audi V6 TDI.jpg', caption: 'EA897evo3' },
-        { src: 'audi/motoren/audi v10.jpg', caption: 'EA824 / FSI' }
+        { src: 'assets/images/brands/audi/motoren/2.5 TFSI R5 TURBO.jpg', caption: 'EA855 EVO' },
+        { src: 'assets/images/brands/audi/motoren/4.0 TFSI V8 BITURBO.jpg', caption: 'EA825' },
+        { src: 'assets/images/brands/audi/motoren/Audi V6 TDI.jpg', caption: 'EA897evo3' },
+        { src: 'assets/images/brands/audi/motoren/audi v10.jpg', caption: 'EA824 / FSI' }
       ],
       motors: [
         { name: 'EA855 EVO', meta: '2.5 TFSI R5 TURBO', copy: 'Die Ikone mit der markanten 1-2-4-5-3 Zündfolge. Dieser mehrfache "Engine of the Year"-Sieger liefert bis zu 400 PS und bietet eine unverwechselbare Klangkulisse. Kompakte Bauweise trifft auf Rennsport-Performance, perfektioniert für Modelle wie den RS 3 und TT RS.' },
@@ -240,8 +240,8 @@ window.siteContent = {
     },
     {
       sceneId: 'brandBmwScene',
-      mobileImage: 'bmw/bmw_m6_portrait_mobile-optimized.jpg',
-      heroImage: 'bmw/bmw m6-optimized.jpg',
+      mobileImage: 'assets/images/brands/bmw/bmw_m6_portrait_mobile-optimized.jpg',
+      heroImage: 'assets/images/brands/bmw/bmw m6-optimized.jpg',
       heroAlt: 'BMW M Performance Fahrzeug',
       chip: 'Germany · BMW M',
       name: 'BMW',
@@ -250,10 +250,10 @@ window.siteContent = {
       subtitle: 'Vier Hochleistungsaggregate von Reihensechszylinder bis V10.',
       intro: 'Vom aktuell leistungsstarken M-Reihensechszylinder bis zum ikonischen Hochdrehzahl-V10 zeigt diese Auswahl die prägendsten BMW Performance-Motoren mit Fokus auf Präzision, Biturbo-Wucht und emotionale Drehfreude.',
       slides: [
-        { src: 'bmw/motoren/BMW S58 Motor.jpg', caption: 'S58' },
-        { src: 'bmw/motoren/BMW S63 Motor.jpg', caption: 'S63' },
-        { src: 'bmw/motoren/BMW_B57_engine.jpg', caption: 'B57D30S0' },
-        { src: 'bmw/motoren/bmw s65.jpg', caption: 'S85B50' }
+        { src: 'assets/images/brands/bmw/motoren/BMW S58 Motor.jpg', caption: 'S58' },
+        { src: 'assets/images/brands/bmw/motoren/BMW S63 Motor.jpg', caption: 'S63' },
+        { src: 'assets/images/brands/bmw/motoren/BMW_B57_engine.jpg', caption: 'B57D30S0' },
+        { src: 'assets/images/brands/bmw/motoren/bmw s65.jpg', caption: 'S85B50' }
       ],
       motors: [
         { name: 'S58', meta: '3.0 M TWINPOWER TURBO R6', copy: 'Der aktuell leistungsstärkste Reihensechszylinder von BMW M. Mit zwei Monoscroll-Ladern und bis zu 550 PS bietet er eine Drehfreude, die fast an Saugmotoren erinnert. Er ist das technische Kraftzentrum des aktuellen M3 und M4 und steht für unerreichte Präzision.' },
@@ -264,8 +264,8 @@ window.siteContent = {
     },
     {
       sceneId: 'brandMercedesScene',
-      mobileImage: 'mercedes/mercedes_portrait_mobile-optimized.jpg',
-      heroImage: 'mercedes/s63 amg-optimized.jpg',
+      mobileImage: 'assets/images/brands/mercedes/mercedes_portrait_mobile-optimized.jpg',
+      heroImage: 'assets/images/brands/mercedes/s63 amg-optimized.jpg',
       heroAlt: 'Mercedes AMG Performance Fahrzeug',
       chip: 'Germany · AMG',
       name: 'Mercedes',
@@ -274,10 +274,10 @@ window.siteContent = {
       subtitle: 'Vier Hochleistungsaggregate von AMG-Vierzylinder bis V12 Biturbo.',
       intro: 'Vom stärksten Serien-Vierzylinder der Welt bis zum monumentalen V12 zeigt diese Auswahl die prägendsten Mercedes Performance-Motoren mit Fokus auf AMG-Charakter, moderne Aufladung und maximale Souveränität.',
       slides: [
-        { src: 'mercedes/motoren/mercedes m139.jpg', caption: 'M139' },
-        { src: 'mercedes/motoren/mercedes m177:m178.jpg', caption: 'M177 / M178' },
-        { src: 'mercedes/motoren/mercedes OM656.jpg', caption: 'OM656' },
-        { src: 'mercedes/motoren/Mercedes_M279_engine.jpg', caption: 'M279' }
+        { src: 'assets/images/brands/mercedes/motoren/mercedes m139.jpg', caption: 'M139' },
+        { src: 'assets/images/brands/mercedes/motoren/mercedes m177:m178.jpg', caption: 'M177 / M178' },
+        { src: 'assets/images/brands/mercedes/motoren/mercedes OM656.jpg', caption: 'OM656' },
+        { src: 'assets/images/brands/mercedes/motoren/Mercedes_M279_engine.jpg', caption: 'M279' }
       ],
       motors: [
         { name: 'M139', meta: '2.0 L 4-ZYLINDER TURBO (AMG)', copy: 'Der stärkste Serien-Vierzylinder der Welt. Mit bis zu 421 PS setzt dieses Triebwerk neue Maßstäbe in Sachen Literleistung. Durch den gedrehten Einbau und den Twin-Scroll-Lader liefert er eine Performance, die man früher nur von großen V8-Motoren kannte – das Herzstück der aktuellen A 45 und C 63 Modelle.' },
@@ -288,8 +288,8 @@ window.siteContent = {
     },
     {
       sceneId: 'brandRangeScene',
-      mobileImage: 'range/range rover mobile.jpg',
-      heroImage: 'range/range rover.jpg',
+      mobileImage: 'assets/images/brands/range/range rover mobile.jpg',
+      heroImage: 'assets/images/brands/range/range rover.jpg',
       heroAlt: 'Range Rover Performance Fahrzeug',
       chip: 'United Kingdom · Range Rover',
       name: 'Range Rover',
@@ -298,10 +298,10 @@ window.siteContent = {
       subtitle: 'Vier Hochleistungsaggregate von britischer Souveränität bis zur V8-Kompressor-Gewalt.',
       intro: 'Vom modernen Twin-Turbo V8 der neuesten Generation bis zum ikonischen Kompressor-V8 zeigt diese Auswahl die prägendsten Range Rover Performance-Motoren. Unser Fokus liegt auf der technischen Perfektionierung dieser Triebwerke, um die Balance zwischen monumentaler Kraft und ultimativer Laufruhe dauerhaft zu bewahren.',
       slides: [
-        { src: 'range/motor/AJ133.jpg', caption: 'AJ133' },
-        { src: 'range/motor/N63.jpg', caption: 'N63 (P530)' },
-        { src: 'range/motor/448DT.webp', caption: '448DT' },
-        { src: 'range/motor/AJ33S.jpg', caption: 'AJ33S' }
+        { src: 'assets/images/brands/range/motor/AJ133.jpg', caption: 'AJ133' },
+        { src: 'assets/images/brands/range/motor/N63.jpg', caption: 'N63 (P530)' },
+        { src: 'assets/images/brands/range/motor/448DT.webp', caption: '448DT' },
+        { src: 'assets/images/brands/range/motor/AJ33S.jpg', caption: 'AJ33S' }
       ],
       motors: [
         { name: 'AJ133', meta: '5.0 V8 SUPERCHARGED', copy: 'Das emotionale Kraftzentrum der SVR-Reihe. Dieser V8 mit Twin-Vortex-Kompressor leistet bis zu 575 PS und ist weltberühmt für sein aggressives, mechanisches Brüllen. Als Spezialisten fokussieren wir uns bei der Instandsetzung auf die Optimierung des Kettentriebs und der Kompressor-Lagerung, um die brutale Performance dauerhaft zu sichern.' },
@@ -313,9 +313,9 @@ window.siteContent = {
   ],
   // Werkstattkarten im Ergebnis-Bereich
   workshopCards: [
-    { src: 'Projects/motor-honen.jpg', alt: 'Zylinder Honen', title: 'Zylinder-Honen', sub: 'Präzise Bearbeitung der Zylinderlaufbahnen für optimale Kompression und lange Lebensdauer.', speed: 14 },
-    { src: 'Projects/messen.png', alt: 'Motorblock Vermessung', title: 'Motorblock Vermessung', sub: 'Exakte Prüfung aller Bauteile nach OEM-Spezifikationen mit modernen Messverfahren.', speed: 10 },
-    { src: 'Projects/img-zylinder.jpg', alt: 'Zylinderkopf Planen', title: 'Zylinderkopf Planen', sub: 'Präzises Planen der Dichtfläche für optimale Passgenauigkeit und langfristige Betriebssicherheit.', speed: 12 }
+    { src: 'assets/images/projects/motor-honen.jpg', alt: 'Zylinder Honen', title: 'Zylinder-Honen', sub: 'Präzise Bearbeitung der Zylinderlaufbahnen für optimale Kompression und lange Lebensdauer.', speed: 14 },
+    { src: 'assets/images/projects/messen.png', alt: 'Motorblock Vermessung', title: 'Motorblock Vermessung', sub: 'Exakte Prüfung aller Bauteile nach OEM-Spezifikationen mit modernen Messverfahren.', speed: 10 },
+    { src: 'assets/images/projects/img-zylinder.jpg', alt: 'Zylinderkopf Planen', title: 'Zylinderkopf Planen', sub: 'Präzises Planen der Dichtfläche für optimale Passgenauigkeit und langfristige Betriebssicherheit.', speed: 12 }
   ],
   // Schritte im Prozess-Bereich
   processSteps: [
@@ -356,9 +356,9 @@ window.siteContent = {
   ],
   // Rechtliche Links im Footer
   footerLegal: [
-    { label: 'Impressum', href: 'impressum.html' },
-    { label: 'Datenschutz', href: 'datenschutz.html' },
-    { label: 'AGB', href: 'agb.html' }
+    { label: 'Impressum', href: 'pages/impressum.html' },
+    { label: 'Datenschutz', href: 'pages/datenschutz.html' },
+    { label: 'AGB', href: 'pages/agb.html' }
   ],
   // Kontaktlinks im Footer
   footerContact: [

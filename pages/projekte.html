@@ -389,8 +389,8 @@
   <div class="page">
     <nav class="topbar">
       <div class="topbar-layout">
-        <a href="index.html" class="topbar-brand">
-          <span class="topbar-brand-icon"><img src="assets/branding/teuto-logo-symbol.png" alt="Teuto Motoren Logo"></span>
+        <a href="../index.html" class="topbar-brand">
+          <span class="topbar-brand-icon"><img src="../assets/branding/teuto-logo-symbol.png" alt="Teuto Motoren Logo"></span>
           <span class="topbar-brand-copy">
             <strong>Teuto Motoren</strong>
             <span>Wir leben Motoren</span>
@@ -398,31 +398,31 @@
         </a>
         <div class="topbar-nav">
           <ul>
-            <li><a href="index.html#leistungen">Leistungen</a></li>
-            <li><a href="index.html#cases" class="is-active">Referenzen</a></li>
+            <li><a href="../index.html#leistungen">Leistungen</a></li>
+            <li><a href="../index.html#cases" class="is-active">Referenzen</a></li>
             <li><a href="motoren.html">Motoren</a></li>
-            <li><a href="index.html#ueber-uns">Über uns</a></li>
-            <li><a href="index.html#kontakt">Kontakt</a></li>
+            <li><a href="../index.html#ueber-uns">Über uns</a></li>
+            <li><a href="../index.html#kontakt">Kontakt</a></li>
           </ul>
         </div>
         <div class="topbar-actions">
           <a class="ghost-btn js-whatsapp-link" href="#kontakt">WhatsApp</a>
-          <a class="solid-btn" href="index.html#kontakt">Angebot anfragen</a>
+          <a class="solid-btn" href="../index.html#kontakt">Angebot anfragen</a>
         </div>
       </div>
     </nav>
 
     <main class="shell">
       <section class="hero">
-        <img src="Projects/projekte/Motorblock.jpg" alt="Projektübersicht Teuto Motoren" loading="eager" decoding="async">
+        <img src="../assets/images/projects/projekte/Motorblock.jpg" alt="Projektübersicht Teuto Motoren" loading="eager" decoding="async">
         <div class="hero-copy">
           <div>
             <span class="eyebrow" id="projectsHeroLabel"></span>
             <h1 class="hero-title" id="projectsHeroTitle"></h1>
             <p class="hero-text" id="projectsHeroText"></p>
             <div class="hero-actions">
-              <a class="solid-btn" href="index.html#kontakt" id="projectsHeroPrimary"></a>
-              <a class="ghost-btn" href="index.html#cases" id="projectsHeroSecondary"></a>
+              <a class="solid-btn" href="../index.html#kontakt" id="projectsHeroPrimary"></a>
+              <a class="ghost-btn" href="../index.html#cases" id="projectsHeroSecondary"></a>
             </div>
           </div>
         </div>
@@ -447,7 +447,7 @@
             <h2 id="projectsClosingTitle"></h2>
             <p id="projectsClosingBody"></p>
             <div class="hero-actions">
-              <a class="solid-btn" href="index.html#kontakt" id="projectsClosingAction"></a>
+              <a class="solid-btn" href="../index.html#kontakt" id="projectsClosingAction"></a>
             </div>
           </div>
         </div>
@@ -455,8 +455,8 @@
     </main>
   </div>
 
-  <script src="content.js"></script>
-  <script src="projekte-content.js"></script>
+  <script src="../content.js"></script>
+  <script src="../content/projekte-content.js"></script>
   <script>
     const site = window.siteContent || {};
     const page = window.projectsPageContent || {};
@@ -465,12 +465,18 @@
       ? page.showcases
       : legacyProjects;
 
+    const asset = (path) => {
+      if (!path) return '';
+      if (/^(https?:|mailto:|tel:|#|\.\.\/)/.test(path)) return path;
+      return `../${path}`;
+    };
+
     const normalizeImages = project => {
       if (Array.isArray(project.images) && project.images.length) {
-        return project.images;
+        return project.images.map(image => ({ ...image, src: asset(image.src) }));
       }
       if (project.image) {
-        return [{ src: project.image, alt: project.imageAlt || project.title || 'Projektbild' }];
+        return [{ src: asset(project.image), alt: project.imageAlt || project.title || 'Projektbild' }];
       }
       return [];
     };
@@ -512,7 +518,7 @@
     }).join('');
 
     const closingImages = Array.isArray(page.closingImages) && page.closingImages.length
-      ? page.closingImages
+      ? page.closingImages.map(image => ({ ...image, src: asset(image.src) }))
       : projects.flatMap(project => normalizeImages(project)).slice(0, 5);
 
     document.getElementById('closingBg').innerHTML = closingImages.slice(0, 5).map(image => `
@@ -536,7 +542,7 @@
     const number = site.business?.whatsappNumber || '';
     const message = site.business?.whatsappMessage || 'Hallo Teuto Motoren';
     const cleaned = number.replace(/\D/g, '');
-    const href = cleaned ? `https://wa.me/${cleaned}?text=${encodeURIComponent(message)}` : 'index.html#kontakt';
+    const href = cleaned ? `https://wa.me/${cleaned}?text=${encodeURIComponent(message)}` : '../index.html#kontakt';
     document.querySelectorAll('.js-whatsapp-link').forEach(link => {
       link.setAttribute('href', href);
       if (cleaned) {

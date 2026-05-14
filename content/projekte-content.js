@@ -27,11 +27,11 @@ window.projectsPageContent = {
       excerpt: 'Platzhalter für ein reales Kundenprojekt mit kurzer Beschreibung des Schadensbilds, der Diagnose und der durchgeführten Arbeiten.',
       images: [
         {
-          src: 'Projects/projekte/img-block.jpg',
+          src: 'assets/images/projects/projekte/img-block.jpg',
           alt: 'Projektbild Zylinderkopf'
         },
         {
-          src: 'Projects/projekte/Motorblock.jpg',
+          src: 'assets/images/projects/projekte/Motorblock.jpg',
           alt: 'Projektbild Motorblock'
         }
       ],
@@ -45,11 +45,11 @@ window.projectsPageContent = {
       excerpt: 'Platzhalter für einen Motorblock-Fall inklusive Vermessung, Bearbeitung und dokumentierter Endkontrolle nach der Instandsetzung.',
       images: [
         {
-          src: 'Projects/projekte/Motorblock.jpg',
+          src: 'assets/images/projects/projekte/Motorblock.jpg',
           alt: 'Projektbild Motorblock'
         },
         {
-          src: 'Projects/projekte/Motor.jpg',
+          src: 'assets/images/projects/projekte/Motor.jpg',
           alt: 'Projektbild Reihenmotor'
         }
       ],
@@ -60,23 +60,23 @@ window.projectsPageContent = {
   // Fallback-/Kollagenbilder für den Abschlussbereich
   closingImages: [
     {
-      src: 'Projects/projekte/img-block.jpg',
+      src: 'assets/images/projects/projekte/img-block.jpg',
       alt: 'Projektbild Zylinderkopf'
     },
     {
-      src: 'Projects/projekte/Motorblock.jpg',
+      src: 'assets/images/projects/projekte/Motorblock.jpg',
       alt: 'Projektbild Motorblock'
     },
     {
-      src: 'Projects/projekte/Motor.jpg',
+      src: 'assets/images/projects/projekte/Motor.jpg',
       alt: 'Projektbild Reihenmotor'
     },
     {
-      src: 'Projects/projekte/Motor1.jpg',
+      src: 'assets/images/projects/projekte/Motor1.jpg',
       alt: 'Projektbild V-Motor'
     },
     {
-      src: 'Projects/messen.png',
+      src: 'assets/images/projects/messen.png',
       alt: 'Projektbild Messprozess'
     }
   ],

@@ -4,7 +4,7 @@
     { label: 'Start', href: 'index-multipage.html', key: 'home' },
     { label: 'Leistungen', href: 'leistungen.html', key: 'leistungen' },
     { label: 'Referenzen', href: 'referenzen.html', key: 'referenzen' },
-    { label: 'Motoren', href: '../motoren.html', key: 'motoren' },
+    { label: 'Motoren', href: '../pages/motoren.html', key: 'motoren' },
     { label: 'Über uns', href: 'ueber-uns.html', key: 'ueber-uns' },
     { label: 'Kontakt', href: 'kontakt.html', key: 'kontakt' }
   ];
@@ -158,7 +158,7 @@
             ${(site.brandsPreview?.brands || []).map(brand => `<span>${brand}</span>`).join('')}
           </div>
           <div class="mp-cta-row">
-              <a class="mp-btn" href="../motoren.html">${site.brandsPreview?.button || 'Zur Motoren-Seite →'}</a>
+              <a class="mp-btn" href="../pages/motoren.html">${site.brandsPreview?.button || 'Zur Motoren-Seite →'}</a>
           </div>
         </div>
       </section>

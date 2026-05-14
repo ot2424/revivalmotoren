@@ -1,7 +1,7 @@
 (() => {
   const site = window.siteContent || {};
   const root = document.body.dataset.root || '.';
-  const overviewHref = document.body.dataset.overview || '../motoren.html';
+  const overviewHref = document.body.dataset.overview || '../pages/motoren.html';
   const currentBrand = document.body.dataset.brand || '';
   const logo = site.logo || {};
   const brands = site.brandScenes || [];
@@ -43,7 +43,7 @@
     { label: 'Kontakt', href: resolveHref('index.html#kontakt') }
   ];
 
-  const brandLink = (brand) => currentBrand === brand.name ? '#' : (currentBrand ? brandFileMap[brand.name] : `motoren-pages/${brandFileMap[brand.name]}`);
+  const brandLink = (brand) => currentBrand === brand.name ? '#' : (currentBrand ? brandFileMap[brand.name] : resolveHref(`motoren-pages/${brandFileMap[brand.name]}`));
 
   const app = document.getElementById('motorenApp');
   app.innerHTML = `
@@ -85,7 +85,7 @@
   const renderOverview = () => {
     content.innerHTML = `
       <section class="mpg-hero">
-        <img src="${asset('range/range rover.jpg')}" alt="Motorenwelt Teuto Motoren">
+        <img src="${asset('assets/images/brands/range/range rover.jpg')}" alt="Motorenwelt Teuto Motoren">
         <div class="mpg-hero-copy">
           <div class="mpg-hero-card">
             <span class="mpg-eyebrow">Motorenwelt</span>
