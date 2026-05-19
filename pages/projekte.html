@@ -208,7 +208,7 @@
         padding:10px;
       }
       .topbar-layout{grid-template-columns:minmax(0,1fr) auto;gap:10px}
-      .topbar-actions{display:none}
+      .topbar-actions{display:flex}
       .topbar-brand{
         padding:7px 12px 7px 7px;
         gap:10px;
@@ -247,6 +247,16 @@
       .shell{width:min(calc(100% - 12px), 1560px)}
       .topbar{top:8px;width:min(calc(100% - 16px), 1450px);padding:10px}
       .topbar-layout{grid-template-columns:1fr auto}
+      .topbar-nav{display:none}
+      .topbar-actions{
+        display:flex;
+        gap:8px;
+      }
+      .ghost-btn,.solid-btn{
+        min-height:46px;
+        padding:0 16px;
+        font-size:13px;
+      }
       .topbar-brand{padding:6px 10px 6px 6px;border-radius:18px;gap:8px}
       .topbar-brand-icon{width:46px;height:46px;border-radius:14px}
       .topbar-brand-copy strong{font-size:16px}
@@ -399,15 +409,15 @@
         <div class="topbar-nav">
           <ul>
             <li><a href="../index.html#leistungen">Leistungen</a></li>
-            <li><a href="../index.html#cases" class="is-active">Referenzen</a></li>
+            <li><a href="projekte.html" class="is-active">Referenzen</a></li>
             <li><a href="motoren.html">Motoren</a></li>
-            <li><a href="../index.html#ueber-uns">Über uns</a></li>
-            <li><a href="../index.html#kontakt">Kontakt</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
           </ul>
         </div>
         <div class="topbar-actions">
-          <a class="ghost-btn js-whatsapp-link" href="#kontakt">WhatsApp</a>
-          <a class="solid-btn" href="../index.html#kontakt">Angebot anfragen</a>
+          <a class="ghost-btn" href="../index.html">Zur Startseite</a>
+          <a class="solid-btn" href="kontakt.html">Angebot anfragen</a>
         </div>
       </div>
     </nav>
@@ -421,8 +431,8 @@
             <h1 class="hero-title" id="projectsHeroTitle"></h1>
             <p class="hero-text" id="projectsHeroText"></p>
             <div class="hero-actions">
-              <a class="solid-btn" href="../index.html#kontakt" id="projectsHeroPrimary"></a>
-              <a class="ghost-btn" href="../index.html#cases" id="projectsHeroSecondary"></a>
+              <a class="solid-btn" href="kontakt.html" id="projectsHeroPrimary"></a>
+              <a class="ghost-btn" href="../index.html" id="projectsHeroSecondary"></a>
             </div>
           </div>
         </div>
@@ -447,7 +457,7 @@
             <h2 id="projectsClosingTitle"></h2>
             <p id="projectsClosingBody"></p>
             <div class="hero-actions">
-              <a class="solid-btn" href="../index.html#kontakt" id="projectsClosingAction"></a>
+              <a class="solid-btn" href="kontakt.html" id="projectsClosingAction"></a>
             </div>
           </div>
         </div>
@@ -455,7 +465,7 @@
     </main>
   </div>
 
-  <script src="../content.js"></script>
+  <script src="../content/site-core.js"></script>
   <script src="../content/projekte-content.js"></script>
   <script>
     const site = window.siteContent || {};
@@ -542,7 +552,7 @@
     const number = site.business?.whatsappNumber || '';
     const message = site.business?.whatsappMessage || 'Hallo Teuto Motoren';
     const cleaned = number.replace(/\D/g, '');
-    const href = cleaned ? `https://wa.me/${cleaned}?text=${encodeURIComponent(message)}` : '../index.html#kontakt';
+    const href = cleaned ? `https://wa.me/${cleaned}?text=${encodeURIComponent(message)}` : 'kontakt.html';
     document.querySelectorAll('.js-whatsapp-link').forEach(link => {
       link.setAttribute('href', href);
       if (cleaned) {

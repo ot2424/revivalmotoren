@@ -22,9 +22,9 @@ window.projectsPageContent = {
     {
       slug: 'projekt-01',
       placement: 'bottom-right',
-      category: 'Zylinderkopf',
-      title: 'Druckprüfung, Reinigung und Planen',
-      excerpt: 'Platzhalter für ein reales Kundenprojekt mit kurzer Beschreibung des Schadensbilds, der Diagnose und der durchgeführten Arbeiten.',
+      category: 'Motorschaden',
+      title: 'Projekt Template',
+      excerpt: 'Hier kann Ihr Projekt beschrieben werden.',
       images: [
         {
           src: 'assets/images/projects/projekte/img-block.jpg',

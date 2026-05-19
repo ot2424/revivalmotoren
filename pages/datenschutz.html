@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared-pages.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -269,6 +270,12 @@ a{color:inherit}
     grid-template-columns:1fr;
     gap:22px;
   }
+  .topbar-center{display:none}
+  .topbar-actions{
+    width:100%;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
   .hero-art{
     justify-content:center;
   }
@@ -299,73 +306,42 @@ a{color:inherit}
       <div class="topbar-center">
         <ul class="topbar-nav">
           <li><a href="../index.html#leistungen">Leistungen</a></li>
-          <li><a href="../index.html#cases">Referenzen</a></li>
+          <li><a href="projekte.html">Referenzen</a></li>
           <li><a href="motoren.html">Motoren</a></li>
-          <li><a href="../index.html#ueber-uns">Über uns</a></li>
-          <li><a href="../index.html#kontakt">Kontakt</a></li>
+          <li><a href="ueber-uns.html">Über uns</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
         </ul>
       </div>
       <div class="topbar-actions">
         <a class="back-link" href="../index.html">Zur Startseite</a>
-        <a class="nav-contact" href="../index.html#kontakt">Angebot anfragen</a>
+        <a class="nav-contact" href="kontakt.html">Angebot anfragen</a>
       </div>
     </header>
 
     <section class="hero">
       <div class="hero-copy">
-        <span class="eyebrow">Rechtliches</span>
-        <h1>Datenschutz&shy;erklärung</h1>
-        <p>Diese Datenschutzseite ist eine sauber strukturierte Vorlage für Teuto Motoren. Für den produktiven Einsatz sollten die Inhalte mit den tatsächlichen Prozessen, Tools, Kontaktwegen und Hosting-Daten abgeglichen und rechtlich geprüft werden.</p>
+        <span class="eyebrow" id="privacyHeroEyebrow">Rechtliches</span>
+        <h1 id="privacyHeroTitle">Datenschutzerklärung</h1>
+        <p id="privacyHeroSubtitle">Wir informieren Sie hier darüber, welche personenbezogenen Daten bei der Nutzung dieser Website und bei der Kontaktaufnahme mit Teuto Motoren verarbeitet werden, zu welchem Zweck dies geschieht und welche Rechte Ihnen dabei zustehen.</p>
       </div>
       <div class="hero-art" aria-hidden="true">
         <img src="../assets/branding/teuto-logo-full-final.png" alt="">
       </div>
     </section>
 
-    <section class="content-card">
-      <h2>1. Verantwortlicher</h2>
-      <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist Teuto Motoren, Artur-Ladebeck-Straße 181, 33647 Bielefeld, E-Mail: info@teutomotoren.de, Telefon: +49 521 897 391 51.</p>
-
-      <h2>2. Allgemeine Hinweise zur Datenverarbeitung</h2>
-      <p>Wir verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung einer funktionsfähigen Website, zur Bearbeitung von Anfragen, zur Vertragsanbahnung und zur Durchführung unserer Leistungen erforderlich ist.</p>
-
-      <h2>3. Kontaktformular</h2>
-      <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Formular inklusive der von Ihnen dort angegebenen Kontaktdaten zum Zweck der Bearbeitung Ihrer Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.</p>
-      <p>Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, soweit Ihre Anfrage auf den Abschluss eines Vertrages gerichtet ist, oder auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO bei sonstigen Anfragen.</p>
-
-      <h2>4. Telefon, E-Mail und WhatsApp</h2>
-      <p>Wenn Sie uns telefonisch, per E-Mail oder über WhatsApp kontaktieren, verarbeiten wir die von Ihnen übermittelten Daten zur Bearbeitung Ihrer Anfrage. Bei der Nutzung von WhatsApp können Daten auch durch den jeweiligen Anbieter verarbeitet werden. Es gelten ergänzend die Datenschutzbestimmungen des eingesetzten Kommunikationsdienstes.</p>
-
-      <h2>5. Hochgeladene Dateien</h2>
-      <p>Übermittelte Dateien und Dokumente, zum Beispiel Fotos, PDFs oder technische Unterlagen, werden ausschließlich zur Prüfung und Bearbeitung Ihrer Anfrage verwendet, sofern keine gesetzliche Aufbewahrungspflicht entgegensteht.</p>
-
-      <h2>6. Google Maps</h2>
-      <p>Auf unserer Website kann eine Karte von Google Maps eingebunden sein, um unseren Standort darzustellen. Bei Nutzung der Karte können personenbezogene Daten, insbesondere Ihre IP-Adresse, an Google übermittelt werden. Die Einbindung erfolgt im Interesse einer ansprechenden Darstellung unserer Online-Angebote und einer leichten Auffindbarkeit unseres Standorts.</p>
-
-      <h2>7. Hosting und Server-Logfiles</h2>
-      <p>Beim Besuch dieser Website können technisch erforderliche Daten in sogenannten Server-Logfiles verarbeitet werden. Dazu zählen beispielsweise Browsertyp, Betriebssystem, Referrer-URL, Uhrzeit des Zugriffs und IP-Adresse. Diese Verarbeitung dient der technischen Stabilität und Sicherheit der Website.</p>
-
-      <h2>8. Speicherdauer</h2>
-      <p>Wir speichern personenbezogene Daten nur so lange, wie dies zur Bearbeitung Ihrer Anfrage, zur Vertragsabwicklung oder aufgrund gesetzlicher Aufbewahrungspflichten erforderlich ist. Anschließend werden die Daten gelöscht, sofern keine weitere Rechtsgrundlage für die Speicherung besteht.</p>
-
-      <h2>9. Ihre Rechte</h2>
-      <ul>
-        <li>Recht auf Auskunft über Ihre gespeicherten Daten</li>
-        <li>Recht auf Berichtigung unrichtiger Daten</li>
-        <li>Recht auf Löschung nach Maßgabe der gesetzlichen Vorgaben</li>
-        <li>Recht auf Einschränkung der Verarbeitung</li>
-        <li>Recht auf Datenübertragbarkeit</li>
-        <li>Recht auf Widerspruch gegen bestimmte Verarbeitungen</li>
-        <li>Beschwerderecht bei einer zuständigen Aufsichtsbehörde</li>
-      </ul>
-
-      <h2>10. SSL- bzw. TLS-Verschlüsselung</h2>
-      <p>Zur sicheren Übertragung vertraulicher Inhalte sollte diese Website eine SSL- bzw. TLS-Verschlüsselung verwenden. Eine verschlüsselte Verbindung erkennen Sie in der Regel an der Adresszeile Ihres Browsers.</p>
-
-      <h2>11. Aktualität dieser Erklärung</h2>
-      <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, wenn sich rechtliche, technische oder organisatorische Änderungen ergeben.</p>
-
-    </section>
+    <section class="content-card" id="privacyContent"></section>
   </div>
+  <script src="../content/pages-content.js"></script>
+  <script>
+    const privacy = (window.sitePagesContent && window.sitePagesContent.privacyPage) || {};
+    document.getElementById('privacyHeroEyebrow').textContent = privacy.hero?.eyebrow || 'Rechtliches';
+    document.getElementById('privacyHeroTitle').textContent = privacy.hero?.title || 'Datenschutzerklärung';
+    document.getElementById('privacyHeroSubtitle').textContent = privacy.hero?.subtitle || '';
+    document.getElementById('privacyContent').innerHTML = (privacy.sections || []).map(section => `
+      <h2>${section.title}</h2>
+      ${(section.paragraphs || []).map(paragraph => `<p>${paragraph}</p>`).join('')}
+      ${section.list ? `<ul>${section.list.map(item => `<li>${item}</li>`).join('')}</ul>` : ''}
+    `).join('');
+  </script>
 </body>
 </html>

@@ -4,7 +4,7 @@ window.agbContent = {
     street: 'Artur-Ladebeck-Straße 181',
     city: '33647 Bielefeld',
     email: 'info@teutomotoren.de',
-    phone: '0521 92 37 35 19'
+    phone: '0521 92373519'
   },
   hero: {
     eyebrow: 'Rechtliches',
@@ -96,7 +96,7 @@ window.agbContent = {
             'Artur-Ladebeck-Straße 181',
             '33647 Bielefeld',
             'E-Mail: info@teutomotoren.de',
-            'Telefon: 0521 92 37 35 19'
+            'Telefon: 0521 92373519'
           ]
         },
         {

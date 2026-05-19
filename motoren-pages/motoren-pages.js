@@ -24,9 +24,10 @@
     return `${root}/${path}`;
   };
 
+  const contactHref = resolveHref('pages/kontakt.html');
   const whatsappHref = whatsappNumber
     ? `https://wa.me/${whatsappNumber.replace(/[^\d]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`
-    : resolveHref('index.html#kontakt');
+    : contactHref;
 
   const brandFileMap = {
     Audi: 'audi.html',
@@ -38,9 +39,9 @@
   const navItems = [
     { label: 'Startseite', href: resolveHref('index.html') },
     { label: 'Leistungen', href: resolveHref('index.html#leistungen') },
-    { label: 'Referenzen', href: resolveHref('index.html#cases') },
+    { label: 'Referenzen', href: resolveHref('pages/projekte.html') },
     { label: 'Motoren', href: overviewHref, key: 'overview' },
-    { label: 'Kontakt', href: resolveHref('index.html#kontakt') }
+    { label: 'Kontakt', href: contactHref }
   ];
 
   const brandLink = (brand) => currentBrand === brand.name ? '#' : (currentBrand ? brandFileMap[brand.name] : resolveHref(`motoren-pages/${brandFileMap[brand.name]}`));
@@ -62,8 +63,8 @@
           </ul>
         </div>
         <div class="mpg-nav-actions">
-          <a class="mpg-action" href="${whatsappHref}" ${whatsappNumber ? 'target="_blank" rel="noopener noreferrer"' : ''}>WhatsApp</a>
-          <a class="mpg-action-solid" href="${resolveHref('index.html#kontakt')}">Angebot anfragen</a>
+          <a class="mpg-action" href="${resolveHref('index.html')}">Zur Startseite</a>
+          <a class="mpg-action-solid" href="${contactHref}">Angebot anfragen</a>
         </div>
         <button class="mpg-mobile-toggle" id="mpgMobileToggle" type="button" aria-expanded="false" aria-label="Menü öffnen">
           <svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
@@ -71,8 +72,8 @@
         <div class="mpg-mobile-panel" id="mpgMobilePanel">
           <nav>${navItems.map(item => `<a href="${item.href}">${item.label}</a>`).join('')}</nav>
           <div class="mpg-mobile-actions">
-            <a class="mpg-action" href="${whatsappHref}" ${whatsappNumber ? 'target="_blank" rel="noopener noreferrer"' : ''}>WhatsApp</a>
-            <a class="mpg-action-solid" href="${resolveHref('index.html#kontakt')}">Angebot anfragen</a>
+            <a class="mpg-action" href="${resolveHref('index.html')}">Zur Startseite</a>
+            <a class="mpg-action-solid" href="${contactHref}">Angebot anfragen</a>
           </div>
         </div>
       </div>
@@ -93,7 +94,7 @@
             <p class="mpg-copy">Ob Performance-Fahrzeug, Oberklasse oder Alltagsauto: Wir arbeiten an einer Vielzahl moderner Motoren und Antriebskonzepte. Die gezeigten Markenbereiche dienen als strukturierter Einblick in unsere Arbeit.</p>
             <div class="mpg-hero-actions">
               <a class="mpg-action-solid" href="#marken">Marken ansehen</a>
-              <a class="mpg-action" href="${resolveHref('index.html#kontakt')}">Anfrage senden</a>
+              <a class="mpg-action" href="${contactHref}">Anfrage senden</a>
             </div>
           </div>
         </div>
@@ -130,7 +131,7 @@
             <h3>${support.title || ''}</h3>
             <p>${support.body || ''}</p>
             <div class="mpg-hero-actions">
-              <a class="mpg-action-solid" href="${resolveHref('index.html#kontakt')}">${support.button || 'Service anfragen →'}</a>
+              <a class="mpg-action-solid" href="${contactHref}">${support.button || 'Service anfragen →'}</a>
             </div>
           </div>
         </div>
@@ -151,7 +152,12 @@
             </div>
             <div>
               <h5>Navigation</h5>
-              <ul>${(site.footerNav || []).map(item => `<li><a href="${resolveHref(`index.html${item.href}`)}">${item.label}</a></li>`).join('')}</ul>
+              <ul>${(site.footerNav || []).map(item => {
+                const href = item.href && item.href.startsWith('#')
+                  ? resolveHref(`index.html${item.href}`)
+                  : resolveHref(item.href || 'index.html');
+                return `<li><a href="${href}">${item.label}</a></li>`;
+              }).join('')}</ul>
             </div>
             <div>
               <h5>Rechtliches</h5>
@@ -188,7 +194,7 @@
             </div>
             <div class="mpg-hero-actions">
               <a class="mpg-action" href="${overviewHref}">Zur Motorenübersicht</a>
-              <a class="mpg-action-solid" href="${resolveHref('index.html#kontakt')}">Anfrage senden</a>
+              <a class="mpg-action-solid" href="${contactHref}">Anfrage senden</a>
             </div>
           </div>
         </div>

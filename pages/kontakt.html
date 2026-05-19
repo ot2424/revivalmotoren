@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt – Teuto Motoren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared-pages.css">
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-icon"><img src="../assets/branding/teuto-logo-symbol.png" alt="Teuto Motoren Logo"></span>
+        <span class="brand-copy">
+          <span class="brand-name">Teuto Motoren</span>
+          <span class="brand-tagline">Wir leben Motoren</span>
+        </span>
+      </a>
+      <div class="topbar-center">
+        <ul class="topbar-nav">
+          <li><a href="../index.html#leistungen">Leistungen</a></li>
+          <li><a href="projekte.html">Referenzen</a></li>
+          <li><a href="motoren.html">Motoren</a></li>
+          <li><a href="ueber-uns.html">Über uns</a></li>
+          <li><a href="kontakt.html" class="is-active">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="topbar-actions">
+        <a class="back-link" href="../index.html">Zur Startseite</a>
+        <a class="nav-contact" href="kontakt.html">Angebot anfragen</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">Kontakt</span>
+      <h1 id="contactHeroTitle">Angebot anfragen</h1>
+      <p id="contactHeroSubtitle">Kostenlos & unverbindlich. Wir melden uns innerhalb von 24 Stunden mit einem transparenten Kostenvoranschlag.</p>
+    </section>
+
+    <section class="contact-layout">
+      <aside class="contact-panel">
+        <span class="response-pill" id="responseHint">Antwort innerhalb 24 Stunden</span>
+        <h2 class="side-title" style="margin-top:22px">Direkt Kontakt aufnehmen</h2>
+        <p class="contact-intro">Wenn Sie bereits wissen, was Sie benötigen, können Sie uns Ihre Fahrzeugdaten und eine kurze Problembeschreibung direkt senden. So können wir Ihr Anliegen schneller einordnen und gezielter zurückrufen.</p>
+        <div class="contact-grid" id="contactItems"></div>
+        <div class="note">Hinweis: WhatsApp ist aktuell noch nicht eingerichtet. Nutzen Sie bitte Telefon, E-Mail oder das Formular auf dieser Seite.</div>
+      </aside>
+
+      <section class="contact-form-panel">
+        <h2 class="form-title" id="formTitle">Ihre Anfrage</h2>
+        <form id="contactForm" novalidate>
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label" for="name">Name <span class="required">*</span></label>
+              <input class="form-input" id="name" name="name" type="text" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="email">E-Mail <span class="required">*</span></label>
+              <input class="form-input" id="email" name="email" type="email" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="phone">Telefon <span class="required">*</span></label>
+              <input class="form-input" id="phone" name="phone" type="tel" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="mileage">Kilometerstand</label>
+              <input class="form-input" id="mileage" name="mileage" type="text" inputmode="numeric">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="vin">Fahrgestellnummer (VIN) <span class="required">*</span><span class="form-help" title="Zu finden im Fahrzeugschein unter Feld E.">?</span></label>
+              <input class="form-input" id="vin" name="vin" type="text" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="hsn-tsn">Schlüsselnummern (HSN/TSN) <span class="form-help" title="Zu finden im Fahrzeugschein in den Feldern 2.1 und 2.2.">?</span></label>
+              <input class="form-input" id="hsn-tsn" name="hsn_tsn" type="text">
+            </div>
+            <div class="form-field is-full">
+              <label class="form-label" for="problem">Problembeschreibung <span class="required">*</span></label>
+              <textarea class="form-textarea" id="problem" name="problem" required></textarea>
+            </div>
+            <div class="form-field is-full">
+              <label class="form-check" id="privacyCheckWrap">
+                <input id="privacy" name="privacy" type="checkbox" required>
+                <span>Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu. <span class="required">*</span></span>
+              </label>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="form-submit" id="submitLabel">Angebot anfragen →</button>
+            <span class="form-note" id="formNote">Kostenlos & unverbindlich · Keine Datenweitergabe</span>
+          </div>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <h3 id="successTitle">Anfrage gesendet!</h3>
+          <p id="successText">Vielen Dank für Ihre Kontaktanfrage. Wir prüfen Ihr Anliegen und melden uns schnellstmöglich bei Ihnen zurück.</p>
+        </div>
+      </section>
+    </section>
+
+    <section class="map-card">
+      <div class="map-split">
+        <div class="map-info">
+          <span class="eyebrow" id="mapLabel">Anfahrt</span>
+          <h2 id="mapTitle">Werkstatt & Standort</h2>
+          <p id="mapSubtitle">Alle Kontaktdaten und die direkte Route zu unserer Werkstatt in Bielefeld.</p>
+          <div class="contact-grid" id="mapPoints"></div>
+          <a class="map-route" id="mapRoute" href="#" target="_blank" rel="noopener noreferrer">Route planen</a>
+        </div>
+        <div class="map-frame">
+          <iframe
+            id="mapFrame"
+            title="Google Maps Standort Teuto Motoren"
+            src=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="../content/site-core.js"></script>
+  <script src="../content/contact-content.js"></script>
+  <script src="../content/pages-content.js"></script>
+  <script>
+    const site = window.siteContent || {};
+    const pageContent = (window.sitePagesContent && window.sitePagesContent.contactPage) || {};
+    const contactSection = site.contactSection || {};
+    const contactItems = site.contactItems || [];
+    const mapSection = site.mapSection || {};
+    const mapPoints = site.mapPoints || [];
+
+    document.querySelector('.hero .eyebrow').textContent = pageContent.heroEyebrow || 'Kontakt';
+    document.querySelector('.side-title').textContent = pageContent.sideTitle || 'Direkt Kontakt aufnehmen';
+    document.querySelector('.contact-intro').textContent = pageContent.sideIntro || '';
+    document.querySelector('.note').textContent = pageContent.sideNote || '';
+    document.getElementById('contactHeroTitle').innerHTML = contactSection.title || 'Angebot anfragen';
+    document.getElementById('contactHeroSubtitle').textContent = contactSection.subtitle || '';
+    document.getElementById('responseHint').textContent = contactSection.responseHint || 'Antwort innerhalb 24 Stunden';
+    document.getElementById('formTitle').textContent = contactSection.formTitle || 'Ihre Anfrage';
+    document.getElementById('submitLabel').textContent = contactSection.submitLabel || 'Angebot anfragen →';
+    document.getElementById('formNote').textContent = contactSection.note || '';
+    document.getElementById('successTitle').textContent = contactSection.successTitle || 'Anfrage gesendet!';
+    document.getElementById('successText').textContent = contactSection.successText || '';
+
+    document.getElementById('contactItems').innerHTML = contactItems
+      .filter(item => item.label !== 'WhatsApp')
+      .map(item => `
+        <div class="contact-item">
+          <strong>${item.label}</strong>
+          ${item.href ? `<a href="${item.href}">${item.value}</a>` : `<span>${item.value}</span>`}
+        </div>
+      `).join('');
+
+    document.getElementById('mapLabel').textContent = mapSection.label || pageContent.map?.fallbackLabel || 'Anfahrt';
+    document.getElementById('mapTitle').innerHTML = mapSection.title || pageContent.map?.fallbackTitle || 'Werkstatt & Standort';
+    document.getElementById('mapSubtitle').textContent = mapSection.subtitle || pageContent.map?.fallbackSubtitle || '';
+    document.getElementById('mapRoute').href = mapSection.routeHref || '#';
+    document.getElementById('mapRoute').textContent = mapSection.routeLabel || 'Route planen';
+    document.getElementById('mapFrame').src = mapSection.iframeSrc || '';
+    document.getElementById('mapFrame').title = mapSection.iframeTitle || 'Google Maps Standort Teuto Motoren';
+    document.getElementById('mapPoints').innerHTML = mapPoints.map(point => `
+      <div class="contact-item">
+        <strong>${point.title}</strong>
+        <span>${point.body}</span>
+      </div>
+    `).join('');
+
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+    const privacyWrap = document.getElementById('privacyCheckWrap');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      form.classList.add('form-error');
+      privacyWrap.classList.toggle('is-invalid', !document.getElementById('privacy').checked);
+      if(!form.checkValidity()){
+        form.reportValidity();
+        return;
+      }
+      form.style.display = 'none';
+      success.classList.add('is-visible');
+    });
+    document.getElementById('privacy').addEventListener('change', () => {
+      privacyWrap.classList.toggle('is-invalid', !document.getElementById('privacy').checked);
+    });
+  </script>
+</body>
+</html>

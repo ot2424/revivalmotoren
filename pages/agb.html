@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared-pages.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -344,6 +345,7 @@ a{color:inherit}
 @media(max-width:768px){
   .page{width:calc(100% - 12px);padding-top:12px}
   .topbar{grid-template-columns:1fr;gap:10px;border-radius:24px}
+  .topbar-center{display:none}
   .topbar-actions{justify-content:space-between;flex-wrap:wrap}
   .topbar-nav{
     width:100%;
@@ -380,8 +382,8 @@ a{color:inherit}
         <ul class="topbar-nav" id="legalNav"></ul>
       </div>
       <div class="topbar-actions">
-        <a class="nav-contact" href="../index.html#kontakt">Angebot anfragen</a>
-        <a class="back-link" href="../index.html#kontakt">Zurück zur Anfrage</a>
+        <a class="nav-contact" href="kontakt.html">Angebot anfragen</a>
+        <a class="back-link" href="../index.html">Zur Startseite</a>
       </div>
     </div>
 
@@ -399,28 +401,41 @@ a{color:inherit}
 
       <aside class="side-card">
         <h2 class="side-title">Unternehmensdaten</h2>
-        <p class="side-copy">Die wichtigsten Angaben sowie der Hinweis zur Pflege dieser Seite sind separat ausgelagert und können direkt in der JS-Datei aktualisiert werden.</p>
+        <p class="side-copy">Die folgenden Angaben fassen die wichtigsten Unternehmens- und Kontaktinformationen für diese Rechteseite kompakt zusammen.</p>
         <div class="contact-list" id="companyDetails"></div>
         <div class="note" id="legalNote"></div>
       </aside>
     </section>
   </div>
 
-  <a class="floating-contact" id="floatingContact" href="../index.html#kontakt">Kontakt aufnehmen</a>
+  <a class="floating-contact" id="floatingContact" href="kontakt.html">Kontakt aufnehmen</a>
 
-  <script src="../content.js"></script>
+  <script src="../content/site-core.js"></script>
   <script src="../content/agb-content.js"></script>
   <script>
+    const asset = (path) => {
+      if (!path) return '';
+      if (/^(https?:|mailto:|tel:|#|\.\.\/)/.test(path)) return path;
+      return `../${path}`;
+    };
+
     const brandLogo = document.getElementById('brandLogo');
     const legalNav = document.getElementById('legalNav');
     const floatingContact = document.getElementById('floatingContact');
     if(brandLogo && window.siteContent && window.siteContent.logo){
-      brandLogo.src = window.siteContent.logo.dark || window.siteContent.logo.light;
+      brandLogo.src = asset(window.siteContent.logo.dark || window.siteContent.logo.light);
     }
 
-    if(legalNav && window.siteContent && Array.isArray(window.siteContent.navItems)){
-      legalNav.innerHTML = window.siteContent.navItems.map(item => `
-        <li><a href="../index.html${item.href}">${item.label}</a></li>
+    if(legalNav){
+      const legalNavItems = [
+        { label: 'Leistungen', href: '../index.html#leistungen' },
+        { label: 'Referenzen', href: 'projekte.html' },
+        { label: 'Motoren', href: 'motoren.html' },
+        { label: 'Über uns', href: 'ueber-uns.html' },
+        { label: 'Kontakt', href: 'kontakt.html' }
+      ];
+      legalNav.innerHTML = legalNavItems.map(item => `
+        <li><a href="${item.href}">${item.label}</a></li>
       `).join('');
     }
 
@@ -437,8 +452,8 @@ a{color:inherit}
 
     document.getElementById('heroEyebrow').textContent = data.hero.eyebrow;
     document.getElementById('heroTitle').textContent = data.hero.title;
-    document.getElementById('heroSubtitle').textContent = data.hero.subtitle;
-    document.getElementById('legalNote').textContent = data.note;
+    document.getElementById('heroSubtitle').textContent = data.hero.subtitle || '';
+    document.getElementById('legalNote').textContent = data.note || 'Bitte prüfen Sie diese Rechtstexte vor der finalen Veröffentlichung noch einmal zusammen mit Ihren verbindlichen Unternehmensangaben.';
 
     const companyDetails = [
       { label: 'Unternehmen', value: data.company.name },

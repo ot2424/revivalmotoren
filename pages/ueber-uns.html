@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Über uns – Teuto Motoren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared-pages.css">
+<style>
+  .about-hero{
+    margin-top:18px;
+    padding:40px 36px;
+    border-radius:34px;
+    background:linear-gradient(180deg, rgba(17,18,20,.98) 0%, rgba(12,13,15,.98) 100%);
+    border:1px solid rgba(255,255,255,.06);
+    box-shadow:var(--shadow);
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(240px,360px);
+    gap:32px;
+    align-items:center;
+  }
+  .about-hero-copy h1{
+    font-size:clamp(40px,5vw,68px);
+    line-height:.97;
+    letter-spacing:-.06em;
+    margin:0 0 16px;
+  }
+  .about-hero-copy p{
+    max-width:64ch;
+    font-size:18px;
+    line-height:1.75;
+    color:var(--text);
+  }
+  .about-hero-art img{
+    width:min(100%,320px);
+    margin-left:auto;
+    height:auto;
+    object-fit:contain;
+    filter:drop-shadow(0 20px 44px rgba(0,0,0,.28));
+  }
+
+  .about-layout{
+    margin-top:18px;
+    display:grid;
+    grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr);
+    gap:20px;
+    align-items:start;
+  }
+  .about-main{
+    display:grid;
+    gap:18px;
+  }
+  .about-sidebar{
+    display:grid;
+    gap:18px;
+  }
+  .about-card,
+  .about-slider{
+    border-radius:30px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .about-card{
+    padding:28px;
+  }
+  .about-story-intro{
+    margin-bottom:18px;
+  }
+  .about-story-intro .section-title{
+    margin:10px 0 14px;
+  }
+  .about-story-intro p{
+    font-size:20px;
+    line-height:1.75;
+    color:var(--muted);
+    max-width:60ch;
+  }
+  .about-story-copy{
+    display:grid;
+    gap:14px;
+  }
+  .about-story-copy p{
+    font-size:17px;
+    line-height:1.9;
+    color:var(--text);
+  }
+
+  .about-slider{
+    min-height:520px;
+    position:relative;
+    isolation:isolate;
+  }
+  .about-slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transform:scale(1.02);
+    transition:opacity .6s ease, transform 1.4s ease;
+    pointer-events:none;
+  }
+  .about-slide.is-active{
+    opacity:1;
+    transform:scale(1);
+    pointer-events:auto;
+  }
+  .about-slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:brightness(.78) saturate(.92);
+  }
+  .about-slide::after{
+    content:'';
+    position:absolute;
+    inset:auto 0 0 0;
+    height:40%;
+    background:linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(10,10,10,.66) 100%);
+  }
+  .about-slider-copy{
+    position:absolute;
+    left:22px;
+    right:22px;
+    bottom:22px;
+    z-index:2;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .about-slider-copy strong{
+    display:block;
+    max-width:18ch;
+    font-size:22px;
+    line-height:1.05;
+    letter-spacing:-.04em;
+    color:#fff;
+  }
+  .about-slider-dots{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-shrink:0;
+  }
+  .about-slider-dots span{
+    width:8px;
+    height:8px;
+    border-radius:999px;
+    background:rgba(255,255,255,.34);
+    transition:transform .2s ease, background .2s ease;
+  }
+  .about-slider-dots span.is-active{
+    background:#fff;
+    transform:scale(1.18);
+  }
+  .about-slider-empty{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:24px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,.05), transparent 36%),
+      linear-gradient(180deg, rgba(18,19,23,.96) 0%, rgba(10,11,14,.98) 100%);
+  }
+  .about-slider-empty p{
+    margin-top:10px;
+    max-width:26ch;
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.7;
+  }
+
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+    margin-top:18px;
+  }
+  .feature-card{
+    padding:18px;
+    border-radius:20px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .feature-card strong{
+    display:block;
+    margin:10px 0 8px;
+    font-size:18px;
+    line-height:1.1;
+    letter-spacing:-.03em;
+  }
+  .feature-card p{
+    font-size:14px;
+    line-height:1.72;
+    color:var(--text);
+  }
+  .feature-icon{font-size:20px}
+
+  .spec-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+    margin-top:18px;
+  }
+  .spec-card{
+    padding:18px;
+    border-radius:22px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .spec-card strong{
+    display:block;
+    font-size:30px;
+    line-height:1;
+    letter-spacing:-.05em;
+    margin-bottom:8px;
+  }
+  .spec-card span{
+    display:block;
+    font-size:13px;
+    line-height:1.6;
+    color:var(--text);
+  }
+
+  @media(max-width:1024px){
+    .about-hero,
+    .about-layout{grid-template-columns:1fr}
+    .about-slider{min-height:360px}
+  }
+  @media(max-width:768px){
+    .about-hero,
+    .about-card{padding:24px 20px;border-radius:24px}
+    .about-hero-copy h1{font-size:clamp(34px,11vw,48px)}
+    .about-hero-copy p{font-size:16px}
+    .about-hero-art{display:none}
+    .about-story-intro p,
+    .about-story-copy p{font-size:16px}
+    .about-slider{min-height:240px;border-radius:24px}
+    .about-slider-copy{
+      left:16px;
+      right:16px;
+      bottom:16px;
+      gap:12px;
+    }
+    .about-slider-copy strong{font-size:18px;max-width:16ch}
+    .feature-grid,
+    .spec-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-icon"><img src="../assets/branding/teuto-logo-symbol.png" alt="Teuto Motoren Logo"></span>
+        <span class="brand-copy">
+          <span class="brand-name">Teuto Motoren</span>
+          <span class="brand-tagline">Wir leben Motoren</span>
+        </span>
+      </a>
+      <div class="topbar-center">
+        <ul class="topbar-nav">
+          <li><a href="../index.html#leistungen">Leistungen</a></li>
+          <li><a href="projekte.html">Referenzen</a></li>
+          <li><a href="motoren.html">Motoren</a></li>
+          <li><a href="ueber-uns.html" class="is-active">Über uns</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="topbar-actions">
+        <a class="back-link" href="../index.html">Zur Startseite</a>
+        <a class="nav-contact" href="kontakt.html">Angebot anfragen</a>
+      </div>
+    </header>
+
+    <section class="about-hero">
+      <div class="about-hero-copy">
+        <span class="eyebrow" id="aboutLabel">Über uns</span>
+        <h1 id="aboutTitle">Teuto Motoren – Bielefeld</h1>
+        <p id="aboutSubtitle">Spezialisierte Werkstatt für Motorinstandsetzung und Motorreparatur.</p>
+      </div>
+      <div class="about-hero-art">
+        <img src="../assets/branding/teuto-logo-full-final.png" alt="Teuto Motoren Logo">
+      </div>
+    </section>
+
+    <section class="about-layout">
+      <div class="about-main">
+        <article class="about-card">
+          <div class="about-story-intro">
+            <span class="eyebrow" id="aboutStoryEyebrow">Werkstatt & Anspruch</span>
+            <h2 class="section-title" id="aboutStoryTitle">Wofür Teuto Motoren steht</h2>
+            <p id="aboutStoryIntro">Keine laute Selbstdarstellung, sondern saubere Diagnosen, ehrliche Einschätzungen und Reparaturen, die technisch Sinn ergeben und langfristig halten sollen.</p>
+          </div>
+          <div class="about-story-copy" id="aboutStoryCopy"></div>
+        </article>
+
+        <article class="about-card">
+          <span class="eyebrow" id="aboutFeaturesEyebrow">Warum Kunden zu uns kommen</span>
+          <h2 class="section-title" id="aboutFeaturesTitle">Stärken unserer Arbeitsweise</h2>
+          <div class="feature-grid" id="aboutFeatureGrid"></div>
+        </article>
+
+        <article class="about-card">
+          <span class="eyebrow" id="aboutSpecsEyebrow">Kennzahlen</span>
+          <h2 class="section-title" id="aboutSpecsTitle">Ein kompakter Überblick</h2>
+          <div class="spec-grid" id="aboutSpecGrid"></div>
+        </article>
+      </div>
+
+      <aside class="about-sidebar">
+        <div class="about-slider" id="aboutGallerySlider">
+          <div class="about-slider-copy">
+            <strong id="aboutSlideTitle">Einblicke in Werkstatt und Motorenarbeit</strong>
+            <div class="about-slider-dots" id="aboutSliderDots" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="about-slider" id="aboutOfficeSlider">
+          <div class="about-slider-copy">
+            <strong id="aboutOfficeSlideTitle">Büro & Kundenbereich</strong>
+            <div class="about-slider-dots" id="aboutOfficeSliderDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </div>
+
+  <script src="../content/site-core.js"></script>
+  <script src="../content/about-content.js"></script>
+  <script src="../content/pages-content.js"></script>
+  <script>
+    const site = window.siteContent || {};
+    const pageContent = (window.sitePagesContent && window.sitePagesContent.aboutPage) || {};
+    const about = site.about || {};
+    const whyFeatures = site.whyFeatures || [];
+    const aboutSpecs = site.aboutSpecs || [];
+    const slideshowImages = about.slideshowImages || [];
+    const officeSlideshowImages = about.officeSlideshowImages || [];
+
+    document.getElementById('aboutLabel').textContent = about.label || 'Über uns';
+    document.getElementById('aboutTitle').innerHTML = about.title || 'Teuto Motoren – Bielefeld';
+    document.getElementById('aboutSubtitle').textContent = about.subtitle || '';
+    document.getElementById('aboutStoryEyebrow').textContent = pageContent.story?.eyebrow || 'Werkstatt & Anspruch';
+    document.getElementById('aboutStoryTitle').textContent = pageContent.story?.title || 'Wofür Teuto Motoren steht';
+    document.getElementById('aboutStoryIntro').textContent = pageContent.story?.intro || '';
+    document.getElementById('aboutStoryCopy').innerHTML = (pageContent.story?.paragraphs || []).map(paragraph => `<p>${paragraph}</p>`).join('');
+    document.getElementById('aboutFeaturesEyebrow').textContent = pageContent.features?.eyebrow || 'Warum Kunden zu uns kommen';
+    document.getElementById('aboutFeaturesTitle').textContent = pageContent.features?.title || 'Stärken unserer Arbeitsweise';
+    document.getElementById('aboutSpecsEyebrow').textContent = pageContent.specs?.eyebrow || 'Kennzahlen';
+    document.getElementById('aboutSpecsTitle').textContent = pageContent.specs?.title || 'Ein kompakter Überblick';
+
+    const mountSlider = ({ sliderId, dotsId, titleId, images, title, hint, key }) => {
+      const slider = document.getElementById(sliderId);
+      const dots = document.getElementById(dotsId);
+      const titleNode = document.getElementById(titleId);
+      if(!slider || !dots || !titleNode) return;
+
+      if(!images.length){
+        dots.innerHTML = '';
+        titleNode.textContent = title;
+        slider.insertAdjacentHTML('afterbegin', `
+          <div class="about-slider-empty">
+            <strong>${title}</strong>
+            <p>${hint}</p>
+          </div>
+        `);
+        return;
+      }
+
+      slider.insertAdjacentHTML('afterbegin', images.map((image, index) => `
+        <figure class="about-slide ${index === 0 ? 'is-active' : ''}" data-${key}-slide="${index}">
+          <img src="../${image.src}" alt="${image.alt || title}" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async">
+        </figure>
+      `).join(''));
+      dots.innerHTML = images.map((_, index) => `
+        <span class="${index === 0 ? 'is-active' : ''}" data-${key}-dot="${index}"></span>
+      `).join('');
+      let currentSlide = 0;
+      titleNode.textContent = images[0].alt || title;
+      window.setInterval(() => {
+        const slides = slider.querySelectorAll(`[data-${key}-slide]`);
+        const sliderDots = dots.querySelectorAll(`[data-${key}-dot]`);
+        currentSlide = (currentSlide + 1) % images.length;
+        slides.forEach((slide, index) => slide.classList.toggle('is-active', index === currentSlide));
+        sliderDots.forEach((dot, index) => dot.classList.toggle('is-active', index === currentSlide));
+        titleNode.textContent = images[currentSlide].alt || title;
+      }, key === 'office' ? 3800 : 3400);
+    };
+
+    mountSlider({
+      sliderId: 'aboutGallerySlider',
+      dotsId: 'aboutSliderDots',
+      titleId: 'aboutSlideTitle',
+      images: slideshowImages,
+      title: about.slideshowTitle || pageContent.sliderFallbackTitle || 'Einblicke in Werkstatt und Motorenarbeit',
+      hint: pageContent.sliderFallbackTitle || 'Einblicke in Werkstatt und Motorenarbeit',
+      key: 'about'
+    });
+
+    mountSlider({
+      sliderId: 'aboutOfficeSlider',
+      dotsId: 'aboutOfficeSliderDots',
+      titleId: 'aboutOfficeSlideTitle',
+      images: officeSlideshowImages,
+      title: about.officeSlideshowTitle || 'Büro & Kundenbereich',
+      hint: about.officeSlideshowHint || 'Hier kannst du später einfach Office-Bilder ergänzen.',
+      key: 'office'
+    });
+
+    document.getElementById('aboutFeatureGrid').innerHTML = whyFeatures.map(feature => `
+      <article class="feature-card">
+        <div class="feature-icon">${feature.icon}</div>
+        <strong>${feature.title}</strong>
+        <p>${feature.body}</p>
+      </article>
+    `).join('');
+
+    document.getElementById('aboutSpecGrid').innerHTML = aboutSpecs.map(spec => `
+      <article class="spec-card">
+        <strong>${spec.value}</strong>
+        <span>${spec.label}</span>
+      </article>
+    `).join('');
+  </script>
+</body>
+</html>
