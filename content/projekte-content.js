@@ -27,12 +27,12 @@ window.projectsPageContent = {
       excerpt: 'Hier kann Ihr Projekt beschrieben werden.',
       images: [
         {
-          src: 'assets/images/projects/projekte/img-block.jpg',
-          alt: 'Projektbild Zylinderkopf'
+          src: 'assets/images/placeholders/placeholder.png',
+          alt: 'Platzhalter Projektbild 1'
         },
         {
-          src: 'assets/images/projects/projekte/Motorblock.jpg',
-          alt: 'Projektbild Motorblock'
+          src: 'assets/images/placeholders/placeholder.png',
+          alt: 'Platzhalter Projektbild 2'
         }
       ],
       stats: ['Diagnose', 'Reinigung', 'Planen']

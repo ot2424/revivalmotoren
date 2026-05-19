@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./shared-pages.css">
+<link rel="stylesheet" href="../assets/ui/mobile-nav.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -57,6 +58,7 @@ a{color:inherit}
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
   box-shadow:var(--shadow);
+  overflow:visible;
 }
 .brand{
   display:flex;
@@ -119,6 +121,13 @@ a{color:inherit}
   align-items:center;
   gap:10px;
 }
+.topbar-mobile-toggle{display:none;width:46px;height:46px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--ink);align-items:center;justify-content:center;cursor:pointer}
+.topbar-mobile-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
+.topbar-mobile-panel{position:absolute;left:0;right:0;top:calc(100% + 10px);padding:10px;border-radius:24px;background:rgba(15,16,19,.96);border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:none}
+.topbar-mobile-panel.is-open{display:grid;gap:10px}
+.topbar-mobile-panel nav{display:grid;gap:6px}
+.topbar-mobile-panel nav a{min-height:48px;padding:0 16px;border-radius:16px;display:flex;align-items:center;text-decoration:none;color:var(--ink);background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);font-size:14px;font-weight:650}
+.topbar-mobile-actions{display:grid;gap:8px}
 .topbar-center{
   min-width:0;
   display:flex;
@@ -344,9 +353,9 @@ a{color:inherit}
 }
 @media(max-width:768px){
   .page{width:calc(100% - 12px);padding-top:12px}
-  .topbar{grid-template-columns:1fr;gap:10px;border-radius:24px}
-  .topbar-center{display:none}
-  .topbar-actions{justify-content:space-between;flex-wrap:wrap}
+  .topbar{grid-template-columns:minmax(0,1fr) auto;gap:10px;border-radius:24px}
+  .topbar-center,.topbar-actions{display:none}
+  .topbar-mobile-toggle{display:flex}
   .topbar-nav{
     width:100%;
     justify-content:flex-start;
@@ -383,7 +392,13 @@ a{color:inherit}
       </div>
       <div class="topbar-actions">
         <a class="nav-contact" href="kontakt.html">Angebot anfragen</a>
-        <a class="back-link" href="../index.html">Zur Startseite</a>
+      </div>
+      <button class="topbar-mobile-toggle mnav-toggle" id="topbarMobileToggle" type="button" aria-label="Menü öffnen" aria-expanded="false"></button>
+      <div class="topbar-mobile-panel" id="topbarMobilePanel">
+        <nav id="legalMobileNav"></nav>
+        <div class="topbar-mobile-actions">
+          <a class="nav-contact" href="kontakt.html">Angebot anfragen</a>
+        </div>
       </div>
     </div>
 
@@ -412,6 +427,7 @@ a{color:inherit}
 
   <script src="../content/site-core.js"></script>
   <script src="../content/agb-content.js"></script>
+  <script src="../assets/ui/mobile-nav.js"></script>
   <script>
     const asset = (path) => {
       if (!path) return '';
@@ -437,6 +453,12 @@ a{color:inherit}
       legalNav.innerHTML = legalNavItems.map(item => `
         <li><a href="${item.href}">${item.label}</a></li>
       `).join('');
+      const legalMobileNav = document.getElementById('legalMobileNav');
+      if(legalMobileNav){
+        legalMobileNav.innerHTML = [{ label: 'Startseite', href: '../index.html' }, ...legalNavItems]
+          .map(item => `<a href="${item.href}">${item.label}</a>`)
+          .join('');
+      }
     }
 
     const whatsappNumber = window.siteContent && window.siteContent.business ? window.siteContent.business.whatsappNumber.replace(/\D/g,'') : '';
@@ -480,6 +502,7 @@ a{color:inherit}
         `).join('')}
       </section>
     `).join('');
+    window.SharedMobileNav?.bind({ toggleId:'topbarMobileToggle', panelId:'topbarMobilePanel' });
   </script>
 </body>
 </html>

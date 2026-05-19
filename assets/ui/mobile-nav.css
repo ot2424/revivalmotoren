@@ -1,0 +1,41 @@
+.mnav-toggle{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  color:inherit;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  cursor:pointer;
+  padding:0;
+  transition:transform .2s ease,background .2s ease,border-color .2s ease,opacity .2s ease;
+}
+
+.mnav-toggle:hover{
+  transform:translateY(-1px);
+  background:rgba(255,255,255,.07);
+}
+
+.mnav-toggle-bar{
+  display:block;
+  width:18px;
+  height:1.5px;
+  background:currentColor;
+  border-radius:2px;
+  transition:transform .22s ease,opacity .2s ease;
+}
+
+.mnav-toggle.is-open .mnav-toggle-bar:nth-child(1){
+  transform:translateY(5.5px) rotate(45deg);
+}
+
+.mnav-toggle.is-open .mnav-toggle-bar:nth-child(2){
+  opacity:0;
+}
+
+.mnav-toggle.is-open .mnav-toggle-bar:nth-child(3){
+  transform:translateY(-5.5px) rotate(-45deg);
+}

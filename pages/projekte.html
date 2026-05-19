@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/ui/mobile-nav.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth;overflow-x:hidden}
@@ -34,6 +35,7 @@
       background:rgba(13,15,18,.82);
       backdrop-filter:blur(18px);
       box-shadow:0 24px 80px rgba(0,0,0,.35);
+      overflow:visible;
     }
     .topbar-layout{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center}
     .topbar-brand{
@@ -42,13 +44,21 @@
       background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
     }
     .topbar-brand-icon{
-      width:58px;height:58px;border-radius:18px;flex-shrink:0;
+      width:74px;height:74px;border-radius:20px;flex-shrink:0;
       display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
       background:linear-gradient(180deg,#1b2027,#111418);
       border:1px solid rgba(255,255,255,.08);
       box-shadow:0 12px 28px rgba(0,0,0,.18);
     }
-    .topbar-brand-icon img{width:88%;height:88%;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,.22))}
+    .topbar-brand-icon img{
+      width:112%;
+      height:112%;
+      object-fit:cover;
+      object-position:center 44%;
+      filter:drop-shadow(0 8px 16px rgba(0,0,0,.22));
+      transform:translateY(10%) scale(1.4);
+    }
     .topbar-brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
     .topbar-brand-copy strong{font-size:20px;line-height:1;letter-spacing:-.045em}
     .topbar-brand-copy span{font-size:12px;color:#b7b2a8;line-height:1.1}
@@ -66,6 +76,35 @@
     }
     .topbar-nav a.is-active,.topbar-nav a:hover{background:rgba(255,255,255,.08);color:#f3f1ec}
     .topbar-actions{display:flex;align-items:center;gap:10px}
+    .topbar-mobile-toggle{
+      display:none;
+      width:46px;height:46px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);color:#f3f1ec;
+      align-items:center;justify-content:center;cursor:pointer;
+    }
+    .topbar-mobile-toggle svg{
+      width:20px;height:20px;stroke:currentColor;fill:none;
+      stroke-width:1.8;stroke-linecap:round;
+    }
+    .topbar-mobile-panel{
+      position:absolute;left:0;right:0;top:calc(100% + 10px);
+      padding:10px;border-radius:24px;
+      background:rgba(15,16,19,.96);border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 24px 80px rgba(0,0,0,.35);
+      backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+      display:none;
+    }
+    .topbar-mobile-panel.is-open{display:grid;gap:10px}
+    .topbar-mobile-panel nav{display:grid;gap:6px}
+    .topbar-mobile-panel nav a{
+      min-height:48px;padding:0 16px;border-radius:16px;
+      display:flex;align-items:center;
+      background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);
+      color:#f3f1ec;font-size:14px;font-weight:650;
+    }
+    .topbar-mobile-panel nav a.is-active{background:rgba(255,255,255,.08)}
+    .topbar-mobile-actions{display:grid;gap:8px}
     .ghost-btn,.solid-btn{
       min-height:50px;padding:0 20px;border-radius:999px;
       display:inline-flex;align-items:center;justify-content:center;
@@ -213,7 +252,7 @@
         padding:7px 12px 7px 7px;
         gap:10px;
       }
-      .topbar-brand-icon{width:52px;height:52px;border-radius:16px}
+      .topbar-brand-icon{width:58px;height:58px;border-radius:16px}
       .topbar-brand-copy strong{font-size:18px}
       .topbar-brand-copy span{font-size:11px}
       .hero{min-height:58vh;border-radius:32px}
@@ -248,17 +287,15 @@
       .topbar{top:8px;width:min(calc(100% - 16px), 1450px);padding:10px}
       .topbar-layout{grid-template-columns:1fr auto}
       .topbar-nav{display:none}
-      .topbar-actions{
-        display:flex;
-        gap:8px;
-      }
+      .topbar-actions{display:none}
+      .topbar-mobile-toggle{display:flex}
       .ghost-btn,.solid-btn{
         min-height:46px;
         padding:0 16px;
         font-size:13px;
       }
       .topbar-brand{padding:6px 10px 6px 6px;border-radius:18px;gap:8px}
-      .topbar-brand-icon{width:46px;height:46px;border-radius:14px}
+      .topbar-brand-icon{width:52px;height:52px;border-radius:14px}
       .topbar-brand-copy strong{font-size:16px}
       .topbar-brand-copy span{font-size:9px}
       .hero,.hero-copy{min-height:620px}
@@ -416,8 +453,21 @@
           </ul>
         </div>
         <div class="topbar-actions">
-          <a class="ghost-btn" href="../index.html">Zur Startseite</a>
           <a class="solid-btn" href="kontakt.html">Angebot anfragen</a>
+        </div>
+        <button class="topbar-mobile-toggle mnav-toggle" id="topbarMobileToggle" type="button" aria-label="Menü öffnen" aria-expanded="false"></button>
+        <div class="topbar-mobile-panel" id="topbarMobilePanel">
+          <nav>
+            <a href="../index.html">Startseite</a>
+            <a href="../index.html#leistungen">Leistungen</a>
+            <a href="projekte.html" class="is-active">Referenzen</a>
+            <a href="motoren.html">Motoren</a>
+            <a href="ueber-uns.html">Über uns</a>
+            <a href="kontakt.html">Kontakt</a>
+          </nav>
+          <div class="topbar-mobile-actions">
+            <a class="solid-btn" href="kontakt.html">Angebot anfragen</a>
+          </div>
         </div>
       </div>
     </nav>
@@ -467,7 +517,10 @@
 
   <script src="../content/site-core.js"></script>
   <script src="../content/projekte-content.js"></script>
+  <script src="../assets/ui/mobile-nav.js"></script>
   <script>
+    window.SharedMobileNav?.bind({ toggleId:'topbarMobileToggle', panelId:'topbarMobilePanel' });
+
     const site = window.siteContent || {};
     const page = window.projectsPageContent || {};
     const legacyProjects = Array.isArray(page.projects) ? page.projects : [];

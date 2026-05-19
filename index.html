@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/ui/mobile-nav.css">
 <script>
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
@@ -178,7 +179,7 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 
 /* ── NAV ─────────────────────────────── */
 #nav{
-  position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:400;
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:460;
   width:min(1380px, calc(100% - 40px));
   padding:12px;
   background:var(--nav-bg);
@@ -286,25 +287,32 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .nav-btn:hover{opacity:.85;transform:scale(.98)}
 .nav-mobile-tools{display:none;align-items:center;gap:8px;margin-left:auto}
 .hbg{
-  display:none;flex-direction:column;gap:4px;background:var(--nav-inner-surface);
-  border:1px solid rgba(255,255,255,.08);cursor:pointer;padding:0;
-  width:48px;height:48px;border-radius:16px;align-items:center;justify-content:center;
-  transition:transform .2s ease,background .2s ease,border-color .2s ease;
+  display:none;
+  background:var(--nav-inner-surface);
+  border:1px solid rgba(255,255,255,.08);
+  color:var(--ink);
 }
-.hbg:hover{transform:translateY(-1px);background:var(--theme-btn-hover)}
-.hbg span{display:block;width:18px;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .22s ease,opacity .2s ease}
-.hbg.is-open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
-.hbg.is-open span:nth-child(2){opacity:0}
-.hbg.is-open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.hbg:hover{background:var(--theme-btn-hover)}
 .mob{
   display:none;position:fixed;inset:0;
   background:var(--mobile-menu-bg);
-  z-index:399;flex-direction:column;padding:104px 24px 40px;gap:0;
+  z-index:450;flex-direction:column;padding:104px 24px 40px;gap:0;
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
 }
 .mob.open{display:flex}
-.mob a{font-size:clamp(20px,5.5vw,28px);font-weight:750;color:var(--mobile-menu-link);text-decoration:none;padding:18px 0;border-bottom:1px solid var(--mobile-menu-border);letter-spacing:-.03em}
+.mob a{
+  font-size:14px;
+  font-weight:650;
+  color:var(--mobile-menu-link);
+  text-decoration:none;
+  padding:16px 0;
+  border-bottom:1px solid var(--mobile-menu-border);
+  letter-spacing:-.02em;
+  min-height:48px;
+  display:flex;
+  align-items:center;
+}
 .mob a:hover{color:var(--mobile-menu-link-muted)}
 .mob a.mob-cta,
 .mob a.mob-wa{
@@ -337,7 +345,6 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   text-align:center;
   border:1px solid var(--whatsapp-border);
 }
-.mob-x{position:absolute;top:22px;right:20px;background:var(--mobile-menu-surface);border:1px solid var(--mobile-menu-border);width:48px;height:48px;border-radius:16px;font-size:22px;cursor:pointer;color:var(--mobile-menu-link-muted);font-family:var(--sans)}
 
 /* ── HERO ─────────────────────────────── */
 #hero{
@@ -2616,7 +2623,6 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .kt-h{font-size:clamp(26px,9vw,34px)}
   .kt-form-title{font-size:18px}
   .mob{padding:96px 18px 28px}
-  .mob a{padding:16px 0}
   .mob a.mob-cta,.mob a.mob-wa{padding:14px 18px;font-size:15px}
 }
 
@@ -2644,7 +2650,6 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   }
   .hero-pill-track{animation-duration:22s}
   .hpill{font-size:11px;padding:0 12px}
-  .mob a{font-size:20px}
 }
 
 
@@ -2682,15 +2687,14 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
       <a href="pages/kontakt.html" class="nav-btn">Angebot anfragen</a>
     </div>
     <div class="nav-mobile-tools">
-      <button class="hbg" id="menuToggle" onclick="mobToggle()" aria-label="Menü öffnen" aria-controls="mobMenu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button class="hbg mnav-toggle" id="menuToggle" type="button" aria-label="Menü öffnen" aria-controls="mobMenu" aria-expanded="false"></button>
     </div>
   </div>
 </nav>
 
 <div class="mob" id="mobMenu" aria-hidden="true">
-  <button class="mob-x" onclick="mobToggle()">✕</button>
-  <a v-for="item in navItems" :key="item.href + '-mobile'" :href="item.href" onclick="mobToggle()">{{ item.label }}</a>
-  <a href="pages/kontakt.html" class="mob-cta" onclick="mobToggle()">Angebot anfragen</a>
+  <a v-for="item in navItems" :key="item.href + '-mobile'" :href="item.href">{{ item.label }}</a>
+  <a href="pages/kontakt.html" class="mob-cta">Angebot anfragen</a>
 </div>
 
 <aside class="sticky-contact" id="stickyContact" aria-label="Schneller Kontakt">
@@ -3027,6 +3031,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <script src="content/about-content.js"></script>
 <script src="content/contact-content.js"></script>
 <script src="content/motoren-content.js"></script>
+<script src="assets/ui/mobile-nav.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 <script>
 const navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
@@ -3292,6 +3297,7 @@ window.addEventListener('resize', ()=>{
       m.classList.remove('open');
       m.setAttribute('aria-hidden', 'true');
     }
+    document.body.classList.remove('menu-open');
     if(menuToggle){
       menuToggle.classList.remove('is-open');
       menuToggle.setAttribute('aria-expanded', 'false');
@@ -3337,20 +3343,6 @@ if(mobileContact){
   });
 }
 
-/* ── MOBILE MENU ──────────────────────────── */
-function mobToggle(){
-  const m = document.getElementById('mobMenu');
-  const menuToggle = document.getElementById('menuToggle');
-  const isOpen = m.classList.toggle('open');
-  m.setAttribute('aria-hidden', String(!isOpen));
-  if(menuToggle){
-    menuToggle.classList.toggle('is-open', isOpen);
-    menuToggle.setAttribute('aria-expanded', String(isOpen));
-    menuToggle.setAttribute('aria-label', isOpen ? 'Menü schließen' : 'Menü öffnen');
-  }
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-}
-
 /* ── SMOOTH SCROLL ──────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e=>{
   const t = document.querySelector(a.getAttribute('href'));
@@ -3386,6 +3378,15 @@ function setupWhatsAppLinks(){
   });
 }
 setupWhatsAppLinks();
+window.SharedMobileNav?.bind({
+  toggleId:'menuToggle',
+  panelId:'mobMenu',
+  panelOpenClass:'open',
+  closeSelectors:'a',
+  bodyOpenClass:'menu-open',
+  lockBody:true,
+  desktopBreakpoint:1180
+});
 
 function applyImageLoadingStrategy(){
   document.querySelectorAll('img').forEach(img=>{

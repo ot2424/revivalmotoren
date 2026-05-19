@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./shared-pages.css">
+<link rel="stylesheet" href="../assets/ui/mobile-nav.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -56,6 +57,7 @@ a{color:inherit}
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
   box-shadow:var(--shadow);
+  overflow:visible;
 }
 .brand{
   display:flex;
@@ -153,6 +155,13 @@ a{color:inherit}
   align-items:center;
   gap:10px;
 }
+.topbar-mobile-toggle{display:none;width:46px;height:46px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--ink);align-items:center;justify-content:center;cursor:pointer}
+.topbar-mobile-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
+.topbar-mobile-panel{position:absolute;left:0;right:0;top:calc(100% + 10px);padding:10px;border-radius:24px;background:rgba(15,16,19,.96);border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:none}
+.topbar-mobile-panel.is-open{display:grid;gap:10px}
+.topbar-mobile-panel nav{display:grid;gap:6px}
+.topbar-mobile-panel nav a{min-height:48px;padding:0 16px;border-radius:16px;display:flex;align-items:center;text-decoration:none;color:var(--ink);background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);font-size:14px;font-weight:650}
+.topbar-mobile-actions{display:grid;gap:8px}
 .back-link,
 .nav-contact{
   min-height:48px;
@@ -270,12 +279,9 @@ a{color:inherit}
     grid-template-columns:1fr;
     gap:22px;
   }
-  .topbar-center{display:none}
-  .topbar-actions{
-    width:100%;
-    justify-content:space-between;
-    flex-wrap:wrap;
-  }
+  .topbar{grid-template-columns:minmax(0,1fr) auto}
+  .topbar-center,.topbar-actions{display:none}
+  .topbar-mobile-toggle{display:flex}
   .hero-art{
     justify-content:center;
   }
@@ -313,8 +319,21 @@ a{color:inherit}
         </ul>
       </div>
       <div class="topbar-actions">
-        <a class="back-link" href="../index.html">Zur Startseite</a>
         <a class="nav-contact" href="kontakt.html">Angebot anfragen</a>
+      </div>
+      <button class="topbar-mobile-toggle mnav-toggle" id="topbarMobileToggle" type="button" aria-label="Menü öffnen" aria-expanded="false"></button>
+      <div class="topbar-mobile-panel" id="topbarMobilePanel">
+        <nav>
+          <a href="../index.html">Startseite</a>
+          <a href="../index.html#leistungen">Leistungen</a>
+          <a href="projekte.html">Referenzen</a>
+          <a href="motoren.html">Motoren</a>
+          <a href="ueber-uns.html">Über uns</a>
+          <a href="kontakt.html">Kontakt</a>
+        </nav>
+        <div class="topbar-mobile-actions">
+          <a class="nav-contact" href="kontakt.html">Angebot anfragen</a>
+        </div>
       </div>
     </header>
 
@@ -332,6 +351,7 @@ a{color:inherit}
     <section class="content-card" id="privacyContent"></section>
   </div>
   <script src="../content/pages-content.js"></script>
+  <script src="../assets/ui/mobile-nav.js"></script>
   <script>
     const privacy = (window.sitePagesContent && window.sitePagesContent.privacyPage) || {};
     document.getElementById('privacyHeroEyebrow').textContent = privacy.hero?.eyebrow || 'Rechtliches';
@@ -342,6 +362,7 @@ a{color:inherit}
       ${(section.paragraphs || []).map(paragraph => `<p>${paragraph}</p>`).join('')}
       ${section.list ? `<ul>${section.list.map(item => `<li>${item}</li>`).join('')}</ul>` : ''}
     `).join('');
+    window.SharedMobileNav?.bind({ toggleId:'topbarMobileToggle', panelId:'topbarMobilePanel' });
   </script>
 </body>
 </html>

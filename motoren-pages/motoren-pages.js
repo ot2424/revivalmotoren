@@ -28,6 +28,14 @@
   const whatsappHref = whatsappNumber
     ? `https://wa.me/${whatsappNumber.replace(/[^\d]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`
     : contactHref;
+  const desktopActions = whatsappNumber
+    ? `
+          <a class="mpg-action-wa" href="${whatsappHref}">WhatsApp</a>
+          <a class="mpg-action-solid" href="${contactHref}">Angebot anfragen</a>
+        `
+    : `
+          <a class="mpg-action-solid" href="${contactHref}">Angebot anfragen</a>
+        `;
 
   const brandFileMap = {
     Audi: 'audi.html',
@@ -37,10 +45,10 @@
   };
 
   const navItems = [
-    { label: 'Startseite', href: resolveHref('index.html') },
     { label: 'Leistungen', href: resolveHref('index.html#leistungen') },
     { label: 'Referenzen', href: resolveHref('pages/projekte.html') },
     { label: 'Motoren', href: overviewHref, key: 'overview' },
+    { label: 'Über uns', href: resolveHref('pages/ueber-uns.html') },
     { label: 'Kontakt', href: contactHref }
   ];
 
@@ -63,16 +71,12 @@
           </ul>
         </div>
         <div class="mpg-nav-actions">
-          <a class="mpg-action" href="${resolveHref('index.html')}">Zur Startseite</a>
-          <a class="mpg-action-solid" href="${contactHref}">Angebot anfragen</a>
+          ${desktopActions}
         </div>
-        <button class="mpg-mobile-toggle" id="mpgMobileToggle" type="button" aria-expanded="false" aria-label="Menü öffnen">
-          <svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
-        </button>
+        <button class="mpg-mobile-toggle mnav-toggle" id="mpgMobileToggle" type="button" aria-expanded="false" aria-label="Menü öffnen"></button>
         <div class="mpg-mobile-panel" id="mpgMobilePanel">
-          <nav>${navItems.map(item => `<a href="${item.href}">${item.label}</a>`).join('')}</nav>
+          <nav><a href="${resolveHref('index.html')}">Startseite</a>${navItems.map(item => `<a href="${item.href}">${item.label}</a>`).join('')}</nav>
           <div class="mpg-mobile-actions">
-            <a class="mpg-action" href="${resolveHref('index.html')}">Zur Startseite</a>
             <a class="mpg-action-solid" href="${contactHref}">Angebot anfragen</a>
           </div>
         </div>
@@ -285,10 +289,5 @@
     renderOverview();
   }
 
-  const mobileToggle = document.getElementById('mpgMobileToggle');
-  const mobilePanel = document.getElementById('mpgMobilePanel');
-  mobileToggle?.addEventListener('click', () => {
-    const open = mobilePanel.classList.toggle('is-open');
-    mobileToggle.setAttribute('aria-expanded', String(open));
-  });
+  window.SharedMobileNav?.bind({ toggleId:'mpgMobileToggle', panelId:'mpgMobilePanel' });
 })();

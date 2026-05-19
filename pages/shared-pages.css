@@ -36,24 +36,27 @@ img{display:block;max-width:100%}
 }
 .topbar{
   position:sticky;
-  top:12px;
-  z-index:30;
+  top:16px;
+  z-index:460;
   display:grid;
   grid-template-columns:auto minmax(0,1fr) auto;
   align-items:center;
   gap:16px;
-  padding:10px;
-  border-radius:28px;
+  width:min(1380px, calc(100% - 40px));
+  margin:0 auto;
+  padding:12px;
+  border-radius:32px;
   background:var(--surface);
   border:1px solid var(--line);
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
-  box-shadow:var(--shadow);
+  box-shadow:0 12px 36px rgba(0,0,0,.34);
+  overflow:visible;
 }
 .brand{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:14px;
   min-width:0;
   padding:9px 18px 9px 9px;
   border-radius:24px;
@@ -63,9 +66,9 @@ img{display:block;max-width:100%}
   min-height:70px;
 }
 .brand-icon{
-  width:64px;
-  height:64px;
-  border-radius:18px;
+  width:74px;
+  height:74px;
+  border-radius:20px;
   overflow:hidden;
   background:
     radial-gradient(circle at 30% 20%, rgba(49,51,55,.92), rgba(23,25,28,.92)),
@@ -126,8 +129,8 @@ img{display:block;max-width:100%}
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  min-height:42px;
-  padding:0 18px;
+  min-height:46px;
+  padding:0 20px;
   border-radius:999px;
   text-decoration:none;
   white-space:nowrap;
@@ -145,12 +148,69 @@ img{display:block;max-width:100%}
 .topbar-actions{
   display:flex;
   align-items:center;
+  justify-content:flex-end;
   gap:10px;
+}
+.topbar-mobile-toggle{
+  display:none;
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  color:var(--ink);
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.topbar-mobile-toggle svg{
+  width:20px;
+  height:20px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+}
+.topbar-mobile-panel{
+  position:absolute;
+  left:0;
+  right:0;
+  top:calc(100% + 10px);
+  padding:10px;
+  border-radius:24px;
+  background:rgba(15,16,19,.96);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  display:none;
+}
+.topbar-mobile-panel.is-open{display:grid;gap:10px}
+.topbar-mobile-panel nav{display:grid;gap:6px}
+.topbar-mobile-panel nav a{
+  min-height:48px;
+  padding:0 16px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  text-decoration:none;
+  color:var(--ink);
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.06);
+  font-size:14px;
+  font-weight:650;
+}
+.topbar-mobile-panel nav a.is-active{
+  background:rgba(255,255,255,.08);
+}
+.topbar-mobile-actions{
+  display:grid;
+  gap:8px;
 }
 .back-link,
 .nav-contact{
-  min-height:48px;
-  padding:0 20px;
+  min-height:50px;
+  padding:0 24px;
   border-radius:999px;
   text-decoration:none;
   display:inline-flex;
@@ -530,7 +590,7 @@ img{display:block;max-width:100%}
 }
 
 @media(max-width:980px){
-  .topbar{grid-template-columns:1fr;justify-items:stretch}
+  .topbar{width:min(calc(100% - 18px), 1380px);grid-template-columns:1fr;justify-items:stretch}
   .topbar-center,
   .topbar-actions{justify-content:flex-start}
   .content-grid,
@@ -549,16 +609,16 @@ img{display:block;max-width:100%}
     opacity:.07;
   }
   .content-card,.side-card,.contact-panel,.contact-form-panel{padding:24px 20px;border-radius:24px}
-  .topbar{padding:8px;gap:10px}
-  .topbar-center{display:none}
-  .topbar-actions{width:100%;justify-content:space-between;flex-wrap:wrap}
+  .topbar{width:min(calc(100% - 12px), 1380px);padding:8px;gap:10px;grid-template-columns:minmax(0,1fr) auto}
+  .topbar-center,
+  .topbar-actions{display:none}
+  .topbar-mobile-toggle{display:flex}
   .brand{min-height:62px}
-  .brand-icon{width:56px;height:56px}
+  .brand-icon{width:58px;height:58px;border-radius:16px}
   .brand-name{font-size:18px}
   .brand-tagline{font-size:11px}
   .topbar-nav{padding:4px}
   .topbar-nav a{min-height:38px;padding:0 14px;font-size:13px}
-  .back-link,.nav-contact{flex:1}
   .section-title,.side-title,.form-title{font-size:24px}
   .form-grid{grid-template-columns:1fr}
   .form-actions{flex-direction:column;align-items:stretch}

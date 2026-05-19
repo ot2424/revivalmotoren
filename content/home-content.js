@@ -74,7 +74,7 @@ Object.assign(window.siteContent, {
   whyMosaic: [
     { src: 'assets/images/projects/img-block.jpg', alt: 'Motorblock Detail', speed: 10 },
     { src: 'assets/images/projects/Motor.jpg', alt: 'Werkstattmotor', speed: 14 },
-    { src: 'assets/images/projects/Motor1.jpg', alt: 'Leistungsaggregat', speed: 12 },
+    { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter Mosaikbild', speed: 12 },
     { src: 'assets/images/projects/Motorblock.jpg', alt: 'Motorraum Detail', speed: 16 }
   ],
   services: [
@@ -118,9 +118,9 @@ Object.assign(window.siteContent, {
   caseGallery: [
     { src: 'assets/images/projects/projekte/img-block.jpg', alt: 'Zylinderkopf', tag: 'Zylinderkopf', name: 'Druckprüfung & Planen', speed: 14 },
     { src: 'assets/images/projects/projekte/Motorblock.jpg', alt: 'Motorblock fertig', tag: 'Motorblock', name: 'OEM-Instandsetzung', speed: 12 },
-    { src: 'assets/images/projects/projekte/Motor.jpg', alt: 'BMW R4', tag: 'BMW · R4', name: 'Reihenmotor', speed: 16 },
-    { src: 'assets/images/projects/projekte/Motor1.jpg', alt: 'Maserati V6', tag: 'Maserati · V6', name: 'V-Motor', speed: 10 },
-    { src: 'assets/images/projects/Motor1.jpg', alt: 'Mercedes V12', tag: 'Mercedes · V12', name: 'Oberklasse', speed: 18 }
+    { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter BMW R4 Reihenmotor', tag: 'BMW · R4', name: 'Reihenmotor', speed: 16 },
+    { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter Maserati V6 V-Motor', tag: 'Maserati · V6', name: 'V-Motor', speed: 10 },
+    { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter Mercedes V12 Oberklasse', tag: 'Mercedes · V12', name: 'Oberklasse', speed: 18 }
   ],
   workshopCards: [
     { src: 'assets/images/projects/motor-honen.jpg', alt: 'Zylinder Honen', title: 'Zylinder-Honen', sub: 'Präzise Bearbeitung der Zylinderlaufbahnen für optimale Kompression und lange Lebensdauer.', speed: 14 },

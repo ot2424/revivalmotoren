@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./shared-pages.css">
+<link rel="stylesheet" href="../assets/ui/mobile-nav.css">
 </head>
 <body>
   <div class="page">
@@ -29,8 +30,21 @@
         </ul>
       </div>
       <div class="topbar-actions">
-        <a class="back-link" href="../index.html">Zur Startseite</a>
         <a class="nav-contact" href="kontakt.html">Angebot anfragen</a>
+      </div>
+      <button class="topbar-mobile-toggle mnav-toggle" id="topbarMobileToggle" type="button" aria-label="Menü öffnen" aria-expanded="false"></button>
+      <div class="topbar-mobile-panel" id="topbarMobilePanel">
+        <nav>
+          <a href="../index.html">Startseite</a>
+          <a href="../index.html#leistungen">Leistungen</a>
+          <a href="projekte.html">Referenzen</a>
+          <a href="motoren.html">Motoren</a>
+          <a href="ueber-uns.html">Über uns</a>
+          <a href="kontakt.html" class="is-active">Kontakt</a>
+        </nav>
+        <div class="topbar-mobile-actions">
+          <a class="nav-contact" href="kontakt.html">Angebot anfragen</a>
+        </div>
       </div>
     </header>
 
@@ -126,6 +140,7 @@
   <script src="../content/site-core.js"></script>
   <script src="../content/contact-content.js"></script>
   <script src="../content/pages-content.js"></script>
+  <script src="../assets/ui/mobile-nav.js"></script>
   <script>
     const site = window.siteContent || {};
     const pageContent = (window.sitePagesContent && window.sitePagesContent.contactPage) || {};
@@ -187,6 +202,7 @@
     document.getElementById('privacy').addEventListener('change', () => {
       privacyWrap.classList.toggle('is-invalid', !document.getElementById('privacy').checked);
     });
+    window.SharedMobileNav?.bind({ toggleId:'topbarMobileToggle', panelId:'topbarMobilePanel' });
   </script>
 </body>
 </html>

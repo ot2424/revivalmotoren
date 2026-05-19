@@ -33,16 +33,16 @@ img{display:block;max-width:100%}
 
 .mpg-nav{
   position:sticky;
-  top:14px;
-  z-index:40;
-  width:min(calc(100% - 24px), calc(var(--max) + 32px));
+  top:16px;
+  z-index:460;
+  width:min(1380px, calc(100% - 40px));
   margin:0 auto 24px;
   padding:12px;
   border:1px solid var(--line);
-  border-radius:34px;
-  background:rgba(13,15,18,.82);
+  border-radius:32px;
+  background:rgba(18,19,21,.86);
   backdrop-filter:blur(18px);
-  box-shadow:var(--shadow);
+  box-shadow:0 12px 36px rgba(0,0,0,.34);
 }
 
 .mpg-nav-layout{
@@ -55,24 +55,33 @@ img{display:block;max-width:100%}
 .mpg-brand{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:14px;
   min-width:0;
-  padding:8px 16px 8px 8px;
+  padding:9px 18px 9px 9px;
   border-radius:24px;
   background:rgba(255,255,255,.04);
   border:1px solid var(--line);
+  min-height:70px;
 }
 
 .mpg-brand-icon{
-  width:58px;height:58px;border-radius:18px;
+  width:74px;height:74px;border-radius:20px;
   display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
   background:linear-gradient(180deg,#1b2027,#111418);
   border:1px solid var(--line);
   box-shadow:0 12px 28px rgba(0,0,0,.18);
   flex-shrink:0;
 }
 
-.mpg-brand-icon img{width:80%;height:80%;object-fit:contain}
+.mpg-brand-icon img{
+  width:112%;
+  height:112%;
+  object-fit:cover;
+  object-position:center 44%;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.22));
+  transform:translateY(10%) scale(1.4);
+}
 .mpg-brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
 .mpg-brand-name{font-size:20px;font-weight:800;line-height:1;letter-spacing:-.045em}
 .mpg-brand-tag{font-size:12px;font-weight:650;color:var(--muted);line-height:1.1}
@@ -85,7 +94,7 @@ img{display:block;max-width:100%}
 }
 .mpg-nav-list a{
   display:inline-flex;align-items:center;justify-content:center;
-  min-height:46px;padding:0 18px;border-radius:999px;
+  min-height:46px;padding:0 20px;border-radius:999px;
   color:var(--muted);font-size:14px;font-weight:650;white-space:nowrap;
   transition:background .2s ease,color .2s ease,transform .2s ease;
 }
@@ -95,12 +104,18 @@ img{display:block;max-width:100%}
 
 .mpg-nav-actions{display:flex;align-items:center;gap:10px}
 .mpg-action,
+.mpg-action-wa,
 .mpg-action-solid{
-  min-height:50px;padding:0 20px;border-radius:999px;font-size:14px;font-weight:750;
+  min-height:50px;padding:0 24px;border-radius:999px;font-size:14px;font-weight:750;
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   border:1px solid var(--line);
 }
 .mpg-action{background:rgba(255,255,255,.04);color:var(--text)}
+.mpg-action-wa{
+  background:rgba(37,211,102,.12);
+  color:#f3f1ec;
+  border-color:rgba(37,211,102,.24);
+}
 .mpg-action-solid{background:#f3f1ec;color:#0f1114;border-color:transparent}
 
 .mpg-mobile-toggle{
@@ -108,7 +123,6 @@ img{display:block;max-width:100%}
   width:48px;height:48px;border-radius:16px;
   border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);
 }
-.mpg-mobile-toggle svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
 .mpg-mobile-panel{display:none}
 
 .mpg-hero{
@@ -251,9 +265,10 @@ img{display:block;max-width:100%}
 .mpg-footer-copy{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted-2);font-size:13px}
 
 @media(max-width:1180px){
+  .mpg-nav{width:min(calc(100% - 18px), 1380px)}
   .mpg-nav-layout{grid-template-columns:auto minmax(0,1fr) auto}
   .mpg-nav-center,.mpg-nav-actions{display:none}
-  .mpg-mobile-toggle{display:grid;place-items:center;margin-left:auto}
+  .mpg-mobile-toggle{display:flex;margin-left:auto}
   .mpg-mobile-panel{
     position:absolute;left:12px;right:12px;top:calc(100% + 10px);
     padding:14px;border-radius:24px;border:1px solid var(--line);background:rgba(13,15,18,.96);
@@ -272,9 +287,9 @@ img{display:block;max-width:100%}
 @media(max-width:760px){
   .mpg-shell{width:min(calc(100% - 16px), var(--max))}
   .mpg-page{padding-top:8px}
-  .mpg-nav{top:8px;width:min(calc(100% - 16px), calc(var(--max) + 32px));padding:10px}
+  .mpg-nav{top:8px;width:min(calc(100% - 12px), 1380px);padding:8px}
   .mpg-brand{padding:6px 10px 6px 6px;border-radius:18px;gap:8px}
-  .mpg-brand-icon{width:46px;height:46px;border-radius:14px}
+  .mpg-brand-icon{width:58px;height:58px;border-radius:16px}
   .mpg-brand-name{font-size:16px}
   .mpg-brand-tag{font-size:9px}
   .mpg-hero,.mpg-hero-copy{min-height:620px}
