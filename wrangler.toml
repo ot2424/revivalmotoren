@@ -1,4 +1,5 @@
-name = "teuto-motoren"
+# wrangler.toml
+name = 'teutomotoren-page'
 compatibility_date = "2026-05-23"
 pages_build_output_dir = "."
 
