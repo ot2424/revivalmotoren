@@ -7,7 +7,7 @@ Object.assign(window.siteContent, {
     responseHint: 'Antwort innerhalb 24 Stunden',
     formTitle: 'Ihre Anfrage',
     uploadLabel: 'Dateien hochladen',
-    uploadHint: 'Optional: Fahrzeugschein, Schadensbilder oder Fotos vom Motor als JPG, PNG, WEBP oder PDF.',
+    uploadHint: 'Optional: Fahrzeugschein, Schadensbilder oder Fotos vom Motor als JPG, PNG, WEBP oder PDF. Maximal 4 Dateien, 3,5 MB pro Datei und 14 MB insgesamt.',
     submitLabel: 'Angebot anfragen →',
     note: 'Kostenlos & unverbindlich · Keine Datenweitergabe',
     successTitle: 'Anfrage gesendet!',

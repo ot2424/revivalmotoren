@@ -498,6 +498,11 @@ img{display:block;max-width:100%}
   border-color:rgba(255,255,255,.24);
   box-shadow:0 0 0 4px rgba(255,255,255,.04);
 }
+.form-upload.is-invalid{
+  border-color:rgba(216,111,111,.72);
+  background:rgba(216,111,111,.08);
+  box-shadow:0 0 0 4px rgba(216,111,111,.08);
+}
 .form-upload-input{
   position:absolute;
   width:1px;
@@ -527,10 +532,25 @@ img{display:block;max-width:100%}
   font-size:13px;
   line-height:1.65;
 }
+.form-upload-copy.is-error{
+  color:#ffb0b0;
+}
 .form-upload-meta{
   color:var(--text);
   font-size:12px;
   line-height:1.5;
+}
+.form-upload-meta.is-error{
+  color:#ffb0b0;
+}
+.form-upload-error{
+  display:none;
+  font-size:12px;
+  line-height:1.5;
+  color:#ffb0b0;
+}
+.form-upload-error.is-visible{
+  display:block;
 }
 .form-check{
   display:flex;

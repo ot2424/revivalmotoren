@@ -1,4 +1,4 @@
-export async function sendContactMail({ config, to, replyTo, subject, html, text }) {
+export async function sendContactMail({ config, to, replyTo, subject, html, text, attachments = [] }) {
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
@@ -11,7 +11,8 @@ export async function sendContactMail({ config, to, replyTo, subject, html, text
       reply_to: replyTo || config.mailReplyFallback,
       subject,
       html,
-      text
+      text,
+      attachments
     })
   });
 

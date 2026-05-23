@@ -1,5 +1,4 @@
 import { getContactConfig, getRouteRecipients } from '../_lib/contact-config.js';
-import { signDownloadToken } from '../_lib/contact-security.js';
 import { sendContactMail } from '../_lib/contact-mail.js';
 
 const jsonHeaders = {
@@ -21,17 +20,11 @@ export async function onRequestPost(context) {
     const files = formData.getAll('attachments').filter(item => item instanceof File && item.size > 0);
     validateFiles(files, config);
 
-    const uploadResults = await uploadFiles({
-      files,
-      bucket: context.env.CONTACT_UPLOADS,
-      request: context.request,
-      secret: config.downloadTokenSecret,
-      ttlSeconds: config.uploadLinkTtlSeconds
-    });
+    const attachments = await buildMailAttachments(files, config);
 
     const recipients = getRouteRecipients(config, payload.route);
     const subject = buildSubject(payload);
-    const { html, text } = buildMailContent(payload, uploadResults);
+    const { html, text } = buildMailContent(payload, attachments);
 
     await sendContactMail({
       config,
@@ -39,7 +32,12 @@ export async function onRequestPost(context) {
       replyTo: payload.email,
       subject,
       html,
-      text
+      text,
+      attachments: attachments.map(file => ({
+        filename: file.name,
+        content: file.content,
+        content_type: file.type
+      }))
     });
 
     return json({
@@ -87,7 +85,7 @@ function validateFiles(files, config) {
   for (const file of files) {
     totalSize += file.size;
     if (file.size > config.uploadMaxFileSizeBytes) {
-      throw badRequest(`Die Datei „${file.name}“ ist größer als ${Math.round(config.uploadMaxFileSizeBytes / 1024 / 1024)} MB.`);
+      throw badRequest(`Die Datei „${file.name}“ ist größer als ${formatMegabytes(config.uploadMaxFileSizeBytes)} MB.`);
     }
     const type = resolveFileType(file);
     if (!config.uploadAllowedTypes.includes(type)) {
@@ -96,7 +94,7 @@ function validateFiles(files, config) {
   }
 
   if (totalSize > config.uploadMaxTotalSizeBytes) {
-    throw badRequest(`Die Gesamtgröße der Dateien darf ${Math.round(config.uploadMaxTotalSizeBytes / 1024 / 1024)} MB nicht überschreiten.`);
+    throw badRequest(`Die Gesamtgröße der Dateien darf ${formatMegabytes(config.uploadMaxTotalSizeBytes)} MB nicht überschreiten.`);
   }
 }
 
@@ -113,44 +111,34 @@ function resolveFileType(file) {
   return explicitType;
 }
 
-async function uploadFiles({ files, bucket, request, secret, ttlSeconds }) {
-  if (!bucket) throw new Error('Missing R2 binding CONTACT_UPLOADS');
+async function buildMailAttachments(files, config) {
   if (!files.length) return [];
+  if (files.length > config.attachmentMaxFiles) {
+    throw badRequest(`Per E-Mail werden maximal ${config.attachmentMaxFiles} Anhänge unterstützt.`);
+  }
 
-  const origin = new URL(request.url).origin;
-  const now = Date.now();
-  const results = [];
+  let totalSize = 0;
+  const attachments = [];
 
   for (const file of files) {
+    totalSize += file.size;
+    if (file.size > config.attachmentMaxFileSizeBytes) {
+      throw badRequest(`Die Datei „${file.name}“ ist größer als ${formatMegabytes(config.attachmentMaxFileSizeBytes)} MB und kann nicht als Anhang versendet werden.`);
+    }
+    if (totalSize > config.attachmentMaxTotalSizeBytes) {
+      throw badRequest(`Die Gesamtgröße aller Anhänge darf ${formatMegabytes(config.attachmentMaxTotalSizeBytes)} MB nicht überschreiten.`);
+    }
     const safeName = sanitizeFilename(file.name || 'upload');
-    const key = `contact-uploads/${new Date(now).toISOString().slice(0, 10)}/${crypto.randomUUID()}-${safeName}`;
-    await bucket.put(key, await file.arrayBuffer(), {
-      httpMetadata: {
-        contentType: file.type || 'application/octet-stream',
-        contentDisposition: `inline; filename="${safeName}"`
-      },
-      customMetadata: {
-        originalName: safeName,
-        uploadedAt: String(now)
-      }
-    });
-
-    const token = await signDownloadToken({
-      key,
-      name: safeName,
-      type: file.type || 'application/octet-stream',
-      exp: now + ttlSeconds * 1000
-    }, secret);
-
-    results.push({
+    const arrayBuffer = await file.arrayBuffer();
+    attachments.push({
       name: safeName,
       type: file.type || 'application/octet-stream',
       size: file.size,
-      url: `${origin}/api/uploads?token=${encodeURIComponent(token)}`
+      content: arrayBufferToBase64(arrayBuffer)
     });
   }
 
-  return results;
+  return attachments;
 }
 
 function buildSubject(payload) {
@@ -158,7 +146,7 @@ function buildSubject(payload) {
   return `Neue Anfrage – ${descriptor}`;
 }
 
-function buildMailContent(payload, uploads) {
+function buildMailContent(payload, attachments) {
   const fields = [
     ['Name', payload.name],
     ['E-Mail', payload.email],
@@ -168,8 +156,8 @@ function buildMailContent(payload, uploads) {
     ['HSN/TSN', payload.hsnTsn || '—']
   ];
 
-  const uploadHtml = uploads.length
-    ? `<h3 style="margin:24px 0 10px;font-size:16px;">Hochgeladene Dateien</h3><ul style="padding-left:18px;margin:0;">${uploads.map(file => `<li style="margin:0 0 8px;"><a href="${escapeHtml(file.url)}">${escapeHtml(file.name)}</a> <span style="color:#888;">(${formatBytes(file.size)})</span></li>`).join('')}</ul>`
+  const uploadHtml = attachments.length
+    ? `<h3 style="margin:24px 0 10px;font-size:16px;">Dateianhänge</h3><ul style="padding-left:18px;margin:0;">${attachments.map(file => `<li style="margin:0 0 8px;">${escapeHtml(file.name)} <span style="color:#888;">(${formatBytes(file.size)})</span></li>`).join('')}</ul><p style="margin:14px 0 0;color:#666;">Die Dateien wurden dieser E-Mail direkt als Anhang beigefügt.</p>`
     : '<p style="margin:20px 0 0;color:#888;">Keine Dateien hochgeladen.</p>';
 
   const html = `
@@ -199,8 +187,8 @@ function buildMailContent(payload, uploads) {
     'Problembeschreibung:',
     payload.problem,
     '',
-    uploads.length
-      ? `Dateien:\n${uploads.map(file => `- ${file.name} (${formatBytes(file.size)}): ${file.url}`).join('\n')}`
+    attachments.length
+      ? `Dateien:\n${attachments.map(file => `- ${file.name} (${formatBytes(file.size)})`).join('\n')}\n\nDie Dateien sind als Anhang beigefügt.`
       : 'Dateien: Keine'
   ].join('\n');
 
@@ -219,6 +207,20 @@ function formatBytes(bytes) {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function formatMegabytes(bytes) {
+  return (bytes / (1024 * 1024)).toFixed(1).replace(/\.0$/, '');
+}
+
+function arrayBufferToBase64(buffer) {
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  const chunkSize = 0x8000;
+  for (let index = 0; index < bytes.length; index += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(index, index + chunkSize));
+  }
+  return btoa(binary);
 }
 
 function escapeHtml(value) {

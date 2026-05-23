@@ -106,8 +106,9 @@
               <label class="form-upload" for="attachments">
                 <input class="form-upload-input" id="attachments" name="attachments" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf,.heic,.heif" multiple>
                 <span class="form-upload-cta">Dateien auswählen</span>
-                <span class="form-upload-copy" id="uploadHint">Optional: Fahrzeugschein, Schadensbilder oder Fotos vom Motor als JPG, PNG, WEBP oder PDF.</span>
+                <span class="form-upload-copy" id="uploadHint">Optional: Fahrzeugschein, Schadensbilder oder Fotos vom Motor als JPG, PNG, WEBP oder PDF. Maximal 4 Dateien, 3,5 MB pro Datei und 14 MB insgesamt.</span>
                 <span class="form-upload-meta" id="uploadMeta">Noch keine Dateien ausgewählt</span>
+                <span class="form-upload-error" id="uploadError"></span>
               </label>
             </div>
             <div class="form-field is-full">
@@ -235,20 +236,92 @@
     const success = document.getElementById('formSuccess');
     const privacyWrap = document.getElementById('privacyCheckWrap');
     const attachments = document.getElementById('attachments');
+    const uploadWrap = document.querySelector('.form-upload');
+    const uploadHint = document.getElementById('uploadHint');
     const uploadMeta = document.getElementById('uploadMeta');
+    const uploadError = document.getElementById('uploadError');
     const formStatus = document.getElementById('formStatus');
     const submitButton = document.getElementById('submitLabel');
-    attachments.addEventListener('change', () => {
+    const uploadRules = {
+      maxFiles: 4,
+      maxFileSizeBytes: 3.5 * 1024 * 1024,
+      maxTotalSizeBytes: 14 * 1024 * 1024,
+      allowedTypes: ['image/jpeg','image/png','image/webp','application/pdf','image/heic','image/heif']
+    };
+    const defaultUploadMeta = 'Noch keine Dateien ausgewählt';
+    const defaultUploadHint = contactSection.uploadHint || 'Optional: Fahrzeugschein, Schadensbilder oder Fotos vom Motor als JPG, PNG, WEBP oder PDF. Maximal 4 Dateien, 3,5 MB pro Datei und 14 MB insgesamt.';
+    function formatBytes(bytes){
+      if(bytes < 1024) return `${bytes} B`;
+      if(bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+      return `${(bytes / (1024 * 1024)).toFixed(1).replace(/\\.0$/, '')} MB`;
+    }
+    function resolveFileType(file){
+      const explicitType = (file.type || '').toLowerCase();
+      if(explicitType) return explicitType;
+      const name = String(file.name || '').toLowerCase();
+      if(name.endsWith('.jpg') || name.endsWith('.jpeg')) return 'image/jpeg';
+      if(name.endsWith('.png')) return 'image/png';
+      if(name.endsWith('.webp')) return 'image/webp';
+      if(name.endsWith('.pdf')) return 'application/pdf';
+      if(name.endsWith('.heic')) return 'image/heic';
+      if(name.endsWith('.heif')) return 'image/heif';
+      return explicitType;
+    }
+    function setUploadError(message){
+      uploadWrap.classList.add('is-invalid');
+      uploadHint.classList.add('is-error');
+      uploadMeta.classList.add('is-error');
+      uploadError.classList.add('is-visible');
+      uploadError.textContent = message;
+    }
+    function clearUploadError(){
+      uploadWrap.classList.remove('is-invalid');
+      uploadHint.classList.remove('is-error');
+      uploadMeta.classList.remove('is-error');
+      uploadError.classList.remove('is-visible');
+      uploadError.textContent = '';
+    }
+    function validateAttachments(){
       const files = Array.from(attachments.files || []);
       if(!files.length){
-        uploadMeta.textContent = 'Noch keine Dateien ausgewählt';
-        return;
+        clearUploadError();
+        uploadMeta.textContent = defaultUploadMeta;
+        return { valid:true, files };
       }
+      if(files.length > uploadRules.maxFiles){
+        setUploadError(`Bitte laden Sie maximal ${uploadRules.maxFiles} Dateien hoch.`);
+        uploadMeta.textContent = `${files.length} Dateien ausgewählt`;
+        return { valid:false, files };
+      }
+      let totalSize = 0;
+      for (const file of files) {
+        totalSize += file.size;
+        if(file.size > uploadRules.maxFileSizeBytes){
+          setUploadError(`„${file.name}“ ist größer als 3,5 MB.`);
+          uploadMeta.textContent = `${files.length} Dateien ausgewählt`;
+          return { valid:false, files };
+        }
+        if(!uploadRules.allowedTypes.includes(resolveFileType(file))){
+          setUploadError(`Der Dateityp von „${file.name}“ wird nicht unterstützt.`);
+          uploadMeta.textContent = `${files.length} Dateien ausgewählt`;
+          return { valid:false, files };
+        }
+      }
+      if(totalSize > uploadRules.maxTotalSizeBytes){
+        setUploadError(`Die Gesamtgröße aller Dateien darf 14 MB nicht überschreiten. Aktuell: ${formatBytes(totalSize)}.`);
+        uploadMeta.textContent = `${files.length} Dateien ausgewählt`;
+        return { valid:false, files };
+      }
+      clearUploadError();
       if(files.length === 1){
-        uploadMeta.textContent = files[0].name;
-        return;
+        uploadMeta.textContent = `${files[0].name} · ${formatBytes(files[0].size)}`;
+      } else {
+        uploadMeta.textContent = `${files.length} Dateien ausgewählt · ${formatBytes(totalSize)} gesamt`;
       }
-      uploadMeta.textContent = `${files.length} Dateien ausgewählt`;
+      return { valid:true, files };
+    }
+    attachments.addEventListener('change', () => {
+      validateAttachments();
     });
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -258,6 +331,12 @@
       formStatus.textContent = '';
       if(!form.checkValidity()){
         form.reportValidity();
+        return;
+      }
+      const uploadValidation = validateAttachments();
+      if(!uploadValidation.valid){
+        formStatus.className = 'form-status is-visible is-error';
+        formStatus.textContent = 'Bitte korrigieren Sie die Datei-Auswahl.';
         return;
       }
       submitButton.disabled = true;
@@ -275,7 +354,9 @@
           throw new Error(result.message || 'Die Anfrage konnte nicht versendet werden.');
         }
         form.reset();
-        uploadMeta.textContent = 'Noch keine Dateien ausgewählt';
+        clearUploadError();
+        uploadHint.textContent = defaultUploadHint;
+        uploadMeta.textContent = defaultUploadMeta;
         formStatus.className = 'form-status';
         formStatus.textContent = '';
         form.style.display = 'none';
