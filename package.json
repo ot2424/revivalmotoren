@@ -1,0 +1,12 @@
+{
+  "name": "teuto-motoren-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "cf:dev": "wrangler pages dev .",
+    "cf:deploy": "wrangler pages deploy ."
+  },
+  "devDependencies": {
+    "wrangler": "^4.20.0"
+  }
+}

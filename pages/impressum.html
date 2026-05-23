@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum – Teuto Motoren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared-pages.css">
+<link rel="stylesheet" href="../assets/ui/mobile-nav.css">
+<link rel="stylesheet" href="../assets/ui/scroll-top.css">
+<link rel="stylesheet" href="../assets/ui/consent-banner.css">
+<link rel="stylesheet" href="../assets/ui/shared-footer.css">
+<link rel="stylesheet" href="../assets/ui/floating-contact.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:
+    radial-gradient(circle at top left, rgba(198,163,109,.12), transparent 26%),
+    radial-gradient(circle at 85% 18%, rgba(99,117,150,.10), transparent 24%),
+    linear-gradient(180deg,#0e0f11 0%,#131416 52%,#111214 100%);
+  --surface:rgba(18,19,21,.86);
+  --surface-solid:#14161a;
+  --ink:#f2eee7;
+  --text:rgba(228,222,212,.78);
+  --muted:rgba(200,194,184,.66);
+  --line:rgba(255,255,255,.08);
+  --shadow:0 22px 60px rgba(0,0,0,.28);
+  --hero:#0d0e10;
+  --hero-text:#f6f2eb;
+  --hero-soft:rgba(244,239,231,.74);
+  --btn:#f3efe7;
+  --btn-text:#111214;
+}
+body{
+  font-family:'Geist',system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.72;
+}
+::selection{background:var(--ink);color:#111214}
+a{color:inherit}
+.page{
+  width:calc(100% - 24px);
+  margin:0 auto;
+  padding:16px 0 56px;
+}
+.topbar{
+  position:sticky;
+  top:12px;
+  z-index:30;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:16px;
+  padding:10px;
+  border-radius:28px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:var(--shadow);
+  overflow:visible;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+  padding:9px 18px 9px 9px;
+  border-radius:24px;
+  text-decoration:none;
+  background:linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.02) 100%);
+  border:1px solid rgba(255,255,255,.06);
+  min-height:70px;
+}
+.brand-icon{
+  width:64px;
+  height:64px;
+  border-radius:18px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(49,51,55,.92), rgba(23,25,28,.92)),
+    linear-gradient(180deg,#1c1f23 0%,#121417 100%);
+  border:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 12px 28px rgba(0,0,0,.14);
+}
+.brand-icon img{
+  width:112%;
+  height:112%;
+  object-fit:cover;
+  object-position:center 44%;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.22));
+  transform:translateY(10%) scale(1.4);
+}
+.brand-copy{min-width:0}
+.brand-name{
+  display:block;
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:-.045em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.brand-tagline{
+  display:block;
+  font-size:12px;
+  font-weight:650;
+  color:var(--muted);
+  line-height:1.1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.topbar-center{
+  min-width:0;
+  display:flex;
+  justify-content:center;
+}
+.topbar-nav{
+  display:flex;
+  list-style:none;
+  gap:4px;
+  align-items:center;
+  padding:6px;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.02) 100%);
+  border:1px solid rgba(255,255,255,.06);
+  max-width:100%;
+  overflow:auto;
+}
+.topbar-nav a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:0 18px;
+  border-radius:999px;
+  text-decoration:none;
+  white-space:nowrap;
+  color:var(--muted);
+  font-size:14px;
+  font-weight:650;
+  transition:background .2s ease,color .2s ease,transform .2s ease;
+}
+.topbar-nav a:hover{
+  color:var(--ink);
+  background:rgba(255,255,255,.08);
+  transform:translateY(-1px);
+}
+.topbar-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.topbar-mobile-toggle{display:none;width:46px;height:46px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--ink);align-items:center;justify-content:center;cursor:pointer}
+.topbar-mobile-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
+.topbar-mobile-panel{position:absolute;left:0;right:0;top:calc(100% + 10px);padding:10px;border-radius:24px;background:rgba(15,16,19,.96);border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:none}
+.topbar-mobile-panel.is-open{display:grid;gap:10px}
+.topbar-mobile-panel nav{display:grid;gap:6px}
+.topbar-mobile-panel nav a{min-height:48px;padding:0 16px;border-radius:16px;display:flex;align-items:center;text-decoration:none;color:var(--ink);background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);font-size:14px;font-weight:650}
+.topbar-mobile-actions{display:grid;gap:8px}
+.back-link,
+.nav-contact{
+  min-height:48px;
+  padding:0 20px;
+  border-radius:999px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  font-weight:750;
+  letter-spacing:-.02em;
+}
+.back-link{
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  color:var(--ink);
+}
+.nav-contact{
+  background:var(--btn);
+  color:var(--btn-text);
+}
+.hero{
+  margin-top:18px;
+  padding:34px;
+  border-radius:34px;
+  background:linear-gradient(180deg, rgba(17,18,20,.98) 0%, rgba(12,13,15,.98) 100%);
+  border:1px solid rgba(255,255,255,.06);
+  color:var(--hero-text);
+  box-shadow:var(--shadow);
+}
+.eyebrow{
+  display:inline-flex;
+  margin-bottom:14px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(200,194,184,.58);
+}
+.hero h1{
+  font-size:clamp(34px,6vw,72px);
+  line-height:.95;
+  letter-spacing:-.06em;
+  max-width:900px;
+  margin-bottom:16px;
+}
+.hero p{
+  max-width:760px;
+  font-size:16px;
+  line-height:1.82;
+  color:var(--hero-soft);
+}
+.content-card{
+  margin-top:18px;
+  border-radius:30px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  padding:32px 28px;
+}
+.content-card h2{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-.03em;
+  margin:26px 0 10px;
+}
+.content-card h2:first-child{margin-top:0}
+.content-card p,
+.content-card li{
+  font-size:14px;
+  color:var(--text);
+}
+.content-card ul{padding-left:18px}
+.note{
+  margin-top:24px;
+  padding:16px 18px;
+  border-radius:18px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  color:var(--muted);
+  font-size:13px;
+}
+@media(max-width:980px){
+  .topbar{
+    grid-template-columns:1fr;
+    justify-items:stretch;
+  }
+  .topbar-center,
+  .topbar-actions{justify-content:flex-start}
+}
+@media(max-width:768px){
+  .page{width:calc(100% - 12px);padding:12px 0 44px}
+  .hero{padding:24px}
+  .content-card{padding:24px 20px}
+  .topbar{padding:8px;grid-template-columns:minmax(0,1fr) auto}
+  .topbar-center,.topbar-actions{display:none}
+  .topbar-mobile-toggle{display:flex}
+  .brand{min-height:62px}
+  .brand-icon{width:56px;height:56px}
+  .brand-name{font-size:18px}
+  .brand-tagline{font-size:11px}
+  .topbar-nav{padding:4px}
+  .topbar-nav a{min-height:38px;padding:0 14px;font-size:13px}
+}
+</style>
+</head>
+<body data-root="..">
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-icon"><img src="../assets/branding/teuto-logo-symbol.png" alt="Teuto Motoren Logo"></span>
+        <span class="brand-copy">
+          <span class="brand-name">Teuto Motoren</span>
+          <span class="brand-tagline">Wir leben Motoren</span>
+        </span>
+      </a>
+      <div class="topbar-center">
+        <ul class="topbar-nav">
+          <li><a href="../index.html#leistungen">Leistungen</a></li>
+          <li><a href="projekte.html">Referenzen</a></li>
+          <li><a href="motoren.html">Motoren</a></li>
+          <li><a href="ueber-uns.html">Über uns</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="topbar-actions">
+        <a class="nav-contact" href="kontakt.html">Angebot anfragen</a>
+      </div>
+      <button class="topbar-mobile-toggle mnav-toggle" id="topbarMobileToggle" type="button" aria-label="Menü öffnen" aria-expanded="false"></button>
+      <div class="topbar-mobile-panel" id="topbarMobilePanel">
+        <nav>
+          <a href="../index.html">Startseite</a>
+          <a href="../index.html#leistungen">Leistungen</a>
+          <a href="projekte.html">Referenzen</a>
+          <a href="motoren.html">Motoren</a>
+          <a href="ueber-uns.html">Über uns</a>
+          <a href="kontakt.html">Kontakt</a>
+        </nav>
+        <div class="topbar-mobile-actions">
+          <a class="nav-contact" href="kontakt.html">Angebot anfragen</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow" id="imprintHeroEyebrow">Rechtliches</span>
+      <h1 id="imprintHeroTitle">Impressum</h1>
+    </section>
+
+    <section class="content-card" id="imprintContent"></section>
+    <div data-shared-footer></div>
+  </div>
+  <script src="../content/site-core.js"></script>
+  <script src="../content/pages-content.js"></script>
+  <script src="../assets/ui/mobile-nav.js"></script>
+  <script src="../assets/ui/scroll-top.js"></script>
+  <script src="../assets/ui/consent-banner.js"></script>
+  <script src="../assets/ui/shared-footer.js"></script>
+  <script src="../assets/ui/floating-contact.js"></script>
+  <script>
+    const imprint = (window.sitePagesContent && window.sitePagesContent.imprintPage) || {};
+    document.getElementById('imprintHeroEyebrow').textContent = imprint.hero?.eyebrow || 'Rechtliches';
+    document.getElementById('imprintHeroTitle').textContent = imprint.hero?.title || 'Impressum';
+    document.getElementById('imprintContent').innerHTML = (imprint.sections || []).map(section => `
+      <h2>${section.title}</h2>
+      ${(section.paragraphs || []).map(paragraph => `<p>${paragraph}</p>`).join('')}
+    `).join('');
+    window.SharedMobileNav?.bind({ toggleId:'topbarMobileToggle', panelId:'topbarMobilePanel' });
+  </script>
+</body>
+</html>

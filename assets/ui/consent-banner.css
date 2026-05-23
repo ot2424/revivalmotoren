@@ -1,0 +1,308 @@
+.consent-overlay{
+  position:fixed;
+  inset:0;
+  z-index:900;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  background:rgba(7,8,10,.54);
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+  padding:0;
+}
+.consent-overlay.is-open{display:flex}
+
+.consent-panel{
+  position:relative;
+  width:min(100%, 1260px);
+  margin:0 auto;
+  border-radius:28px 28px 0 0;
+  border:1px solid rgba(255,255,255,.10);
+  background:linear-gradient(180deg, rgba(20,21,24,.985) 0%, rgba(13,14,17,.985) 100%);
+  color:#f3f1ec;
+  box-shadow:0 28px 80px rgba(0,0,0,.42);
+  overflow:hidden;
+}
+.consent-panel::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:6px;
+  background:linear-gradient(90deg, rgba(243,239,231,.94) 0%, rgba(243,239,231,.74) 48%, rgba(243,239,231,.94) 100%);
+}
+
+.consent-shell{
+  display:grid;
+  gap:0;
+}
+
+.consent-summary{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);
+  gap:26px;
+  align-items:end;
+  padding:34px 34px 28px;
+}
+
+.consent-main{
+  min-width:0;
+}
+
+.consent-eyebrow{
+  display:inline-flex;
+  margin-bottom:12px;
+  font:800 11px/1 'Geist',system-ui,-apple-system,sans-serif;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(219,213,203,.58);
+}
+
+.consent-title{
+  margin:0;
+  font:800 clamp(28px, 3vw, 40px)/.95 'Geist',system-ui,-apple-system,sans-serif;
+  letter-spacing:-.055em;
+}
+
+.consent-text{
+  margin:14px 0 0;
+  max-width:70ch;
+  color:rgba(231,225,215,.78);
+  font-size:15px;
+  line-height:1.78;
+}
+
+.consent-meta{
+  margin:16px 0 0;
+  color:rgba(210,205,197,.54);
+  font-size:12px;
+  line-height:1.6;
+}
+
+.consent-actions{
+  display:grid;
+  gap:10px;
+  align-self:end;
+}
+
+.consent-btn{
+  min-height:54px;
+  padding:0 20px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+  color:#f3f1ec;
+  font:700 15px/1 'Geist',system-ui,-apple-system,sans-serif;
+  cursor:pointer;
+  transition:transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease, opacity .2s ease;
+}
+.consent-btn:hover{transform:translateY(-1px)}
+.consent-btn--primary{
+  background:#f3efe7;
+  color:#111214;
+  border-color:transparent;
+}
+.consent-btn--primary:hover{opacity:.88}
+.consent-btn--ghost{
+  background:transparent;
+  border-color:rgba(255,255,255,.16);
+  color:#f3f1ec;
+}
+.consent-btn--ghost:hover{
+  background:rgba(255,255,255,.05);
+}
+.consent-btn--dark{
+  background:rgba(255,255,255,.06);
+  color:#f3f1ec;
+}
+
+.consent-detail{
+  border-top:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.02);
+  padding:24px 34px 30px;
+}
+
+.consent-points{
+  display:grid;
+  gap:10px;
+  margin-bottom:18px;
+}
+.consent-point{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  color:rgba(231,225,215,.78);
+  font-size:14px;
+  line-height:1.65;
+}
+.consent-point strong{
+  color:#f3f1ec;
+}
+
+.consent-cats{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:12px;
+}
+.consent-cat{
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:16px;
+  background:rgba(255,255,255,.025);
+}
+.consent-cat-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.consent-cat-title{
+  font-size:15px;
+  font-weight:750;
+  color:#f3f1ec;
+}
+.consent-cat-copy{
+  margin-top:8px;
+  color:rgba(220,214,205,.72);
+  font-size:13px;
+  line-height:1.7;
+}
+
+.consent-switch{
+  position:relative;
+  width:54px;
+  height:30px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.10);
+  flex-shrink:0;
+}
+.consent-switch input{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  cursor:pointer;
+}
+.consent-switch span{
+  position:absolute;
+  top:3px;
+  left:3px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:#f3f1ec;
+  transition:transform .22s ease;
+}
+.consent-switch input:checked + span{
+  transform:translateX(24px);
+}
+.consent-switch.is-locked{
+  background:rgba(243,239,231,.16);
+}
+.consent-switch.is-locked span{
+  transform:translateX(24px);
+}
+.consent-switch.is-locked input{
+  cursor:not-allowed;
+}
+
+.consent-detail-actions{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:18px;
+}
+
+@media (max-width: 1100px){
+  .consent-summary{
+    grid-template-columns:1fr;
+    align-items:start;
+  }
+  .consent-actions{
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+  }
+  .consent-cats{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px){
+  .consent-overlay{
+    align-items:flex-end;
+  }
+  .consent-panel{
+    width:100%;
+    border-radius:22px 22px 0 0;
+    max-height:min(88vh, 760px);
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .consent-summary{
+    gap:14px;
+    padding:26px 16px 14px;
+  }
+  .consent-title{
+    font-size:clamp(22px, 7vw, 30px);
+    line-height:.98;
+  }
+  .consent-text{
+    font-size:13px;
+    line-height:1.56;
+  }
+  .consent-meta{
+    margin-top:10px;
+    font-size:11px;
+    line-height:1.5;
+  }
+  .consent-actions{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .consent-btn{
+    min-height:44px;
+    width:100%;
+    border-radius:15px;
+    font-size:13px;
+  }
+  .consent-detail{
+    padding:12px 16px 16px;
+  }
+  .consent-points{
+    display:none;
+  }
+  .consent-cats{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .consent-cat{
+    padding:12px 14px;
+    border-radius:15px;
+  }
+  .consent-cat-title{
+    font-size:13px;
+  }
+  .consent-cat-copy{
+    margin-top:5px;
+    font-size:11px;
+    line-height:1.48;
+  }
+  .consent-switch{
+    width:48px;
+    height:28px;
+  }
+  .consent-switch span{
+    width:20px;
+    height:20px;
+  }
+  .consent-switch input:checked + span,
+  .consent-switch.is-locked span{
+    transform:translateX(20px);
+  }
+  .consent-detail-actions{
+    justify-content:stretch;
+    margin-top:12px;
+  }
+  .consent-detail-actions .consent-btn{
+    width:100%;
+  }
+}

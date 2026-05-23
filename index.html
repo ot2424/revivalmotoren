@@ -1,17 +1,33 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revival Motoren – Vue Bootstrap Alternative</title>
+<title>Teuto Motoren – Professionelle Motorinstandsetzung Bielefeld</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/ui/mobile-nav.css">
+<link rel="stylesheet" href="assets/ui/scroll-top.css">
+<link rel="stylesheet" href="assets/ui/floating-contact.css">
+<link rel="stylesheet" href="assets/ui/consent-banner.css">
+<script>
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+(function () {
+  const navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  const isReload = navEntry && navEntry.type === 'reload';
+  if (isReload && window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+})();
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden;width:100%;max-width:100%}
 img{display:block;max-width:100%}
+[v-cloak]{visibility:hidden}
 
 :root{
   --bg:       #f5f5f3;
@@ -63,6 +79,8 @@ img{display:block;max-width:100%}
   --sans:     'Geist', system-ui, -apple-system, sans-serif;
   --rad:      14px;
   --rad2:     20px;
+  --arc-outer: rgba(33,37,42,.18);
+  --arc-inner: rgba(165,24,28,.20);
 }
 
 html[data-theme="dark"]{
@@ -106,20 +124,57 @@ html[data-theme="dark"]{
   --whatsapp-bg: linear-gradient(180deg,rgba(31,68,49,.72) 0%,rgba(21,48,36,.84) 100%);
   --whatsapp-border: rgba(84,199,127,.22);
   --whatsapp-color: #d6f5df;
-  --mob-bg:
-    radial-gradient(circle at top center, rgba(198,163,109,.10), transparent 34%),
-    linear-gradient(180deg, rgba(13,14,16,.98) 0%, rgba(16,17,19,.98) 100%);
-  --mob-border: rgba(255,255,255,.10);
-  --mob-close-bg: rgba(255,255,255,.06);
-  --mob-close-color: #e4e0d7;
-  --mob-wa-bg: linear-gradient(180deg,rgba(31,68,49,.72) 0%,rgba(21,48,36,.84) 100%);
-  --mob-wa-color: #d6f5df;
+  --mobile-menu-bg:
+    linear-gradient(180deg, rgba(13,14,17,.98) 0%, rgba(16,17,20,.98) 100%);
+  --mobile-menu-border: rgba(255,255,255,.08);
+  --mobile-menu-link: #f3f1ec;
+  --mobile-menu-link-muted: #b7b2a8;
+  --mobile-menu-surface: rgba(255,255,255,.04);
+  --arc-outer: rgba(255,255,255,.10);
+  --arc-inner: rgba(165,24,28,.22);
 }
 
 body{
+  width:100%;
+  max-width:100%;
   font-family:var(--sans);color:var(--ink);overflow-x:hidden;
   background:var(--page-bg);
   transition:background .35s ease,color .25s ease;
+}
+#app{
+  width:100%;
+  max-width:100%;
+  overflow-x:clip;
+  position:relative;
+  isolation:isolate;
+}
+#app > *{
+  position:relative;
+  z-index:1;
+}
+#app::before,
+#app::after{
+  content:'';
+  position:absolute;
+  border-radius:50%;
+  clip-path:inset(0 0 50% 0);
+  pointer-events:none;
+  z-index:0;
+  opacity:.92;
+}
+#app::before{
+  width:min(860px, 64vw);
+  aspect-ratio:1 / 1;
+  right:min(-18vw, -160px);
+  top:1560px;
+  border:2px solid rgba(255,255,255,.10);
+}
+#app::after{
+  width:min(740px, 56vw);
+  aspect-ratio:1 / 1;
+  left:min(-16vw, -132px);
+  top:3200px;
+  border:2px solid rgba(165,24,28,.22);
 }
 ::selection{background:var(--ink);color:#fff}
 html::-webkit-scrollbar{width:3px}
@@ -127,11 +182,9 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 
 /* ── NAV ─────────────────────────────── */
 #nav{
-  position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:400;
-  width:min(1360px, calc(100% - 40px));
-  min-height:88px;
-  display:flex;align-items:center;
-  padding:12px 16px 12px 14px;gap:14px;
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:460;
+  width:min(1380px, calc(100% - 40px));
+  padding:12px;
   background:var(--nav-bg);
   backdrop-filter:blur(20px);
   border:1px solid var(--rule);
@@ -149,7 +202,7 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   will-change:transform,opacity;
 }
 #nav.is-hidden{
-  transform:translateX(-50%) translateY(-132%);
+  transform:translateX(-50%) translateY(calc(-100% - 28px));
   opacity:0;
   pointer-events:none;
 }
@@ -160,15 +213,22 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   border-radius:28px;
   box-shadow:0 10px 24px rgba(0,0,0,.12);
 }
-#nav.is-compact .nav-brand{min-width:248px;padding:6px 8px 6px 6px;border-radius:20px}
-#nav.is-compact .brand-icon{width:54px;height:54px;border-radius:16px}
+#nav.is-compact .nav-layout{gap:12px}
+#nav.is-compact .nav-brand{padding:8px 16px 8px 8px}
+#nav.is-compact .brand-icon{width:60px;height:60px;border-radius:18px}
 #nav.is-compact .brand-name{font-size:18px}
 #nav.is-compact .brand-tagline{font-size:11px}
-#nav.is-compact .navl{padding:4px}
-#nav.is-compact .navl a{padding:10px 15px;font-size:13px;white-space:nowrap;line-height:1.1}
-#nav.is-compact .theme-toggle,#nav.is-compact .nav-tel{width:42px;height:42px}
-#nav.is-compact .nav-whatsapp{min-height:42px;padding:10px 16px;font-size:13px}
-#nav.is-compact .nav-btn{min-height:44px;padding:11px 18px;font-size:14px}
+#nav.is-compact .navl{padding:5px}
+#nav.is-compact .navl a{padding:11px 16px;font-size:13px}
+#nav.is-compact .nav-whatsapp{min-height:44px;padding:10px 16px;font-size:13px}
+#nav.is-compact .nav-btn{min-height:46px;padding:11px 20px;font-size:14px}
+
+.nav-layout{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:16px;
+}
 
 .nav-brand{
   font-size:15px;font-weight:700;color:var(--ink);
@@ -178,12 +238,19 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   background:var(--nav-inner-surface);border:1px solid rgba(255,255,255,.06);flex-shrink:0;
 }
 .brand-icon{
-  width:68px;height:68px;border-radius:20px;overflow:hidden;
+  width:74px;height:74px;border-radius:20px;overflow:hidden;
   border:1px solid var(--brand-border);background:var(--brand-surface);
   flex-shrink:0;box-shadow:0 12px 28px rgba(0,0,0,.14);
   display:flex;align-items:center;justify-content:center;
 }
-.brand-icon img{width:80%;height:80%;object-fit:contain;object-position:center center;filter:drop-shadow(0 6px 12px rgba(0,0,0,.12))}
+.brand-icon img{
+  width:112%;
+  height:112%;
+  object-fit:cover;
+  object-position:center 44%;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.22));
+  transform: translateY(10%) scale(1.4);
+}
 .brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
 .brand-name{font-size:20px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.045em}
 .brand-tagline{font-size:12px;font-weight:650;color:var(--brand-tag);line-height:1.1;letter-spacing:0}
@@ -198,7 +265,7 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 }
 .navl a:hover,.navl a.on{color:var(--nav-active-color);background:var(--nav-active-bg)}
 .navl a:hover{transform:translateY(-1px)}
-.nav-end{display:flex;align-items:center;gap:10px;margin-left:0;flex-shrink:0}
+.nav-end{display:flex;align-items:center;gap:12px;margin-left:0;flex-shrink:0}
 .theme-toggle{
   border:1px solid var(--theme-btn-border);background:var(--theme-btn-bg);color:var(--theme-btn-color);
   width:48px;height:48px;border-radius:999px;display:flex;align-items:center;justify-content:center;
@@ -206,14 +273,6 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 }
 .theme-toggle:hover{transform:translateY(-1px);background:var(--theme-btn-hover)}
 .theme-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
-.nav-tel{
-  font-size:13px;font-weight:650;color:var(--mid);text-decoration:none;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  width:48px;height:48px;border-radius:999px;
-  border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.025);transition:all .2s;
-}
-.nav-tel svg{width:14px;height:14px;stroke:currentColor;fill:none}
-.nav-tel:hover{color:var(--ink);background:rgba(0,0,0,.06)}
 .nav-whatsapp{
   font-size:14px;font-weight:700;color:var(--whatsapp-color);text-decoration:none;
   display:flex;align-items:center;gap:7px;min-height:48px;padding:12px 20px;
@@ -230,32 +289,91 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .nav-btn:hover{opacity:.85;transform:scale(.98)}
 .nav-mobile-tools{display:none;align-items:center;gap:8px;margin-left:auto}
 .hbg{
-  display:none;flex-direction:column;gap:4px;background:var(--nav-inner-surface);
-  border:1px solid rgba(255,255,255,.08);cursor:pointer;padding:0;
-  width:48px;height:48px;border-radius:16px;align-items:center;justify-content:center;
-  transition:transform .2s ease,background .2s ease,border-color .2s ease;
+  display:none;
+  background:var(--nav-inner-surface);
+  border:1px solid rgba(255,255,255,.08);
+  color:var(--ink);
 }
-.hbg:hover{transform:translateY(-1px);background:var(--theme-btn-hover)}
-.hbg span{display:block;width:18px;height:1.5px;background:var(--ink);border-radius:2px}
+.hbg:hover{background:var(--theme-btn-hover)}
 .mob{
   display:none;position:fixed;inset:0;
-  background:var(--mob-bg);
-  z-index:399;flex-direction:column;padding:104px 24px 40px;gap:0;
+  background:var(--mobile-menu-bg);
+  z-index:450;flex-direction:column;padding:104px 24px 40px;gap:0;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
 }
 .mob.open{display:flex}
-.mob a{font-size:24px;font-weight:700;color:var(--ink);text-decoration:none;padding:18px 0;border-bottom:1px solid var(--mob-border);letter-spacing:-.03em}
-.mob a:hover{color:var(--mid)}
-.mob-cta{margin-top:28px;background:var(--primary-btn-bg);color:var(--primary-btn-text);text-align:center;padding:16px;border-radius:40px;font-size:16px;font-weight:700;text-decoration:none}
-.mob-wa{margin-top:12px;background:var(--mob-wa-bg);color:var(--mob-wa-color);text-align:center;padding:16px;border-radius:40px;font-size:16px;font-weight:700;text-decoration:none;border:none}
-.mob-x{
-  position:absolute;top:28px;right:20px;
-  width:44px;height:44px;border-radius:14px;
-  background:var(--mob-close-bg);border:1px solid var(--mob-border);
-  font-size:22px;cursor:pointer;color:var(--mob-close-color);font-family:var(--sans)
+.mob a{
+  font-size:14px;
+  font-weight:650;
+  color:var(--mobile-menu-link);
+  text-decoration:none;
+  padding:16px 0;
+  border-bottom:1px solid var(--mobile-menu-border);
+  letter-spacing:-.02em;
+  min-height:48px;
+  display:flex;
+  align-items:center;
+}
+.mob a:hover{color:var(--mobile-menu-link-muted)}
+.mob a.mob-cta,
+.mob a.mob-wa{
+  align-self:stretch;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-width:0;
+  max-width:none;
+  padding:15px 18px;
+  border-radius:40px;
+  font-size:16px;
+  font-weight:700;
+  text-decoration:none;
+  letter-spacing:-.02em;
+  border-bottom:none;
+}
+.mob a.mob-cta{
+  margin-top:28px;
+  background:#f3f1ec;
+  color:#101215 !important;
+  text-align:center;
+  border:1px solid rgba(255,255,255,.08);
+}
+.mob a.mob-wa{
+  margin-top:12px;
+  background:var(--whatsapp-bg);
+  color:#f3f1ec !important;
+  text-align:center;
+  border:1px solid var(--whatsapp-border);
 }
 
 /* ── HERO ─────────────────────────────── */
-#hero{padding:158px 0 24px;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+#hero{
+  padding:158px 0 24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+#hero::before{
+  content:"";
+  position:absolute;
+  right:-3%;
+  top:34%;
+  width:min(54vw, 920px);
+  aspect-ratio:1 / 1;
+  transform:translateY(-60%) rotate(-10deg);
+  background:url("assets/branding/teuto-logo-full-final.png") center / contain no-repeat;
+  opacity:.12;
+  filter:grayscale(1) brightness(1.28) contrast(1.04);
+  pointer-events:none;
+  z-index:0;
+}
+#hero > *{position:relative;z-index:1}
 .hero-social-row{display:flex;align-items:center;gap:10px;margin-bottom:24px;animation:up .7s .05s ease both}
 .avatar-stack{display:flex}
 .avatar-stack span{width:30px;height:30px;border-radius:50%;border:2px solid #fff;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:11px;margin-left:-8px;overflow:hidden}
@@ -290,15 +408,70 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 }
 .hero-card-title{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.04em;color:#fff;line-height:1.1;margin-bottom:8px}
 .hero-card-sub{font-size:15px;color:rgba(255,255,255,.6);font-weight:400}
-.hero-pill-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:32px;animation:up .7s .44s ease both}
-.hpill{background:rgba(255,255,255,.78);border:1px solid rgba(208,208,206,.85);border-radius:40px;padding:7px 16px;font-size:12px;font-weight:500;color:var(--mid);letter-spacing:-.01em;backdrop-filter:blur(12px)}
+.hero-pill-row{
+  width:min(1180px, calc(100% - 48px));
+  margin-top:32px;
+  animation:up .7s .44s ease both;
+}
+.hero-pill-marquee{
+  position:relative;
+  overflow:hidden;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(180deg, rgba(20,22,26,.94), rgba(13,15,18,.94));
+  box-shadow:0 14px 36px rgba(0,0,0,.16);
+  mask-image:linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image:linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+.hero-pill-track{
+  display:flex;
+  width:max-content;
+  animation:hero-pill-marquee 28s linear infinite;
+}
+.hero-pill-group{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+}
+.hero-pill-group + .hero-pill-group{
+  padding-left:clamp(80px, 10vw, 180px);
+}
+.hpill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:0 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:12px;
+  font-weight:650;
+  color:#e1dbd1;
+  letter-spacing:-.01em;
+  white-space:nowrap;
+}
+@keyframes hero-pill-marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
 
 /* ── WHY SECTION ──────────────────────── */
 #why{margin:24px 24px 0;background:var(--white);border-radius:var(--rad2);border:1px solid var(--rule);overflow:hidden}
 .why-top{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--rule)}
-.why-top-left{padding:52px 48px;border-right:1px solid var(--rule)}
-.why-top-right{padding:52px 48px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
-.why-h{font-size:clamp(28px,3.5vw,40px);font-weight:800;letter-spacing:-.04em;color:var(--ink);line-height:1.1;margin-bottom:14px}
+.why-top-left{
+  padding:52px 48px 52px;
+  border-right:1px solid var(--rule);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+.why-top-left > div:first-child{
+  margin-top:53px;
+}
+.why-top-right{padding:120px 48px;display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.why-h{display:block;font-size:clamp(28px,3.5vw,40px);font-weight:800;letter-spacing:-.04em;color:var(--ink);line-height:1.18;margin-bottom:14px;padding-top:0}
 .why-sub{font-size:14px;color:var(--mid);line-height:1.75;max-width:300px}
 .why-feat-icon{font-size:18px;margin-bottom:10px}
 .why-feat-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:-.02em}
@@ -324,11 +497,35 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .leistung-grid{display:flex;flex-direction:column;gap:2px}
 .lcard{background:var(--white);border:1px solid var(--rule);border-radius:var(--rad);padding:28px 28px;display:flex;align-items:flex-start;gap:18px;transition:all .3s;cursor:default}
 .lcard:hover{box-shadow:0 8px 32px rgba(0,0,0,.08);transform:translateY(-2px);border-color:var(--rule2)}
-.lcard-icon{width:44px;height:44px;flex-shrink:0;border-radius:12px;background:var(--bg);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font-size:20px}
+.lcard-icon{
+  width:44px;height:44px;flex-shrink:0;border-radius:12px;background:var(--bg);border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;color:var(--ink);position:relative;overflow:hidden;
+}
+.lcard-icon-mark{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+.lcard-icon-mark img{width:20px;height:20px;object-fit:contain;display:block;filter:brightness(0) invert(1)}
 .lcard-title{font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--ink);margin-bottom:6px}
 .lcard-body{font-size:13px;color:var(--mid);line-height:1.7}
 .lcard-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .ltag{font-size:11px;font-weight:500;color:var(--mid);background:var(--bg2);border-radius:40px;padding:3px 10px}
+.service-reveal{
+  opacity:0;
+  transform:translate3d(0,42px,0) scale(.985);
+  transition:
+    opacity .72s cubic-bezier(.22,1,.36,1),
+    transform .72s cubic-bezier(.22,1,.36,1),
+    box-shadow .3s ease,
+    border-color .3s ease;
+}
+.service-reveal:nth-child(odd){
+  transform:translate3d(-18px,42px,0) scale(.985);
+}
+.service-reveal:nth-child(even){
+  transform:translate3d(18px,42px,0) scale(.985);
+}
+.service-reveal.is-visible{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+}
 
 /* ── CASES ────────────────────────────── */
 #cases{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);border:1px solid var(--rule);overflow:hidden}
@@ -384,6 +581,280 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   margin:0 auto 28px;
 }
 .brand-scroll-list{display:flex;flex-direction:column;gap:0}
+.brands-preview{
+  width:calc(100% - 24px);
+  margin:0 auto;
+}
+.brands-preview-stage{
+  position:relative;
+  padding:14px;
+  border-radius:34px;
+  background:linear-gradient(180deg, rgba(17,18,20,.98) 0%, rgba(12,13,15,.98) 100%);
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 24px 60px rgba(0,0,0,.18);
+  overflow:hidden;
+  min-height:640px;
+}
+.brands-preview-stage::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(198,163,109,.14), transparent 32%),
+    radial-gradient(circle at 82% 86%, rgba(198,163,109,.08), transparent 34%);
+  pointer-events:none;
+}
+.brands-preview-copy{
+  position:absolute;
+  left:34px;
+  bottom:34px;
+  z-index:3;
+  width:min(460px, calc(100% - 68px));
+  padding:26px 26px 24px;
+  border-radius:26px;
+  background:linear-gradient(180deg, rgba(247,243,236,.78) 0%, rgba(255,255,255,.88) 100%);
+  border:1px solid rgba(255,255,255,.36);
+  box-shadow:0 18px 42px rgba(0,0,0,.18);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:18px;
+  min-height:auto;
+}
+.brands-preview-title{
+  font-size:clamp(30px,3.5vw,52px);
+  line-height:.96;
+  letter-spacing:-.05em;
+  color:#171411;
+  margin-bottom:10px;
+}
+.brands-preview-text{
+  font-size:15px;
+  line-height:1.72;
+  color:rgba(34,28,23,.8);
+  max-width:380px;
+}
+.brands-preview-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+.brands-preview-list span{
+  display:inline-flex;
+  align-items:center;
+  min-height:34px;
+  padding:0 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.46);
+  border:1px solid rgba(23,19,16,.08);
+  color:#171411;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:-.02em;
+}
+.brands-preview-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:12px 20px;
+  border-radius:999px;
+  background:#111214;
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  transition:transform .18s ease, opacity .2s ease;
+}
+.brands-preview-link:hover{opacity:.88;transform:translateY(-1px)}
+.brands-preview-collage{
+  position:relative;
+  z-index:1;
+  overflow:hidden;
+  border-radius:26px;
+  background:#131416;
+  min-height:612px;
+  height:100%;
+}
+.brands-preview-slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transform:scale(1.025);
+  transition:opacity .85s ease, transform 1.2s ease;
+  pointer-events:none;
+}
+.brands-preview-slide.is-active{
+  opacity:1;
+  transform:scale(1);
+}
+.brands-preview-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.78) saturate(.94);
+}
+.brands-preview-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding:28px;
+  background:linear-gradient(180deg, rgba(9,10,12,.16) 0%, rgba(9,10,12,.28) 34%, rgba(10,10,12,.72) 100%);
+}
+.brands-preview-overlay strong{
+  display:block;
+  color:#fff;
+  font-size:28px;
+  letter-spacing:-.04em;
+  margin-bottom:6px;
+}
+.brands-preview-overlay span{
+  display:block;
+  color:rgba(255,255,255,.74);
+  line-height:1.62;
+  font-size:13px;
+  max-width:320px;
+}
+.brands-preview-slider-ui{
+  position:absolute;
+  left:28px;
+  right:28px;
+  top:28px;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  pointer-events:none;
+}
+.brands-preview-meta{
+  max-width:420px;
+}
+.brands-preview-dots{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.brands-preview-dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.3);
+  border:1px solid rgba(255,255,255,.18);
+  transition:transform .25s ease, background .25s ease, width .25s ease;
+}
+.brands-preview-dot.is-active{
+  width:28px;
+  background:#fff;
+  transform:translateY(-1px);
+}
+.brand-general-panel{
+  width:100%;
+  margin:0;
+  position:relative;
+  overflow:hidden;
+  min-height:100vh;
+  border:none;
+  box-shadow:none;
+  background:#111214;
+}
+.brand-general-bg{
+  position:absolute;
+  inset:0;
+  display:grid;
+  grid-template-columns:1.35fr 1fr 1fr;
+  grid-template-rows:repeat(3, 1fr);
+  grid-auto-flow:dense;
+  gap:8px;
+  background:#181818;
+}
+.brand-general-bg::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,
+    rgba(8,9,10,.06) 0%,
+    rgba(8,9,10,.18) 36%,
+    rgba(8,9,10,.32) 100%);
+  opacity:.32;
+}
+.brand-general-bg .cg{
+  position:relative;
+  overflow:hidden;
+  background:#151515;
+}
+.brand-general-bg .cg:first-child{grid-row:span 3}
+.brand-general-bg .cg:nth-child(2){grid-column:2 / span 2;grid-row:1}
+.brand-general-bg .cg:nth-child(3){grid-column:2;grid-row:2}
+.brand-general-bg .cg:nth-child(4){grid-column:3;grid-row:2}
+.brand-general-bg .cg:nth-child(5){grid-column:2 / span 2;grid-row:3}
+.brand-general-bg img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.72) saturate(.92);
+  transform:translateZ(0);
+}
+.brand-general-grid{
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  width:min(1240px, calc(100% - 96px));
+  margin:0 auto;
+  display:flex;
+  align-items:flex-end;
+  padding:clamp(48px,7vw,80px) 0;
+}
+.brand-general-copy{
+  max-width:620px;
+  padding:32px 34px;
+  border-radius:28px;
+  background:rgba(247,243,236,.68);
+  border:1px solid rgba(32,26,21,.08);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 18px 42px rgba(0,0,0,.12);
+}
+.brand-general-copy .sec-label{margin-bottom:12px;color:rgba(38,31,26,.74)}
+.brand-general-title{
+  font-size:clamp(28px,3.7vw,46px);
+  line-height:1.04;
+  letter-spacing:-.045em;
+  color:#171411;
+  margin-bottom:14px;
+  font-weight:800;
+}
+.brand-general-text{
+  font-size:15px;
+  line-height:1.8;
+  color:rgba(34,28,23,.78);
+  max-width:620px;
+  margin-bottom:24px;
+}
+.brand-general-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:52px;
+  padding:13px 24px;
+  border-radius:999px;
+  background:#111214;
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  transition:transform .18s ease, opacity .2s ease;
+}
+.brand-general-cta:hover{opacity:.88;transform:translateY(-1px)}
 
 /* Jede Brand-Sektion: relative Container für sticky */
 .brand-scroll-chapter{
@@ -626,6 +1097,95 @@ html[data-theme="dark"] .brand-intro-text,
 html[data-theme="dark"] .motor-copy{color:var(--brand-text-soft)}
 html[data-theme="dark"] .brand-detail-title,
 html[data-theme="dark"] .motor-name{color:var(--brand-text-main)}
+html[data-theme="dark"] .brands-preview-copy{
+  background:linear-gradient(180deg, rgba(23,25,28,.72) 0%, rgba(18,20,23,.84) 100%);
+  border-color:rgba(255,255,255,.1);
+  box-shadow:0 18px 42px rgba(0,0,0,.24);
+}
+html[data-theme="dark"] .brands-preview-list span{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.08);
+  color:#f1ede6;
+}
+html[data-theme="dark"] .brands-preview-title{color:#f1ede6}
+html[data-theme="dark"] .brands-preview-text{color:rgba(226,220,210,.76)}
+html[data-theme="dark"] .brands-preview-link{
+  background:#f3f1ec;
+  color:#111214;
+}
+html[data-theme="dark"] .sticky-contact-toggle,
+html[data-theme="dark"] .sticky-contact-panel{
+  background:rgba(18,20,23,.88);
+  border-color:rgba(255,255,255,.08);
+  box-shadow:0 20px 48px rgba(0,0,0,.28);
+}
+html[data-theme="dark"] .sticky-contact-head strong{color:#f1ede6}
+html[data-theme="dark"] .sticky-contact-head span,
+html[data-theme="dark"] .sticky-contact-line span:last-child,
+html[data-theme="dark"] .sticky-contact-ping .kt-ping-txt{color:rgba(226,220,210,.76)}
+html[data-theme="dark"] .sticky-contact-ping,
+html[data-theme="dark"] .sticky-contact-line{
+  background:rgba(255,255,255,.05);
+  border-color:rgba(255,255,255,.07);
+}
+html[data-theme="dark"] .sticky-contact-line{color:#f1ede6}
+html[data-theme="dark"] .sticky-contact-toggle{color:#f1ede6}
+html[data-theme="dark"] .sticky-contact-btn{
+  background:#f3f1ec;
+  color:#111214;
+}
+html[data-theme="dark"] .sticky-contact-wa{
+  background:rgba(29,74,41,.26);
+  border-color:rgba(108,181,128,.14);
+  color:#e6f4ea;
+}
+html[data-theme="dark"] .mobile-contact-toggle{
+  background:#f3efe7;
+  color:#111214;
+}
+html[data-theme="dark"] .mobile-contact-backdrop{
+  background:rgba(4,5,7,.58);
+}
+html[data-theme="dark"] .mobile-contact-sheet{
+  background:linear-gradient(180deg, rgba(18,20,23,.98) 0%, rgba(14,15,18,.98) 100%);
+  box-shadow:0 20px 42px rgba(0,0,0,.4);
+}
+html[data-theme="dark"] .mobile-contact-sheet::before{background:rgba(255,255,255,.18)}
+html[data-theme="dark"] .mobile-contact-sheet-head strong{color:#f1ede6}
+html[data-theme="dark"] .mobile-contact-sheet-head span,
+html[data-theme="dark"] .mobile-contact-line span:last-child{color:rgba(226,220,210,.76)}
+html[data-theme="dark"] .mobile-contact-close{
+  background:rgba(255,255,255,.08);
+  color:#f1ede6;
+}
+html[data-theme="dark"] .mobile-contact-line{
+  background:rgba(255,255,255,.05);
+  color:#f1ede6;
+}
+html[data-theme="dark"] .mobile-contact-btn{
+  background:#f3efe7;
+  color:#111214;
+}
+html[data-theme="dark"] .mobile-contact-wa{
+  background:rgba(29,74,41,.26);
+  border-color:rgba(108,181,128,.14);
+  color:#e6f4ea;
+}
+html[data-theme="dark"] .brand-general-panel{
+  box-shadow:none;
+}
+html[data-theme="dark"] .brand-general-copy{
+  background:rgba(23,25,28,.72);
+  border-color:rgba(255,255,255,.08);
+  box-shadow:0 18px 42px rgba(0,0,0,.24);
+}
+html[data-theme="dark"] .brand-general-copy .sec-label{color:rgba(226,220,210,.6)}
+html[data-theme="dark"] .brand-general-title{color:#f1ede6}
+html[data-theme="dark"] .brand-general-text{color:rgba(226,220,210,.76)}
+html[data-theme="dark"] .brand-general-cta{
+  background:#f3f1ec;
+  color:#111214;
+}
 
 /* ── RESULTS ─────────────────────────── */
 #results{padding:80px 24px}
@@ -660,30 +1220,339 @@ html[data-theme="dark"] .motor-name{color:var(--brand-text-main)}
 .a-img:first-child{grid-row:span 2}
 .a-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.8) saturate(.85)}
 .about-text .sec-sub{max-width:100%;margin-bottom:28px}
+.about-preview-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:28px}
 .spec-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
 .spec-item{background:var(--white);border:1px solid var(--rule);border-radius:var(--rad);padding:18px 20px}
 .spec-n{font-size:28px;font-weight:900;letter-spacing:-.04em;color:var(--ink);line-height:1;margin-bottom:3px}
 .spec-n em{font-style:italic;font-size:.7em;color:var(--mid)}
 .spec-l{font-size:12px;color:var(--mid);line-height:1.4}
 
-/* ── MAP ─────────────────────────────── */
-#map-section{margin:0 24px 24px;background:var(--white);border:1px solid var(--rule);border-radius:var(--rad2);overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.05)}
-.map-wrap{display:grid;grid-template-columns:1fr 1.3fr}
-.map-info{padding:52px 48px;background:linear-gradient(180deg,#141414 0%,#1e1d1a 100%);color:#fff}
-.map-info .sec-label{color:rgba(255,255,255,.34)}
-.map-info .sec-h{color:#fff}
-.map-copy{font-size:14px;color:rgba(255,255,255,.56);line-height:1.8;max-width:340px;margin-bottom:28px}
-.map-points{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
-.map-point{padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
-.map-point strong{display:block;font-size:13px;font-weight:700;margin-bottom:4px}
-.map-point span{font-size:13px;color:rgba(255,255,255,.58);line-height:1.6}
-.map-note{font-size:12px;color:rgba(255,255,255,.38);line-height:1.7;margin:-4px 0 24px;max-width:360px}
-.map-actions{display:flex;flex-wrap:wrap;gap:10px}
-.map-actions a{text-decoration:none;padding:12px 18px;border-radius:999px;font-size:13px;font-weight:700}
-.map-route{background:#fff;color:var(--ink)}
-.map-whatsapp{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12)}
-.map-frame{min-height:420px;background:var(--bg2)}
-.map-frame iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.1) contrast(1.03)}
+/* ── STICKY CONTACT CARD ───────────────── */
+.sticky-contact{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:440;
+  width:58px;
+  opacity:0;
+  pointer-events:none;
+  transform:translate3d(0,18px,0) scale(.98);
+  transition:opacity .28s ease, transform .32s cubic-bezier(.22,1,.36,1);
+}
+.sticky-contact.is-visible{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate3d(0,0,0) scale(1);
+}
+.sticky-contact-toggle{
+  margin-left:auto;
+  width:58px;
+  height:58px;
+  border:none;
+  border-radius:20px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 20px 48px rgba(0,0,0,.16);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#111214;
+  cursor:pointer;
+  transition:transform .18s ease, opacity .2s ease, border-radius .2s ease;
+}
+.sticky-contact-toggle:hover{opacity:.9;transform:translateY(-1px)}
+.sticky-contact-toggle svg{
+  width:26px;
+  height:26px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.9;
+}
+.sticky-contact-panel{
+  position:absolute;
+  right:0;
+  bottom:72px;
+  width:min(440px, calc(100vw - 48px));
+  padding:18px;
+  border-radius:24px;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 20px 48px rgba(0,0,0,.16);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  opacity:0;
+  pointer-events:none;
+  transform:translate3d(0,10px,0) scale(.98);
+  transition:opacity .24s ease, transform .28s cubic-bezier(.22,1,.36,1);
+}
+.sticky-contact.is-open .sticky-contact-panel{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate3d(0,0,0) scale(1);
+}
+.sticky-contact.is-open .sticky-contact-toggle{border-radius:18px}
+.sticky-contact-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:start;
+  gap:14px;
+  margin-bottom:14px;
+}
+.sticky-contact-head strong{
+  display:block;
+  font-size:20px;
+  line-height:1;
+  letter-spacing:-.04em;
+  color:var(--ink);
+  margin-bottom:6px;
+}
+.sticky-contact-head span{
+  display:block;
+  font-size:13px;
+  line-height:1.65;
+  color:var(--mid);
+  max-width:280px;
+}
+.sticky-contact-ping{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:30px;
+  padding:0 10px;
+  border-radius:999px;
+  background:rgba(16,18,20,.05);
+  border:1px solid rgba(16,18,20,.06);
+  white-space:nowrap;
+  justify-self:end;
+}
+.sticky-contact-ping .kt-ping-dot{margin:0}
+.sticky-contact-ping .kt-ping-txt{
+  color:var(--mid);
+  font-size:11px;
+}
+.sticky-contact-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+.sticky-contact-btn,
+.sticky-contact-wa{
+  min-height:46px;
+  border-radius:999px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  transition:transform .16s ease, opacity .2s ease;
+}
+.sticky-contact-btn:hover,
+.sticky-contact-wa:hover{
+  opacity:.88;
+  transform:translateY(-1px);
+}
+.sticky-contact-btn{
+  background:#111214;
+  color:#fff;
+}
+.sticky-contact-wa{
+  background:#eff7f0;
+  color:#17361f;
+  border:1px solid rgba(23,54,31,.08);
+}
+.sticky-contact-lines{
+  display:grid;
+  gap:8px;
+}
+.sticky-contact-line{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:42px;
+  padding:0 12px;
+  border-radius:16px;
+  background:rgba(16,18,20,.04);
+  text-decoration:none;
+  color:var(--ink);
+}
+.sticky-contact-line span:first-child{font-size:14px}
+.sticky-contact-line span:last-child{
+  font-size:13px;
+  color:var(--mid);
+  line-height:1.5;
+}
+
+.mobile-contact{
+  position:fixed;
+  inset:0;
+  z-index:440;
+  display:none;
+  pointer-events:none;
+}
+.mobile-contact.is-visible{
+  display:block !important;
+}
+.mobile-contact-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(7,8,10,.44);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .24s ease;
+}
+.mobile-contact.is-open .mobile-contact-backdrop{
+  opacity:1;
+  pointer-events:auto;
+}
+.mobile-contact-toggle{
+  position:fixed;
+  right:16px;
+  bottom:calc(14px + env(safe-area-inset-bottom));
+  min-height:48px;
+  padding:0 14px;
+  border:none;
+  border-radius:999px;
+  background:rgba(17,18,20,.88);
+  color:#fff;
+  box-shadow:0 14px 30px rgba(0,0,0,.18);
+  backdrop-filter:blur(14px);
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font:inherit;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  cursor:pointer;
+  z-index:442;
+  pointer-events:auto;
+  opacity:.92;
+  transition:transform .18s ease, opacity .2s ease, background .2s ease;
+}
+.mobile-contact-toggle:hover{opacity:1;transform:translateY(-1px);background:rgba(17,18,20,.96)}
+.mobile-contact-toggle svg{
+  width:18px;
+  height:18px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2;
+}
+.mobile-contact-sheet{
+  position:fixed;
+  left:12px;
+  right:12px;
+  bottom:12px;
+  z-index:441;
+  width:auto;
+  padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+  max-height:min(72vh, 520px);
+  overflow:auto;
+  background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(247,243,236,.98) 100%);
+  border-radius:24px;
+  box-shadow:0 20px 42px rgba(0,0,0,.24);
+  transform:translate3d(0,100%,0);
+  transition:transform .34s cubic-bezier(.22,1,.36,1);
+  pointer-events:auto;
+}
+.mobile-contact.is-open .mobile-contact-sheet{
+  transform:translate3d(0,0,0);
+}
+.mobile-contact-sheet::before{
+  content:'';
+  display:block;
+  width:46px;
+  height:5px;
+  border-radius:999px;
+  background:rgba(17,18,20,.16);
+  margin:0 auto 14px;
+}
+.mobile-contact-sheet-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:14px;
+}
+.mobile-contact-sheet-head strong{
+  display:block;
+  font-size:20px;
+  line-height:1;
+  letter-spacing:-.04em;
+  color:var(--ink);
+  margin-bottom:6px;
+}
+.mobile-contact-sheet-head span{
+  display:block;
+  font-size:13px;
+  line-height:1.65;
+  color:var(--mid);
+}
+.mobile-contact-close{
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:14px;
+  background:rgba(17,18,20,.06);
+  color:var(--ink);
+  font:inherit;
+  font-size:20px;
+  cursor:pointer;
+}
+.mobile-contact-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+.mobile-contact-btn,
+.mobile-contact-wa{
+  min-height:48px;
+  border-radius:999px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-.02em;
+}
+.mobile-contact-btn{
+  background:#111214;
+  color:#fff;
+}
+.mobile-contact-wa{
+  background:#eff7f0;
+  color:#17361f;
+  border:1px solid rgba(23,54,31,.08);
+}
+.mobile-contact-lines{
+  display:grid;
+  gap:8px;
+}
+.mobile-contact-line{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:44px;
+  padding:0 12px;
+  border-radius:16px;
+  background:rgba(16,18,20,.04);
+  text-decoration:none;
+  color:var(--ink);
+}
+.mobile-contact-line span:last-child{
+  font-size:13px;
+  color:var(--mid);
+}
+.sticky-contact,
+.mobile-contact{
+  display:none !important;
+}
 
 /* ── CONTACT ──────────────────────────── */
 #kontakt{margin:0 24px 24px;display:grid;grid-template-columns:1fr 1fr;border-radius:var(--rad2);overflow:hidden;border:1px solid var(--rule);box-shadow:0 4px 24px rgba(0,0,0,.05)}
@@ -709,12 +1578,86 @@ html[data-theme="dark"] .motor-name{color:var(--brand-text-main)}
 .ff{display:flex;flex-direction:column;gap:5px}
 .fl{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 .fl em{color:var(--ink);font-style:normal}
+.fl-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.field-help{
+  position:relative;
+  width:18px;
+  height:18px;
+  border:none;
+  border-radius:999px;
+  background:rgba(17,18,20,.08);
+  color:var(--ink);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font:inherit;
+  font-size:11px;
+  font-weight:800;
+  line-height:1;
+  cursor:help;
+  flex-shrink:0;
+}
+.field-help-tip{
+  position:absolute;
+  left:50%;
+  bottom:calc(100% + 10px);
+  transform:translateX(-50%) translateY(6px);
+  width:min(220px, 62vw);
+  padding:10px 12px;
+  border-radius:12px;
+  background:#111214;
+  color:#fff;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0;
+  text-transform:none;
+  line-height:1.55;
+  box-shadow:0 16px 30px rgba(0,0,0,.22);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease;
+  z-index:4;
+}
+.field-help-tip::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:100%;
+  transform:translateX(-50%);
+  border-width:6px 6px 0 6px;
+  border-style:solid;
+  border-color:#111214 transparent transparent transparent;
+}
+.field-help:hover .field-help-tip,
+.field-help:focus-visible .field-help-tip{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
 .fi,.fta,.fsel{border:1.5px solid var(--rule);border-radius:10px;padding:11px 14px;font-family:var(--sans);font-size:14px;color:var(--ink);outline:none;width:100%;background:#fff;transition:border-color .2s}
 .fi:focus,.fta:focus,.fsel:focus{border-color:var(--ink)}
 .fi::placeholder,.fta::placeholder{color:var(--muted)}
 .fsel{color:var(--mid);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
 .fsel.ch{color:var(--ink)}
 .fta{resize:vertical;min-height:100px}
+.fi:required,.fta:required,.fsel:required{box-shadow:none}
+#kForm.is-attempted .fi:required:invalid,
+#kForm.is-attempted .fta:required:invalid,
+#kForm.is-attempted .fsel:required:invalid{
+  border-color:#d94b4b;
+  box-shadow:0 0 0 3px rgba(217,75,75,.12);
+  background:rgba(217,75,75,.04);
+}
+#kForm.is-attempted .fcheck:has(input:required:invalid){
+  border-color:#d94b4b;
+  box-shadow:0 0 0 3px rgba(217,75,75,.10);
+  background:rgba(217,75,75,.04);
+}
+#kForm.is-attempted .fcheck:has(input:required:invalid) label,
+#kForm.is-attempted .ff:has(.fi:required:invalid) .fl,
+#kForm.is-attempted .ff:has(.fta:required:invalid) .fl,
+#kForm.is-attempted .ff:has(.fsel:required:invalid) .fl{
+  color:#c94a4a;
+}
 .fupload{border:1.5px dashed var(--rule2);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:all .3s;background:var(--bg)}
 .fupload:hover{border-color:var(--ink);background:var(--bg2)}
 .fupload input{display:none}
@@ -730,15 +1673,17 @@ html[data-theme="dark"] .motor-name{color:var(--brand-text-main)}
 .fsubmit{background:var(--primary-btn-bg);color:var(--primary-btn-text);border:none;cursor:pointer;padding:13px 28px;border-radius:40px;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:-.01em;transition:opacity .2s,transform .15s}
 .fsubmit:hover{opacity:.82;transform:scale(.98)}
 .fnote{font-size:11px;color:var(--muted);text-align:right;margin-top:8px}
+.contact-preview-card{padding:56px 48px}
+.contact-preview-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:28px}
+.contact-preview-route{display:inline-flex;align-items:center;justify-content:center;padding:14px 18px;border-radius:999px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);font-size:13px;font-weight:800;text-decoration:none}
 
 /* ── DARK MODE OVERRIDES ──────────────── */
-html[data-theme="dark"] .navl a:hover,html[data-theme="dark"] .navl a.on,html[data-theme="dark"] .nav-tel:hover{background:rgba(255,255,255,.07)}
-html[data-theme="dark"] .hero-pill-row .hpill,html[data-theme="dark"] .lcard,html[data-theme="dark"] .spec-item,html[data-theme="dark"] .ba-card,html[data-theme="dark"] .fcheck,html[data-theme="dark"] footer,html[data-theme="dark"] #why,html[data-theme="dark"] #cases,html[data-theme="dark"] #map-section,html[data-theme="dark"] #kontakt{background:var(--white)}
+html[data-theme="dark"] .navl a:hover,html[data-theme="dark"] .navl a.on{background:rgba(255,255,255,.07)}
+html[data-theme="dark"] .hero-pill-row .hpill,html[data-theme="dark"] .lcard,html[data-theme="dark"] .spec-item,html[data-theme="dark"] .ba-card,html[data-theme="dark"] .fcheck,html[data-theme="dark"] footer,html[data-theme="dark"] #why,html[data-theme="dark"] #cases,html[data-theme="dark"] #kontakt{background:var(--white)}
 html[data-theme="dark"] .ba-footer,html[data-theme="dark"] .kt-right{background:var(--white)}
 html[data-theme="dark"] .fi,html[data-theme="dark"] .fta,html[data-theme="dark"] .fsel{background:#121417;color:var(--ink);border-color:var(--rule2)}
 html[data-theme="dark"] .fi::placeholder,html[data-theme="dark"] .fta::placeholder{color:var(--muted)}
 html[data-theme="dark"] .fupload{background:#121417;border-color:var(--rule2)}
-html[data-theme="dark"] .map-route{background:var(--pill);color:var(--pill-txt)}
 html[data-theme="dark"] .ba-card{box-shadow:0 18px 38px rgba(0,0,0,.28)}
 
 /* ── FOOTER ───────────────────────────── */
@@ -746,7 +1691,19 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 .ft-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;margin-bottom:40px}
 .ft-brand-name{font-size:18px;font-weight:800;letter-spacing:-.04em;color:var(--ink);margin-bottom:10px}
 .ft-brand-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.ft-brand-row .brand-icon{width:46px;height:46px;border-color:var(--rule);box-shadow:none}
+.ft-brand-row .brand-icon{
+  width:66px;
+  height:66px;
+  border-radius:18px;
+  border-color:var(--rule);
+  box-shadow:none;
+}
+.ft-brand-row .brand-icon img{
+  width:112%;
+  height:112%;
+  object-fit:cover;
+  object-position:center 44%;
+}
 .ft-brand-row .brand-name{font-size:18px}
 .ft-brand-row .brand-tagline{font-size:11px}
 .ft-brand-desc{font-size:13px;color:var(--muted);line-height:1.75;max-width:240px}
@@ -780,13 +1737,71 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 .float-card{transform:translate3d(0,var(--fy,0px),0);will-change:transform}
 @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
+/* ── TEUTO ARC DECOR ─────────────────── */
+.panel-arcs{
+  position:relative;
+  isolation:isolate;
+}
+.panel-arcs > *{
+  position:relative;
+  z-index:1;
+}
+.panel-arcs::before,
+.panel-arcs::after{
+  content:'';
+  position:absolute;
+  aspect-ratio:1 / 1;
+  border-radius:50%;
+  clip-path:inset(0 0 50% 0);
+  pointer-events:none;
+  z-index:0;
+}
+.panel-arcs::before{
+  width:clamp(640px, 72vw, 1160px);
+  border:2px solid var(--arc-outer);
+}
+.panel-arcs::after{
+  width:clamp(572px, 64vw, 1040px);
+  border:2px solid var(--arc-inner);
+}
+.panel-arcs.arc-right::before{
+  right:clamp(-430px, -31vw, -220px);
+  top:-146px;
+}
+.panel-arcs.arc-right::after{
+  right:clamp(-378px, -27vw, -180px);
+  top:-104px;
+}
+.panel-arcs.arc-left::before{
+  left:clamp(-430px, -31vw, -220px);
+  top:-146px;
+}
+.panel-arcs.arc-left::after{
+  left:clamp(-378px, -27vw, -180px);
+  top:-104px;
+}
+.panel-arcs.panel-arcs-dark{
+  --arc-outer: rgba(255,255,255,.11);
+  --arc-inner: rgba(165,24,28,.24);
+}
+.panel-arcs.panel-arcs-footer::before{
+  width:clamp(760px, 86vw, 1400px);
+  left:clamp(-520px, -38vw, -280px);
+  top:-168px;
+}
+.panel-arcs.panel-arcs-footer::after{
+  width:clamp(680px, 78vw, 1260px);
+  left:clamp(-456px, -33vw, -236px);
+  top:-122px;
+}
+
 /* ── RESPONSIVE ───────────────────────── */
-@media(max-width:1100px){
-  #hero{padding:142px 0 24px}
-  .hero-card img{height:min(62vh,540px)}
-  #nav{width:calc(100% - 28px);top:12px;min-height:82px;padding:10px 12px 10px 10px;gap:10px}
-  .nav-brand{min-width:250px;padding:7px 8px 7px 7px}
-  .brand-icon{width:60px;height:60px;border-radius:18px}
+@media(max-width:1280px){
+  .nav-whatsapp{display:none}
+  #nav{width:calc(100% - 28px);top:12px;padding:10px}
+  .nav-layout{gap:12px}
+  .nav-brand{padding:8px 14px 8px 8px}
+  .brand-icon{width:64px;height:64px;border-radius:18px}
   .brand-name{font-size:18px}
   .brand-tagline{font-size:11px}
   .navl{padding:5px;gap:2px}
@@ -794,8 +1809,51 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .nav-end{gap:8px}
   .nav-whatsapp{padding:11px 16px}
   .nav-btn{min-height:48px;padding:12px 18px;font-size:14px}
+}
+
+@media(max-width:1180px){
+  .navl,.nav-end{display:none}
+  .nav-mobile-tools{display:flex}
+  .hbg{display:flex}
+  .nav-center{display:none}
+  .nav-layout{grid-template-columns:minmax(0,1fr) auto;gap:10px}
+  #nav{width:calc(100% - 20px);top:10px;padding:10px;border-radius:28px}
+  .nav-brand{min-width:0;gap:10px;padding:6px 8px 6px 6px;background:var(--nav-inner-surface);border:1px solid rgba(255,255,255,.06);border-radius:20px;flex:1;min-height:auto}
+  .brand-icon{width:58px;height:58px;border-radius:16px}
+  .brand-copy{gap:3px;max-width:220px}
+  .brand-name{font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .brand-tagline{font-size:10px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .theme-toggle{width:44px;height:44px;border-radius:14px}
+  .theme-toggle svg{width:17px;height:17px}
+  .hbg{width:44px;height:44px;border-radius:14px}
+  #hero::before{
+    top:32%;
+    transform:translateY(-60%) rotate(-10deg);
+  }
+}
+
+@media(max-width:1100px){
+  #app::before{
+    width:min(620px, 78vw);
+    right:-170px;
+    top:1620px;
+  }
+  #app::after{
+    width:min(520px, 66vw);
+    left:-138px;
+    top:3380px;
+  }
+  #hero{padding:142px 0 24px}
+  #hero::before{
+    right:-10%;
+    top:46%;
+    width:min(64vw,760px);
+    opacity:.11;
+  }
+  .hero-card img{height:min(62vh,540px)}
   .why-top{grid-template-columns:1fr}
   .why-top-left{border-right:none;border-bottom:1px solid var(--rule);padding:40px 32px}
+  .why-top-left > div:first-child{margin-top:28px}
   .why-top-right{padding:40px 32px}
   .why-mosaic{grid-template-columns:repeat(2,1fr);height:220px}
   .leistung-layout{grid-template-columns:1fr}
@@ -807,6 +1865,28 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .brands-header{
     grid-template-columns:1fr;
     width:calc(100% - 40px);
+  }
+  .brands-preview{
+    width:calc(100% - 20px);
+  }
+  .brands-preview-stage{
+    padding:12px;
+    min-height:580px;
+  }
+  .brands-preview-copy{
+    left:24px;
+    bottom:24px;
+    width:min(430px, calc(100% - 48px));
+    padding:24px;
+  }
+  .brands-preview-collage{
+    min-height:556px;
+  }
+  .brands-preview-overlay{
+    padding:24px;
+  }
+  .brands-preview-overlay strong{
+    font-size:30px;
   }
   .brand-scroll-chapter{min-height:520vh}
   .brand-scroll-content{margin-top:calc(-1 * min(106vh,1080px));padding:0 0 72px}
@@ -831,12 +1911,36 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .about-imgs-wrap{grid-template-rows:220px}
   .a-img:first-child{grid-row:span 1}
   #kontakt{grid-template-columns:1fr}
-  .map-wrap{grid-template-columns:1fr}
   .kt-left,.kt-right{padding:48px 36px}
+  .sticky-contact{display:none !important}
+  .mobile-contact{
+    display:block !important;
+  }
+  .mobile-contact-toggle{
+    min-height:52px;
+    padding:0 16px;
+    font-size:13px;
+    right:12px;
+    bottom:calc(12px + env(safe-area-inset-bottom));
+  }
+  .mobile-contact-sheet{
+    left:12px;
+    right:12px;
+    bottom:calc(12px + env(safe-area-inset-bottom));
+    max-height:min(72vh, 560px);
+  }
   .ft-top{grid-template-columns:1fr 1fr;gap:32px}
   footer{padding:44px 32px 28px}
   #prozess{padding:52px 32px;margin:0 16px 16px}
-  #why,#cases,#kontakt,#map-section,footer{margin-left:16px;margin-right:16px}
+  #why,#cases,#kontakt,footer{margin-left:16px;margin-right:16px}
+  .panel-arcs::before{width:500px}
+  .panel-arcs::after{width:444px}
+  .panel-arcs.arc-right::before{right:-258px;top:-96px}
+  .panel-arcs.arc-right::after{right:-220px;top:-68px}
+  .panel-arcs.arc-left::before{left:-258px;top:-96px}
+  .panel-arcs.arc-left::after{left:-220px;top:-68px}
+  .panel-arcs.panel-arcs-footer::before{width:620px;left:-320px;top:-110px}
+  .panel-arcs.panel-arcs-footer::after{width:548px;left:-278px;top:-78px}
 }
 
 /* ═══════════════════════════════════════════════
@@ -855,19 +1959,40 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
    4. Veil-Gradient stärker für Lesbarkeit
    ═══════════════════════════════════════════════ */
 @media(max-width:768px){
-  .navl,.nav-end{display:none}
-  .nav-mobile-tools{display:flex}
-  .hbg{display:flex}
-  #nav{width:calc(100% - 20px);top:10px;min-height:78px;padding:10px 10px 10px 9px;border-radius:28px;gap:10px}
-  .nav-brand{min-width:0;gap:10px;padding:6px 8px 6px 6px;background:var(--nav-inner-surface);border:1px solid rgba(255,255,255,.06);border-radius:20px;flex:1}
-  .brand-icon{width:52px;height:52px;border-radius:16px}
-  .brand-copy{gap:3px;max-width:170px}
-  .brand-name{font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .brand-tagline{font-size:10px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .theme-toggle{width:44px;height:44px;border-radius:14px}
-  .theme-toggle svg{width:17px;height:17px}
-  .hbg{width:44px;height:44px;border-radius:14px}
+  #hero::before{
+    top:26%;
+    transform:translateY(-58%) rotate(-12deg);
+  }
+  #nav{width:calc(100% - 20px);top:10px;padding:10px;border-radius:26px}
+  .brand-copy{max-width:190px}
+  .brand-name{
+    font-size:17px;
+    white-space:normal;
+    overflow:visible;
+    text-overflow:clip;
+    line-height:1.02;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+  }
+  .brand-tagline{
+    font-size:10px;
+    line-height:1.15;
+    white-space:normal;
+    overflow:hidden;
+    text-overflow:clip;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+  }
+  .sticky-contact{display:none !important}
   #hero{padding:128px 0 20px}
+  #hero::before{
+    right:-14%;
+    top:48%;
+    width:min(76vw,640px);
+    opacity:.095;
+  }
   .hero-card img{height:52vh;min-height:320px}
   .why-mosaic{grid-template-columns:repeat(2,1fr)}
 
@@ -888,6 +2013,102 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     margin:0 auto 24px;
     width:calc(100% - 32px);
     padding:0 4px;
+  }
+  .brands-preview{
+    width:calc(100% - 16px);
+  }
+  .brands-preview-stage{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    padding:10px;
+    border-radius:28px;
+    min-height:auto;
+  }
+  .brands-preview-copy{
+    position:relative;
+    left:auto;
+    right:auto;
+    bottom:auto;
+    width:100%;
+    order:2;
+    padding:18px 18px 18px;
+    border-radius:22px;
+    background:linear-gradient(180deg, rgba(17,18,21,.94) 0%, rgba(11,12,14,.98) 100%);
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 16px 34px rgba(0,0,0,.24);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    gap:12px;
+  }
+  .brands-preview-title{
+    font-size:clamp(26px,7.4vw,34px);
+    line-height:1.02;
+    margin:0 0 8px;
+    max-width:14ch;
+    text-wrap:pretty;
+  }
+  .brands-preview-text{
+    font-size:13px;
+    line-height:1.62;
+    max-width:none;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .brands-preview-list{
+    margin-top:12px;
+    gap:7px;
+  }
+  .brands-preview-list span{
+    min-height:30px;
+    padding:0 10px;
+    font-size:11px;
+  }
+  .brands-preview-list span:nth-child(n+6){
+    display:none;
+  }
+  .brands-preview-collage{
+    order:1;
+    flex:0 0 auto;
+    min-height:300px;
+    height:300px;
+    max-height:300px;
+    border-radius:22px;
+  }
+  .brands-preview-overlay{
+    align-items:flex-end;
+    justify-content:flex-start;
+    padding:16px;
+    background:linear-gradient(180deg, rgba(9,10,12,.08) 0%, rgba(9,10,12,.12) 30%, rgba(10,10,12,.74) 100%);
+  }
+  .brands-preview-overlay strong{
+    font-size:22px;
+    margin-bottom:4px;
+  }
+  .brands-preview-overlay span{
+    font-size:12px;
+    line-height:1.45;
+    max-width:180px;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .brands-preview-slider-ui{
+    left:16px;
+    right:16px;
+    top:16px;
+    bottom:auto;
+    align-items:flex-start;
+  }
+  .brands-preview-dot{
+    width:8px;
+    height:8px;
+  }
+  .brands-preview-dot.is-active{
+    width:22px;
   }
   .brands-header .sec-label{margin-bottom:10px;font-size:11px}
   .brands-header .sec-h{
@@ -1153,66 +2374,385 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .cases-gallery{grid-template-columns:1fr;grid-template-rows:200px 200px}
   .frow{grid-template-columns:1fr}
   .ft-top{grid-template-columns:1fr}
-  .map-info,.kt-left,.kt-right{padding:40px 24px}
-  .map-frame{min-height:320px}
-  #why,#cases,#kontakt,#map-section,footer,#prozess{margin-left:12px;margin-right:12px}
+  .kt-left,.kt-right,.contact-preview-card{padding:40px 24px}
+  #why,#cases,#kontakt,footer,#prozess{margin-left:12px;margin-right:12px}
   footer{padding:36px 24px 24px}
   #leistungen,#results,#prozess,#ueber-uns{padding:60px 16px}
   #brands{padding:0 0 60px}
+  .panel-arcs::before{width:340px}
+  .panel-arcs::after{width:296px}
+  .panel-arcs.arc-right::before{right:-168px;top:-48px}
+  .panel-arcs.arc-right::after{right:-142px;top:-26px}
+  .panel-arcs.arc-left::before{left:-168px;top:-48px}
+  .panel-arcs.arc-left::after{left:-142px;top:-26px}
+  .panel-arcs.panel-arcs-footer::before{width:420px;left:-214px;top:-62px}
+  .panel-arcs.panel-arcs-footer::after{width:364px;left:-182px;top:-38px}
 }
+
+@media(max-width:560px){
+  #app::before{
+    width:360px;
+    right:-122px;
+    top:1340px;
+  }
+  #app::after{
+    width:320px;
+    left:-106px;
+    top:2860px;
+  }
+  #ueber-uns{
+    padding-top:8px;
+    padding-bottom:52px;
+  }
+  .about-wrap{
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+  }
+  .about-text{
+    order:1;
+  }
+  .about-imgs-wrap{
+    order:2;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:180px 140px;
+    gap:8px;
+  }
+  .a-img:first-child{
+    grid-column:1 / span 2;
+    grid-row:1;
+  }
+  .a-img:nth-child(2){
+    grid-column:1;
+    grid-row:2;
+  }
+  .a-img:nth-child(3){
+    grid-column:2;
+    grid-row:2;
+  }
+  .about-text .sec-h{
+    margin-bottom:10px !important;
+  }
+  .about-text .sec-sub{
+    margin-bottom:20px;
+  }
+  .spec-list{
+    gap:10px;
+    margin-top:20px;
+  }
+  .spec-item{
+    padding:16px 16px;
+  }
+  .brands-preview{
+    width:calc(100% - 16px);
+  }
+  .brands-preview-stage{
+    gap:10px;
+    min-height:auto;
+  }
+  .brands-preview-copy{
+    padding:16px 16px 16px;
+  }
+  .brands-preview-list{gap:8px}
+  .brands-preview-list span{
+    min-height:30px;
+    padding:0 10px;
+    font-size:11px;
+  }
+  .brands-preview-collage{
+    min-height:300px;
+    height:300px;
+    max-height:300px;
+  }
+  .brands-preview-title{
+    font-size:clamp(20px,7.8vw,28px);
+    line-height:1.02;
+    max-width:14ch;
+  }
+  .brands-preview-text{
+    font-size:12px;
+    line-height:1.56;
+    -webkit-line-clamp:2;
+  }
+  .brands-preview-list span:nth-child(n+5){
+    display:none;
+  }
+  .brands-preview-overlay{
+    padding:14px;
+  }
+  .brands-preview-overlay strong{font-size:18px}
+  .brands-preview-overlay span{
+    font-size:10px;
+    max-width:136px;
+  }
+  .brands-preview-link{
+    min-height:44px;
+    padding:11px 16px;
+    font-size:13px;
+    width:100%;
+  }
+  #nav{width:calc(100% - 16px);top:8px;padding:8px}
+  .nav-layout{gap:8px}
+  .nav-brand{gap:8px;padding:5px 7px 5px 5px;border-radius:18px}
+  .brand-icon{width:52px;height:52px;border-radius:14px}
+  .brand-copy{max-width:178px}
+  .brand-name{
+    font-size:15px;
+    line-height:1.02;
+  }
+  .brand-tagline{
+    font-size:9px;
+    line-height:1.12;
+  }
+  .theme-toggle,.hbg{width:42px;height:42px;border-radius:13px}
+  .mobile-contact-backdrop{
+    background:rgba(7,8,10,.52);
+  }
+  .mobile-contact-toggle{
+    min-height:46px;
+    padding:0 12px;
+    gap:8px;
+    border-radius:18px;
+    font-size:13px;
+    right:10px;
+    bottom:calc(10px + env(safe-area-inset-bottom));
+  }
+  .mobile-contact-toggle svg{
+    width:18px;
+    height:18px;
+  }
+  .mobile-contact-sheet{
+    left:10px;
+    right:10px;
+    bottom:calc(10px + env(safe-area-inset-bottom));
+    padding:12px 12px calc(12px + env(safe-area-inset-bottom));
+    max-height:min(80vh, 520px);
+    width:auto;
+    border-radius:22px;
+  }
+  .mobile-contact-sheet-head{
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .mobile-contact-sheet-head strong{
+    font-size:18px;
+  }
+  .mobile-contact-sheet-head span{
+    font-size:12px;
+    line-height:1.6;
+  }
+  .mobile-contact-close{
+    width:36px;
+    height:36px;
+    border-radius:12px;
+    font-size:18px;
+    flex-shrink:0;
+  }
+  .mobile-contact-actions{
+    grid-template-columns:1fr;
+  }
+  .mobile-contact-btn,
+  .mobile-contact-wa{
+    min-height:46px;
+    font-size:13px;
+  }
+  .mobile-contact-line{
+    min-height:42px;
+    padding:0 10px;
+  }
+  .mobile-contact-line span:last-child{
+    font-size:12px;
+    line-height:1.45;
+  }
+  #hero{padding:112px 0 16px;min-height:auto}
+  #hero::before{
+    right:-28%;
+    top:38%;
+    width:min(96vw,460px);
+    transform:translateY(-50%) rotate(-12deg);
+    opacity:.085;
+  }
+  .hero-h{font-size:clamp(34px,11vw,48px);line-height:.98;margin-bottom:16px;padding:0 14px}
+  .hero-sub{font-size:14px;line-height:1.65;margin-bottom:28px;padding:0 18px}
+  .hero-actions{width:100%;flex-direction:column;gap:10px;padding:0 16px;margin-bottom:32px}
+  .btn-pill,.btn-pill-ghost{width:100%;justify-content:center;text-align:center}
+  .hero-card img{height:44vh;min-height:260px}
+  .hero-card-overlay{padding:20px 18px}
+  .hero-card-title{font-size:24px}
+  .hero-card-sub{font-size:13px}
+  .hero-pill-row{width:calc(100% - 24px);padding:0;margin-top:24px}
+  .hero-pill-marquee{
+    border-radius:22px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    mask-image:none;
+    -webkit-mask-image:none;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .hero-pill-marquee::-webkit-scrollbar{display:none}
+  .hero-pill-track{animation:none;width:max-content}
+  .hero-pill-group{gap:8px;padding:10px 12px}
+  .hero-pill-group + .hero-pill-group{display:none}
+  .hpill{flex:0 0 auto;min-height:40px;padding:0 14px;font-size:12px}
+  .why-top-left,.why-top-right,.cases-header,.map-info,.kt-left,.kt-right,footer{padding-left:20px;padding-right:20px}
+  .why-top-right{grid-template-columns:1fr;gap:22px}
+  .why-mosaic{height:auto;grid-template-columns:1fr}
+  .wy-img{min-height:180px}
+  .sec-h{font-size:clamp(26px,9vw,34px)}
+  .sec-sub,.lst-intro-body,.map-copy,.kt-sub{font-size:13px}
+  .lcard{padding:22px 18px;gap:14px}
+  .lcard-icon{width:40px;height:40px}
+  .service-reveal,
+  .service-reveal:nth-child(odd),
+  .service-reveal:nth-child(even){
+    transform:translate3d(0,24px,0) scale(.992);
+  }
+  #prozess{padding:44px 20px}
+  .pz-step{padding:28px 20px}
+  .about-imgs-wrap{grid-template-columns:1fr;grid-template-rows:220px 180px 20px}
+  .spec-list{grid-template-columns:1fr}
+  .map-actions,.fsub-row{flex-direction:column}
+  .map-actions a,.fsubmit{width:100%;text-align:center;justify-content:center}
+  .kt-h{font-size:clamp(26px,9vw,34px)}
+  .kt-form-title{font-size:18px}
+  .mob{padding:96px 18px 28px}
+  .mob a.mob-cta,.mob a.mob-wa{padding:14px 18px;font-size:15px}
+}
+
+@media(max-width:400px){
+  .brand-copy{max-width:162px}
+  .brand-name{
+    font-size:14px;
+    line-height:1.02;
+  }
+  .brand-tagline{
+    font-size:8px;
+    line-height:1.1;
+  }
+  .hero-h{font-size:32px}
+  #hero::before{
+    right:-34%;
+    top:36%;
+    width:108vw;
+    opacity:.07;
+  }
+  .hero-pill-row{width:calc(100% - 20px)}
+  .hero-pill-group{padding:8px 10px}
+  .hpill{font-size:11px;padding:0 12px}
+}
+
+
+
+
+
+
+
+
 </style>
 </head>
 <body>
-<div id="app">
+<div id="app" v-cloak>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#hero" class="nav-brand">
-    <span class="brand-icon"><img src="logo-icon-gold.png" alt="Revival Motoren Logo Symbol" decoding="async" fetchpriority="high"></span>
-    <span class="brand-copy">
-      <span class="brand-name">Revival Motoren</span>
-      <span class="brand-tagline">Wir beleben Ihren Motor</span>
-    </span>
-  </a>
-  <ul class="navl">
-    <li v-for="item in navItems" :key="item.href"><a :href="item.href" :class="{on:item.href==='#leistungen'}">{{ item.label }}</a></li>
-  </ul>
-  <div class="nav-end">
-    <button class="theme-toggle" id="themeToggle" data-theme-toggle type="button" aria-label="Darstellung wechseln">
-      <svg viewBox="0 0 24 24"><path d="M12 3v2.2M12 18.8V21M5.64 5.64l1.56 1.56M16.8 16.8l1.56 1.56M3 12h2.2M18.8 12H21M5.64 18.36l1.56-1.56M16.8 7.2l1.56-1.56"/><circle cx="12" cy="12" r="4.2"/></svg>
-    </button>
-    <a href="tel:+4952189739151" class="nav-tel">
-      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l1-1.01a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  <div class="nav-layout">
+    <a href="#hero" class="nav-brand">
+      <span class="brand-icon"><img :src="logo.dark || logo.light" :alt="logo.alt" decoding="async" fetchpriority="high"></span>
+      <span class="brand-copy">
+        <span class="brand-name">{{ logo.name }}</span>
+        <span class="brand-tagline">{{ logo.tagline }}</span>
+      </span>
     </a>
-    <a href="#kontakt" class="nav-whatsapp js-whatsapp-link" aria-label="WhatsApp Anfrage">
-      <svg viewBox="0 0 32 32"><path d="M19.11 17.34c-.29-.15-1.71-.84-1.97-.93-.26-.1-.45-.15-.64.15s-.74.93-.91 1.12c-.17.2-.33.22-.62.08-.29-.15-1.22-.45-2.32-1.45-.86-.76-1.44-1.7-1.61-1.99-.17-.29-.02-.45.13-.59.13-.12.29-.33.44-.49.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.52-.08-.15-.64-1.55-.87-2.13-.23-.55-.47-.48-.64-.49h-.55c-.2 0-.52.08-.79.37s-1.03 1.01-1.03 2.45 1.06 2.84 1.21 3.03c.15.2 2.09 3.19 5.06 4.47.71.31 1.27.49 1.71.63.72.23 1.38.2 1.9.12.58-.09 1.71-.7 1.95-1.38.24-.67.24-1.25.17-1.37-.07-.12-.26-.2-.55-.34Z"/><path d="M16.03 3.2c-7.05 0-12.76 5.72-12.76 12.77 0 2.25.59 4.45 1.71 6.39L3 29l6.83-1.79a12.75 12.75 0 0 0 6.2 1.59h.01c7.05 0 12.77-5.72 12.77-12.77S23.09 3.2 16.03 3.2Zm0 23.44h-.01a10.6 10.6 0 0 1-5.39-1.47l-.39-.23-4.05 1.06 1.08-3.95-.26-.41a10.56 10.56 0 0 1-1.63-5.63c0-5.85 4.76-10.61 10.62-10.61 2.84 0 5.5 1.11 7.5 3.11a10.54 10.54 0 0 1 3.11 7.5c0 5.85-4.76 10.61-10.61 10.61Z"/></svg>
-      WhatsApp
-    </a>
-    <a href="#kontakt" class="nav-btn">Angebot anfragen</a>
-  </div>
-  <div class="nav-mobile-tools">
-    <button class="theme-toggle" id="themeToggleMobile" data-theme-toggle type="button" aria-label="Darstellung wechseln">
-      <svg viewBox="0 0 24 24"><path d="M12 3v2.2M12 18.8V21M5.64 5.64l1.56 1.56M16.8 16.8l1.56 1.56M3 12h2.2M18.8 12H21M5.64 18.36l1.56-1.56M16.8 7.2l1.56-1.56"/><circle cx="12" cy="12" r="4.2"/></svg>
-    </button>
-    <button class="hbg" onclick="mobToggle()" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
+    <div class="nav-center">
+      <ul class="navl">
+        <li v-for="item in navItems" :key="item.href"><a :href="item.href" :class="{on:item.href==='#leistungen'}">{{ item.label }}</a></li>
+      </ul>
+    </div>
+    <div class="nav-end">
+      <a href="pages/kontakt.html" class="nav-whatsapp js-whatsapp-link" aria-label="WhatsApp Anfrage">
+        <svg viewBox="0 0 32 32"><path d="M19.11 17.34c-.29-.15-1.71-.84-1.97-.93-.26-.1-.45-.15-.64.15s-.74.93-.91 1.12c-.17.2-.33.22-.62.08-.29-.15-1.22-.45-2.32-1.45-.86-.76-1.44-1.7-1.61-1.99-.17-.29-.02-.45.13-.59.13-.12.29-.33.44-.49.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.52-.08-.15-.64-1.55-.87-2.13-.23-.55-.47-.48-.64-.49h-.55c-.2 0-.52.08-.79.37s-1.03 1.01-1.03 2.45 1.06 2.84 1.21 3.03c.15.2 2.09 3.19 5.06 4.47.71.31 1.27.49 1.71.63.72.23 1.38.2 1.9.12.58-.09 1.71-.7 1.95-1.38.24-.67.24-1.25.17-1.37-.07-.12-.26-.2-.55-.34Z"/><path d="M16.03 3.2c-7.05 0-12.76 5.72-12.76 12.77 0 2.25.59 4.45 1.71 6.39L3 29l6.83-1.79a12.75 12.75 0 0 0 6.2 1.59h.01c7.05 0 12.77-5.72 12.77-12.77S23.09 3.2 16.03 3.2Zm0 23.44h-.01a10.6 10.6 0 0 1-5.39-1.47l-.39-.23-4.05 1.06 1.08-3.95-.26-.41a10.56 10.56 0 0 1-1.63-5.63c0-5.85 4.76-10.61 10.62-10.61 2.84 0 5.5 1.11 7.5 3.11a10.54 10.54 0 0 1 3.11 7.5c0 5.85-4.76 10.61-10.61 10.61Z"/></svg>
+        WhatsApp
+      </a>
+      <a href="pages/kontakt.html" class="nav-btn">Angebot anfragen</a>
+    </div>
+    <div class="nav-mobile-tools">
+      <button class="hbg mnav-toggle" id="menuToggle" type="button" aria-label="Menü öffnen" aria-controls="mobMenu" aria-expanded="false"></button>
+    </div>
   </div>
 </nav>
 
-<div class="mob" id="mobMenu">
-  <button class="mob-x" onclick="mobToggle()">✕</button>
-  <a v-for="item in navItems" :key="item.href + '-mobile'" :href="item.href" onclick="mobToggle()">{{ item.label }}</a>
-  <a href="#" onclick="toggleTheme(); mobToggle(); return false;">Dark / Light Mode</a>
-  <a href="#kontakt" class="mob-wa js-whatsapp-link" onclick="mobToggle()">WhatsApp Anfrage</a>
-  <a href="#kontakt" class="mob-cta" onclick="mobToggle()">Angebot anfragen</a>
+<div class="mob" id="mobMenu" aria-hidden="true">
+  <a v-for="item in navItems" :key="item.href + '-mobile'" :href="item.href">{{ item.label }}</a>
+  <a href="pages/kontakt.html" class="mob-cta">Angebot anfragen</a>
 </div>
+
+<aside class="sticky-contact" id="stickyContact" aria-label="Schneller Kontakt">
+  <button class="sticky-contact-toggle" id="stickyContactToggle" type="button" aria-label="Kontaktkarte öffnen" aria-expanded="false">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg>
+  </button>
+  <div class="sticky-contact-panel">
+    <div class="sticky-contact-head">
+      <div>
+        <strong>Direkt Kontakt aufnehmen</strong>
+        <span>Wenn Sie schon wissen, was Sie brauchen, ist der schnellste Weg nur einen Klick entfernt.</span>
+      </div>
+      <div class="sticky-contact-ping">
+        <span class="kt-ping-dot"></span>
+        <span class="kt-ping-txt">{{ contactSection.responseHint }}</span>
+      </div>
+    </div>
+    <div class="sticky-contact-actions">
+      <a href="pages/kontakt.html" class="sticky-contact-btn">Anfrage starten</a>
+      <a href="pages/kontakt.html" class="sticky-contact-wa js-whatsapp-link">WhatsApp</a>
+    </div>
+    <div class="sticky-contact-lines">
+      <a class="sticky-contact-line" :href="contactItems[1].href">
+        <span>{{ contactItems[1].icon }}</span>
+        <span>{{ contactItems[1].value }}</span>
+      </a>
+      <a class="sticky-contact-line" :href="contactItems[3].href">
+        <span>{{ contactItems[3].icon }}</span>
+        <span>{{ contactItems[3].value }}</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+<aside class="mobile-contact" id="mobileContact" aria-label="Mobiler Kontakt">
+  <div class="mobile-contact-backdrop" id="mobileContactBackdrop"></div>
+  <div class="mobile-contact-sheet">
+    <div class="mobile-contact-sheet-head">
+      <div>
+        <strong>Direkt Kontakt aufnehmen</strong>
+        <span>Kurzer Weg zu WhatsApp, Telefon oder dem kompletten Anfrageformular.</span>
+      </div>
+      <button class="mobile-contact-close" id="mobileContactClose" type="button" aria-label="Kontakt schließen">×</button>
+    </div>
+    <div class="mobile-contact-actions">
+      <a href="pages/kontakt.html" class="mobile-contact-btn">Anfrage</a>
+      <a href="pages/kontakt.html" class="mobile-contact-wa js-whatsapp-link">WhatsApp</a>
+    </div>
+    <div class="mobile-contact-lines">
+      <a class="mobile-contact-line" :href="contactItems[1].href">
+        <span>{{ contactItems[1].icon }}</span>
+        <span>{{ contactItems[1].value }}</span>
+      </a>
+      <a class="mobile-contact-line" :href="contactItems[3].href">
+        <span>{{ contactItems[3].icon }}</span>
+        <span>{{ contactItems[3].value }}</span>
+      </a>
+    </div>
+  </div>
+</aside>
 
 <!-- ════ HERO ════════════════════════════ -->
 <section id="hero">
   <h1 class="hero-h">Professionelle<br>Motorinstand&shy;setzung</h1>
   <p class="hero-sub">Präzise PKW-Motorreparaturen in Bielefeld – mit modernster Diagnosetechnik und 12 Monaten Garantie.</p>
   <div class="hero-actions">
-    <a href="#kontakt" class="btn-pill">Kostenloses Angebot →</a>
-    <a href="#leistungen" class="btn-pill-ghost">Leistungen ansehen</a>
+    <a href="pages/kontakt.html" class="btn-pill">{{ hero.primaryAction }}</a>
+    <a href="#leistungen" class="btn-pill-ghost">{{ hero.secondaryAction }}</a>
   </div>
   <div class="hero-card float-card" data-float="22">
     <img src="Projects/Motorblock1.jpg" alt="Motorblock Werkstatt Revival Motoren" class="parallax-media" data-parallax-speed="18" decoding="async" fetchpriority="high">
@@ -1222,7 +2762,16 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     </div>
   </div>
   <div class="hero-pill-row">
-    <span class="hpill" v-for="pill in heroPills" :key="pill">{{ pill }}</span>
+    <div class="hero-pill-marquee">
+      <div class="hero-pill-track">
+        <div class="hero-pill-group">
+          <span class="hpill" v-for="pill in heroPills" :key="pill + '-a'">{{ pill }}</span>
+        </div>
+        <div class="hero-pill-group" aria-hidden="true">
+          <span class="hpill" v-for="pill in heroPills" :key="pill + '-b'">{{ pill }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1250,14 +2799,18 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <section id="leistungen">
   <div class="leistung-layout">
     <div class="leistung-sticky rv">
-      <span class="sec-label">Unsere Leistungen</span>
-      <h2 class="sec-h">Alles aus einer<br>Hand</h2>
-      <p class="lst-intro-body">Von der Erstdiagnose bis zur finalen Abnahmeprüfung – vollständige Motorinstandsetzung durch erfahrene Spezialisten.</p>
-      <a href="#kontakt" class="lst-all-link">Alle Leistungen anfragen →</a>
+      <span class="sec-label">{{ servicesSection.label }}</span>
+      <h2 class="sec-h" v-html="servicesSection.title"></h2>
+      <p class="lst-intro-body">{{ servicesSection.subtitle }}</p>
+      <a href="pages/kontakt.html" class="lst-all-link">{{ servicesSection.action }}</a>
     </div>
     <div class="leistung-grid rv stagger glow-section float-card" style="transition-delay:.1s" data-float="16">
-      <div class="lcard" v-for="service in services" :key="service.title">
-        <div class="lcard-icon">{{ service.icon }}</div>
+      <div class="lcard service-reveal" v-for="service in services" :key="service.title">
+        <div class="lcard-icon">
+          <div class="lcard-icon-mark">
+            <img :src="service.icon" :alt="service.title + ' Icon'" loading="lazy" decoding="async">
+          </div>
+        </div>
         <div>
           <div class="lcard-title">{{ service.title }}</div>
           <p class="lcard-body">{{ service.body }}</p>
@@ -1268,95 +2821,12 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   </div>
 </section>
 
-<!-- ════ CASES ════════════════════════════ -->
-<div id="cases" class="rv glow-section">
-  <div class="cases-header">
-    <div>
-      <span class="sec-label">Referenzarbeiten</span>
-      <h2 class="sec-h">Unsere<br>Motorprojekte</h2>
-      <p class="sec-sub">Präzise Instandsetzung und Reparatur für alle führenden Fahrzeughersteller.</p>
-    </div>
-    <div class="cases-right">
-      <a href="#kontakt" class="btn-pill">Projekt anfragen →</a>
-    </div>
-  </div>
-  <div class="cases-gallery stagger rv" style="transition-delay:.08s">
-    <div class="cg-cell" v-for="item in caseGallery" :key="item.name">
-      <img :src="item.src" :alt="item.alt" class="parallax-media" :data-parallax-speed="item.speed">
-      <div class="cg-label"><div class="cg-tag">{{ item.tag }}</div><div class="cg-name">{{ item.name }}</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ════ BRANDS ═══════════════════════════ -->
-<section id="brands">
-  <div class="brands-shell glow-section">
-    <div class="brands-header rv">
-      <div>
-        <span class="sec-label">Marken & Motoren</span>
-        <h2 class="sec-h">Ingenieurskunst am Limit</h2>
-        <p class="sec-sub">Wo Präzision auf rohe Gewalt trifft. Entdecke die Meilensteine der Motorenentwicklung, die Performance neu definiert haben.</p>
-      </div>
-    </div>
-
-    <div class="brand-scroll-list">
-      <article class="brand-scroll-chapter" v-for="brand in brandScenes" :key="brand.sceneId" :id="brand.sceneId" data-brand-scene>
-        <div class="brand-scroll-stage">
-          <picture class="brand-scroll-media">
-            <source media="(max-width: 768px)" :srcset="brand.mobileImage">
-            <img :src="brand.heroImage" :alt="brand.heroAlt" class="brand-hero-media" loading="eager" decoding="async" fetchpriority="high">
-          </picture>
-          <div class="brand-scroll-veil"></div>
-        </div>
-        <section class="brand-scroll-content">
-          <div class="brand-detail-top brand-observe">
-            <div class="brand-detail-copy">
-              <div class="brand-detail-title">{{ brand.title }}</div>
-              <div class="brand-detail-subtitle">{{ brand.subtitle }}</div>
-            </div>
-          </div>
-          <div class="brand-intro-block">
-            <div class="brand-intro-copy">
-              <div class="brand-intro-kicker">Brand Story</div>
-              <p class="brand-intro-text">{{ brand.intro }}</p>
-            </div>
-          </div>
-          <div class="brand-detail-body">
-            <div class="brand-flow-row brand-observe" v-for="(motor,index) in brand.motors" :key="brand.sceneId + motor.name">
-              <div class="brand-back-copy">
-                <article class="motor-card brand-observe">
-                  <div class="motor-summary">
-                    <div class="motor-summary-copy">
-                      <div class="motor-name">{{ motor.name }}</div>
-                      <div class="motor-meta">{{ motor.meta }}</div>
-                    </div>
-                  </div>
-                  <div class="motor-body">
-                    <p class="motor-copy">{{ motor.copy }}</p>
-                  </div>
-                </article>
-              </div>
-              <div class="brand-slideshow">
-                <div class="brand-slide brand-observe" v-if="brand.slides[index]">
-                  <img :src="brand.slides[index].src" :alt="brand.name + ' Motorbild ' + (index + 1)" loading="lazy" decoding="async" fetchpriority="low">
-                  <span class="brand-slide-caption">{{ brand.slides[index].caption }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="brand-scroll-scene-tail" aria-hidden="true"></div>
-          </div>
-        </section>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- ════ RESULTS / WORKSHOP ══════════ -->
 <section id="results">
   <div class="results-header rv">
-    <span class="sec-label">Werkstatt</span>
-    <h2 class="sec-h">Präzision in jeder Bearbeitung.<br>Modernste Technik.</h2>
-    <p class="sec-sub">Professionelle Maschinen und moderne Verfahren für langlebige Motoren.</p>
+    <span class="sec-label">{{ resultsSection.label }}</span>
+    <h2 class="sec-h" v-html="resultsSection.title"></h2>
+    <p class="sec-sub">{{ resultsSection.subtitle }}</p>
   </div>
   <div class="ba-grid rv" style="transition-delay:.1s">
     <div class="ba-card" v-for="card in workshopCards" :key="card.title">
@@ -1373,10 +2843,81 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   </div>
 </section>
 
+<!-- ════ CASES ════════════════════════════ -->
+<div id="cases" class="rv glow-section">
+  <div class="cases-header">
+    <div>
+      <span class="sec-label">Referenzarbeiten</span>
+      <h2 class="sec-h">Unsere<br>Motorprojekte</h2>
+      <p class="sec-sub">Präzise Instandsetzung und Reparatur für alle führenden Fahrzeughersteller.</p>
+    </div>
+    <div class="cases-right">
+      <a href="pages/projekte.html" class="btn-pill">{{ casesSection.action }}</a>
+    </div>
+  </div>
+  <div class="cases-gallery stagger rv" style="transition-delay:.08s">
+    <div class="cg-cell" v-for="item in caseGallery" :key="item.name">
+      <img :src="item.src" :alt="item.alt" class="parallax-media" :data-parallax-speed="item.speed">
+      <div class="cg-label"><div class="cg-tag">{{ item.tag }}</div><div class="cg-name">{{ item.name }}</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ BRANDS ═══════════════════════════ -->
+<section id="brands">
+  <div class="brands-shell glow-section">
+    <div class="brands-preview rv glow-section">
+      <div class="brands-preview-stage">
+        <div class="brands-preview-copy">
+          <div>
+            <span class="sec-label">{{ brandsPreview.label }}</span>
+            <h3 class="brands-preview-title">{{ brandsPreview.title }}</h3>
+            <p class="brands-preview-text">{{ brandsPreview.body }}</p>
+            <div class="brands-preview-list">
+              <span v-for="brand in brandsPreview.brands" :key="brand + '-chip'">{{ brand }}</span>
+            </div>
+          </div>
+          <div>
+            <a href="pages/motoren.html" class="brands-preview-link">{{ brandsPreview.button }}</a>
+          </div>
+        </div>
+        <div class="brands-preview-collage">
+          <article
+            class="brands-preview-slide"
+            v-for="(brand, index) in brandScenes"
+            :key="brand.sceneId + '-preview'"
+            :class="{ 'is-active': currentBrandSlide === index }"
+          >
+              <img :src="brand.heroImage" :alt="brand.heroAlt" :loading="index === 0 ? 'eager' : 'lazy'" decoding="async">
+              <div class="brands-preview-overlay">
+                <div class="brands-preview-meta">
+                <strong>{{ brand.name }}</strong>
+                <span>{{ brand.subtitle }}</span>
+                </div>
+              </div>
+          </article>
+          <div class="brands-preview-slider-ui" v-if="brandScenes.length > 1">
+            <div></div>
+            <div class="brands-preview-dots" aria-hidden="true">
+              <span
+                class="brands-preview-dot"
+                v-for="(brand, index) in brandScenes"
+                :key="brand.sceneId + '-dot'"
+                :class="{ 'is-active': currentBrandSlide === index }"
+              ></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- ════ PROZESS ══════════════════════════ -->
 <div id="prozess" class="rv glow-section">
-  <span class="sec-label">Unser Ablauf</span>
-  <h2 class="sec-h" style="margin-bottom:48px">In 4 Schritten<br>zu Ihrem Motor</h2>
+  <span class="sec-label">{{ processSection.label }}</span>
+  <h2 class="sec-h" style="margin-bottom:42px; margin-top:40px" v-html="processSection.title"></h2>
   <div class="pz-grid rv stagger" style="transition-delay:.08s">
     <div class="pz-step" v-for="step in processSteps" :key="step.n" :data-step="step.step">
       <div class="pz-n">{{ step.n }}</div>
@@ -1390,19 +2931,22 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <section id="ueber-uns">
   <div class="about-wrap rv glow-section">
     <div class="about-imgs-wrap">
-      <div class="a-img"><img src="Projects/ueber-uns/block-floor.jpg" alt="Werkstatt" class="parallax-media" data-parallax-speed="14" style="height:100%;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)"></div>
-      <div class="a-img" style="align-self:start"><img src="Projects/ueber-uns/Motorblock1.jpg" alt="Zylinderkopf" class="parallax-media" data-parallax-speed="10" style="height:200px;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)"></div>
-      <div class="a-img" style="align-self:end"><img src="Projects//Motor1.jpg" alt="Motor fertig" class="parallax-media" data-parallax-speed="12" style="height:280px;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)"></div>
+      <div class="a-img" v-if="aboutPreviewImages[0]"><img :src="aboutPreviewImages[0].src" :alt="aboutPreviewImages[0].alt" class="parallax-media" :data-parallax-speed="aboutPreviewImages[0].speed" :style="aboutPreviewImages[0].style"></div>
+      <div class="a-img" style="align-self:start" v-if="aboutPreviewImages[1]"><img :src="aboutPreviewImages[1].src" :alt="aboutPreviewImages[1].alt" class="parallax-media" :data-parallax-speed="aboutPreviewImages[1].speed" :style="aboutPreviewImages[1].style"></div>
+      <div class="a-img" style="align-self:end" v-if="aboutPreviewImages[2]"><img :src="aboutPreviewImages[2].src" :alt="aboutPreviewImages[2].alt" class="parallax-media" :data-parallax-speed="aboutPreviewImages[2].speed" :style="aboutPreviewImages[2].style"></div>
     </div>
     <div class="about-text">
-      <span class="sec-label">Über uns</span>
-      <h2 class="sec-h" style="margin-bottom:14px">Revival Motoren –<br>Bielefeld</h2>
-      <p class="sec-sub">Spezialisierte Werkstatt für Motorinstandsetzung und Motorreparatur. Traditionelles Handwerk trifft modernste Technik – für langlebige und zuverlässige Ergebnisse.</p>
+      <span class="sec-label">{{ aboutPreview.label }}</span>
+      <h2 class="sec-h" style="margin-bottom:14px" v-html="aboutPreview.title"></h2>
+      <p class="sec-sub">{{ aboutPreview.body }}</p>
       <div class="spec-list">
         <div class="spec-item" v-for="spec in aboutSpecs" :key="spec.label">
           <div class="spec-n" :style="spec.style || ''" v-html="spec.value"></div>
           <div class="spec-l">{{ spec.label }}</div>
         </div>
+      </div>
+      <div class="about-preview-actions">
+        <a href="pages/ueber-uns.html" class="btn-pill">{{ aboutPreview.button }}</a>
       </div>
     </div>
   </div>
@@ -1417,7 +2961,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     </div>
     <div>
       <div class="kt-contacts">
-        <div class="ktci" v-for="item in contactItems" :key="item.label">
+        <div class="ktci" v-for="item in contactItems.filter(item => item.label !== 'WhatsApp')" :key="item.label">
           <span class="ktci-ic">{{ item.icon }}</span>
           <div>
             <div class="ktci-lbl">{{ item.label }}</div>
@@ -1434,87 +2978,23 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
       </div>
     </div>
   </div>
-  <div class="kt-right">
-    <div class="kt-form-title">Ihre Anfrage</div>
-    <form id="kForm" onsubmit="submitForm(event)">
-      <div class="frow">
-        <div class="ff"><label class="fl">Name <em>*</em></label><input type="text" class="fi" placeholder="Vor- und Nachname" required></div>
-        <div class="ff"><label class="fl">E-Mail <em>*</em></label><input type="email" class="fi" placeholder="ihre@email.de" required></div>
-      </div>
-      <div class="frow">
-        <div class="ff"><label class="fl">Telefon</label><input type="tel" class="fi" placeholder="+49 ..."></div>
-        <div class="ff"><label class="fl">Fahrzeugmarke</label><input type="text" class="fi" placeholder="BMW, Mercedes ..."></div>
-      </div>
-      <div class="frow">
-        <div class="ff"><label class="fl">Motortyp</label>
-          <select class="fsel" id="mtyp" onchange="this.classList.add('ch')">
-            <option value="" disabled selected>Bitte wählen…</option>
-            <option v-for="option in engineOptions" :key="option">{{ option }}</option>
-          </select>
-        </div>
-        <div class="ff"><label class="fl">Fahrgestellnummer (VIN)</label><input type="text" class="fi" placeholder="17-stellige VIN" maxlength="17"></div>
-      </div>
-      <div class="frow one">
-        <div class="ff"><label class="fl">Problembeschreibung <em>*</em></label><textarea class="fta" placeholder="Beschreiben Sie den Motorschaden detailliert …" required></textarea></div>
-      </div>
-      <div class="frow one" style="margin-bottom:0">
-        <label class="fupload">
-          <input type="file" accept=".pdf,.jpg,.jpeg,.png" multiple>
-          <div class="fupload-t">📎 Dokumente hochladen (optional)</div>
-          <div class="fupload-s">PDF, JPG oder PNG – max. 10 MB</div>
-        </label>
-      </div>
-      <div class="fcheck-row">
-        <div class="fcheck">
-          <input type="checkbox" id="consent-agb" required>
-          <label for="consent-agb">Ich habe die <a href="agb.html" target="_blank" rel="noopener noreferrer">AGB</a> und die <a href="datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu. <em>*</em></label>
-        </div>
-      </div>
-      <div class="fsub-row"><button type="submit" class="fsubmit">Angebot anfragen →</button></div>
-      <div class="fnote">Kostenlos & unverbindlich · Keine Datenweitergabe</div>
-    </form>
-    <div id="kOk" style="display:none;text-align:center;padding:56px 20px">
-      <div style="width:56px;height:56px;border-radius:50%;background:var(--bg);border:1.5px solid var(--rule);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px">✓</div>
-      <div style="font-size:22px;font-weight:800;letter-spacing:-.04em;color:var(--ink);margin-bottom:6px">Anfrage gesendet!</div>
-      <p style="font-size:13px;color:var(--mid);line-height:1.7">Wir melden uns innerhalb von 24 Stunden mit Ihrem Angebot.</p>
+  <div class="kt-right contact-preview-card">
+    <span class="sec-label">{{ contactPreview.label }}</span>
+    <div class="kt-form-title">{{ contactPreview.title }}</div>
+    <p class="sec-sub" style="max-width:100%;margin-bottom:0">{{ contactPreview.body }}</p>
+    <div class="contact-preview-actions">
+      <a href="pages/kontakt.html" class="btn-pill">{{ contactPreview.primaryButton }}</a>
+      <a class="contact-preview-route" :href="mapSection.routeHref" target="_blank" rel="noopener noreferrer">{{ contactPreview.secondaryButton }}</a>
     </div>
   </div>
 </div>
-
-<!-- ════ MAP ═════════════════════════════ -->
-<section id="map-section" class="rv">
-  <div class="map-wrap">
-    <div class="map-info">
-      <span class="sec-label">Standort</span>
-      <h2 class="sec-h">Werkstatt in<br>Bielefeld finden</h2>
-      <p class="map-copy">Revival Motoren finden Sie direkt an der Artur-Ladebeck-Straße. Die Karte unten hilft Ihren Kunden bei der schnellen Navigation zur Werkstatt.</p>
-      <div class="map-points">
-        <div class="map-point" v-for="point in mapPoints" :key="point.title"><strong>{{ point.title }}</strong><span v-html="point.body"></span></div>
-      </div>
-      <p class="map-note">Telefon, E-Mail und vollständige Kontaktdaten finden Sie direkt im Anfragebereich darunter, damit die Informationen nicht doppelt erscheinen.</p>
-      <div class="map-actions">
-        <a class="map-route" href="https://www.google.com/maps/dir/?api=1&destination=Artur-Ladebeck-Stra%C3%9Fe+181,+33647+Bielefeld" target="_blank" rel="noopener noreferrer">Route planen</a>
-        <a class="map-whatsapp js-whatsapp-link" href="#kontakt">WhatsApp</a>
-      </div>
-    </div>
-    <div class="map-frame">
-      <iframe
-        title="Google Maps Standort Revival Motoren"
-        src="https://www.google.com/maps?q=Artur-Ladebeck-Stra%C3%9Fe%20181,%2033647%20Bielefeld&z=15&output=embed"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-</section>
 
 <!-- ════ FOOTER ═══════════════════════════ -->
 <footer>
   <div class="ft-top">
     <div>
       <div class="ft-brand-row">
-        <span class="brand-icon"><img src="logo-icon-gold.png" alt="Revival Motoren Logo Symbol" loading="lazy" decoding="async"></span>
+        <span class="brand-icon"><img :src="logo.dark || logo.light" :alt="logo.alt" loading="lazy" decoding="async"></span>
         <div class="brand-copy">
           <div class="brand-name">Revival Motoren</div>
           <div class="brand-tagline">Wir beleben Ihren Motor</div>
@@ -1532,190 +3012,93 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 </footer>
 </div>
 
+<script src="content/site-core.js"></script>
+<script src="content/home-content.js"></script>
+<script src="content/about-content.js"></script>
+<script src="content/contact-content.js"></script>
+<script src="content/motoren-content.js"></script>
+<script src="assets/ui/mobile-nav.js"></script>
+<script src="assets/ui/scroll-top.js"></script>
+<script src="assets/ui/floating-contact.js"></script>
+<script src="assets/ui/consent-banner.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+const navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+const isReloadNavigation = navEntry && navEntry.type === 'reload';
+
+function forceScrollTop(){
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+if (isReloadNavigation) {
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+  forceScrollTop();
+  requestAnimationFrame(() => {
+    forceScrollTop();
+    requestAnimationFrame(() => forceScrollTop());
+  });
+  window.setTimeout(forceScrollTop, 0);
+  window.setTimeout(forceScrollTop, 120);
+}
+
+window.addEventListener('pageshow', () => {
+  if (isReloadNavigation) {
+    forceScrollTop();
+  }
+});
+
+window.addEventListener('load', () => {
+  if (isReloadNavigation || !window.location.hash) {
+    forceScrollTop();
+  }
+});
+
 const { createApp } = Vue;
 
 createApp({
   data(){
-    return{
-      navItems:[
-        {label:'Leistungen',href:'#leistungen'},
-        {label:'Referenzen',href:'#cases'},
-        {label:'Motoren',href:'#brands'},
-        {label:'Über uns',href:'#ueber-uns'},
-        {label:'Kontakt',href:'#kontakt'}
-      ],
-      heroPills:[
-        '🛡️ 12 Monate Garantie',
-        '🚗 DE-weite Abholung',
-        '⏱️ 7–15 Werktage',
-        '🔩 OEM-Ersatzteile',
-        '📋 Kostenloser Voranschlag',
-        '✅ Verfügbar 24/7'
-      ],
-      whyFeatures:[
-        {icon:'🔬',title:'Präzise Diagnose',body:'Modernste OBD-Messtechnik identifiziert jedes Problem exakt.'},
-        {icon:'🛡️',title:'12 Monate Garantie',body:'Jede Reparatur ist vollständig abgesichert.'},
-        {icon:'🔩',title:'OEM-Ersatzteile',body:'Ausschließlich Original- und OEM-Qualitätsteile.'},
-        {icon:'⚡',title:'7–15 Werktage',body:'Schnelle Reparatur – Ihr Motor wieder einsatzbereit.'}
-      ],
-      whyMosaic:[
-        {src:'Projects/img-block.jpg',alt:'Motorblock Detail',speed:10},
-        {src:'Projects/Motor.jpg',alt:'Werkstattmotor',speed:14},
-        {src:'Projects/Motor1.jpg',alt:'Leistungsaggregat',speed:12},
-        {src:'Projects/Motorblock.jpg',alt:'Motorraum Detail',speed:16}
-      ],
-      services:[
-        {icon:'🔬',title:'Diagnose & Befund',body:'Vollständige Fehleranalyse mit modernster OBD-Messtechnik. Transparenter Befundbericht und fester Kostenvoranschlag vor Beginn.',tags:['Kompressionsprüfung','Öldruckkontrolle','Dichtigkeitsprüfung']},
-        {icon:'🔩',title:'Zylinderkopf-Instandsetzung',body:'Druckprüfung, Ultraschallreinigung, Planen und vollständige Aufbereitung des Zylinderkopfes nach Herstellervorgaben.',tags:['Ultraschall','Planen','Ventilsitze']},
-        {icon:'⚙️',title:'Kurbelwelle & Lager',body:'Prüfung, Richten und Schleifen der Kurbelwelle. Austausch aller Haupt- und Pleuellager mit OEM-Teilen.',tags:['Schleifen','Hauptlager','Pleuellager']},
-        {icon:'🔗',title:'Steuerkette & Timing',body:'Austausch der Steuerkette inkl. Führungsschienen, Spanner und aller zugehörigen Komponenten.',tags:['Führungsschienen','Spanner','Kettenkit']},
-        {icon:'🏁',title:'Honen & Kolbenringe',body:'Professionelles Honen der Zylinder und Austausch aller Kolbenringe sowie Prüfung der Kolben.',tags:['Honen','Kolbenringe','Ölpumpe']},
-        {icon:'🚗',title:'Abholung & Lieferung',body:'Deutschlandweite Fahrzeugabholung direkt bei Ihnen zuhause – bequem, sicher und termingerecht.',tags:['Deutschlandweit','Termintreu','Sicherer Transport']}
-      ],
-      caseGallery:[
-        {src:'Projects/projekte/img-block.jpg',alt:'Zylinderkopf',tag:'Zylinderkopf',name:'Druckprüfung & Planen',speed:14},
-        {src:'Projects/projekte/Motorblock.jpg',alt:'Motorblock fertig',tag:'Motorblock',name:'OEM-Instandsetzung',speed:12},
-        {src:'Projects/projekte/Motor.jpg',alt:'BMW R4',tag:'BMW · R4',name:'Reihenmotor',speed:16},
-        {src:'Projects/projekte/Motor1.jpg',alt:'Maserati V6',tag:'Maserati · V6',name:'V-Motor',speed:10},
-        {src:'Projects/Motor1.jpg',alt:'Mercedes V12',tag:'Mercedes · V12',name:'Oberklasse',speed:18}
-      ],
-      brandScenes:[
-        {
-          sceneId:'brandAudiScene',
-          mobileImage:'audi/mobile.jpg',
-          heroImage:'audi/Audi R8-optimized.jpg',
-          heroAlt:'Audi R8 Performance Fahrzeug',
-          chip:'Germany · Audi',
-          name:'Audi',
-          teaser:'R8, RS-Modelle und High-Performance-Antriebe mit klarer Linienführung, präziser Technik und ikonischem Klangbild.',
-          title:'Audi Motoren',
-          subtitle:'Vier Hochleistungsaggregate von FSI bis BiTDI.',
-          intro:'Vom ikonischen Fünfzylinder bis zum hochdrehenden V10 zeigt diese Auswahl die charakterstarken Audi-Performance-Motoren mit Fokus auf Klang, Drehmoment, Aufladung und technische Eigenständigkeit.',
-          slides:[
-            {src:'audi/motoren/2.5 TFSI R5 TURBO.jpg',caption:'EA855 EVO'},
-            {src:'audi/motoren/4.0 TFSI V8 BITURBO.jpg',caption:'EA825'},
-            {src:'audi/motoren/Audi V6 TDI.jpg',caption:'EA897evo3'},
-            {src:'audi/motoren/audi v10.jpg',caption:'EA824 / FSI'}
-          ],
-          motors:[
-            {name:'EA855 EVO',meta:'2.5 TFSI R5 TURBO',copy:'Die Ikone mit der markanten 1-2-4-5-3 Zündfolge. Dieser mehrfache "Engine of the Year"-Sieger liefert bis zu 400 PS und bietet eine unverwechselbare Klangkulisse. Kompakte Bauweise trifft auf Rennsport-Performance, perfektioniert für Modelle wie den RS 3 und TT RS.'},
-            {name:'EA825',meta:'4.0 TFSI V8 BITURBO',copy:'Das High-End-Aggregat der Oberklasse. Mit zwei im heißen Innen-V liegenden Turboladern und Zylinderabschaltung (COD) vereint dieser Motor brachiale 630 PS mit modernster Effizienztechnologie. Er bildet das emotionale Herzstück der RS 6, RS 7 und RS Q8 Modelle.'},
-            {name:'EA897evo3',meta:'3.0 V6 BiTDI QUATTRO',copy:'Die Speerspitze der Audi Diesel-Technologie. Dank Biturbo-Aufladung und massiver Durchzugskraft von bis zu 700 Nm definiert dieser V6 Langstrecken-Performance neu. Ein hocheffizientes Kraftpaket, das souveräne Kraftentfaltung mit beeindruckender Reichweite in den S-Modellen kombiniert.'},
-            {name:'EA824 / FSI',meta:'5.2 V10 SAUGMOTOR',copy:'Ein akustisches und mechanisches Spektakel. Dieser hochdrehende Zehnzylinder verzichtet auf Aufladung und setzt stattdessen auf ein direktes Ansprechverhalten und einen unvergleichlichen, kreischenden Sound. Das Herzstück des Audi R8 – ein technisches Vermächtnis, das für puristische Sportwagen-Performance steht.'}
-          ]
-        },
-        {
-          sceneId:'brandBmwScene',
-          mobileImage:'bmw/bmw_m6_portrait_mobile-optimized.jpg',
-          heroImage:'bmw/bmw m6-optimized.jpg',
-          heroAlt:'BMW M Performance Fahrzeug',
-          chip:'Germany · BMW M',
-          name:'BMW',
-          teaser:'M-Modelle mit präzisem Fahrgefühl, hochdrehenden Ikonen und Biturbo-Wucht zwischen Reihensechser, V8 und V10.',
-          title:'BMW Motoren',
-          subtitle:'Vier Hochleistungsaggregate von Reihensechszylinder bis V10.',
-          intro:'Vom aktuell leistungsstarken M-Reihensechszylinder bis zum ikonischen Hochdrehzahl-V10 zeigt diese Auswahl die prägendsten BMW Performance-Motoren mit Fokus auf Präzision, Biturbo-Wucht und emotionale Drehfreude.',
-          slides:[
-            {src:'bmw/motoren/BMW S58 Motor.jpg',caption:'S58'},
-            {src:'bmw/motoren/BMW S63 Motor.jpg',caption:'S63'},
-            {src:'bmw/motoren/BMW_B57_engine.jpg',caption:'B57D30S0'},
-            {src:'bmw/motoren/bmw s65.jpg',caption:'S85B50'}
-          ],
-          motors:[
-            {name:'S58',meta:'3.0 M TWINPOWER TURBO R6',copy:'Der aktuell leistungsstärkste Reihensechszylinder von BMW M. Mit zwei Monoscroll-Ladern und bis zu 550 PS bietet er eine Drehfreude, die fast an Saugmotoren erinnert. Er ist das technische Kraftzentrum des aktuellen M3 und M4 und steht für unerreichte Präzision.'},
-            {name:'S63',meta:'4.4 V8 M TWINPOWER TURBO',copy:'Ein legendäres Kraftpaket mit dem charakteristischen bankübergreifenden Abgaskrümmer. In Modellen wie dem M5 Competition liefert er bis zu 625 PS. Die extrem kurzen Wege zwischen Brennraum und Turbolader sorgen für ein explosives Ansprechverhalten und brachiale Beschleunigungswerte.'},
-            {name:'B57D30S0',meta:'3.0 M50d QUAD-TURBO R6',copy:'Ein technisches Unikat: Der einzige Pkw-Dieselmotor der Welt mit vier Turboladern. Mit 400 PS und massiven 760 Nm Drehmoment verbindet er die Souveränität eines V8 mit der Effizienz eines Reihensechszylinders. Ein Meisterwerk der Ingenieurskunst für maximale Langstrecken-Performance.'},
-            {name:'S85B50',meta:'5.0 V10 HOCHDREHZAHL-SAUGER',copy:'Das ikonische Herzstück der M-High-Performance-Serie. Mit zehn Einzeldrosselklappen und einer Maximaldrehzahl von 8.250 U/min bietet dieser 507 PS starke V10 eine unvergleichliche Aggressivität. Sein kreischender Sound macht ihn zum emotionalsten Saugmotor der BMW-Geschichte.'}
-          ]
-        },
-        {
-          sceneId:'brandMercedesScene',
-          mobileImage:'mercedes/mercedes_portrait_mobile-optimized.jpg',
-          heroImage:'mercedes/s63 amg-optimized.jpg',
-          heroAlt:'Mercedes AMG Performance Fahrzeug',
-          chip:'Germany · AMG',
-          name:'Mercedes',
-          teaser:'AMG-Charakter von modernem Vierzylinder bis monumentalem V12 mit Langstrecken-Souveränität und markantem Sound.',
-          title:'Mercedes Motoren',
-          subtitle:'Vier Hochleistungsaggregate von AMG-Vierzylinder bis V12 Biturbo.',
-          intro:'Vom stärksten Serien-Vierzylinder der Welt bis zum monumentalen V12 zeigt diese Auswahl die prägendsten Mercedes Performance-Motoren mit Fokus auf AMG-Charakter, moderne Aufladung und maximale Souveränität.',
-          slides:[
-            {src:'mercedes/motoren/mercedes m139.jpg',caption:'M139'},
-            {src:'mercedes/motoren/mercedes m177:m178.jpg',caption:'M177 / M178'},
-            {src:'mercedes/motoren/mercedes OM656.jpg',caption:'OM656'},
-            {src:'mercedes/motoren/Mercedes_M279_engine.jpg',caption:'M279'}
-          ],
-          motors:[
-            {name:'M139',meta:'2.0 L 4-ZYLINDER TURBO (AMG)',copy:'Der stärkste Serien-Vierzylinder der Welt. Mit bis zu 421 PS setzt dieses Triebwerk neue Maßstäbe in Sachen Literleistung. Durch den gedrehten Einbau und den Twin-Scroll-Lader liefert er eine Performance, die man früher nur von großen V8-Motoren kannte – das Herzstück der aktuellen A 45 und C 63 Modelle.'},
-            {name:'M177 / M178',meta:'4.0 V8 BITURBO (AMG)',copy:'Das Synonym für modernen AMG-Sound. Mit den Turboladern im heißen Innen-V für extrem direktes Ansprechverhalten. Ob im GT-Supersportwagen oder in der G-Klasse: Dieser Motor ist berühmt für seine brutale Leistungsentfaltung von bis zu 730 PS und seinen tief grollenden Charakter.'},
-            {name:'OM656',meta:'3.0 R6 TURBODIESEL',copy:'Das effiziente Kraftpaket der Oberklasse. Dieser Reihensechszylinder-Diesel nutzt ein Stufenaufladungskonzept und das innovative CAMTRONIC-Ventilhubsystem. Mit bis zu 340 PS und 700 Nm Drehmoment kombiniert er seidenweichen Lauf mit einer Durchzugskraft, die Mercedes zur ersten Wahl für Langstrecken-Performance macht.'},
-            {name:'M279',meta:'6.0 V12 BITURBO',copy:'Das Maximum an automobiler Souveränität. Während andere auf Downsizing setzen, bietet dieser V12 ein Drehmomentplateau, das sich wie eine endlose Kraftwelle anfühlt. Verbaut in der Maybach-Klasse und den legendären 65er AMG-Modellen, steht dieser Motor für absoluten Luxus und unerschöpfliche Reserven.'}
-          ]
-        },
-        {
-          sceneId:'brandRangeScene',
-          mobileImage:'range/range rover mobile.jpg',
-          heroImage:'range/range rover.jpg',
-          heroAlt:'Range Rover Performance Fahrzeug',
-          chip:'United Kingdom · Range Rover',
-          name:'Range Rover',
-          teaser:'SV-Modelle mit unerschütterlichem Durchzug, legendärem Klangcharakter und massiver Biturbo-Wucht zwischen High-Performance-Diesel und High-End-V8.',
-          title:'Range Rover Motoren',
-          subtitle:'Vier Hochleistungsaggregate von britischer Souveränität bis zur V8-Kompressor-Gewalt.',
-          intro:'Vom modernen Twin-Turbo V8 der neuesten Generation bis zum ikonischen Kompressor-V8 zeigt diese Auswahl die prägendsten Range Rover Performance-Motoren. Unser Fokus liegt auf der technischen Perfektionierung dieser Triebwerke, um die Balance zwischen monumentaler Kraft und ultimativer Laufruhe dauerhaft zu bewahren.',
-          slides:[
-            {src:'range/motor/AJ133.jpg',caption:'AJ133'},
-            {src:'range/motor/N63.jpg',caption:'N63 (P530)'},
-            {src:'range/motor/448DT.webp',caption:'448DT'},
-            {src:'range/motor/AJ33S.jpg',caption:'AJ33S'}
-          ],
-          motors:[
-            {name:'AJ133',meta:'5.0 V8 SUPERCHARGED',copy:'Das emotionale Kraftzentrum der SVR-Reihe. Dieser V8 mit Twin-Vortex-Kompressor leistet bis zu 575 PS und ist weltberühmt für sein aggressives, mechanisches Brüllen. Als Spezialisten fokussieren wir uns bei der Instandsetzung auf die Optimierung des Kettentriebs und der Kompressor-Lagerung, um die brutale Performance dauerhaft zu sichern.'},
-            {name:'N63 (P530)',meta:'4.4 V8 TWIN-TURBO',copy:'Die neue Speerspitze der modernen Range Rover Generation. Durch das „Hot V"-Layout der Turbolader liefert dieses Aggregat 530 PS mit einer Effizienz und einem Ansprechverhalten, das neue Maßstäbe setzt. Unsere Expertise umfasst das präzise thermische Management dieses Hochleistungsmotors für maximale Standfestigkeit unter Extrembedingungen.'},
-            {name:'448DT',meta:'4.4 SDV8 BITURBO DIESEL',copy:'Das Drehmoment-Monument. Mit massiven 740 Nm ist dieser V8-Diesel der Inbegriff für unerschütterliche Souveränität. Er kombiniert die Kraft eines Schleppers mit der Laufruhe einer Luxuslimousine. Wir beheben die typischen Schwachstellen des Biturbo-Systems und der Ölkühlung, damit dieser Langstreckenkönig seine Zuverlässigkeit behält.'},
-            {name:'AJ33S',meta:'4.2 V8 SUPERCHARGED',copy:'Die unverwüstliche Legende aus der Ära der L322-Modelle. Mit 396 PS gilt dieser Kompressor-V8 als einer der robustesten Motoren, die je britischen Boden verlassen haben. Eine professionelle Revision dieses Klassikers in unserem Haus garantiert den Erhalt echter Automobilgeschichte mit der Zuverlässigkeit eines Neuwagens.'}
-          ]
-        }
-      ],
-      workshopCards:[
-        {src:'Projects/motor-honen.jpg',alt:'Zylinder Honen',title:'Zylinder-Honen',sub:'Präzise Bearbeitung der Zylinderlaufbahnen für optimale Kompression und lange Lebensdauer.',speed:14},
-        {src:'Projects/messen.png',alt:'Motorblock Vermessung',title:'Motorblock Vermessung',sub:'Exakte Prüfung aller Bauteile nach OEM-Spezifikationen mit modernen Messverfahren.',speed:10},
-        {src:'Projects/img-zylinder.jpg',alt:'Zylinderkopf Planen',title:'Zylinderkopf Planen',sub:'Präzises Planen der Dichtfläche für optimale Passgenauigkeit und langfristige Betriebssicherheit.',speed:12}
-      ],
-      processSteps:[
-        {step:1,n:'01',title:'Diagnose',body:'Vollständige Fehleranalyse, Befundbericht und transparenter Kostenvoranschlag.'},
-        {step:2,n:'02',title:'Reparatur',body:'Fachgerechter Austausch aller defekten Bauteile mit OEM-Ersatzteilen.'},
-        {step:3,n:'03',title:'Zusammenbau',body:'Präziser Motorzusammenbau nach Herstellervorgaben, kalibriert und dokumentiert.'},
-        {step:4,n:'04',title:'Abnahme',body:'Kompression, Öldruck, Dichtigkeit – Freigabe erst nach bestandener Vollprüfung.'}
-      ],
-      aboutSpecs:[
-        {value:'12<em>M</em>',label:'Garantie auf alle Reparaturen'},
-        {value:'7–<em>15</em>',label:'Werktage Reparaturdauer'},
-        {value:'100<em>%</em>',label:'OEM-Qualitätsstandard'},
-        {value:'DE-<em style="font-size:.8em">weit</em>',label:'Fahrzeugabholung',style:'font-size:22px;letter-spacing:-.02em'}
-      ],
-      engineOptions:['R4 – Reihenmotor','R6 – Reihenmotor','V6 – V-Motor','V8 – V-Motor','V10 – V-Motor','V12 – V-Motor','Sonstiges'],
-      contactItems:[
-        {icon:'📍',label:'Adresse',value:'Artur-Ladebeck-Straße 181, 33647 Bielefeld'},
-        {icon:'📞',label:'Telefon',value:'+49 521 897 391 51',href:'tel:+4952189739151'},
-        {icon:'💬',label:'WhatsApp',value:'Direkt Anfrage senden',href:'#kontakt',className:'js-whatsapp-link'},
-        {icon:'✉️',label:'E-Mail',value:'info@revivalmotoren.de',href:'mailto:info@revivalmotoren.de'}
-      ],
-      mapPoints:[
-        {title:'Adresse',body:'Artur-Ladebeck-Straße 181<br>33647 Bielefeld'},
-        {title:'Anfahrt',body:'Ideal für lokale Kunden, Fahrzeuganlieferung und schnelle Orientierung per Google Maps.'}
-      ],
-      footerNav:[{label:'Leistungen',href:'#leistungen'},{label:'Referenzen',href:'#cases'},{label:'Über uns',href:'#ueber-uns'},{label:'Kontakt',href:'#kontakt'}],
-      footerLegal:[{label:'Impressum',href:'impressum.html'},{label:'Datenschutz',href:'datenschutz.html'},{label:'AGB',href:'agb.html'}],
-      footerContact:[{label:'+49 521 897 391 51',href:'tel:+4952189739151'},{label:'info@revivalmotoren.de',href:'mailto:info@revivalmotoren.de'},{label:'Bielefeld, DE',href:'#kontakt'}]
+    return {
+      ...window.siteContent,
+      currentBrandSlide: 0,
+      brandSlideTimer: null,
+      aboutPreviewImages: []
     };
+  },
+  methods:{
+    startBrandPreviewSlider(){
+      if(!Array.isArray(this.brandScenes) || this.brandScenes.length <= 1) return;
+      this.stopBrandPreviewSlider();
+      this.brandSlideTimer = window.setInterval(()=>{
+        this.currentBrandSlide = (this.currentBrandSlide + 1) % this.brandScenes.length;
+      }, 3400);
+    },
+    stopBrandPreviewSlider(){
+      if(this.brandSlideTimer){
+        window.clearInterval(this.brandSlideTimer);
+        this.brandSlideTimer = null;
+      }
+    }
   },
   mounted(){
     this.$nextTick(()=>{
-      if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      this.aboutPreviewImages = Array.isArray(this.about?.images) ? this.about.images.slice(0, 3) : [];
+      if(this.aboutPreviewImages.length === 1){
+        this.aboutPreviewImages = [this.aboutPreviewImages[0], this.aboutPreviewImages[0], this.aboutPreviewImages[0]];
+      } else if(this.aboutPreviewImages.length === 2){
+        this.aboutPreviewImages = [...this.aboutPreviewImages, this.aboutPreviewImages[1]];
+      }
+      const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if(!reducedMotion){
+        this.startBrandPreviewSlider();
+      }
+
+      if(reducedMotion){
         document.querySelectorAll('.brand-observe').forEach(el=>el.classList.add('is-visible'));
         return;
       }
@@ -1734,6 +3117,9 @@ createApp({
 
       document.querySelectorAll('.brand-observe').forEach(el => observer.observe(el));
     });
+  },
+  beforeUnmount(){
+    this.stopBrandPreviewSlider();
   }
 }).mount('#app');
 </script>
@@ -1741,24 +3127,55 @@ createApp({
 <script>
 /* ── NAV SCROLL ──────────────────────────── */
 const nav = document.getElementById('nav');
+const stickyContact = document.getElementById('stickyContact');
+const stickyContactToggle = document.getElementById('stickyContactToggle');
+const mobileContact = document.getElementById('mobileContact');
+const mobileContactBackdrop = document.getElementById('mobileContactBackdrop');
+const mobileContactToggle = document.getElementById('mobileContactToggle');
+const mobileContactClose = document.getElementById('mobileContactClose');
 let lastNavScrollY = window.scrollY;
+let lastStickyScrollY = window.scrollY;
+let lastMobileContactScrollY = window.scrollY;
 let navHidden = false;
+let navScrollTicking = false;
+
+function setStickyContactOpenState(isOpen){
+  if(!stickyContact || !stickyContactToggle) return;
+  stickyContact.classList.toggle('is-open', isOpen);
+  stickyContactToggle.setAttribute('aria-expanded', String(isOpen));
+  stickyContactToggle.setAttribute('aria-label', isOpen ? 'Kontaktkarte schließen' : 'Kontaktkarte öffnen');
+}
+
+function setMobileContactOpenState(isOpen){
+  if(!mobileContact || !mobileContactToggle) return;
+  mobileContact.classList.toggle('is-open', isOpen);
+  mobileContactToggle.setAttribute('aria-expanded', String(isOpen));
+  mobileContactToggle.setAttribute('aria-label', isOpen ? 'Kontakt schließen' : 'Kontakt öffnen');
+  document.body.style.overflow = isOpen && window.innerWidth <= 1180 ? 'hidden' : '';
+}
+
+function updateActiveNavLink(currentY){
+  let currentSection = '';
+  ['leistungen','cases','brands','results','prozess','ueber-uns','kontakt'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && currentY >= el.offsetTop - 120) currentSection = id;
+  });
+  document.querySelectorAll('.navl a').forEach(a=>{
+    const h = a.getAttribute('href').replace('#','');
+    a.classList.toggle('on', h === currentSection || (currentSection === '' && h === 'leistungen'));
+  });
+}
 
 function updateNavChrome(){
+  if(!nav) return;
   const currentY = window.scrollY;
   const delta = currentY - lastNavScrollY;
-  const mobileView = window.innerWidth <= 768;
-  const compactThreshold = 80;
-  const hideThreshold = 180;
-  const directionThreshold = 10;
+  const mobileView = window.innerWidth <= 1180;
+  const compactThreshold = mobileView ? 48 : 80;
+  const hideThreshold = mobileView ? 96 : 180;
+  const directionThreshold = mobileView ? 6 : 10;
 
   nav.classList.toggle('is-compact', currentY > compactThreshold);
-
-  if(mobileView){
-    nav.classList.remove('is-hidden');
-    lastNavScrollY = currentY;
-    return;
-  }
   if(currentY <= 24){
     navHidden = false;
     nav.classList.remove('is-hidden');
@@ -1775,6 +3192,84 @@ function updateNavChrome(){
   lastNavScrollY = currentY;
 }
 
+function updateStickyContactCard(){
+  if(!stickyContact) return;
+  if(window.innerWidth <= 1180){
+    stickyContact.classList.remove('is-visible');
+    setStickyContactOpenState(false);
+    return;
+  }
+
+  const currentY = window.scrollY;
+  const contactSection = document.getElementById('kontakt');
+  const showThreshold = 560;
+  let shouldShow = currentY > showThreshold;
+
+  if(contactSection){
+    const rect = contactSection.getBoundingClientRect();
+    if(rect.top <= window.innerHeight * 0.72){
+      shouldShow = false;
+    }
+  }
+
+  stickyContact.classList.toggle('is-visible', shouldShow);
+  if(!shouldShow){
+    setStickyContactOpenState(false);
+  }
+
+  const scrollDelta = Math.abs(currentY - lastStickyScrollY);
+  if(scrollDelta > 18){
+    setStickyContactOpenState(false);
+  }
+  lastStickyScrollY = currentY;
+}
+
+function updateMobileContact(){
+  if(!mobileContact) return;
+  if(window.innerWidth > 1180){
+    mobileContact.classList.remove('is-visible');
+    setMobileContactOpenState(false);
+    return;
+  }
+
+  const currentY = window.scrollY;
+  const contactSection = document.getElementById('kontakt');
+  const mobileMenu = document.getElementById('mobMenu');
+  const showThreshold = Math.min(window.innerHeight * 0.55, 380);
+  let shouldShow = currentY > showThreshold;
+
+  if(mobileMenu && mobileMenu.classList.contains('open')){
+    shouldShow = false;
+  }
+
+  if(contactSection){
+    const rect = contactSection.getBoundingClientRect();
+    if(rect.top <= window.innerHeight * 0.82){
+      shouldShow = false;
+    }
+  }
+
+  mobileContact.classList.toggle('is-visible', shouldShow);
+  if(!shouldShow){
+    setMobileContactOpenState(false);
+  }
+
+  const scrollDelta = Math.abs(currentY - lastMobileContactScrollY);
+  if(scrollDelta > 18){
+    setMobileContactOpenState(false);
+  }
+  lastMobileContactScrollY = currentY;
+}
+
+function handleNavScroll(){
+  navScrollTicking = false;
+  const currentY = window.scrollY;
+  updateActiveNavLink(currentY);
+  updateNavChrome();
+  updateStickyContactCard();
+  updateMobileContact();
+}
+
 window.addEventListener('scroll', ()=>{
   let c = '';
   ['leistungen','cases','brands','results','prozess','ueber-uns','kontakt','map-section'].forEach(id=>{
@@ -1786,21 +3281,72 @@ window.addEventListener('scroll', ()=>{
     a.classList.toggle('on', h === c || (c === '' && h === 'leistungen'));
   });
   updateNavChrome();
+  updateStickyContactCard();
+  updateMobileContact();
+  if(window.innerWidth > 1180){
+    const m = document.getElementById('mobMenu');
+    const menuToggle = document.getElementById('menuToggle');
+    if(m){
+      m.classList.remove('open');
+      m.setAttribute('aria-hidden', 'true');
+    }
+    document.body.classList.remove('menu-open');
+    if(menuToggle){
+      menuToggle.classList.remove('is-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Menü öffnen');
+    }
+    if(!mobileContact || !mobileContact.classList.contains('is-open')){
+      document.body.style.overflow = '';
+    }
+  }
 });
-window.addEventListener('resize', updateNavChrome);
+updateActiveNavLink(window.scrollY);
 updateNavChrome();
+updateStickyContactCard();
+updateMobileContact();
 
-/* ── MOBILE MENU ──────────────────────────── */
-function mobToggle(){
-  const m = document.getElementById('mobMenu');
-  m.classList.toggle('open');
-  document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
+if(stickyContactToggle){
+  stickyContactToggle.addEventListener('click', ()=>{
+    if(!stickyContact || !stickyContact.classList.contains('is-visible')) return;
+    setStickyContactOpenState(!stickyContact.classList.contains('is-open'));
+  });
+}
+if(mobileContactToggle){
+  mobileContactToggle.addEventListener('click', ()=>{
+    if(!mobileContact || !mobileContact.classList.contains('is-visible')) return;
+    setMobileContactOpenState(!mobileContact.classList.contains('is-open'));
+  });
+}
+if(mobileContactClose){
+  mobileContactClose.addEventListener('click', ()=>{
+    setMobileContactOpenState(false);
+  });
+}
+if(mobileContactBackdrop){
+  mobileContactBackdrop.addEventListener('click', ()=>{
+    setMobileContactOpenState(false);
+  });
+}
+if(mobileContact){
+  mobileContact.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click', ()=>{
+      setMobileContactOpenState(false);
+    });
+  });
 }
 
 /* ── SMOOTH SCROLL ──────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e=>{
   const t = document.querySelector(a.getAttribute('href'));
-  if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  if(t){
+    e.preventDefault();
+    t.scrollIntoView({behavior:'smooth'});
+    const cleanUrl = window.location.pathname + window.location.search;
+    window.setTimeout(() => {
+      history.replaceState(null, '', cleanUrl);
+    }, 20);
+  }
 }));
 
 /* ── WHATSAPP ──────────────────────────── */
@@ -1808,7 +3354,7 @@ const BUSINESS_WHATSAPP_NUMBER = '';
 const DEFAULT_WHATSAPP_MESSAGE = 'Hallo Revival Motoren, ich möchte eine Anfrage zur Motorinstandsetzung stellen.';
 
 function setupWhatsAppLinks(){
-  const fallback = '#kontakt';
+  const fallback = 'pages/kontakt.html';
   const cleaned = BUSINESS_WHATSAPP_NUMBER.replace(/\D/g,'');
   const href = cleaned
     ? `https://wa.me/${cleaned}?text=${encodeURIComponent(DEFAULT_WHATSAPP_MESSAGE)}`
@@ -1825,30 +3371,15 @@ function setupWhatsAppLinks(){
   });
 }
 setupWhatsAppLinks();
-
-/* ── THEME ──────────────────────────── */
-const themeToggles = Array.from(document.querySelectorAll('[data-theme-toggle]'));
-const themeRoot = document.documentElement;
-const logoImages = Array.from(document.querySelectorAll('.brand-icon img'));
-
-function applyTheme(theme){
-  themeRoot.dataset.theme = theme;
-  localStorage.setItem('revival-theme', theme);
-  logoImages.forEach(img=>{
-    img.src = theme === 'dark' ? 'logo-icon.png' : 'logo-icon-gold.png';
-  });
-  themeToggles.forEach(toggle=>{
-    toggle.setAttribute('aria-label', theme === 'dark' ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln');
-    toggle.title = theme === 'dark' ? 'Heller Modus' : 'Dunkler Modus';
-  });
-}
-function toggleTheme(){
-  applyTheme(themeRoot.dataset.theme === 'dark' ? 'light' : 'dark');
-}
-const storedTheme = localStorage.getItem('revival-theme');
-const preferredDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-applyTheme(storedTheme || (preferredDark ? 'dark' : 'light'));
-themeToggles.forEach(toggle => toggle.addEventListener('click', toggleTheme));
+window.SharedMobileNav?.bind({
+  toggleId:'menuToggle',
+  panelId:'mobMenu',
+  panelOpenClass:'open',
+  closeSelectors:'a',
+  bodyOpenClass:'menu-open',
+  lockBody:true,
+  desktopBreakpoint:1180
+});
 
 function applyImageLoadingStrategy(){
   document.querySelectorAll('img').forEach(img=>{
@@ -1982,6 +3513,19 @@ const ro = new IntersectionObserver(en=>{
 }, {threshold:.05, rootMargin:'0px 0px -20px 0px'});
 document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
+const serviceRevealObserver = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('is-visible');
+      serviceRevealObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold:.14, rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.service-reveal').forEach((el, index)=>{
+  el.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
+  serviceRevealObserver.observe(el);
+});
+
 /* ── PARALLAX / FLOAT ──────────────────────────── */
 const parallaxItems = Array.from(document.querySelectorAll('[data-parallax-speed]'));
 const floatItems = Array.from(document.querySelectorAll('[data-float]'));
@@ -2012,23 +3556,9 @@ function queueScrollMotion(){
   motionTicking = true;
   requestAnimationFrame(updateScrollMotion);
 }
-const allowScrollMotion = !prefersReducedMotion && window.innerWidth > 768;
-if(allowScrollMotion){
-  window.addEventListener('scroll', queueScrollMotion, {passive:true});
-  window.addEventListener('resize', queueScrollMotion);
-  updateScrollMotion();
-}
-
-/* ── FORM ──────────────────────────── */
-function submitForm(e){
-  e.preventDefault();
-  document.getElementById('kForm').style.display = 'none';
-  document.getElementById('kOk').style.display = 'block';
-}
-document.querySelectorAll('input[type="file"]').forEach(fi => fi.addEventListener('change', function(){
-  const t = this.closest('label').querySelector('.fupload-t');
-  if(t && this.files.length) t.textContent = '✓ ' + this.files.length + ' Datei(en) ausgewählt';
-}));
+window.addEventListener('scroll', queueScrollMotion, {passive:true});
+window.addEventListener('resize', queueScrollMotion, {passive:true});
+updateScrollMotion();
 </script>
 </body>
 </html>
