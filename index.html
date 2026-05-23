@@ -2755,10 +2755,10 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     <a href="#leistungen" class="btn-pill-ghost">{{ hero.secondaryAction }}</a>
   </div>
   <div class="hero-card float-card" data-float="22">
-    <img src="Projects/Motorblock1.jpg" alt="Motorblock Werkstatt Revival Motoren" class="parallax-media" data-parallax-speed="18" decoding="async" fetchpriority="high">
+    <img :src="hero.image?.src" :alt="hero.image?.alt || 'Motorblock Werkstatt Teuto Motoren'" class="parallax-media" data-parallax-speed="18" decoding="async" fetchpriority="high">
     <div class="hero-card-overlay">
-      <div class="hero-card-title">Zuverlässige<br>Motorreparatur</div>
-      <div class="hero-card-sub">Modernste Diagnosetechnik · Bielefeld & deutschlandweit</div>
+      <div class="hero-card-title" v-html="hero.overlayTitle"></div>
+      <div class="hero-card-sub">{{ hero.overlaySubtitle }}</div>
     </div>
   </div>
   <div class="hero-pill-row">

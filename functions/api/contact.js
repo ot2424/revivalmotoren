@@ -157,7 +157,7 @@ function buildMailContent(payload, attachments) {
   ];
 
   const uploadHtml = attachments.length
-    ? `<h3 style="margin:24px 0 10px;font-size:16px;">Dateianhänge</h3><ul style="padding-left:18px;margin:0;">${attachments.map(file => `<li style="margin:0 0 8px;">${escapeHtml(file.name)} <span style="color:#888;">(${formatBytes(file.size)})</span></li>`).join('')}</ul><p style="margin:14px 0 0;color:#666;">Die Dateien wurden dieser E-Mail direkt als Anhang beigefügt.</p>`
+    ? `<h3 style="margin:24px 0 10px;font-size:16px;">Dateianhänge</h3><ul style="padding-left:18px;margin:0;">${attachments.map(file => `<li style="margin:0 0 8px;">${escapeHtml(file.name)} <span style="color:#888;">(${formatBytes(file.size)})</span></li>`).join('')}</ul>`
     : '<p style="margin:20px 0 0;color:#888;">Keine Dateien hochgeladen.</p>';
 
   const html = `
