@@ -8,6 +8,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/ui/mobile-nav.css">
+<link rel="stylesheet" href="assets/ui/scroll-top.css">
+<link rel="stylesheet" href="assets/ui/floating-contact.css">
+<link rel="stylesheet" href="assets/ui/consent-banner.css">
 <script>
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
@@ -1230,7 +1233,7 @@ html[data-theme="dark"] .brand-general-cta{
   position:fixed;
   right:24px;
   bottom:24px;
-  z-index:26;
+  z-index:440;
   width:58px;
   opacity:0;
   pointer-events:none;
@@ -1388,7 +1391,7 @@ html[data-theme="dark"] .brand-general-cta{
 .mobile-contact{
   position:fixed;
   inset:0;
-  z-index:60;
+  z-index:440;
   display:none;
   pointer-events:none;
 }
@@ -1427,7 +1430,7 @@ html[data-theme="dark"] .brand-general-cta{
   font-weight:700;
   letter-spacing:-.02em;
   cursor:pointer;
-  z-index:62;
+  z-index:442;
   pointer-events:auto;
   opacity:.92;
   transition:transform .18s ease, opacity .2s ease, background .2s ease;
@@ -1445,7 +1448,7 @@ html[data-theme="dark"] .brand-general-cta{
   left:12px;
   right:12px;
   bottom:12px;
-  z-index:61;
+  z-index:441;
   width:auto;
   padding:14px 14px calc(14px + env(safe-area-inset-bottom));
   max-height:min(72vh, 520px);
@@ -1546,6 +1549,10 @@ html[data-theme="dark"] .brand-general-cta{
 .mobile-contact-line span:last-child{
   font-size:13px;
   color:var(--mid);
+}
+.sticky-contact,
+.mobile-contact{
+  display:none !important;
 }
 
 /* ── CONTACT ──────────────────────────── */
@@ -2598,9 +2605,20 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .hero-card-title{font-size:24px}
   .hero-card-sub{font-size:13px}
   .hero-pill-row{width:calc(100% - 24px);padding:0;margin-top:24px}
-  .hero-pill-marquee{border-radius:22px}
-  .hero-pill-group{gap:8px;padding:10px}
-  .hpill{min-height:40px;padding:0 14px;font-size:12px}
+  .hero-pill-marquee{
+    border-radius:22px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    mask-image:none;
+    -webkit-mask-image:none;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .hero-pill-marquee::-webkit-scrollbar{display:none}
+  .hero-pill-track{animation:none;width:max-content}
+  .hero-pill-group{gap:8px;padding:10px 12px}
+  .hero-pill-group + .hero-pill-group{display:none}
+  .hpill{flex:0 0 auto;min-height:40px;padding:0 14px;font-size:12px}
   .why-top-left,.why-top-right,.cases-header,.map-info,.kt-left,.kt-right,footer{padding-left:20px;padding-right:20px}
   .why-top-right{grid-template-columns:1fr;gap:22px}
   .why-mosaic{height:auto;grid-template-columns:1fr}
@@ -2644,11 +2662,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     opacity:.07;
   }
   .hero-pill-row{width:calc(100% - 20px)}
-  .hero-pill-marquee{
-    mask-image:none;
-    -webkit-mask-image:none;
-  }
-  .hero-pill-track{animation-duration:22s}
+  .hero-pill-group{padding:8px 10px}
   .hpill{font-size:11px;padding:0 12px}
 }
 
@@ -2731,10 +2745,6 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 
 <aside class="mobile-contact" id="mobileContact" aria-label="Mobiler Kontakt">
   <div class="mobile-contact-backdrop" id="mobileContactBackdrop"></div>
-  <button class="mobile-contact-toggle" id="mobileContactToggle" type="button" aria-label="Kontakt öffnen" aria-expanded="false">
-    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg>
-    Kontakt
-  </button>
   <div class="mobile-contact-sheet">
     <div class="mobile-contact-sheet-head">
       <div>
@@ -3032,6 +3042,9 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <script src="content/contact-content.js"></script>
 <script src="content/motoren-content.js"></script>
 <script src="assets/ui/mobile-nav.js"></script>
+<script src="assets/ui/scroll-top.js"></script>
+<script src="assets/ui/floating-contact.js"></script>
+<script src="assets/ui/consent-banner.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 <script>
 const navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];

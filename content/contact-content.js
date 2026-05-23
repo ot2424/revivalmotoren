@@ -6,6 +6,8 @@ Object.assign(window.siteContent, {
     subtitle: 'Kostenlos & unverbindlich. Wir melden uns innerhalb von 24 Stunden mit einem transparenten Kostenvoranschlag.',
     responseHint: 'Antwort innerhalb 24 Stunden',
     formTitle: 'Ihre Anfrage',
+    uploadLabel: 'Dateien hochladen',
+    uploadHint: 'Optional: Fahrzeugschein, Schadensbilder oder Fotos vom Motor als JPG, PNG, WEBP oder PDF.',
     submitLabel: 'Angebot anfragen →',
     note: 'Kostenlos & unverbindlich · Keine Datenweitergabe',
     successTitle: 'Anfrage gesendet!',
@@ -31,6 +33,7 @@ Object.assign(window.siteContent, {
   contactItems: [
     { icon: '📍', label: 'Adresse', value: 'Artur-Ladebeck-Straße 181, 33647 Bielefeld' },
     { icon: '📞', label: 'Telefon', value: '0521 92373519', href: 'tel:+4952192373519' },
+    { icon: '📞', label: 'Telefon', value: '0521 89739151', href: 'tel:+4952189739151' },
     { icon: '💬', label: 'WhatsApp', value: 'Direkt Anfrage senden', href: 'pages/kontakt.html', className: 'js-whatsapp-link' },
     { icon: '✉️', label: 'E-Mail', value: 'info@teutomotoren.de', href: 'mailto:info@teutomotoren.de' }
   ],

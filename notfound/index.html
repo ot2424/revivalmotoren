@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seite nicht gefunden – Teuto Motoren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../pages/shared-pages.css">
+<link rel="stylesheet" href="../assets/ui/mobile-nav.css">
+<link rel="stylesheet" href="../assets/ui/scroll-top.css">
+<link rel="stylesheet" href="../assets/ui/consent-banner.css">
+<link rel="stylesheet" href="../assets/ui/shared-footer.css">
+<link rel="stylesheet" href="../assets/ui/floating-contact.css">
+</head>
+<body data-root="..">
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-icon"><img src="../assets/branding/teuto-logo-symbol.png" alt="Teuto Motoren Logo"></span>
+        <span class="brand-copy">
+          <span class="brand-name">Teuto Motoren</span>
+          <span class="brand-tagline">Wir leben Motoren</span>
+        </span>
+      </a>
+      <div class="topbar-center">
+        <ul class="topbar-nav">
+          <li><a href="../index.html#leistungen">Leistungen</a></li>
+          <li><a href="../pages/projekte.html">Referenzen</a></li>
+          <li><a href="../pages/motoren.html">Motoren</a></li>
+          <li><a href="../pages/ueber-uns.html">Über uns</a></li>
+          <li><a href="../pages/kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="topbar-actions">
+        <a class="nav-contact" href="../pages/kontakt.html">Angebot anfragen</a>
+      </div>
+      <button class="topbar-mobile-toggle mnav-toggle" id="topbarMobileToggle" type="button" aria-label="Menü öffnen" aria-expanded="false"></button>
+      <div class="topbar-mobile-panel" id="topbarMobilePanel">
+        <nav>
+          <a href="../index.html">Startseite</a>
+          <a href="../index.html#leistungen">Leistungen</a>
+          <a href="../pages/projekte.html">Referenzen</a>
+          <a href="../pages/motoren.html">Motoren</a>
+          <a href="../pages/ueber-uns.html">Über uns</a>
+          <a href="../pages/kontakt.html">Kontakt</a>
+        </nav>
+        <div class="topbar-mobile-actions">
+          <a class="nav-contact" href="../pages/kontakt.html">Angebot anfragen</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">404</span>
+      <h1>Diese Seite konnten wir nicht finden.</h1>
+      <p>Die aufgerufene Adresse existiert nicht oder wurde verschoben. Nutzen Sie die Navigation oder gehen Sie direkt zurück zur Startseite.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:24px">
+        <a class="nav-contact" href="../index.html">Zur Startseite</a>
+        <a class="back-link" href="../pages/kontakt.html">Kontakt aufnehmen</a>
+      </div>
+    </section>
+    <div data-shared-footer></div>
+  </div>
+
+  <script src="../content/site-core.js"></script>
+  <script src="../assets/ui/mobile-nav.js"></script>
+  <script src="../assets/ui/scroll-top.js"></script>
+  <script src="../assets/ui/consent-banner.js"></script>
+  <script src="../assets/ui/shared-footer.js"></script>
+  <script src="../assets/ui/floating-contact.js"></script>
+  <script>
+    window.SharedMobileNav?.bind({ toggleId:'topbarMobileToggle', panelId:'topbarMobilePanel' });
+  </script>
+</body>
+</html>

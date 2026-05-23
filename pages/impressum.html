@@ -9,6 +9,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./shared-pages.css">
 <link rel="stylesheet" href="../assets/ui/mobile-nav.css">
+<link rel="stylesheet" href="../assets/ui/scroll-top.css">
+<link rel="stylesheet" href="../assets/ui/consent-banner.css">
+<link rel="stylesheet" href="../assets/ui/shared-footer.css">
+<link rel="stylesheet" href="../assets/ui/floating-contact.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -269,7 +273,7 @@ a{color:inherit}
 }
 </style>
 </head>
-<body>
+<body data-root="..">
   <div class="page">
     <header class="topbar">
       <a class="brand" href="../index.html">
@@ -313,9 +317,15 @@ a{color:inherit}
     </section>
 
     <section class="content-card" id="imprintContent"></section>
+    <div data-shared-footer></div>
   </div>
+  <script src="../content/site-core.js"></script>
   <script src="../content/pages-content.js"></script>
   <script src="../assets/ui/mobile-nav.js"></script>
+  <script src="../assets/ui/scroll-top.js"></script>
+  <script src="../assets/ui/consent-banner.js"></script>
+  <script src="../assets/ui/shared-footer.js"></script>
+  <script src="../assets/ui/floating-contact.js"></script>
   <script>
     const imprint = (window.sitePagesContent && window.sitePagesContent.imprintPage) || {};
     document.getElementById('imprintHeroEyebrow').textContent = imprint.hero?.eyebrow || 'Rechtliches';

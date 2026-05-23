@@ -87,6 +87,29 @@
 
   const content = document.getElementById('motorenPageContent');
 
+  const initSupportSlideshow = () => {
+    const root = document.querySelector('.mpg-support-slideshow');
+    if (!root) return;
+    const slides = Array.from(root.querySelectorAll('.mpg-support-slide'));
+    const dots = Array.from(document.querySelectorAll('.mpg-support-dot'));
+    if (slides.length <= 1) {
+      slides[0]?.classList.add('is-active');
+      dots[0]?.classList.add('is-active');
+      return;
+    }
+    let index = 0;
+    const apply = (next) => {
+      slides.forEach((slide, i) => slide.classList.toggle('is-active', i === next));
+      dots.forEach((dot, i) => dot.classList.toggle('is-active', i === next));
+    };
+    apply(index);
+    window.clearInterval(window.__teutoSupportSlider);
+    window.__teutoSupportSlider = window.setInterval(() => {
+      index = (index + 1) % slides.length;
+      apply(index);
+    }, 3400);
+  };
+
   const renderOverview = () => {
     content.innerHTML = `
       <section class="mpg-hero">
@@ -129,11 +152,21 @@
             <div class="tile"><img src="${asset(image.src)}" alt="${image.alt}"></div>
           `).join('')}
         </div>
+        <div class="mpg-support-slideshow">
+          ${(support.images || []).map((image, index) => `
+            <div class="mpg-support-slide ${index === 0 ? 'is-active' : ''}">
+              <img src="${asset(image.src)}" alt="${image.alt}">
+            </div>
+          `).join('')}
+        </div>
         <div class="mpg-support-copy">
           <div class="mpg-support-card">
             <span class="mpg-eyebrow">${support.label || 'Weitere Marken'}</span>
             <h3>${support.title || ''}</h3>
             <p>${support.body || ''}</p>
+            <div class="mpg-support-dots" aria-hidden="true">
+              ${(support.images || []).map((_, index) => `<span class="mpg-support-dot ${index === 0 ? 'is-active' : ''}"></span>`).join('')}
+            </div>
             <div class="mpg-hero-actions">
               <a class="mpg-action-solid" href="${contactHref}">${support.button || 'Service anfragen →'}</a>
             </div>
@@ -169,13 +202,14 @@
             </div>
             <div>
               <h5>Kontakt</h5>
-              <ul>${contactItems.slice(1, 4).map(item => `<li><a href="${item.className === 'js-whatsapp-link' ? whatsappHref : resolveHref(item.href || '#')}">${item.value}</a></li>`).join('')}</ul>
+              <ul>${contactItems.filter(item => item.label !== 'Adresse').slice(0, 4).map(item => `<li><a href="${item.className === 'js-whatsapp-link' ? whatsappHref : resolveHref(item.href || '#')}">${item.value}</a></li>`).join('')}</ul>
             </div>
           </div>
           <div class="mpg-footer-copy">${site.footer?.copyright || ''}</div>
         </div>
       </footer>
     `;
+    initSupportSlideshow();
   };
 
   const renderBrandPage = () => {
@@ -274,7 +308,7 @@
             </div>
             <div>
               <h5>Kontakt</h5>
-              <ul>${contactItems.slice(1, 4).map(item => `<li><a href="${item.className === 'js-whatsapp-link' ? whatsappHref : resolveHref(item.href || '#')}">${item.value}</a></li>`).join('')}</ul>
+              <ul>${contactItems.filter(item => item.label !== 'Adresse').slice(0, 4).map(item => `<li><a href="${item.className === 'js-whatsapp-link' ? whatsappHref : resolveHref(item.href || '#')}">${item.value}</a></li>`).join('')}</ul>
             </div>
           </div>
           <div class="mpg-footer-copy">${site.footer?.copyright || ''}</div>

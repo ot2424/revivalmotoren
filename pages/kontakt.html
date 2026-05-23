@@ -9,8 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./shared-pages.css">
 <link rel="stylesheet" href="../assets/ui/mobile-nav.css">
+<link rel="stylesheet" href="../assets/ui/scroll-top.css">
+<link rel="stylesheet" href="../assets/ui/consent-banner.css">
+<link rel="stylesheet" href="../assets/ui/shared-footer.css">
+<link rel="stylesheet" href="../assets/ui/floating-contact.css">
 </head>
-<body>
+<body data-root="..">
   <div class="page">
     <header class="topbar">
       <a class="brand" href="../index.html">
@@ -66,6 +70,8 @@
       <section class="contact-form-panel">
         <h2 class="form-title" id="formTitle">Ihre Anfrage</h2>
         <form id="contactForm" novalidate>
+          <input type="hidden" name="route" value="info">
+          <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
           <div class="form-grid">
             <div class="form-field">
               <label class="form-label" for="name">Name <span class="required">*</span></label>
@@ -96,6 +102,15 @@
               <textarea class="form-textarea" id="problem" name="problem" required></textarea>
             </div>
             <div class="form-field is-full">
+              <label class="form-label" for="attachments" id="uploadLabel">Dateien hochladen</label>
+              <label class="form-upload" for="attachments">
+                <input class="form-upload-input" id="attachments" name="attachments" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf,.heic,.heif" multiple>
+                <span class="form-upload-cta">Dateien auswählen</span>
+                <span class="form-upload-copy" id="uploadHint">Optional: Fahrzeugschein, Schadensbilder oder Fotos vom Motor als JPG, PNG, WEBP oder PDF.</span>
+                <span class="form-upload-meta" id="uploadMeta">Noch keine Dateien ausgewählt</span>
+              </label>
+            </div>
+            <div class="form-field is-full">
               <label class="form-check" id="privacyCheckWrap">
                 <input id="privacy" name="privacy" type="checkbox" required>
                 <span>Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu. <span class="required">*</span></span>
@@ -106,6 +121,7 @@
             <button type="submit" class="form-submit" id="submitLabel">Angebot anfragen →</button>
             <span class="form-note" id="formNote">Kostenlos & unverbindlich · Keine Datenweitergabe</span>
           </div>
+          <div class="form-status" id="formStatus" aria-live="polite"></div>
         </form>
         <div class="form-success" id="formSuccess">
           <h3 id="successTitle">Anfrage gesendet!</h3>
@@ -124,6 +140,11 @@
           <a class="map-route" id="mapRoute" href="#" target="_blank" rel="noopener noreferrer">Route planen</a>
         </div>
         <div class="map-frame">
+          <div class="map-consent-placeholder" id="mapConsentPlaceholder">
+            <strong>Externe Karte erst nach Zustimmung laden</strong>
+            <p>Google Maps wird nur nach Ihrer Zustimmung zu externen Inhalten geladen.</p>
+            <button type="button" class="map-consent-btn" id="mapConsentButton">Google Maps laden</button>
+          </div>
           <iframe
             id="mapFrame"
             title="Google Maps Standort Teuto Motoren"
@@ -135,12 +156,17 @@
         </div>
       </div>
     </section>
+    <div data-shared-footer></div>
   </div>
 
   <script src="../content/site-core.js"></script>
   <script src="../content/contact-content.js"></script>
   <script src="../content/pages-content.js"></script>
   <script src="../assets/ui/mobile-nav.js"></script>
+  <script src="../assets/ui/scroll-top.js"></script>
+  <script src="../assets/ui/consent-banner.js"></script>
+  <script src="../assets/ui/shared-footer.js"></script>
+  <script src="../assets/ui/floating-contact.js"></script>
   <script>
     const site = window.siteContent || {};
     const pageContent = (window.sitePagesContent && window.sitePagesContent.contactPage) || {};
@@ -157,6 +183,8 @@
     document.getElementById('contactHeroSubtitle').textContent = contactSection.subtitle || '';
     document.getElementById('responseHint').textContent = contactSection.responseHint || 'Antwort innerhalb 24 Stunden';
     document.getElementById('formTitle').textContent = contactSection.formTitle || 'Ihre Anfrage';
+    document.getElementById('uploadLabel').textContent = contactSection.uploadLabel || 'Dateien hochladen';
+    document.getElementById('uploadHint').textContent = contactSection.uploadHint || 'Optional: Fahrzeugschein, Schadensbilder oder Fotos vom Motor als JPG, PNG, WEBP oder PDF.';
     document.getElementById('submitLabel').textContent = contactSection.submitLabel || 'Angebot anfragen →';
     document.getElementById('formNote').textContent = contactSection.note || '';
     document.getElementById('successTitle').textContent = contactSection.successTitle || 'Anfrage gesendet!';
@@ -176,8 +204,26 @@
     document.getElementById('mapSubtitle').textContent = mapSection.subtitle || pageContent.map?.fallbackSubtitle || '';
     document.getElementById('mapRoute').href = mapSection.routeHref || '#';
     document.getElementById('mapRoute').textContent = mapSection.routeLabel || 'Route planen';
-    document.getElementById('mapFrame').src = mapSection.iframeSrc || '';
-    document.getElementById('mapFrame').title = mapSection.iframeTitle || 'Google Maps Standort Teuto Motoren';
+    const mapFrame = document.getElementById('mapFrame');
+    const mapConsentPlaceholder = document.getElementById('mapConsentPlaceholder');
+    const mapConsentButton = document.getElementById('mapConsentButton');
+    const mapSrc = mapSection.iframeSrc || '';
+    mapFrame.title = mapSection.iframeTitle || 'Google Maps Standort Teuto Motoren';
+    const applyMapConsent = () => {
+      const allowExternal = window.TeutoConsent?.has('externalMedia');
+      if (allowExternal) {
+        mapFrame.src = mapSrc;
+        mapConsentPlaceholder.style.display = 'none';
+      } else {
+        mapFrame.removeAttribute('src');
+        mapConsentPlaceholder.style.display = 'flex';
+      }
+    };
+    mapConsentButton.addEventListener('click', () => {
+      window.TeutoConsent?.set({ ...(window.TeutoConsent.get ? window.TeutoConsent.get() : {}), externalMedia: true });
+    });
+    window.TeutoConsent?.onChange(applyMapConsent);
+    applyMapConsent();
     document.getElementById('mapPoints').innerHTML = mapPoints.map(point => `
       <div class="contact-item">
         <strong>${point.title}</strong>
@@ -188,16 +234,59 @@
     const form = document.getElementById('contactForm');
     const success = document.getElementById('formSuccess');
     const privacyWrap = document.getElementById('privacyCheckWrap');
-    form.addEventListener('submit', (event) => {
+    const attachments = document.getElementById('attachments');
+    const uploadMeta = document.getElementById('uploadMeta');
+    const formStatus = document.getElementById('formStatus');
+    const submitButton = document.getElementById('submitLabel');
+    attachments.addEventListener('change', () => {
+      const files = Array.from(attachments.files || []);
+      if(!files.length){
+        uploadMeta.textContent = 'Noch keine Dateien ausgewählt';
+        return;
+      }
+      if(files.length === 1){
+        uploadMeta.textContent = files[0].name;
+        return;
+      }
+      uploadMeta.textContent = `${files.length} Dateien ausgewählt`;
+    });
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
       form.classList.add('form-error');
       privacyWrap.classList.toggle('is-invalid', !document.getElementById('privacy').checked);
+      formStatus.className = 'form-status';
+      formStatus.textContent = '';
       if(!form.checkValidity()){
         form.reportValidity();
         return;
       }
-      form.style.display = 'none';
-      success.classList.add('is-visible');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Wird gesendet …';
+      formStatus.className = 'form-status is-visible is-success';
+      formStatus.textContent = 'Dateien und Anfrage werden hochgeladen …';
+      try{
+        const payload = new FormData(form);
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body: payload
+        });
+        const result = await response.json().catch(() => ({}));
+        if(!response.ok || !result.ok){
+          throw new Error(result.message || 'Die Anfrage konnte nicht versendet werden.');
+        }
+        form.reset();
+        uploadMeta.textContent = 'Noch keine Dateien ausgewählt';
+        formStatus.className = 'form-status';
+        formStatus.textContent = '';
+        form.style.display = 'none';
+        success.classList.add('is-visible');
+      }catch(error){
+        formStatus.className = 'form-status is-visible is-error';
+        formStatus.textContent = error.message || 'Die Anfrage konnte nicht versendet werden.';
+      }finally{
+        submitButton.disabled = false;
+        submitButton.textContent = contactSection.submitLabel || 'Angebot anfragen →';
+      }
     });
     document.getElementById('privacy').addEventListener('change', () => {
       privacyWrap.classList.toggle('is-invalid', !document.getElementById('privacy').checked);

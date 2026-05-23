@@ -26,6 +26,9 @@ body{
   line-height:1.72;
   overflow-x:hidden;
 }
+body.consent-open{
+  overflow:hidden;
+}
 ::selection{background:var(--ink);color:#111214}
 a{color:inherit}
 img{display:block;max-width:100%}
@@ -362,7 +365,7 @@ img{display:block;max-width:100%}
   position:fixed;
   right:20px;
   bottom:20px;
-  z-index:35;
+  z-index:440;
   min-height:54px;
   padding:0 20px;
   border-radius:999px;
@@ -477,6 +480,58 @@ img{display:block;max-width:100%}
   margin-left:6px;
   cursor:help;
 }
+.form-upload{
+  display:grid;
+  gap:10px;
+  padding:16px;
+  border-radius:20px;
+  border:1px dashed rgba(255,255,255,.14);
+  background:rgba(255,255,255,.03);
+  cursor:pointer;
+  transition:border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.form-upload:hover{
+  border-color:rgba(255,255,255,.22);
+  background:rgba(255,255,255,.04);
+}
+.form-upload:focus-within{
+  border-color:rgba(255,255,255,.24);
+  box-shadow:0 0 0 4px rgba(255,255,255,.04);
+}
+.form-upload-input{
+  position:absolute;
+  width:1px;
+  height:1px;
+  margin:-1px;
+  padding:0;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  border:0;
+}
+.form-upload-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:max-content;
+  min-height:40px;
+  padding:0 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  color:var(--ink);
+  font-size:13px;
+  font-weight:750;
+  letter-spacing:-.02em;
+}
+.form-upload-copy{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.65;
+}
+.form-upload-meta{
+  color:var(--text);
+  font-size:12px;
+  line-height:1.5;
+}
 .form-check{
   display:flex;
   align-items:flex-start;
@@ -506,10 +561,23 @@ img{display:block;max-width:100%}
   font-weight:800;
   cursor:pointer;
 }
+.form-submit:disabled{
+  opacity:.66;
+  cursor:wait;
+}
 .form-note{
   font-size:13px;
   color:var(--muted);
 }
+.form-status{
+  display:none;
+  margin-top:12px;
+  font-size:13px;
+  line-height:1.6;
+}
+.form-status.is-visible{display:block}
+.form-status.is-error{color:#ffb0b0}
+.form-status.is-success{color:#d2d8cf}
 .form-success{
   display:none;
   padding:20px 0 4px;
@@ -569,6 +637,7 @@ img{display:block;max-width:100%}
 }
 .map-frame{
   min-height:380px;
+  position:relative;
 }
 .map-frame iframe{
   width:100%;
@@ -576,6 +645,42 @@ img{display:block;max-width:100%}
   min-height:380px;
   border:0;
   display:block;
+}
+.map-consent-placeholder{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:28px;
+  text-align:center;
+  background:
+    radial-gradient(circle at top, rgba(198,163,109,.08), transparent 34%),
+    linear-gradient(180deg, rgba(15,16,18,.96), rgba(11,12,15,.98));
+  color:var(--ink);
+}
+.map-consent-placeholder strong{
+  font-size:20px;
+  line-height:1.2;
+  letter-spacing:-.03em;
+}
+.map-consent-placeholder p{
+  max-width:36ch;
+  color:var(--text);
+  font-size:14px;
+  line-height:1.72;
+}
+.map-consent-btn{
+  min-height:48px;
+  padding:0 20px;
+  border-radius:999px;
+  border:1px solid transparent;
+  background:var(--btn);
+  color:var(--btn-text);
+  font:700 14px/1 'Geist',system-ui,-apple-system,sans-serif;
+  cursor:pointer;
 }
 .form-error .form-input:invalid,
 .form-error .form-textarea:invalid,
@@ -622,6 +727,8 @@ img{display:block;max-width:100%}
   .section-title,.side-title,.form-title{font-size:24px}
   .form-grid{grid-template-columns:1fr}
   .form-actions{flex-direction:column;align-items:stretch}
+  .form-upload{padding:14px;border-radius:18px}
+  .form-upload-cta{width:100%}
   .map-info{padding:24px 20px}
   .map-frame,
   .map-frame iframe{min-height:320px}

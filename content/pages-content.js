@@ -25,7 +25,7 @@ window.sitePagesContent = {
     heroEyebrow: 'Kontakt',
     sideTitle: 'Direkt Kontakt aufnehmen',
     sideIntro: 'Wenn Sie bereits wissen, was Sie benötigen, können Sie uns Ihre Fahrzeugdaten und eine kurze Problembeschreibung direkt senden. So können wir Ihr Anliegen schneller einordnen und gezielter zurückrufen.',
-    sideNote: 'Hinweis: WhatsApp ist aktuell noch nicht eingerichtet. Nutzen Sie bitte Telefon, E-Mail oder das Formular auf dieser Seite.',
+    sideNote: 'Hinweis: WhatsApp ist aktuell noch nicht eingerichtet. Nutzen Sie bitte eine der Telefonnummern, E-Mail oder das Formular auf dieser Seite.',
     map: {
       fallbackLabel: 'Anfahrt',
       fallbackTitle: 'Werkstatt & Standort',
@@ -47,7 +47,7 @@ window.sitePagesContent = {
       {
         title: 'Kontakt',
         paragraphs: [
-          'Telefon: 0521 92373519<br>E-Mail: info@teutomotoren.de'
+          'Telefon 1: 0521 92373519<br>Telefon 2: 0521 89739151<br>E-Mail: info@teutomotoren.de'
         ]
       },
       {
@@ -86,7 +86,7 @@ window.sitePagesContent = {
       {
         title: '1. Verantwortlicher',
         paragraphs: [
-          'Verantwortlich für die Datenverarbeitung auf dieser Website ist Teuto Motoren (Einzelunternehmen), Inhaber Oufouk Serif, Artur-Ladebeck-Straße 181, 33647 Bielefeld, E-Mail: info@teutomotoren.de, Telefon: 0521 92373519.'
+          'Verantwortlich für die Datenverarbeitung auf dieser Website ist Teuto Motoren (Einzelunternehmen), Inhaber Oufouk Serif, Artur-Ladebeck-Straße 181, 33647 Bielefeld, E-Mail: info@teutomotoren.de, Telefon: 0521 92373519, weitere Telefonnummer: 0521 89739151.'
         ]
       },
       {

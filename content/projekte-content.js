@@ -35,7 +35,7 @@ window.projectsPageContent = {
           alt: 'Platzhalter Projektbild 2'
         }
       ],
-      stats: ['Diagnose', 'Reinigung', 'Planen']
+      stats: ['Diagnose', 'Planen']
     },
     /*{
       slug: 'projekt-02',

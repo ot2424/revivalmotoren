@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/ui/mobile-nav.css">
+  <link rel="stylesheet" href="../assets/ui/scroll-top.css">
+  <link rel="stylesheet" href="../assets/ui/consent-banner.css">
+  <link rel="stylesheet" href="../assets/ui/shared-footer.css">
+  <link rel="stylesheet" href="../assets/ui/floating-contact.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth;overflow-x:hidden}
@@ -432,7 +436,7 @@
     }
   </style>
 </head>
-<body>
+<body data-root="..">
   <div class="page">
     <nav class="topbar">
       <div class="topbar-layout">
@@ -512,12 +516,17 @@
           </div>
         </div>
       </section>
+      <div data-shared-footer></div>
     </main>
   </div>
 
   <script src="../content/site-core.js"></script>
   <script src="../content/projekte-content.js"></script>
   <script src="../assets/ui/mobile-nav.js"></script>
+  <script src="../assets/ui/scroll-top.js"></script>
+  <script src="../assets/ui/consent-banner.js"></script>
+  <script src="../assets/ui/shared-footer.js"></script>
+  <script src="../assets/ui/floating-contact.js"></script>
   <script>
     window.SharedMobileNav?.bind({ toggleId:'topbarMobileToggle', panelId:'topbarMobilePanel' });
 

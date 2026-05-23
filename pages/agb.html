@@ -9,6 +9,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./shared-pages.css">
 <link rel="stylesheet" href="../assets/ui/mobile-nav.css">
+<link rel="stylesheet" href="../assets/ui/scroll-top.css">
+<link rel="stylesheet" href="../assets/ui/consent-banner.css">
+<link rel="stylesheet" href="../assets/ui/shared-footer.css">
+<link rel="stylesheet" href="../assets/ui/floating-contact.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -326,7 +330,7 @@ a{color:inherit}
   position:fixed;
   right:20px;
   bottom:20px;
-  z-index:35;
+  z-index:440;
   min-height:54px;
   padding:0 20px;
   border-radius:999px;
@@ -377,7 +381,7 @@ a{color:inherit}
 }
 </style>
 </head>
-<body>
+<body data-root="..">
   <div class="page">
     <div class="topbar">
       <a href="../index.html" class="brand">
@@ -424,10 +428,15 @@ a{color:inherit}
   </div>
 
   <a class="floating-contact" id="floatingContact" href="kontakt.html">Kontakt aufnehmen</a>
+  <div data-shared-footer></div>
 
   <script src="../content/site-core.js"></script>
   <script src="../content/agb-content.js"></script>
   <script src="../assets/ui/mobile-nav.js"></script>
+  <script src="../assets/ui/scroll-top.js"></script>
+  <script src="../assets/ui/consent-banner.js"></script>
+  <script src="../assets/ui/shared-footer.js"></script>
+  <script src="../assets/ui/floating-contact.js"></script>
   <script>
     const asset = (path) => {
       if (!path) return '';
@@ -477,11 +486,12 @@ a{color:inherit}
     document.getElementById('heroSubtitle').textContent = data.hero.subtitle || '';
     document.getElementById('legalNote').textContent = data.note || 'Bitte prüfen Sie diese Rechtstexte vor der finalen Veröffentlichung noch einmal zusammen mit Ihren verbindlichen Unternehmensangaben.';
 
+    const primaryPhone = (data.company.phone || '').split('/')[0].trim();
     const companyDetails = [
       { label: 'Unternehmen', value: data.company.name },
       { label: 'Adresse', value: `${data.company.street}, ${data.company.city}` },
       { label: 'E-Mail', value: data.company.email, href: data.company.email.startsWith('[') ? '' : `mailto:${data.company.email}` },
-      { label: 'Telefon', value: data.company.phone, href: data.company.phone.startsWith('[') ? '' : `tel:${data.company.phone.replace(/\s+/g,'')}` }
+      { label: 'Telefon', value: data.company.phone, href: primaryPhone.startsWith('[') ? '' : `tel:${primaryPhone.replace(/\s+/g,'')}` }
     ];
 
     document.getElementById('companyDetails').innerHTML = companyDetails.map(item => `
