@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revival Motoren – Professionelle Motorinstandsetzung Bielefeld</title>
+<title>Revival Motoren – Vue Bootstrap Alternative</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -53,12 +54,12 @@ img{display:block;max-width:100%}
   --whatsapp-bg: linear-gradient(180deg,rgba(234,255,241,.95) 0%,rgba(223,248,232,.85) 100%);
   --whatsapp-border: rgba(37,211,102,.22);
   --whatsapp-color: #215c3f;
-  --mobile-menu-bg:
-    linear-gradient(180deg, rgba(248,246,241,.98) 0%, rgba(241,237,230,.98) 100%);
-  --mobile-menu-border: rgba(20,20,20,.08);
-  --mobile-menu-link: #141414;
-  --mobile-menu-link-muted: #66635d;
-  --mobile-menu-surface: rgba(255,255,255,.72);
+  --mob-bg: linear-gradient(180deg,rgba(248,246,241,.98) 0%,rgba(241,237,230,.98) 100%);
+  --mob-border: rgba(24,24,24,.12);
+  --mob-close-bg: rgba(0,0,0,.04);
+  --mob-close-color: #4c4c4c;
+  --mob-wa-bg: rgba(37,211,102,.12);
+  --mob-wa-color: #0f5132;
   --sans:     'Geist', system-ui, -apple-system, sans-serif;
   --rad:      14px;
   --rad2:     20px;
@@ -105,12 +106,14 @@ html[data-theme="dark"]{
   --whatsapp-bg: linear-gradient(180deg,rgba(31,68,49,.72) 0%,rgba(21,48,36,.84) 100%);
   --whatsapp-border: rgba(84,199,127,.22);
   --whatsapp-color: #d6f5df;
-  --mobile-menu-bg:
-    linear-gradient(180deg, rgba(13,14,17,.98) 0%, rgba(16,17,20,.98) 100%);
-  --mobile-menu-border: rgba(255,255,255,.08);
-  --mobile-menu-link: #f3f1ec;
-  --mobile-menu-link-muted: #b7b2a8;
-  --mobile-menu-surface: rgba(255,255,255,.04);
+  --mob-bg:
+    radial-gradient(circle at top center, rgba(198,163,109,.10), transparent 34%),
+    linear-gradient(180deg, rgba(13,14,16,.98) 0%, rgba(16,17,19,.98) 100%);
+  --mob-border: rgba(255,255,255,.10);
+  --mob-close-bg: rgba(255,255,255,.06);
+  --mob-close-color: #e4e0d7;
+  --mob-wa-bg: linear-gradient(180deg,rgba(31,68,49,.72) 0%,rgba(21,48,36,.84) 100%);
+  --mob-wa-color: #d6f5df;
 }
 
 body{
@@ -125,12 +128,14 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 /* ── NAV ─────────────────────────────── */
 #nav{
   position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:400;
-  width:min(1380px, calc(100% - 40px));
-  padding:12px;
+  width:min(1360px, calc(100% - 40px));
+  min-height:88px;
+  display:flex;align-items:center;
+  padding:12px 16px 12px 14px;gap:14px;
   background:var(--nav-bg);
   backdrop-filter:blur(20px);
   border:1px solid var(--rule);
-  border-radius:32px;
+  border-radius:36px;
   box-shadow:var(--nav-shadow);
   transition:
     background .3s ease,
@@ -138,6 +143,8 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
     box-shadow .3s ease,
     transform .4s cubic-bezier(.22,1,.36,1),
     opacity .28s ease,
+    width .32s ease,
+    min-height .32s ease,
     padding .32s ease;
   will-change:transform,opacity;
 }
@@ -147,39 +154,31 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   pointer-events:none;
 }
 #nav.is-compact{
-  width:min(1260px, calc(100% - 48px));
-  padding:10px;
-  border-radius:26px;
+  width:min(1120px, calc(100% - 56px));
+  min-height:74px;
+  padding:10px 12px 10px 11px;
+  border-radius:28px;
   box-shadow:0 10px 24px rgba(0,0,0,.12);
 }
-#nav.is-compact .nav-layout{gap:12px}
-#nav.is-compact .nav-brand{padding:8px 16px 8px 8px}
-#nav.is-compact .brand-icon{width:52px;height:52px;border-radius:16px}
+#nav.is-compact .nav-brand{min-width:248px;padding:6px 8px 6px 6px;border-radius:20px}
+#nav.is-compact .brand-icon{width:54px;height:54px;border-radius:16px}
 #nav.is-compact .brand-name{font-size:18px}
 #nav.is-compact .brand-tagline{font-size:11px}
-#nav.is-compact .navl{padding:5px}
-#nav.is-compact .navl a{padding:11px 16px;font-size:13px}
-#nav.is-compact .theme-toggle,#nav.is-compact .nav-tel{width:44px;height:44px}
-#nav.is-compact .nav-whatsapp{min-height:44px;padding:10px 16px;font-size:13px}
-#nav.is-compact .nav-btn{min-height:46px;padding:11px 20px;font-size:14px}
-
-.nav-layout{
-  display:grid;
-  grid-template-columns:auto minmax(0,1fr) auto;
-  align-items:center;
-  gap:16px;
-}
+#nav.is-compact .navl{padding:4px}
+#nav.is-compact .navl a{padding:10px 15px;font-size:13px;white-space:nowrap;line-height:1.1}
+#nav.is-compact .theme-toggle,#nav.is-compact .nav-tel{width:42px;height:42px}
+#nav.is-compact .nav-whatsapp{min-height:42px;padding:10px 16px;font-size:13px}
+#nav.is-compact .nav-btn{min-height:44px;padding:11px 18px;font-size:14px}
 
 .nav-brand{
   font-size:15px;font-weight:700;color:var(--ink);
   text-decoration:none;letter-spacing:-.02em;margin-right:0;
   display:flex;align-items:center;justify-content:flex-start;gap:14px;
-  min-width:0;padding:9px 18px 9px 9px;border-radius:24px;
+  min-width:300px;padding:8px 10px 8px 8px;border-radius:26px;
   background:var(--nav-inner-surface);border:1px solid rgba(255,255,255,.06);flex-shrink:0;
-  min-height:70px;
 }
 .brand-icon{
-  width:64px;height:64px;border-radius:18px;overflow:hidden;
+  width:68px;height:68px;border-radius:20px;overflow:hidden;
   border:1px solid var(--brand-border);background:var(--brand-surface);
   flex-shrink:0;box-shadow:0 12px 28px rgba(0,0,0,.14);
   display:flex;align-items:center;justify-content:center;
@@ -188,15 +187,13 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
 .brand-name{font-size:20px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.045em}
 .brand-tagline{font-size:12px;font-weight:650;color:var(--brand-tag);line-height:1.1;letter-spacing:0}
-.nav-center{min-width:0;display:flex;justify-content:center}
 .navl{
-  display:flex;list-style:none;gap:4px;align-items:center;margin:0;
+  display:flex;list-style:none;gap:4px;align-items:center;margin:0 auto;
   padding:6px;border-radius:999px;background:var(--nav-inner-surface);border:1px solid rgba(255,255,255,.06);
-  width:max-content;max-width:100%;
 }
 .navl a{
   font-size:14px;font-weight:650;color:var(--mid);text-decoration:none;
-  padding:13px 20px;border-radius:999px;transition:color .2s,background .2s,transform .2s ease,opacity .2s ease;
+  padding:13px 20px;border-radius:999px;transition:color .2s,background .2s,transform .2s ease;
   white-space:nowrap;line-height:1.1;
 }
 .navl a:hover,.navl a.on{color:var(--nav-active-color);background:var(--nav-active-bg)}
@@ -221,15 +218,14 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   font-size:14px;font-weight:700;color:var(--whatsapp-color);text-decoration:none;
   display:flex;align-items:center;gap:7px;min-height:48px;padding:12px 20px;
   border-radius:999px;border:1px solid var(--whatsapp-border);background:var(--whatsapp-bg);
-  transition:all .2s;white-space:nowrap;align-self:center;flex-shrink:0;
+  transition:all .2s;white-space:nowrap;
 }
 .nav-whatsapp svg{width:14px;height:14px;fill:currentColor}
 .nav-whatsapp:hover{background:rgba(37,211,102,.16);transform:translateY(-1px)}
 .nav-btn{
   background:var(--primary-btn-bg);color:var(--primary-btn-text);text-decoration:none;
   min-height:52px;padding:13px 24px;border-radius:999px;font-size:15px;font-weight:750;
-  letter-spacing:-.025em;transition:opacity .2s,transform .15s;display:flex;align-items:center;justify-content:center;
-  line-height:1;align-self:center;flex-shrink:0;
+  letter-spacing:-.025em;transition:opacity .2s,transform .15s;display:flex;align-items:center;
 }
 .nav-btn:hover{opacity:.85;transform:scale(.98)}
 .nav-mobile-tools{display:none;align-items:center;gap:8px;margin-left:auto}
@@ -240,23 +236,23 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   transition:transform .2s ease,background .2s ease,border-color .2s ease;
 }
 .hbg:hover{transform:translateY(-1px);background:var(--theme-btn-hover)}
-.hbg span{display:block;width:18px;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .22s ease,opacity .2s ease}
-.hbg.is-open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
-.hbg.is-open span:nth-child(2){opacity:0}
-.hbg.is-open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.hbg span{display:block;width:18px;height:1.5px;background:var(--ink);border-radius:2px}
 .mob{
   display:none;position:fixed;inset:0;
-  background:var(--mobile-menu-bg);
+  background:var(--mob-bg);
   z-index:399;flex-direction:column;padding:104px 24px 40px;gap:0;
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
 }
 .mob.open{display:flex}
-.mob a{font-size:clamp(20px,5.5vw,28px);font-weight:750;color:var(--mobile-menu-link);text-decoration:none;padding:18px 0;border-bottom:1px solid var(--mobile-menu-border);letter-spacing:-.03em}
-.mob a:hover{color:var(--mobile-menu-link-muted)}
-.mob-cta{margin-top:28px;background:var(--primary-btn-bg);color:var(--primary-btn-text);text-align:center;padding:16px;border-radius:40px;font-size:16px;font-weight:700;text-decoration:none;border:1px solid transparent}
-.mob-wa{margin-top:12px;background:var(--whatsapp-bg);color:var(--whatsapp-color);text-align:center;padding:16px;border-radius:40px;font-size:16px;font-weight:700;text-decoration:none;border:1px solid var(--whatsapp-border)}
-.mob-x{position:absolute;top:22px;right:20px;background:var(--mobile-menu-surface);border:1px solid var(--mobile-menu-border);width:48px;height:48px;border-radius:16px;font-size:22px;cursor:pointer;color:var(--mobile-menu-link-muted);font-family:var(--sans)}
+.mob a{font-size:24px;font-weight:700;color:var(--ink);text-decoration:none;padding:18px 0;border-bottom:1px solid var(--mob-border);letter-spacing:-.03em}
+.mob a:hover{color:var(--mid)}
+.mob-cta{margin-top:28px;background:var(--primary-btn-bg);color:var(--primary-btn-text);text-align:center;padding:16px;border-radius:40px;font-size:16px;font-weight:700;text-decoration:none}
+.mob-wa{margin-top:12px;background:var(--mob-wa-bg);color:var(--mob-wa-color);text-align:center;padding:16px;border-radius:40px;font-size:16px;font-weight:700;text-decoration:none;border:none}
+.mob-x{
+  position:absolute;top:28px;right:20px;
+  width:44px;height:44px;border-radius:14px;
+  background:var(--mob-close-bg);border:1px solid var(--mob-border);
+  font-size:22px;cursor:pointer;color:var(--mob-close-color);font-family:var(--sans)
+}
 
 /* ── HERO ─────────────────────────────── */
 #hero{padding:158px 0 24px;display:flex;flex-direction:column;align-items:center;min-height:100vh}
@@ -388,105 +384,6 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   margin:0 auto 28px;
 }
 .brand-scroll-list{display:flex;flex-direction:column;gap:0}
-.brand-general-panel{
-  width:100%;
-  margin:0;
-  position:relative;
-  overflow:hidden;
-  min-height:100vh;
-  border:none;
-  box-shadow:none;
-  background:#111214;
-}
-.brand-general-bg{
-  position:absolute;
-  inset:0;
-  display:grid;
-  grid-template-columns:1.35fr 1fr 1fr;
-  grid-template-rows:repeat(3, 1fr);
-  grid-auto-flow:dense;
-  gap:8px;
-  background:#181818;
-}
-.brand-general-bg::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,
-    rgba(8,9,10,.06) 0%,
-    rgba(8,9,10,.18) 36%,
-    rgba(8,9,10,.32) 100%);
-  opacity:.32;
-}
-.brand-general-bg .cg{
-  position:relative;
-  overflow:hidden;
-  background:#151515;
-}
-.brand-general-bg .cg:first-child{grid-row:span 3}
-.brand-general-bg .cg:nth-child(2){grid-column:2 / span 2;grid-row:1}
-.brand-general-bg .cg:nth-child(3){grid-column:2;grid-row:2}
-.brand-general-bg .cg:nth-child(4){grid-column:3;grid-row:2}
-.brand-general-bg .cg:nth-child(5){grid-column:2 / span 2;grid-row:3}
-.brand-general-bg img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  filter:brightness(.72) saturate(.92);
-  transform:translateZ(0);
-}
-.brand-general-grid{
-  position:relative;
-  z-index:1;
-  min-height:100vh;
-  width:min(1240px, calc(100% - 96px));
-  margin:0 auto;
-  display:flex;
-  align-items:flex-end;
-  padding:clamp(48px,7vw,80px) 0;
-}
-.brand-general-copy{
-  max-width:620px;
-  padding:32px 34px;
-  border-radius:28px;
-  background:rgba(247,243,236,.68);
-  border:1px solid rgba(32,26,21,.08);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  box-shadow:0 18px 42px rgba(0,0,0,.12);
-}
-.brand-general-copy .sec-label{margin-bottom:12px;color:rgba(38,31,26,.74)}
-.brand-general-title{
-  font-size:clamp(28px,3.7vw,46px);
-  line-height:1.04;
-  letter-spacing:-.045em;
-  color:#171411;
-  margin-bottom:14px;
-  font-weight:800;
-}
-.brand-general-text{
-  font-size:15px;
-  line-height:1.8;
-  color:rgba(34,28,23,.78);
-  max-width:620px;
-  margin-bottom:24px;
-}
-.brand-general-cta{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:52px;
-  padding:13px 24px;
-  border-radius:999px;
-  background:#111214;
-  color:#fff;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:700;
-  letter-spacing:-.02em;
-  transition:transform .18s ease, opacity .2s ease;
-}
-.brand-general-cta:hover{opacity:.88;transform:translateY(-1px)}
 
 /* Jede Brand-Sektion: relative Container für sticky */
 .brand-scroll-chapter{
@@ -729,21 +626,6 @@ html[data-theme="dark"] .brand-intro-text,
 html[data-theme="dark"] .motor-copy{color:var(--brand-text-soft)}
 html[data-theme="dark"] .brand-detail-title,
 html[data-theme="dark"] .motor-name{color:var(--brand-text-main)}
-html[data-theme="dark"] .brand-general-panel{
-  box-shadow:none;
-}
-html[data-theme="dark"] .brand-general-copy{
-  background:rgba(23,25,28,.72);
-  border-color:rgba(255,255,255,.08);
-  box-shadow:0 18px 42px rgba(0,0,0,.24);
-}
-html[data-theme="dark"] .brand-general-copy .sec-label{color:rgba(226,220,210,.6)}
-html[data-theme="dark"] .brand-general-title{color:#f1ede6}
-html[data-theme="dark"] .brand-general-text{color:rgba(226,220,210,.76)}
-html[data-theme="dark"] .brand-general-cta{
-  background:#f3f1ec;
-  color:#111214;
-}
 
 /* ── RESULTS ─────────────────────────── */
 #results{padding:80px 24px}
@@ -899,40 +781,19 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── RESPONSIVE ───────────────────────── */
-@media(max-width:1280px){
-  .nav-whatsapp{display:none}
-  #nav{width:calc(100% - 28px);top:12px;padding:10px}
-  .nav-layout{gap:12px}
-  .nav-brand{padding:8px 14px 8px 8px}
-  .brand-icon{width:58px;height:58px;border-radius:18px}
+@media(max-width:1100px){
+  #hero{padding:142px 0 24px}
+  .hero-card img{height:min(62vh,540px)}
+  #nav{width:calc(100% - 28px);top:12px;min-height:82px;padding:10px 12px 10px 10px;gap:10px}
+  .nav-brand{min-width:250px;padding:7px 8px 7px 7px}
+  .brand-icon{width:60px;height:60px;border-radius:18px}
   .brand-name{font-size:18px}
   .brand-tagline{font-size:11px}
   .navl{padding:5px;gap:2px}
   .navl a{padding:11px 14px;font-size:13px}
   .nav-end{gap:8px}
+  .nav-whatsapp{padding:11px 16px}
   .nav-btn{min-height:48px;padding:12px 18px;font-size:14px}
-}
-
-@media(max-width:1180px){
-  .navl,.nav-end{display:none}
-  .nav-mobile-tools{display:flex}
-  .hbg{display:flex}
-  .nav-center{display:none}
-  .nav-layout{grid-template-columns:minmax(0,1fr) auto;gap:10px}
-  #nav{width:calc(100% - 20px);top:10px;padding:10px;border-radius:28px}
-  .nav-brand{min-width:0;gap:10px;padding:6px 8px 6px 6px;background:var(--nav-inner-surface);border:1px solid rgba(255,255,255,.06);border-radius:20px;flex:1;min-height:auto}
-  .brand-icon{width:52px;height:52px;border-radius:16px}
-  .brand-copy{gap:3px;max-width:220px}
-  .brand-name{font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .brand-tagline{font-size:10px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .theme-toggle{width:44px;height:44px;border-radius:14px}
-  .theme-toggle svg{width:17px;height:17px}
-  .hbg{width:44px;height:44px;border-radius:14px}
-}
-
-@media(max-width:1100px){
-  #hero{padding:142px 0 24px}
-  .hero-card img{height:min(62vh,540px)}
   .why-top{grid-template-columns:1fr}
   .why-top-left{border-right:none;border-bottom:1px solid var(--rule);padding:40px 32px}
   .why-top-right{padding:40px 32px}
@@ -964,15 +825,6 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .brand-back-copy,.brand-slideshow{padding:0}
   .brand-slideshow{justify-content:flex-start}
   .brand-slide{max-width:620px}
-  .brand-general-panel{min-height:82vh}
-  .brand-general-grid{min-height:82vh;width:calc(100% - 40px);padding:36px 0}
-  .brand-general-copy{padding:26px}
-  .brand-general-bg{grid-template-columns:1.15fr 1fr 1fr;grid-template-rows:repeat(3, 1fr)}
-  .brand-general-bg .cg:first-child{grid-column:1;grid-row:1 / span 3}
-  .brand-general-bg .cg:nth-child(2){grid-column:2 / span 2;grid-row:1}
-  .brand-general-bg .cg:nth-child(3){grid-column:2;grid-row:2}
-  .brand-general-bg .cg:nth-child(4){grid-column:3;grid-row:2}
-  .brand-general-bg .cg:nth-child(5){grid-column:2 / span 2;grid-row:3}
   .ba-grid{grid-template-columns:1fr}
   .pz-grid{grid-template-columns:1fr 1fr}
   .about-wrap{grid-template-columns:1fr;gap:40px}
@@ -1003,10 +855,18 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
    4. Veil-Gradient stärker für Lesbarkeit
    ═══════════════════════════════════════════════ */
 @media(max-width:768px){
-  #nav{width:calc(100% - 20px);top:10px;padding:10px;border-radius:26px}
-  .brand-copy{max-width:170px}
+  .navl,.nav-end{display:none}
+  .nav-mobile-tools{display:flex}
+  .hbg{display:flex}
+  #nav{width:calc(100% - 20px);top:10px;min-height:78px;padding:10px 10px 10px 9px;border-radius:28px;gap:10px}
+  .nav-brand{min-width:0;gap:10px;padding:6px 8px 6px 6px;background:var(--nav-inner-surface);border:1px solid rgba(255,255,255,.06);border-radius:20px;flex:1}
+  .brand-icon{width:52px;height:52px;border-radius:16px}
+  .brand-copy{gap:3px;max-width:170px}
   .brand-name{font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .brand-tagline{font-size:10px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .theme-toggle{width:44px;height:44px;border-radius:14px}
+  .theme-toggle svg{width:17px;height:17px}
+  .hbg{width:44px;height:44px;border-radius:14px}
   #hero{padding:128px 0 20px}
   .hero-card img{height:52vh;min-height:320px}
   .why-mosaic{grid-template-columns:repeat(2,1fr)}
@@ -1280,21 +1140,6 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     width:100%;
     margin:0;
   }
-  .brand-general-panel{min-height:72vh}
-  .brand-general-grid{min-height:72vh;width:calc(100% - 32px);padding:22px 0}
-  .brand-general-copy{padding:22px;border-radius:22px}
-  .brand-general-title{font-size:clamp(24px,8vw,34px)}
-  .brand-general-text{font-size:14px;line-height:1.72;margin-bottom:18px}
-  .brand-general-bg{
-    grid-template-columns:1fr 1fr;
-    grid-template-rows:repeat(3, 1fr);
-  }
-  .brand-general-bg .cg:first-child{grid-column:1 / span 2;grid-row:1 / span 1}
-  .brand-general-bg .cg:nth-child(2){grid-column:1 / span 2;grid-row:2}
-  .brand-general-bg .cg:nth-child(3){grid-column:1;grid-row:3}
-  .brand-general-bg .cg:nth-child(4){grid-column:2;grid-row:3}
-  .brand-general-bg .cg:nth-child(5){display:none}
-  .brand-general-cta{width:100%}
 
   /* Dark Mode auf Mobile */
   html[data-theme="dark"] .brands-shell{
@@ -1315,56 +1160,6 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   #leistungen,#results,#prozess,#ueber-uns{padding:60px 16px}
   #brands{padding:0 0 60px}
 }
-
-@media(max-width:560px){
-  #nav{width:calc(100% - 16px);top:8px;padding:8px}
-  .nav-layout{gap:8px}
-  .nav-brand{gap:8px;padding:5px 7px 5px 5px;border-radius:18px}
-  .brand-icon{width:46px;height:46px;border-radius:14px}
-  .brand-copy{max-width:140px}
-  .brand-name{font-size:16px}
-  .brand-tagline{font-size:9px}
-  .theme-toggle,.hbg{width:42px;height:42px;border-radius:13px}
-  #hero{padding:112px 0 16px;min-height:auto}
-  .hero-h{font-size:clamp(34px,11vw,48px);line-height:.98;margin-bottom:16px;padding:0 14px}
-  .hero-sub{font-size:14px;line-height:1.65;margin-bottom:28px;padding:0 18px}
-  .hero-actions{width:100%;flex-direction:column;gap:10px;padding:0 16px;margin-bottom:32px}
-  .btn-pill,.btn-pill-ghost{width:100%;justify-content:center;text-align:center}
-  .hero-card img{height:44vh;min-height:260px}
-  .hero-card-overlay{padding:20px 18px}
-  .hero-card-title{font-size:24px}
-  .hero-card-sub{font-size:13px}
-  .hero-pill-row{padding:0 12px;margin-top:24px}
-  .hpill{width:calc(50% - 4px);text-align:center;justify-content:center;padding:8px 12px}
-  .why-top-left,.why-top-right,.cases-header,.map-info,.kt-left,.kt-right,footer{padding-left:20px;padding-right:20px}
-  .why-top-right{grid-template-columns:1fr;gap:22px}
-  .why-mosaic{height:auto;grid-template-columns:1fr}
-  .wy-img{min-height:180px}
-  .sec-h{font-size:clamp(26px,9vw,34px)}
-  .sec-sub,.lst-intro-body,.map-copy,.kt-sub{font-size:13px}
-  .lcard{padding:22px 18px;gap:14px}
-  .lcard-icon{width:40px;height:40px}
-  #prozess{padding:44px 20px}
-  .pz-step{padding:28px 20px}
-  .about-imgs-wrap{grid-template-columns:1fr;grid-template-rows:220px 180px 180px}
-  .spec-list{grid-template-columns:1fr}
-  .map-actions,.fsub-row{flex-direction:column}
-  .map-actions a,.fsubmit{width:100%;text-align:center;justify-content:center}
-  .kt-h{font-size:clamp(26px,9vw,34px)}
-  .kt-form-title{font-size:18px}
-  .mob{padding:96px 18px 28px}
-  .mob a{padding:16px 0}
-  .mob-cta,.mob-wa{padding:15px}
-}
-
-@media(max-width:400px){
-  .brand-copy{max-width:118px}
-  .brand-name{font-size:15px}
-  .brand-tagline{font-size:8px}
-  .hero-h{font-size:32px}
-  .hpill{width:100%}
-  .mob a{font-size:20px}
-}
 </style>
 </head>
 <body>
@@ -1372,42 +1167,38 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="nav-layout">
-    <a href="#hero" class="nav-brand">
-      <span class="brand-icon"><img :src="logo.light" :alt="logo.alt" decoding="async" fetchpriority="high"></span>
-      <span class="brand-copy">
-        <span class="brand-name">{{ logo.name }}</span>
-        <span class="brand-tagline">{{ logo.tagline }}</span>
-      </span>
+  <a href="#hero" class="nav-brand">
+    <span class="brand-icon"><img src="logo-icon-gold.png" alt="Revival Motoren Logo Symbol" decoding="async" fetchpriority="high"></span>
+    <span class="brand-copy">
+      <span class="brand-name">Revival Motoren</span>
+      <span class="brand-tagline">Wir beleben Ihren Motor</span>
+    </span>
+  </a>
+  <ul class="navl">
+    <li v-for="item in navItems" :key="item.href"><a :href="item.href" :class="{on:item.href==='#leistungen'}">{{ item.label }}</a></li>
+  </ul>
+  <div class="nav-end">
+    <button class="theme-toggle" id="themeToggle" data-theme-toggle type="button" aria-label="Darstellung wechseln">
+      <svg viewBox="0 0 24 24"><path d="M12 3v2.2M12 18.8V21M5.64 5.64l1.56 1.56M16.8 16.8l1.56 1.56M3 12h2.2M18.8 12H21M5.64 18.36l1.56-1.56M16.8 7.2l1.56-1.56"/><circle cx="12" cy="12" r="4.2"/></svg>
+    </button>
+    <a href="tel:+4952189739151" class="nav-tel">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l1-1.01a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
     </a>
-    <div class="nav-center">
-      <ul class="navl">
-        <li v-for="item in navItems" :key="item.href"><a :href="item.href" :class="{on:item.href==='#leistungen'}">{{ item.label }}</a></li>
-      </ul>
-    </div>
-    <div class="nav-end">
-      <button class="theme-toggle" id="themeToggle" data-theme-toggle type="button" aria-label="Darstellung wechseln">
-        <svg viewBox="0 0 24 24"><path d="M12 3v2.2M12 18.8V21M5.64 5.64l1.56 1.56M16.8 16.8l1.56 1.56M3 12h2.2M18.8 12H21M5.64 18.36l1.56-1.56M16.8 7.2l1.56-1.56"/><circle cx="12" cy="12" r="4.2"/></svg>
-      </button>
-      <a href="tel:+4952189739151" class="nav-tel">
-        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l1-1.01a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      </a>
-      <a href="#kontakt" class="nav-whatsapp js-whatsapp-link" aria-label="WhatsApp Anfrage">
-        <svg viewBox="0 0 32 32"><path d="M19.11 17.34c-.29-.15-1.71-.84-1.97-.93-.26-.1-.45-.15-.64.15s-.74.93-.91 1.12c-.17.2-.33.22-.62.08-.29-.15-1.22-.45-2.32-1.45-.86-.76-1.44-1.7-1.61-1.99-.17-.29-.02-.45.13-.59.13-.12.29-.33.44-.49.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.52-.08-.15-.64-1.55-.87-2.13-.23-.55-.47-.48-.64-.49h-.55c-.2 0-.52.08-.79.37s-1.03 1.01-1.03 2.45 1.06 2.84 1.21 3.03c.15.2 2.09 3.19 5.06 4.47.71.31 1.27.49 1.71.63.72.23 1.38.2 1.9.12.58-.09 1.71-.7 1.95-1.38.24-.67.24-1.25.17-1.37-.07-.12-.26-.2-.55-.34Z"/><path d="M16.03 3.2c-7.05 0-12.76 5.72-12.76 12.77 0 2.25.59 4.45 1.71 6.39L3 29l6.83-1.79a12.75 12.75 0 0 0 6.2 1.59h.01c7.05 0 12.77-5.72 12.77-12.77S23.09 3.2 16.03 3.2Zm0 23.44h-.01a10.6 10.6 0 0 1-5.39-1.47l-.39-.23-4.05 1.06 1.08-3.95-.26-.41a10.56 10.56 0 0 1-1.63-5.63c0-5.85 4.76-10.61 10.62-10.61 2.84 0 5.5 1.11 7.5 3.11a10.54 10.54 0 0 1 3.11 7.5c0 5.85-4.76 10.61-10.61 10.61Z"/></svg>
-        WhatsApp
-      </a>
-      <a href="#kontakt" class="nav-btn">Angebot anfragen</a>
-    </div>
-    <div class="nav-mobile-tools">
-      <button class="theme-toggle" id="themeToggleMobile" data-theme-toggle type="button" aria-label="Darstellung wechseln">
-        <svg viewBox="0 0 24 24"><path d="M12 3v2.2M12 18.8V21M5.64 5.64l1.56 1.56M16.8 16.8l1.56 1.56M3 12h2.2M18.8 12H21M5.64 18.36l1.56-1.56M16.8 7.2l1.56-1.56"/><circle cx="12" cy="12" r="4.2"/></svg>
-      </button>
-      <button class="hbg" id="menuToggle" onclick="mobToggle()" aria-label="Menü öffnen" aria-controls="mobMenu" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
+    <a href="#kontakt" class="nav-whatsapp js-whatsapp-link" aria-label="WhatsApp Anfrage">
+      <svg viewBox="0 0 32 32"><path d="M19.11 17.34c-.29-.15-1.71-.84-1.97-.93-.26-.1-.45-.15-.64.15s-.74.93-.91 1.12c-.17.2-.33.22-.62.08-.29-.15-1.22-.45-2.32-1.45-.86-.76-1.44-1.7-1.61-1.99-.17-.29-.02-.45.13-.59.13-.12.29-.33.44-.49.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.52-.08-.15-.64-1.55-.87-2.13-.23-.55-.47-.48-.64-.49h-.55c-.2 0-.52.08-.79.37s-1.03 1.01-1.03 2.45 1.06 2.84 1.21 3.03c.15.2 2.09 3.19 5.06 4.47.71.31 1.27.49 1.71.63.72.23 1.38.2 1.9.12.58-.09 1.71-.7 1.95-1.38.24-.67.24-1.25.17-1.37-.07-.12-.26-.2-.55-.34Z"/><path d="M16.03 3.2c-7.05 0-12.76 5.72-12.76 12.77 0 2.25.59 4.45 1.71 6.39L3 29l6.83-1.79a12.75 12.75 0 0 0 6.2 1.59h.01c7.05 0 12.77-5.72 12.77-12.77S23.09 3.2 16.03 3.2Zm0 23.44h-.01a10.6 10.6 0 0 1-5.39-1.47l-.39-.23-4.05 1.06 1.08-3.95-.26-.41a10.56 10.56 0 0 1-1.63-5.63c0-5.85 4.76-10.61 10.62-10.61 2.84 0 5.5 1.11 7.5 3.11a10.54 10.54 0 0 1 3.11 7.5c0 5.85-4.76 10.61-10.61 10.61Z"/></svg>
+      WhatsApp
+    </a>
+    <a href="#kontakt" class="nav-btn">Angebot anfragen</a>
+  </div>
+  <div class="nav-mobile-tools">
+    <button class="theme-toggle" id="themeToggleMobile" data-theme-toggle type="button" aria-label="Darstellung wechseln">
+      <svg viewBox="0 0 24 24"><path d="M12 3v2.2M12 18.8V21M5.64 5.64l1.56 1.56M16.8 16.8l1.56 1.56M3 12h2.2M18.8 12H21M5.64 18.36l1.56-1.56M16.8 7.2l1.56-1.56"/><circle cx="12" cy="12" r="4.2"/></svg>
+    </button>
+    <button class="hbg" onclick="mobToggle()" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<div class="mob" id="mobMenu" aria-hidden="true">
+<div class="mob" id="mobMenu">
   <button class="mob-x" onclick="mobToggle()">✕</button>
   <a v-for="item in navItems" :key="item.href + '-mobile'" :href="item.href" onclick="mobToggle()">{{ item.label }}</a>
   <a href="#" onclick="toggleTheme(); mobToggle(); return false;">Dark / Light Mode</a>
@@ -1417,17 +1208,17 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 
 <!-- ════ HERO ════════════════════════════ -->
 <section id="hero">
-  <h1 class="hero-h" v-html="hero.title"></h1>
-  <p class="hero-sub">{{ hero.subtitle }}</p>
+  <h1 class="hero-h">Professionelle<br>Motorinstand&shy;setzung</h1>
+  <p class="hero-sub">Präzise PKW-Motorreparaturen in Bielefeld – mit modernster Diagnosetechnik und 12 Monaten Garantie.</p>
   <div class="hero-actions">
-    <a href="#kontakt" class="btn-pill">{{ hero.primaryAction }}</a>
-    <a href="#leistungen" class="btn-pill-ghost">{{ hero.secondaryAction }}</a>
+    <a href="#kontakt" class="btn-pill">Kostenloses Angebot →</a>
+    <a href="#leistungen" class="btn-pill-ghost">Leistungen ansehen</a>
   </div>
   <div class="hero-card float-card" data-float="22">
-    <img :src="hero.image.src" :alt="hero.image.alt" class="parallax-media" data-parallax-speed="18" decoding="async" fetchpriority="high">
+    <img src="Projects/Motorblock1.jpg" alt="Motorblock Werkstatt Revival Motoren" class="parallax-media" data-parallax-speed="18" decoding="async" fetchpriority="high">
     <div class="hero-card-overlay">
-      <div class="hero-card-title" v-html="hero.overlayTitle"></div>
-      <div class="hero-card-sub">{{ hero.overlaySubtitle }}</div>
+      <div class="hero-card-title">Zuverlässige<br>Motorreparatur</div>
+      <div class="hero-card-sub">Modernste Diagnosetechnik · Bielefeld & deutschlandweit</div>
     </div>
   </div>
   <div class="hero-pill-row">
@@ -1439,8 +1230,8 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <div id="why" class="rv glow-section">
   <div class="why-top">
     <div class="why-top-left">
-      <div class="why-h" v-html="why.title"></div>
-      <p class="why-sub">{{ why.subtitle }}</p>
+      <div class="why-h">Warum Revival Motoren<br>überzeugt</div>
+      <p class="why-sub">Modernste Diagnosetechnik, erfahrene Motorenbauer und höchste Qualitätsstandards – für jede Reparatur.</p>
     </div>
     <div class="why-top-right">
       <div class="why-feat" v-for="feature in whyFeatures" :key="feature.title">
@@ -1459,10 +1250,10 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <section id="leistungen">
   <div class="leistung-layout">
     <div class="leistung-sticky rv">
-      <span class="sec-label">{{ servicesSection.label }}</span>
-      <h2 class="sec-h" v-html="servicesSection.title"></h2>
-      <p class="lst-intro-body">{{ servicesSection.subtitle }}</p>
-      <a href="#kontakt" class="lst-all-link">{{ servicesSection.action }}</a>
+      <span class="sec-label">Unsere Leistungen</span>
+      <h2 class="sec-h">Alles aus einer<br>Hand</h2>
+      <p class="lst-intro-body">Von der Erstdiagnose bis zur finalen Abnahmeprüfung – vollständige Motorinstandsetzung durch erfahrene Spezialisten.</p>
+      <a href="#kontakt" class="lst-all-link">Alle Leistungen anfragen →</a>
     </div>
     <div class="leistung-grid rv stagger glow-section float-card" style="transition-delay:.1s" data-float="16">
       <div class="lcard" v-for="service in services" :key="service.title">
@@ -1481,12 +1272,12 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <div id="cases" class="rv glow-section">
   <div class="cases-header">
     <div>
-      <span class="sec-label">{{ casesSection.label }}</span>
-      <h2 class="sec-h" v-html="casesSection.title"></h2>
-      <p class="sec-sub">{{ casesSection.subtitle }}</p>
+      <span class="sec-label">Referenzarbeiten</span>
+      <h2 class="sec-h">Unsere<br>Motorprojekte</h2>
+      <p class="sec-sub">Präzise Instandsetzung und Reparatur für alle führenden Fahrzeughersteller.</p>
     </div>
     <div class="cases-right">
-      <a href="#kontakt" class="btn-pill">{{ casesSection.action }}</a>
+      <a href="#kontakt" class="btn-pill">Projekt anfragen →</a>
     </div>
   </div>
   <div class="cases-gallery stagger rv" style="transition-delay:.08s">
@@ -1502,9 +1293,9 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   <div class="brands-shell glow-section">
     <div class="brands-header rv">
       <div>
-        <span class="sec-label">{{ brandsSection.label }}</span>
-        <h2 class="sec-h">{{ brandsSection.title }}</h2>
-        <p class="sec-sub">{{ brandsSection.subtitle }}</p>
+        <span class="sec-label">Marken & Motoren</span>
+        <h2 class="sec-h">Ingenieurskunst am Limit</h2>
+        <p class="sec-sub">Wo Präzision auf rohe Gewalt trifft. Entdecke die Meilensteine der Motorenentwicklung, die Performance neu definiert haben.</p>
       </div>
     </div>
 
@@ -1557,31 +1348,15 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
         </section>
       </article>
     </div>
-
-    <div class="brand-general-panel rv glow-section">
-      <div class="brand-general-bg">
-        <div class="cg" v-for="image in generalBrandsPanel.images" :key="image.src + image.alt">
-          <img :src="image.src" :alt="image.alt" loading="eager" decoding="async" fetchpriority="low">
-        </div>
-      </div>
-      <div class="brand-general-grid">
-        <div class="brand-general-copy">
-          <span class="sec-label">{{ generalBrandsPanel.label }}</span>
-          <h3 class="brand-general-title">{{ generalBrandsPanel.title }}</h3>
-          <p class="brand-general-text">{{ generalBrandsPanel.body }}</p>
-          <a href="#kontakt" class="brand-general-cta">{{ generalBrandsPanel.button }}</a>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
 <!-- ════ RESULTS / WORKSHOP ══════════ -->
 <section id="results">
   <div class="results-header rv">
-    <span class="sec-label">{{ resultsSection.label }}</span>
-    <h2 class="sec-h" v-html="resultsSection.title"></h2>
-    <p class="sec-sub">{{ resultsSection.subtitle }}</p>
+    <span class="sec-label">Werkstatt</span>
+    <h2 class="sec-h">Präzision in jeder Bearbeitung.<br>Modernste Technik.</h2>
+    <p class="sec-sub">Professionelle Maschinen und moderne Verfahren für langlebige Motoren.</p>
   </div>
   <div class="ba-grid rv" style="transition-delay:.1s">
     <div class="ba-card" v-for="card in workshopCards" :key="card.title">
@@ -1600,8 +1375,8 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 
 <!-- ════ PROZESS ══════════════════════════ -->
 <div id="prozess" class="rv glow-section">
-  <span class="sec-label">{{ processSection.label }}</span>
-  <h2 class="sec-h" style="margin-bottom:48px" v-html="processSection.title"></h2>
+  <span class="sec-label">Unser Ablauf</span>
+  <h2 class="sec-h" style="margin-bottom:48px">In 4 Schritten<br>zu Ihrem Motor</h2>
   <div class="pz-grid rv stagger" style="transition-delay:.08s">
     <div class="pz-step" v-for="step in processSteps" :key="step.n" :data-step="step.step">
       <div class="pz-n">{{ step.n }}</div>
@@ -1615,14 +1390,14 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <section id="ueber-uns">
   <div class="about-wrap rv glow-section">
     <div class="about-imgs-wrap">
-      <div class="a-img"><img :src="about.images[0].src" :alt="about.images[0].alt" class="parallax-media" :data-parallax-speed="about.images[0].speed" :style="about.images[0].style"></div>
-      <div class="a-img" style="align-self:start"><img :src="about.images[1].src" :alt="about.images[1].alt" class="parallax-media" :data-parallax-speed="about.images[1].speed" :style="about.images[1].style"></div>
-      <div class="a-img" style="align-self:end"><img :src="about.images[2].src" :alt="about.images[2].alt" class="parallax-media" :data-parallax-speed="about.images[2].speed" :style="about.images[2].style"></div>
+      <div class="a-img"><img src="Projects/ueber-uns/block-floor.jpg" alt="Werkstatt" class="parallax-media" data-parallax-speed="14" style="height:100%;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)"></div>
+      <div class="a-img" style="align-self:start"><img src="Projects/ueber-uns/Motorblock1.jpg" alt="Zylinderkopf" class="parallax-media" data-parallax-speed="10" style="height:200px;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)"></div>
+      <div class="a-img" style="align-self:end"><img src="Projects//Motor1.jpg" alt="Motor fertig" class="parallax-media" data-parallax-speed="12" style="height:280px;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)"></div>
     </div>
     <div class="about-text">
-      <span class="sec-label">{{ about.label }}</span>
-      <h2 class="sec-h" style="margin-bottom:14px" v-html="about.title"></h2>
-      <p class="sec-sub">{{ about.subtitle }}</p>
+      <span class="sec-label">Über uns</span>
+      <h2 class="sec-h" style="margin-bottom:14px">Revival Motoren –<br>Bielefeld</h2>
+      <p class="sec-sub">Spezialisierte Werkstatt für Motorinstandsetzung und Motorreparatur. Traditionelles Handwerk trifft modernste Technik – für langlebige und zuverlässige Ergebnisse.</p>
       <div class="spec-list">
         <div class="spec-item" v-for="spec in aboutSpecs" :key="spec.label">
           <div class="spec-n" :style="spec.style || ''" v-html="spec.value"></div>
@@ -1637,8 +1412,8 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <div id="kontakt" class="rv">
   <div class="kt-left">
     <div>
-      <h2 class="kt-h" v-html="contactSection.title"></h2>
-      <p class="kt-sub">{{ contactSection.subtitle }}</p>
+      <h2 class="kt-h">Angebot<br>anfragen</h2>
+      <p class="kt-sub">Kostenlos & unverbindlich. Wir melden uns innerhalb von 24 Stunden mit einem transparenten Kostenvoranschlag.</p>
     </div>
     <div>
       <div class="kt-contacts">
@@ -1655,12 +1430,12 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
       </div>
       <div class="kt-ping">
         <span class="kt-ping-dot"></span>
-        <span class="kt-ping-txt">{{ contactSection.responseHint }}</span>
+        <span class="kt-ping-txt">Antwort innerhalb 24 Stunden</span>
       </div>
     </div>
   </div>
   <div class="kt-right">
-    <div class="kt-form-title">{{ contactSection.formTitle }}</div>
+    <div class="kt-form-title">Ihre Anfrage</div>
     <form id="kForm" onsubmit="submitForm(event)">
       <div class="frow">
         <div class="ff"><label class="fl">Name <em>*</em></label><input type="text" class="fi" placeholder="Vor- und Nachname" required></div>
@@ -1695,13 +1470,13 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
           <label for="consent-agb">Ich habe die <a href="agb.html" target="_blank" rel="noopener noreferrer">AGB</a> und die <a href="datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu. <em>*</em></label>
         </div>
       </div>
-      <div class="fsub-row"><button type="submit" class="fsubmit">{{ contactSection.submitLabel }}</button></div>
-      <div class="fnote">{{ contactSection.note }}</div>
+      <div class="fsub-row"><button type="submit" class="fsubmit">Angebot anfragen →</button></div>
+      <div class="fnote">Kostenlos & unverbindlich · Keine Datenweitergabe</div>
     </form>
     <div id="kOk" style="display:none;text-align:center;padding:56px 20px">
       <div style="width:56px;height:56px;border-radius:50%;background:var(--bg);border:1.5px solid var(--rule);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px">✓</div>
-      <div style="font-size:22px;font-weight:800;letter-spacing:-.04em;color:var(--ink);margin-bottom:6px">{{ contactSection.successTitle }}</div>
-      <p style="font-size:13px;color:var(--mid);line-height:1.7">{{ contactSection.successText }}</p>
+      <div style="font-size:22px;font-weight:800;letter-spacing:-.04em;color:var(--ink);margin-bottom:6px">Anfrage gesendet!</div>
+      <p style="font-size:13px;color:var(--mid);line-height:1.7">Wir melden uns innerhalb von 24 Stunden mit Ihrem Angebot.</p>
     </div>
   </div>
 </div>
@@ -1710,22 +1485,22 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <section id="map-section" class="rv">
   <div class="map-wrap">
     <div class="map-info">
-      <span class="sec-label">{{ mapSection.label }}</span>
-      <h2 class="sec-h" v-html="mapSection.title"></h2>
-      <p class="map-copy">{{ mapSection.subtitle }}</p>
+      <span class="sec-label">Standort</span>
+      <h2 class="sec-h">Werkstatt in<br>Bielefeld finden</h2>
+      <p class="map-copy">Revival Motoren finden Sie direkt an der Artur-Ladebeck-Straße. Die Karte unten hilft Ihren Kunden bei der schnellen Navigation zur Werkstatt.</p>
       <div class="map-points">
         <div class="map-point" v-for="point in mapPoints" :key="point.title"><strong>{{ point.title }}</strong><span v-html="point.body"></span></div>
       </div>
-      <p class="map-note">{{ mapSection.note }}</p>
+      <p class="map-note">Telefon, E-Mail und vollständige Kontaktdaten finden Sie direkt im Anfragebereich darunter, damit die Informationen nicht doppelt erscheinen.</p>
       <div class="map-actions">
-        <a class="map-route" :href="mapSection.routeHref" target="_blank" rel="noopener noreferrer">{{ mapSection.routeLabel }}</a>
-        <a class="map-whatsapp js-whatsapp-link" href="#kontakt">{{ mapSection.whatsappLabel }}</a>
+        <a class="map-route" href="https://www.google.com/maps/dir/?api=1&destination=Artur-Ladebeck-Stra%C3%9Fe+181,+33647+Bielefeld" target="_blank" rel="noopener noreferrer">Route planen</a>
+        <a class="map-whatsapp js-whatsapp-link" href="#kontakt">WhatsApp</a>
       </div>
     </div>
     <div class="map-frame">
       <iframe
-        :title="mapSection.iframeTitle"
-        :src="mapSection.iframeSrc"
+        title="Google Maps Standort Revival Motoren"
+        src="https://www.google.com/maps?q=Artur-Ladebeck-Stra%C3%9Fe%20181,%2033647%20Bielefeld&z=15&output=embed"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
         allowfullscreen>
@@ -1739,32 +1514,204 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   <div class="ft-top">
     <div>
       <div class="ft-brand-row">
-        <span class="brand-icon"><img :src="logo.light" :alt="logo.alt" loading="lazy" decoding="async"></span>
+        <span class="brand-icon"><img src="logo-icon-gold.png" alt="Revival Motoren Logo Symbol" loading="lazy" decoding="async"></span>
         <div class="brand-copy">
-          <div class="brand-name">{{ logo.name }}</div>
-          <div class="brand-tagline">{{ logo.tagline }}</div>
+          <div class="brand-name">Revival Motoren</div>
+          <div class="brand-tagline">Wir beleben Ihren Motor</div>
         </div>
       </div>
-      <p class="ft-brand-desc">{{ footer.description }}</p>
+      <p class="ft-brand-desc">Spezialisierte Motorinstandsetzung in Bielefeld – präzise, zuverlässig und transparent.</p>
     </div>
     <div class="ft-col"><h5>Navigation</h5><ul><li v-for="item in footerNav" :key="item.href"><a :href="item.href">{{ item.label }}</a></li></ul></div>
     <div class="ft-col"><h5>Rechtliches</h5><ul><li v-for="item in footerLegal" :key="item.href"><a :href="item.href">{{ item.label }}</a></li></ul></div>
     <div class="ft-col"><h5>Kontakt</h5><ul><li v-for="item in footerContact" :key="item.href"><a :href="item.href">{{ item.label }}</a></li></ul></div>
   </div>
   <div class="ft-bottom">
-    <span class="ft-copy">{{ footer.copyright }}</span>
+    <span class="ft-copy">© 2025 Revival Motoren</span>
   </div>
 </footer>
 </div>
 
-<script src="content.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 const { createApp } = Vue;
 
 createApp({
   data(){
-    return window.siteContent;
+    return{
+      navItems:[
+        {label:'Leistungen',href:'#leistungen'},
+        {label:'Referenzen',href:'#cases'},
+        {label:'Motoren',href:'#brands'},
+        {label:'Über uns',href:'#ueber-uns'},
+        {label:'Kontakt',href:'#kontakt'}
+      ],
+      heroPills:[
+        '🛡️ 12 Monate Garantie',
+        '🚗 DE-weite Abholung',
+        '⏱️ 7–15 Werktage',
+        '🔩 OEM-Ersatzteile',
+        '📋 Kostenloser Voranschlag',
+        '✅ Verfügbar 24/7'
+      ],
+      whyFeatures:[
+        {icon:'🔬',title:'Präzise Diagnose',body:'Modernste OBD-Messtechnik identifiziert jedes Problem exakt.'},
+        {icon:'🛡️',title:'12 Monate Garantie',body:'Jede Reparatur ist vollständig abgesichert.'},
+        {icon:'🔩',title:'OEM-Ersatzteile',body:'Ausschließlich Original- und OEM-Qualitätsteile.'},
+        {icon:'⚡',title:'7–15 Werktage',body:'Schnelle Reparatur – Ihr Motor wieder einsatzbereit.'}
+      ],
+      whyMosaic:[
+        {src:'Projects/img-block.jpg',alt:'Motorblock Detail',speed:10},
+        {src:'Projects/Motor.jpg',alt:'Werkstattmotor',speed:14},
+        {src:'Projects/Motor1.jpg',alt:'Leistungsaggregat',speed:12},
+        {src:'Projects/Motorblock.jpg',alt:'Motorraum Detail',speed:16}
+      ],
+      services:[
+        {icon:'🔬',title:'Diagnose & Befund',body:'Vollständige Fehleranalyse mit modernster OBD-Messtechnik. Transparenter Befundbericht und fester Kostenvoranschlag vor Beginn.',tags:['Kompressionsprüfung','Öldruckkontrolle','Dichtigkeitsprüfung']},
+        {icon:'🔩',title:'Zylinderkopf-Instandsetzung',body:'Druckprüfung, Ultraschallreinigung, Planen und vollständige Aufbereitung des Zylinderkopfes nach Herstellervorgaben.',tags:['Ultraschall','Planen','Ventilsitze']},
+        {icon:'⚙️',title:'Kurbelwelle & Lager',body:'Prüfung, Richten und Schleifen der Kurbelwelle. Austausch aller Haupt- und Pleuellager mit OEM-Teilen.',tags:['Schleifen','Hauptlager','Pleuellager']},
+        {icon:'🔗',title:'Steuerkette & Timing',body:'Austausch der Steuerkette inkl. Führungsschienen, Spanner und aller zugehörigen Komponenten.',tags:['Führungsschienen','Spanner','Kettenkit']},
+        {icon:'🏁',title:'Honen & Kolbenringe',body:'Professionelles Honen der Zylinder und Austausch aller Kolbenringe sowie Prüfung der Kolben.',tags:['Honen','Kolbenringe','Ölpumpe']},
+        {icon:'🚗',title:'Abholung & Lieferung',body:'Deutschlandweite Fahrzeugabholung direkt bei Ihnen zuhause – bequem, sicher und termingerecht.',tags:['Deutschlandweit','Termintreu','Sicherer Transport']}
+      ],
+      caseGallery:[
+        {src:'Projects/projekte/img-block.jpg',alt:'Zylinderkopf',tag:'Zylinderkopf',name:'Druckprüfung & Planen',speed:14},
+        {src:'Projects/projekte/Motorblock.jpg',alt:'Motorblock fertig',tag:'Motorblock',name:'OEM-Instandsetzung',speed:12},
+        {src:'Projects/projekte/Motor.jpg',alt:'BMW R4',tag:'BMW · R4',name:'Reihenmotor',speed:16},
+        {src:'Projects/projekte/Motor1.jpg',alt:'Maserati V6',tag:'Maserati · V6',name:'V-Motor',speed:10},
+        {src:'Projects/Motor1.jpg',alt:'Mercedes V12',tag:'Mercedes · V12',name:'Oberklasse',speed:18}
+      ],
+      brandScenes:[
+        {
+          sceneId:'brandAudiScene',
+          mobileImage:'audi/mobile.jpg',
+          heroImage:'audi/Audi R8-optimized.jpg',
+          heroAlt:'Audi R8 Performance Fahrzeug',
+          chip:'Germany · Audi',
+          name:'Audi',
+          teaser:'R8, RS-Modelle und High-Performance-Antriebe mit klarer Linienführung, präziser Technik und ikonischem Klangbild.',
+          title:'Audi Motoren',
+          subtitle:'Vier Hochleistungsaggregate von FSI bis BiTDI.',
+          intro:'Vom ikonischen Fünfzylinder bis zum hochdrehenden V10 zeigt diese Auswahl die charakterstarken Audi-Performance-Motoren mit Fokus auf Klang, Drehmoment, Aufladung und technische Eigenständigkeit.',
+          slides:[
+            {src:'audi/motoren/2.5 TFSI R5 TURBO.jpg',caption:'EA855 EVO'},
+            {src:'audi/motoren/4.0 TFSI V8 BITURBO.jpg',caption:'EA825'},
+            {src:'audi/motoren/Audi V6 TDI.jpg',caption:'EA897evo3'},
+            {src:'audi/motoren/audi v10.jpg',caption:'EA824 / FSI'}
+          ],
+          motors:[
+            {name:'EA855 EVO',meta:'2.5 TFSI R5 TURBO',copy:'Die Ikone mit der markanten 1-2-4-5-3 Zündfolge. Dieser mehrfache "Engine of the Year"-Sieger liefert bis zu 400 PS und bietet eine unverwechselbare Klangkulisse. Kompakte Bauweise trifft auf Rennsport-Performance, perfektioniert für Modelle wie den RS 3 und TT RS.'},
+            {name:'EA825',meta:'4.0 TFSI V8 BITURBO',copy:'Das High-End-Aggregat der Oberklasse. Mit zwei im heißen Innen-V liegenden Turboladern und Zylinderabschaltung (COD) vereint dieser Motor brachiale 630 PS mit modernster Effizienztechnologie. Er bildet das emotionale Herzstück der RS 6, RS 7 und RS Q8 Modelle.'},
+            {name:'EA897evo3',meta:'3.0 V6 BiTDI QUATTRO',copy:'Die Speerspitze der Audi Diesel-Technologie. Dank Biturbo-Aufladung und massiver Durchzugskraft von bis zu 700 Nm definiert dieser V6 Langstrecken-Performance neu. Ein hocheffizientes Kraftpaket, das souveräne Kraftentfaltung mit beeindruckender Reichweite in den S-Modellen kombiniert.'},
+            {name:'EA824 / FSI',meta:'5.2 V10 SAUGMOTOR',copy:'Ein akustisches und mechanisches Spektakel. Dieser hochdrehende Zehnzylinder verzichtet auf Aufladung und setzt stattdessen auf ein direktes Ansprechverhalten und einen unvergleichlichen, kreischenden Sound. Das Herzstück des Audi R8 – ein technisches Vermächtnis, das für puristische Sportwagen-Performance steht.'}
+          ]
+        },
+        {
+          sceneId:'brandBmwScene',
+          mobileImage:'bmw/bmw_m6_portrait_mobile-optimized.jpg',
+          heroImage:'bmw/bmw m6-optimized.jpg',
+          heroAlt:'BMW M Performance Fahrzeug',
+          chip:'Germany · BMW M',
+          name:'BMW',
+          teaser:'M-Modelle mit präzisem Fahrgefühl, hochdrehenden Ikonen und Biturbo-Wucht zwischen Reihensechser, V8 und V10.',
+          title:'BMW Motoren',
+          subtitle:'Vier Hochleistungsaggregate von Reihensechszylinder bis V10.',
+          intro:'Vom aktuell leistungsstarken M-Reihensechszylinder bis zum ikonischen Hochdrehzahl-V10 zeigt diese Auswahl die prägendsten BMW Performance-Motoren mit Fokus auf Präzision, Biturbo-Wucht und emotionale Drehfreude.',
+          slides:[
+            {src:'bmw/motoren/BMW S58 Motor.jpg',caption:'S58'},
+            {src:'bmw/motoren/BMW S63 Motor.jpg',caption:'S63'},
+            {src:'bmw/motoren/BMW_B57_engine.jpg',caption:'B57D30S0'},
+            {src:'bmw/motoren/bmw s65.jpg',caption:'S85B50'}
+          ],
+          motors:[
+            {name:'S58',meta:'3.0 M TWINPOWER TURBO R6',copy:'Der aktuell leistungsstärkste Reihensechszylinder von BMW M. Mit zwei Monoscroll-Ladern und bis zu 550 PS bietet er eine Drehfreude, die fast an Saugmotoren erinnert. Er ist das technische Kraftzentrum des aktuellen M3 und M4 und steht für unerreichte Präzision.'},
+            {name:'S63',meta:'4.4 V8 M TWINPOWER TURBO',copy:'Ein legendäres Kraftpaket mit dem charakteristischen bankübergreifenden Abgaskrümmer. In Modellen wie dem M5 Competition liefert er bis zu 625 PS. Die extrem kurzen Wege zwischen Brennraum und Turbolader sorgen für ein explosives Ansprechverhalten und brachiale Beschleunigungswerte.'},
+            {name:'B57D30S0',meta:'3.0 M50d QUAD-TURBO R6',copy:'Ein technisches Unikat: Der einzige Pkw-Dieselmotor der Welt mit vier Turboladern. Mit 400 PS und massiven 760 Nm Drehmoment verbindet er die Souveränität eines V8 mit der Effizienz eines Reihensechszylinders. Ein Meisterwerk der Ingenieurskunst für maximale Langstrecken-Performance.'},
+            {name:'S85B50',meta:'5.0 V10 HOCHDREHZAHL-SAUGER',copy:'Das ikonische Herzstück der M-High-Performance-Serie. Mit zehn Einzeldrosselklappen und einer Maximaldrehzahl von 8.250 U/min bietet dieser 507 PS starke V10 eine unvergleichliche Aggressivität. Sein kreischender Sound macht ihn zum emotionalsten Saugmotor der BMW-Geschichte.'}
+          ]
+        },
+        {
+          sceneId:'brandMercedesScene',
+          mobileImage:'mercedes/mercedes_portrait_mobile-optimized.jpg',
+          heroImage:'mercedes/s63 amg-optimized.jpg',
+          heroAlt:'Mercedes AMG Performance Fahrzeug',
+          chip:'Germany · AMG',
+          name:'Mercedes',
+          teaser:'AMG-Charakter von modernem Vierzylinder bis monumentalem V12 mit Langstrecken-Souveränität und markantem Sound.',
+          title:'Mercedes Motoren',
+          subtitle:'Vier Hochleistungsaggregate von AMG-Vierzylinder bis V12 Biturbo.',
+          intro:'Vom stärksten Serien-Vierzylinder der Welt bis zum monumentalen V12 zeigt diese Auswahl die prägendsten Mercedes Performance-Motoren mit Fokus auf AMG-Charakter, moderne Aufladung und maximale Souveränität.',
+          slides:[
+            {src:'mercedes/motoren/mercedes m139.jpg',caption:'M139'},
+            {src:'mercedes/motoren/mercedes m177:m178.jpg',caption:'M177 / M178'},
+            {src:'mercedes/motoren/mercedes OM656.jpg',caption:'OM656'},
+            {src:'mercedes/motoren/Mercedes_M279_engine.jpg',caption:'M279'}
+          ],
+          motors:[
+            {name:'M139',meta:'2.0 L 4-ZYLINDER TURBO (AMG)',copy:'Der stärkste Serien-Vierzylinder der Welt. Mit bis zu 421 PS setzt dieses Triebwerk neue Maßstäbe in Sachen Literleistung. Durch den gedrehten Einbau und den Twin-Scroll-Lader liefert er eine Performance, die man früher nur von großen V8-Motoren kannte – das Herzstück der aktuellen A 45 und C 63 Modelle.'},
+            {name:'M177 / M178',meta:'4.0 V8 BITURBO (AMG)',copy:'Das Synonym für modernen AMG-Sound. Mit den Turboladern im heißen Innen-V für extrem direktes Ansprechverhalten. Ob im GT-Supersportwagen oder in der G-Klasse: Dieser Motor ist berühmt für seine brutale Leistungsentfaltung von bis zu 730 PS und seinen tief grollenden Charakter.'},
+            {name:'OM656',meta:'3.0 R6 TURBODIESEL',copy:'Das effiziente Kraftpaket der Oberklasse. Dieser Reihensechszylinder-Diesel nutzt ein Stufenaufladungskonzept und das innovative CAMTRONIC-Ventilhubsystem. Mit bis zu 340 PS und 700 Nm Drehmoment kombiniert er seidenweichen Lauf mit einer Durchzugskraft, die Mercedes zur ersten Wahl für Langstrecken-Performance macht.'},
+            {name:'M279',meta:'6.0 V12 BITURBO',copy:'Das Maximum an automobiler Souveränität. Während andere auf Downsizing setzen, bietet dieser V12 ein Drehmomentplateau, das sich wie eine endlose Kraftwelle anfühlt. Verbaut in der Maybach-Klasse und den legendären 65er AMG-Modellen, steht dieser Motor für absoluten Luxus und unerschöpfliche Reserven.'}
+          ]
+        },
+        {
+          sceneId:'brandRangeScene',
+          mobileImage:'range/range rover mobile.jpg',
+          heroImage:'range/range rover.jpg',
+          heroAlt:'Range Rover Performance Fahrzeug',
+          chip:'United Kingdom · Range Rover',
+          name:'Range Rover',
+          teaser:'SV-Modelle mit unerschütterlichem Durchzug, legendärem Klangcharakter und massiver Biturbo-Wucht zwischen High-Performance-Diesel und High-End-V8.',
+          title:'Range Rover Motoren',
+          subtitle:'Vier Hochleistungsaggregate von britischer Souveränität bis zur V8-Kompressor-Gewalt.',
+          intro:'Vom modernen Twin-Turbo V8 der neuesten Generation bis zum ikonischen Kompressor-V8 zeigt diese Auswahl die prägendsten Range Rover Performance-Motoren. Unser Fokus liegt auf der technischen Perfektionierung dieser Triebwerke, um die Balance zwischen monumentaler Kraft und ultimativer Laufruhe dauerhaft zu bewahren.',
+          slides:[
+            {src:'range/motor/AJ133.jpg',caption:'AJ133'},
+            {src:'range/motor/N63.jpg',caption:'N63 (P530)'},
+            {src:'range/motor/448DT.webp',caption:'448DT'},
+            {src:'range/motor/AJ33S.jpg',caption:'AJ33S'}
+          ],
+          motors:[
+            {name:'AJ133',meta:'5.0 V8 SUPERCHARGED',copy:'Das emotionale Kraftzentrum der SVR-Reihe. Dieser V8 mit Twin-Vortex-Kompressor leistet bis zu 575 PS und ist weltberühmt für sein aggressives, mechanisches Brüllen. Als Spezialisten fokussieren wir uns bei der Instandsetzung auf die Optimierung des Kettentriebs und der Kompressor-Lagerung, um die brutale Performance dauerhaft zu sichern.'},
+            {name:'N63 (P530)',meta:'4.4 V8 TWIN-TURBO',copy:'Die neue Speerspitze der modernen Range Rover Generation. Durch das „Hot V"-Layout der Turbolader liefert dieses Aggregat 530 PS mit einer Effizienz und einem Ansprechverhalten, das neue Maßstäbe setzt. Unsere Expertise umfasst das präzise thermische Management dieses Hochleistungsmotors für maximale Standfestigkeit unter Extrembedingungen.'},
+            {name:'448DT',meta:'4.4 SDV8 BITURBO DIESEL',copy:'Das Drehmoment-Monument. Mit massiven 740 Nm ist dieser V8-Diesel der Inbegriff für unerschütterliche Souveränität. Er kombiniert die Kraft eines Schleppers mit der Laufruhe einer Luxuslimousine. Wir beheben die typischen Schwachstellen des Biturbo-Systems und der Ölkühlung, damit dieser Langstreckenkönig seine Zuverlässigkeit behält.'},
+            {name:'AJ33S',meta:'4.2 V8 SUPERCHARGED',copy:'Die unverwüstliche Legende aus der Ära der L322-Modelle. Mit 396 PS gilt dieser Kompressor-V8 als einer der robustesten Motoren, die je britischen Boden verlassen haben. Eine professionelle Revision dieses Klassikers in unserem Haus garantiert den Erhalt echter Automobilgeschichte mit der Zuverlässigkeit eines Neuwagens.'}
+          ]
+        }
+      ],
+      workshopCards:[
+        {src:'Projects/motor-honen.jpg',alt:'Zylinder Honen',title:'Zylinder-Honen',sub:'Präzise Bearbeitung der Zylinderlaufbahnen für optimale Kompression und lange Lebensdauer.',speed:14},
+        {src:'Projects/messen.png',alt:'Motorblock Vermessung',title:'Motorblock Vermessung',sub:'Exakte Prüfung aller Bauteile nach OEM-Spezifikationen mit modernen Messverfahren.',speed:10},
+        {src:'Projects/img-zylinder.jpg',alt:'Zylinderkopf Planen',title:'Zylinderkopf Planen',sub:'Präzises Planen der Dichtfläche für optimale Passgenauigkeit und langfristige Betriebssicherheit.',speed:12}
+      ],
+      processSteps:[
+        {step:1,n:'01',title:'Diagnose',body:'Vollständige Fehleranalyse, Befundbericht und transparenter Kostenvoranschlag.'},
+        {step:2,n:'02',title:'Reparatur',body:'Fachgerechter Austausch aller defekten Bauteile mit OEM-Ersatzteilen.'},
+        {step:3,n:'03',title:'Zusammenbau',body:'Präziser Motorzusammenbau nach Herstellervorgaben, kalibriert und dokumentiert.'},
+        {step:4,n:'04',title:'Abnahme',body:'Kompression, Öldruck, Dichtigkeit – Freigabe erst nach bestandener Vollprüfung.'}
+      ],
+      aboutSpecs:[
+        {value:'12<em>M</em>',label:'Garantie auf alle Reparaturen'},
+        {value:'7–<em>15</em>',label:'Werktage Reparaturdauer'},
+        {value:'100<em>%</em>',label:'OEM-Qualitätsstandard'},
+        {value:'DE-<em style="font-size:.8em">weit</em>',label:'Fahrzeugabholung',style:'font-size:22px;letter-spacing:-.02em'}
+      ],
+      engineOptions:['R4 – Reihenmotor','R6 – Reihenmotor','V6 – V-Motor','V8 – V-Motor','V10 – V-Motor','V12 – V-Motor','Sonstiges'],
+      contactItems:[
+        {icon:'📍',label:'Adresse',value:'Artur-Ladebeck-Straße 181, 33647 Bielefeld'},
+        {icon:'📞',label:'Telefon',value:'+49 521 897 391 51',href:'tel:+4952189739151'},
+        {icon:'💬',label:'WhatsApp',value:'Direkt Anfrage senden',href:'#kontakt',className:'js-whatsapp-link'},
+        {icon:'✉️',label:'E-Mail',value:'info@revivalmotoren.de',href:'mailto:info@revivalmotoren.de'}
+      ],
+      mapPoints:[
+        {title:'Adresse',body:'Artur-Ladebeck-Straße 181<br>33647 Bielefeld'},
+        {title:'Anfahrt',body:'Ideal für lokale Kunden, Fahrzeuganlieferung und schnelle Orientierung per Google Maps.'}
+      ],
+      footerNav:[{label:'Leistungen',href:'#leistungen'},{label:'Referenzen',href:'#cases'},{label:'Über uns',href:'#ueber-uns'},{label:'Kontakt',href:'#kontakt'}],
+      footerLegal:[{label:'Impressum',href:'impressum.html'},{label:'Datenschutz',href:'datenschutz.html'},{label:'AGB',href:'agb.html'}],
+      footerContact:[{label:'+49 521 897 391 51',href:'tel:+4952189739151'},{label:'info@revivalmotoren.de',href:'mailto:info@revivalmotoren.de'},{label:'Bielefeld, DE',href:'#kontakt'}]
+    };
   },
   mounted(){
     this.$nextTick(()=>{
@@ -1796,24 +1743,11 @@ createApp({
 const nav = document.getElementById('nav');
 let lastNavScrollY = window.scrollY;
 let navHidden = false;
-let navScrollTicking = false;
-
-function updateActiveNavLink(currentY){
-  let currentSection = '';
-  ['leistungen','cases','brands','results','prozess','ueber-uns','kontakt','map-section'].forEach(id=>{
-    const el = document.getElementById(id);
-    if(el && currentY >= el.offsetTop - 120) currentSection = id;
-  });
-  document.querySelectorAll('.navl a').forEach(a=>{
-    const h = a.getAttribute('href').replace('#','');
-    a.classList.toggle('on', h === currentSection || (currentSection === '' && h === 'leistungen'));
-  });
-}
 
 function updateNavChrome(){
   const currentY = window.scrollY;
   const delta = currentY - lastNavScrollY;
-  const mobileView = window.innerWidth <= 1180;
+  const mobileView = window.innerWidth <= 768;
   const compactThreshold = 80;
   const hideThreshold = 180;
   const directionThreshold = 10;
@@ -1841,51 +1775,26 @@ function updateNavChrome(){
   lastNavScrollY = currentY;
 }
 
-function handleNavScroll(){
-  navScrollTicking = false;
-  const currentY = window.scrollY;
-  updateActiveNavLink(currentY);
-  updateNavChrome();
-}
-
 window.addEventListener('scroll', ()=>{
-  if(navScrollTicking) return;
-  navScrollTicking = true;
-  requestAnimationFrame(handleNavScroll);
-}, {passive:true});
-window.addEventListener('resize', ()=>{
-  updateActiveNavLink(window.scrollY);
+  let c = '';
+  ['leistungen','cases','brands','results','prozess','ueber-uns','kontakt','map-section'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && scrollY >= el.offsetTop - 120) c = id;
+  });
+  document.querySelectorAll('.navl a').forEach(a=>{
+    const h = a.getAttribute('href').replace('#','');
+    a.classList.toggle('on', h === c || (c === '' && h === 'leistungen'));
+  });
   updateNavChrome();
-  if(window.innerWidth > 1180){
-    const m = document.getElementById('mobMenu');
-    const menuToggle = document.getElementById('menuToggle');
-    if(m){
-      m.classList.remove('open');
-      m.setAttribute('aria-hidden', 'true');
-    }
-    if(menuToggle){
-      menuToggle.classList.remove('is-open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.setAttribute('aria-label', 'Menü öffnen');
-    }
-    document.body.style.overflow = '';
-  }
 });
-updateActiveNavLink(window.scrollY);
+window.addEventListener('resize', updateNavChrome);
 updateNavChrome();
 
 /* ── MOBILE MENU ──────────────────────────── */
 function mobToggle(){
   const m = document.getElementById('mobMenu');
-  const menuToggle = document.getElementById('menuToggle');
-  const isOpen = m.classList.toggle('open');
-  m.setAttribute('aria-hidden', String(!isOpen));
-  if(menuToggle){
-    menuToggle.classList.toggle('is-open', isOpen);
-    menuToggle.setAttribute('aria-expanded', String(isOpen));
-    menuToggle.setAttribute('aria-label', isOpen ? 'Menü schließen' : 'Menü öffnen');
-  }
-  document.body.style.overflow = isOpen ? 'hidden' : '';
+  m.classList.toggle('open');
+  document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
 }
 
 /* ── SMOOTH SCROLL ──────────────────────────── */
@@ -1895,8 +1804,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click
 }));
 
 /* ── WHATSAPP ──────────────────────────── */
-const BUSINESS_WHATSAPP_NUMBER = window.siteContent.business.whatsappNumber;
-const DEFAULT_WHATSAPP_MESSAGE = window.siteContent.business.whatsappMessage;
+const BUSINESS_WHATSAPP_NUMBER = '';
+const DEFAULT_WHATSAPP_MESSAGE = 'Hallo Revival Motoren, ich möchte eine Anfrage zur Motorinstandsetzung stellen.';
 
 function setupWhatsAppLinks(){
   const fallback = '#kontakt';
@@ -1926,7 +1835,7 @@ function applyTheme(theme){
   themeRoot.dataset.theme = theme;
   localStorage.setItem('revival-theme', theme);
   logoImages.forEach(img=>{
-    img.src = theme === 'dark' ? window.siteContent.logo.dark : window.siteContent.logo.light;
+    img.src = theme === 'dark' ? 'logo-icon.png' : 'logo-icon-gold.png';
   });
   themeToggles.forEach(toggle=>{
     toggle.setAttribute('aria-label', theme === 'dark' ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln');
@@ -1962,9 +1871,9 @@ const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-re
 const brandSceneItems = Array.from(document.querySelectorAll('[data-brand-scene]'));
 let brandSceneTicking = false;
 
-function allowBrandSceneMotion(){
-  return !prefersReducedMotion && window.innerWidth > 768;
-}
+/* Nur auf Desktop (> 768px) die JS-gesteuerten Animationen aktivieren.
+   Auf Mobile: alles via CSS / IntersectionObserver */
+const allowBrandSceneMotion = !prefersReducedMotion && window.innerWidth > 768;
 
 function clamp(v, lo=0, hi=1){ return Math.max(lo, Math.min(hi, v)); }
 function easeOut(v){ return 1 - Math.pow(1 - clamp(v), 3); }
@@ -1976,7 +1885,7 @@ function easeInOut(v){
 function updateBrandScenes(){
   brandSceneTicking = false;
 
-  if(!allowBrandSceneMotion()){
+  if(!allowBrandSceneMotion){
     /* Mobile: Custom Props zurücksetzen, CSS übernimmt */
     brandSceneItems.forEach(scene=>{
       scene.style.setProperty('--scene-p','0');
@@ -2046,8 +1955,10 @@ function queueBrandScenes(){
   requestAnimationFrame(updateBrandScenes);
 }
 
-window.addEventListener('scroll', queueBrandScenes, {passive:true});
-window.addEventListener('resize', queueBrandScenes, {passive:true});
+if(allowBrandSceneMotion){
+  window.addEventListener('scroll', queueBrandScenes, {passive:true});
+  window.addEventListener('resize', queueBrandScenes);
+}
 updateBrandScenes();
 
 /* ── PROZESS HOVER ──────────────────────────── */
@@ -2076,17 +1987,8 @@ const parallaxItems = Array.from(document.querySelectorAll('[data-parallax-speed
 const floatItems = Array.from(document.querySelectorAll('[data-float]'));
 let motionTicking = false;
 
-function allowScrollMotion(){
-  return !prefersReducedMotion && window.innerWidth > 768;
-}
-
 function updateScrollMotion(){
   motionTicking = false;
-  if(!allowScrollMotion()){
-    parallaxItems.forEach(el=>el.style.setProperty('--py', '0px'));
-    floatItems.forEach(el=>el.style.setProperty('--fy', '0px'));
-    return;
-  }
   const viewportPadding = 240;
   parallaxItems.forEach(el=>{
     const rect = el.getBoundingClientRect();
@@ -2110,9 +2012,12 @@ function queueScrollMotion(){
   motionTicking = true;
   requestAnimationFrame(updateScrollMotion);
 }
-window.addEventListener('scroll', queueScrollMotion, {passive:true});
-window.addEventListener('resize', queueScrollMotion, {passive:true});
-updateScrollMotion();
+const allowScrollMotion = !prefersReducedMotion && window.innerWidth > 768;
+if(allowScrollMotion){
+  window.addEventListener('scroll', queueScrollMotion, {passive:true});
+  window.addEventListener('resize', queueScrollMotion);
+  updateScrollMotion();
+}
 
 /* ── FORM ──────────────────────────── */
 function submitForm(e){
