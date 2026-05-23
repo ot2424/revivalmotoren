@@ -41,7 +41,7 @@ window.sitePagesContent = {
       {
         title: 'Angaben gemäß § 5 TMG',
         paragraphs: [
-          'Teuto Motoren<br>Oufouk Serif<br>Artur-Ladebeck-Straße 181<br>33647 Bielefeld'
+          'Teuto Motoren<br>O.Serif<br>Artur-Ladebeck-Straße 181<br>33647 Bielefeld'
         ]
       },
       {
@@ -59,7 +59,7 @@ window.sitePagesContent = {
       {
         title: 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV',
         paragraphs: [
-          'Oufouk Serif<br>Bleicherfeldstraße 106<br>33689 Bielefeld'
+          'O.Serif<br>Bleicherfeldstraße 106<br>33689 Bielefeld'
         ]
       },
       {
@@ -86,7 +86,7 @@ window.sitePagesContent = {
       {
         title: '1. Verantwortlicher',
         paragraphs: [
-          'Verantwortlich für die Datenverarbeitung auf dieser Website ist Teuto Motoren (Einzelunternehmen), Inhaber Oufouk Serif, Artur-Ladebeck-Straße 181, 33647 Bielefeld, E-Mail: info@teutomotoren.de, Telefon: 0521 92373519, weitere Telefonnummer: 0521 89739151.'
+          'Verantwortlich für die Datenverarbeitung auf dieser Website ist Teuto Motoren (Einzelunternehmen), Inhaber O.Serif, Artur-Ladebeck-Straße 181, 33647 Bielefeld, E-Mail: info@teutomotoren.de, Telefon: 0521 92373519, weitere Telefonnummer: 0521 89739151.'
         ]
       },
       {
