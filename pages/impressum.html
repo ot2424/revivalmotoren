@@ -196,7 +196,13 @@ a{color:inherit}
   border:1px solid rgba(255,255,255,.06);
   color:var(--hero-text);
   box-shadow:var(--shadow);
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(240px, 420px);
+  align-items:center;
+  gap:28px;
+  overflow:hidden;
 }
+.hero-copy{min-width:0}
 .eyebrow{
   display:inline-flex;
   margin-bottom:14px;
@@ -218,6 +224,19 @@ a{color:inherit}
   font-size:16px;
   line-height:1.82;
   color:var(--hero-soft);
+}
+.hero-art{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  min-width:0;
+}
+.hero-art img{
+  width:min(100%, 380px);
+  height:auto;
+  display:block;
+  object-fit:contain;
+  filter:drop-shadow(0 18px 38px rgba(0,0,0,.28));
 }
 .content-card{
   margin-top:18px;
@@ -259,7 +278,17 @@ a{color:inherit}
 }
 @media(max-width:768px){
   .page{width:calc(100% - 12px);padding:12px 0 44px}
-  .hero{padding:24px}
+  .hero{
+    padding:24px;
+    grid-template-columns:1fr;
+    gap:22px;
+  }
+  .hero-art{
+    justify-content:center;
+  }
+  .hero-art img{
+    width:min(100%, 300px);
+  }
   .content-card{padding:24px 20px}
   .topbar{padding:8px;grid-template-columns:minmax(0,1fr) auto}
   .topbar-center,.topbar-actions{display:none}
@@ -312,8 +341,14 @@ a{color:inherit}
     </header>
 
     <section class="hero">
-      <span class="eyebrow" id="imprintHeroEyebrow">Rechtliches</span>
-      <h1 id="imprintHeroTitle">Impressum</h1>
+      <div class="hero-copy">
+        <span class="eyebrow" id="imprintHeroEyebrow">Rechtliches</span>
+        <h1 id="imprintHeroTitle">Impressum</h1>
+        <p id="imprintHeroSubtitle">Hier finden Sie die gesetzlich erforderlichen Anbieterangaben und Kontaktinformationen von Teuto Motoren.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img src="../assets/branding/teuto-logo-full-final.png" alt="">
+      </div>
     </section>
 
     <section class="content-card" id="imprintContent"></section>
@@ -330,6 +365,7 @@ a{color:inherit}
     const imprint = (window.sitePagesContent && window.sitePagesContent.imprintPage) || {};
     document.getElementById('imprintHeroEyebrow').textContent = imprint.hero?.eyebrow || 'Rechtliches';
     document.getElementById('imprintHeroTitle').textContent = imprint.hero?.title || 'Impressum';
+    document.getElementById('imprintHeroSubtitle').textContent = imprint.hero?.subtitle || 'Hier finden Sie die gesetzlich erforderlichen Anbieterangaben und Kontaktinformationen von Teuto Motoren.';
     document.getElementById('imprintContent').innerHTML = (imprint.sections || []).map(section => `
       <h2>${section.title}</h2>
       ${(section.paragraphs || []).map(paragraph => `<p>${paragraph}</p>`).join('')}
