@@ -216,11 +216,6 @@
     .project-category{display:inline-flex;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b7b2a8;margin-bottom:10px}
     .project-copy h3{font-size:clamp(1.8rem,3.1vw,3rem);letter-spacing:-.06em;line-height:.96;max-width:12ch}
     .project-copy p{margin-top:14px;color:#d0cbc2;line-height:1.74;font-size:15px}
-    .project-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-    .project-tags span{
-      padding:10px 12px;border-radius:999px;font-size:12px;font-weight:700;
-      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
-    }
 
     .closing{
       position:relative;overflow:hidden;min-height:64vh;margin-top:22px;
@@ -533,14 +528,6 @@
         font-size:13px;
         line-height:1.68;
       }
-      .project-tags{
-        gap:6px;
-        margin-top:14px;
-      }
-      .project-tags span{
-        padding:8px 10px;
-        font-size:11px;
-      }
       .closing{
         min-height:52vh;
         border-radius:28px;
@@ -746,9 +733,6 @@
           <span class="project-category">${project.category}</span>
           <h3>${project.title}</h3>
           <p>${project.excerpt}</p>
-          <div class="project-tags">
-            ${project.stats.map(stat => `<span>${stat}</span>`).join('')}
-          </div>
         </div>
       </article>
     `;
