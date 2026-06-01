@@ -161,31 +161,50 @@
     }
     .project-media{
       position:absolute;inset:0;
+      z-index:0;
     }
     .project-frame{
       position:absolute;inset:0;
       opacity:0;
       transition:opacity .9s ease;
+      background:#0f1114;
     }
     .project-frame.is-active{opacity:1}
-    .project-frame img{
-      width:100%;height:100%;object-fit:cover;
-      filter:brightness(.54) saturate(.9);
-      transform:scale(1.02);
+    .project-frame-bg,
+    .project-frame-main{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+    }
+    .project-frame-bg{
+      object-fit:cover;
+      filter:brightness(.5) saturate(.88) blur(10px);
+      transform:scale(1.08);
+    }
+    .project-frame-main{
+      object-fit:contain;
+      object-position:center center;
+      padding:18px;
+      filter:brightness(.94) saturate(.98);
+      cursor:pointer;
+      z-index:1;
     }
     .project-band::after{
       content:"";position:absolute;inset:0;
       background:
-        linear-gradient(90deg, rgba(7,9,12,.24) 0%, rgba(7,9,12,.16) 34%, rgba(7,9,12,.74) 100%),
-        linear-gradient(180deg, rgba(7,9,12,.08) 0%, rgba(7,9,12,.68) 100%);
+        linear-gradient(90deg, rgba(7,9,12,.14) 0%, rgba(7,9,12,.1) 34%, rgba(7,9,12,.6) 100%),
+        linear-gradient(180deg, rgba(7,9,12,.04) 0%, rgba(7,9,12,.52) 100%);
+      pointer-events:none;
+      z-index:1;
     }
     .project-band.is-top-right::after{
       background:
-        linear-gradient(90deg, rgba(7,9,12,.18) 0%, rgba(7,9,12,.14) 46%, rgba(7,9,12,.76) 100%),
-        linear-gradient(180deg, rgba(7,9,12,.64) 0%, rgba(7,9,12,.18) 38%, rgba(7,9,12,.58) 100%);
+        linear-gradient(90deg, rgba(7,9,12,.12) 0%, rgba(7,9,12,.1) 46%, rgba(7,9,12,.62) 100%),
+        linear-gradient(180deg, rgba(7,9,12,.48) 0%, rgba(7,9,12,.12) 38%, rgba(7,9,12,.48) 100%);
     }
     .project-copy{
-      position:absolute;z-index:1;right:26px;bottom:26px;
+      position:absolute;z-index:2;right:26px;bottom:26px;
       width:min(100%, 480px);
       padding:26px 28px;border-radius:30px;
       border:1px solid rgba(255,255,255,.08);
@@ -226,6 +245,108 @@
     }
     .closing-card h2{margin:0;font-size:clamp(2rem,4vw,3.5rem);line-height:.96;letter-spacing:-.06em}
     .closing-card p{margin-top:14px;color:#b7b2a8;line-height:1.76}
+
+    .gallery-lightbox{
+      position:fixed;
+      inset:0;
+      z-index:980;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:22px;
+      background:rgba(6,8,10,.88);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+    .gallery-lightbox.is-open{display:flex}
+    .gallery-lightbox-dialog{
+      position:relative;
+      width:min(100%, 1320px);
+      height:min(88vh, 920px);
+      border-radius:30px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(12,14,18,.9);
+      box-shadow:0 30px 100px rgba(0,0,0,.45);
+    }
+    .gallery-lightbox-stage{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.08), transparent 34%),
+        linear-gradient(180deg,#0c0e12 0%, #0a0c10 100%);
+    }
+    .gallery-lightbox-stage img{
+      max-width:100%;
+      max-height:100%;
+      object-fit:contain;
+      display:block;
+    }
+    .gallery-lightbox-close,
+    .gallery-lightbox-nav{
+      position:absolute;
+      z-index:2;
+      width:52px;
+      height:52px;
+      border:none;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(16,18,22,.76);
+      color:#f3f1ec;
+      box-shadow:0 14px 32px rgba(0,0,0,.28);
+      cursor:pointer;
+      transition:transform .2s ease, background .2s ease;
+    }
+    .gallery-lightbox-close:hover,
+    .gallery-lightbox-nav:hover{
+      background:rgba(26,28,34,.9);
+      transform:translateY(-1px);
+    }
+    .gallery-lightbox-close{
+      top:18px;
+      right:18px;
+      font-size:24px;
+      line-height:1;
+    }
+    .gallery-lightbox-nav{
+      top:50%;
+      transform:translateY(-50%);
+      font-size:26px;
+      font-weight:600;
+    }
+    .gallery-lightbox-nav:hover{
+      transform:translateY(calc(-50% - 1px));
+    }
+    .gallery-lightbox-nav.prev{left:18px}
+    .gallery-lightbox-nav.next{right:18px}
+    .gallery-lightbox-meta{
+      position:absolute;
+      right:18px;
+      bottom:18px;
+      z-index:2;
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .gallery-lightbox-count{
+      padding:12px 14px;
+      border-radius:999px;
+      background:rgba(10,12,16,.68);
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#b7b2a8;
+      white-space:nowrap;
+    }
 
     @media(max-width:1360px){
       .shell{width:min(calc(100% - 18px), 1560px)}
@@ -285,6 +406,7 @@
       .project-copy h3{font-size:clamp(1.7rem,4vw,2.5rem)}
       .closing{min-height:58vh;border-radius:32px}
       .closing-copy{min-height:58vh;padding:24px}
+      .gallery-lightbox-dialog{height:min(82vh, 840px)}
     }
     @media(max-width:760px){
       .shell{width:min(calc(100% - 12px), 1560px)}
@@ -315,8 +437,12 @@
         position:relative;
         height:340px;
       }
-      .project-frame img{
+      .project-frame-bg{
         transform:none;
+        filter:brightness(.48) saturate(.86) blur(8px);
+      }
+      .project-frame-main{
+        padding:12px;
       }
       .project-band::after{
         background:
@@ -334,6 +460,25 @@
       .closing-bg{grid-template-columns:1fr 1fr;grid-template-rows:180px 120px 120px}
       .closing-copy{padding:16px}
       .closing-card{padding:20px}
+      .gallery-lightbox{padding:10px}
+      .gallery-lightbox-dialog{
+        height:min(84vh, 760px);
+        border-radius:24px;
+      }
+      .gallery-lightbox-nav,
+      .gallery-lightbox-close{
+        width:44px;
+        height:44px;
+      }
+      .gallery-lightbox-nav{font-size:22px}
+      .gallery-lightbox-close{font-size:20px}
+      .gallery-lightbox-nav.prev{left:10px}
+      .gallery-lightbox-nav.next{right:10px}
+      .gallery-lightbox-close{top:10px;right:10px}
+      .gallery-lightbox-meta{
+        right:10px;
+        bottom:10px;
+      }
     }
     @media(max-width:560px){
       .page{padding:10px 0 56px}
@@ -520,6 +665,20 @@
     </main>
   </div>
 
+  <div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
+    <div class="gallery-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Projektbilder">
+      <button class="gallery-lightbox-close" id="galleryLightboxClose" type="button" aria-label="Schließen">×</button>
+      <button class="gallery-lightbox-nav prev" id="galleryLightboxPrev" type="button" aria-label="Vorheriges Bild">‹</button>
+      <button class="gallery-lightbox-nav next" id="galleryLightboxNext" type="button" aria-label="Nächstes Bild">›</button>
+      <div class="gallery-lightbox-stage" id="galleryLightboxStage">
+        <img id="galleryLightboxImage" src="" alt="">
+      </div>
+      <div class="gallery-lightbox-meta">
+        <div class="gallery-lightbox-count" id="galleryLightboxCount"></div>
+      </div>
+    </div>
+  </div>
+
   <script src="../content/site-core.js"></script>
   <script src="../content/projekte-content.js"></script>
   <script src="../assets/ui/mobile-nav.js"></script>
@@ -565,15 +724,21 @@
     document.getElementById('projectsClosingBody').textContent = page.closing?.body || '';
     document.getElementById('projectsClosingAction').textContent = page.closing?.action || 'Jetzt Anfrage senden';
 
-    document.getElementById('projectsGrid').innerHTML = projects.map((project, index) => {
-      const images = normalizeImages(project);
+    const normalizedProjects = projects.map(project => ({
+      ...project,
+      normalizedImages: normalizeImages(project)
+    }));
+
+    document.getElementById('projectsGrid').innerHTML = normalizedProjects.map((project, index) => {
+      const images = project.normalizedImages;
       const placement = project.placement === 'top-right' ? 'is-top-right' : 'is-bottom-right';
       return `
-      <article class="project-band ${placement}">
+      <article class="project-band ${placement}" data-project-index="${index}">
         <div class="project-media ${images.length > 1 ? 'has-slideshow' : ''}" ${images.length > 1 ? `data-slideshow-interval="${project.interval || 4200}"` : ''}>
           ${images.map((image, imageIndex) => `
             <div class="project-frame ${imageIndex === 0 ? 'is-active' : ''}">
-              <img src="${image.src}" alt="${image.alt || project.title || 'Projektbild'}" loading="${index === 0 && imageIndex === 0 ? 'eager' : 'lazy'}" decoding="async">
+              <img class="project-frame-bg" src="${image.src}" alt="" aria-hidden="true" loading="${index === 0 && imageIndex === 0 ? 'eager' : 'lazy'}" decoding="async">
+              <img class="project-frame-main" src="${image.src}" alt="${image.alt || project.title || 'Projektbild'}" style="${image.style || ''}" loading="${index === 0 && imageIndex === 0 ? 'eager' : 'lazy'}" decoding="async" data-project-index="${index}" data-image-index="${imageIndex}">
             </div>
           `).join('')}
         </div>
@@ -591,7 +756,7 @@
 
     const closingImages = Array.isArray(page.closingImages) && page.closingImages.length
       ? page.closingImages.map(image => ({ ...image, src: asset(image.src) }))
-      : projects.flatMap(project => normalizeImages(project)).slice(0, 5);
+      : normalizedProjects.flatMap(project => project.normalizedImages).slice(0, 5);
 
     document.getElementById('closingBg').innerHTML = closingImages.slice(0, 5).map(image => `
       <div class="tile">
@@ -610,6 +775,81 @@
         frames[activeIndex].classList.add('is-active');
       }, interval);
     });
+
+    const lightbox = document.getElementById('galleryLightbox');
+    const lightboxDialog = lightbox.querySelector('.gallery-lightbox-dialog');
+    const lightboxImage = document.getElementById('galleryLightboxImage');
+    const lightboxCount = document.getElementById('galleryLightboxCount');
+    const lightboxPrev = document.getElementById('galleryLightboxPrev');
+    const lightboxNext = document.getElementById('galleryLightboxNext');
+    const lightboxClose = document.getElementById('galleryLightboxClose');
+    let activeProjectIndex = 0;
+    let activeImageIndex = 0;
+    let touchStartX = 0;
+
+    function renderLightbox() {
+      const project = normalizedProjects[activeProjectIndex];
+      if (!project || !project.normalizedImages?.length) return;
+      const image = project.normalizedImages[activeImageIndex];
+      if (!image) return;
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt || project.title || 'Projektbild';
+      lightboxImage.style.cssText = image.style || '';
+      lightboxCount.textContent = `${activeImageIndex + 1} / ${project.normalizedImages.length}`;
+      lightboxPrev.style.display = project.normalizedImages.length > 1 ? 'inline-flex' : 'none';
+      lightboxNext.style.display = project.normalizedImages.length > 1 ? 'inline-flex' : 'none';
+    }
+
+    function openLightbox(projectIndex, imageIndex) {
+      activeProjectIndex = Number(projectIndex) || 0;
+      activeImageIndex = Number(imageIndex) || 0;
+      renderLightbox();
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function moveLightbox(step) {
+      const project = normalizedProjects[activeProjectIndex];
+      if (!project || !project.normalizedImages?.length) return;
+      activeImageIndex = (activeImageIndex + step + project.normalizedImages.length) % project.normalizedImages.length;
+      renderLightbox();
+    }
+
+    document.querySelectorAll('.project-frame-main').forEach(image => {
+      image.addEventListener('click', () => {
+        openLightbox(image.dataset.projectIndex, image.dataset.imageIndex);
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', () => moveLightbox(-1));
+    lightboxNext.addEventListener('click', () => moveLightbox(1));
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') moveLightbox(-1);
+      if (event.key === 'ArrowRight') moveLightbox(1);
+    });
+    lightboxDialog.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0]?.clientX || 0;
+    }, { passive: true });
+    lightboxDialog.addEventListener('touchend', (event) => {
+      const touchEndX = event.changedTouches[0]?.clientX || 0;
+      const delta = touchEndX - touchStartX;
+      if (Math.abs(delta) < 40) return;
+      if (delta > 0) moveLightbox(-1);
+      else moveLightbox(1);
+    }, { passive: true });
 
     const number = site.business?.whatsappNumber || '';
     const message = site.business?.whatsappMessage || 'Hallo Teuto Motoren';

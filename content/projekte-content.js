@@ -20,41 +20,50 @@ window.projectsPageContent = {
   // auf der Projekte-Seite automatisch eine Slideshow aufgebaut.
   showcases: [
     {
-      slug: 'projekt-01',
+      slug: 'jeep-projekt',
       placement: 'bottom-right',
-      category: 'Motorschaden',
-      title: 'Projekt Template',
-      excerpt: 'Hier kann Ihr Projekt beschrieben werden.',
+      category: 'SUV · Offroad',
+      title: 'Jeep Wrangler',
+      excerpt: 'Teilzerlegung des Aggregats, technische Befundung und Vorbereitung für die saubere Instandsetzung.',
       images: [
         {
-          src: 'assets/images/placeholders/placeholder.png',
-          alt: 'Platzhalter Projektbild 1'
+          src: 'assets/images/projects/projekte/jeep/jeep-project-1.png',
+          alt: 'Jeep Wrangler vor der Werkstatt von Teuto Motoren',
+          style: 'object-fit:contain;object-position:center center;'
         },
         {
-          src: 'assets/images/placeholders/placeholder.png',
-          alt: 'Platzhalter Projektbild 2'
+          src: 'assets/images/projects/projekte/jeep/jeep-project-2.png',
+          alt: 'Jeep Wrangler während der Demontage mit Motorbauteilen',
+          style: 'object-fit:contain;object-position:center center;'
+        },
+        {
+          src: 'assets/images/projects/projekte/jeep/jeep-project-3.png',
+          alt: 'Jeep Wrangler nach dem Werkstatttermin vor dem Betrieb',
+          style: 'object-fit:contain;object-position:center center;'
         }
       ],
-      stats: ['Diagnose', 'Planen']
+      stats: ['Demontage', 'Befundung', 'Instandsetzung']
     },
-    /*{
-      slug: 'projekt-02',
+    {
+      slug: 'bmw-x5-projekt',
       placement: 'top-right',
-      category: 'Motorblock',
-      title: 'Motorblock OEM-Instandsetzung',
-      excerpt: 'Platzhalter für einen Motorblock-Fall inklusive Vermessung, Bearbeitung und dokumentierter Endkontrolle nach der Instandsetzung.',
+      category: 'BMW · SUV',
+      title: 'BMW X5',
+      excerpt: 'Motor geöffnet, Komponenten geprüft und das Aggregat für die fachgerechte Instandsetzung vorbereitet.',
       images: [
         {
-          src: 'assets/images/projects/projekte/Motorblock.jpg',
-          alt: 'Projektbild Motorblock'
+          src: 'assets/images/projects/projekte/bmw-x5/bmw-x5-project-1.png',
+          alt: 'BMW X5 in der Werkstatt von Teuto Motoren',
+          style: 'object-fit:contain;object-position:center center;'
         },
         {
-          src: 'assets/images/projects/projekte/Motor.jpg',
-          alt: 'Projektbild Reihenmotor'
+          src: 'assets/images/projects/projekte/bmw-x5/bmw-x5-project-2.png',
+          alt: 'BMW X5 mit geöffnetem Motor und ausgelegten Bauteilen',
+          style: 'object-fit:contain;object-position:center center;'
         }
       ],
-      stats: ['Vermessung', 'Bearbeitung', 'Endkontrolle']
-    },*/
+      stats: ['Öffnung', 'Bauteilprüfung', 'Aufbau']
+    },
   ],
 
   // Fallback-/Kollagenbilder für den Abschlussbereich
