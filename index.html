@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="assets/ui/scroll-top.css">
 <link rel="stylesheet" href="assets/ui/floating-contact.css">
 <link rel="stylesheet" href="assets/ui/consent-banner.css">
+<link rel="stylesheet" href="assets/ui/gallery-lightbox.css">
 <script>
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
@@ -183,8 +184,8 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 /* ── NAV ─────────────────────────────── */
 #nav{
   position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:460;
-  width:min(1380px, calc(100% - 40px));
-  padding:12px;
+  width:min(1336px, calc(100% - 52px));
+  padding:11px;
   background:var(--nav-bg);
   backdrop-filter:blur(20px);
   border:1px solid var(--rule);
@@ -207,21 +208,29 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   pointer-events:none;
 }
 #nav.is-compact{
-  width:min(1120px, calc(100% - 56px));
-  min-height:74px;
-  padding:10px 12px 10px 11px;
+  width:min(1240px, calc(100% - 52px));
+  min-height:76px;
+  padding:9px 11px 9px 10px;
   border-radius:28px;
   box-shadow:0 10px 24px rgba(0,0,0,.12);
 }
-#nav.is-compact .nav-layout{gap:12px}
-#nav.is-compact .nav-brand{padding:8px 16px 8px 8px}
+#nav.is-compact .nav-layout{gap:10px}
+#nav.is-compact .nav-brand{
+  min-width:268px;
+  padding:8px 14px 8px 8px;
+}
 #nav.is-compact .brand-icon{width:60px;height:60px;border-radius:18px}
 #nav.is-compact .brand-name{font-size:18px}
 #nav.is-compact .brand-tagline{font-size:11px}
-#nav.is-compact .navl{padding:5px}
-#nav.is-compact .navl a{padding:11px 16px;font-size:13px}
-#nav.is-compact .nav-whatsapp{min-height:44px;padding:10px 16px;font-size:13px}
-#nav.is-compact .nav-btn{min-height:46px;padding:11px 20px;font-size:14px}
+#nav.is-compact .navl{
+  width:554px;
+  height:63px;
+  flex:0 0 554px;
+  padding:5px;
+}
+#nav.is-compact .navl a{min-height:42px;padding:0 16px;font-size:14px}
+#nav.is-compact .nav-whatsapp{min-height:44px;padding:10px 15px;font-size:13px}
+#nav.is-compact .nav-btn{min-height:46px;padding:11px 18px;font-size:14px}
 
 .nav-layout{
   display:grid;
@@ -234,7 +243,7 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
   font-size:15px;font-weight:700;color:var(--ink);
   text-decoration:none;letter-spacing:-.02em;margin-right:0;
   display:flex;align-items:center;justify-content:flex-start;gap:14px;
-  min-width:300px;padding:8px 10px 8px 8px;border-radius:26px;
+  min-width:286px;padding:8px 10px 8px 8px;border-radius:26px;
   background:var(--nav-inner-surface);border:1px solid rgba(255,255,255,.06);flex-shrink:0;
 }
 .brand-icon{
@@ -255,12 +264,18 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .brand-name{font-size:20px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.045em}
 .brand-tagline{font-size:12px;font-weight:650;color:var(--brand-tag);line-height:1.1;letter-spacing:0}
 .navl{
-  display:flex;list-style:none;gap:4px;align-items:center;margin:0 auto;
+  display:flex;list-style:none;gap:4px;align-items:center;justify-content:space-between;
+  margin:0 auto;
+  width:554px;
+  height:63px;
+  flex:0 0 554px;
   padding:6px;border-radius:999px;background:var(--nav-inner-surface);border:1px solid rgba(255,255,255,.06);
 }
 .navl a{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:46px;padding:0 20px;border-radius:999px;
   font-size:14px;font-weight:650;color:var(--mid);text-decoration:none;
-  padding:13px 20px;border-radius:999px;transition:color .2s,background .2s,transform .2s ease;
+  transition:color .2s,background .2s,transform .2s ease;
   white-space:nowrap;line-height:1.1;
 }
 .navl a:hover,.navl a.on{color:var(--nav-active-color);background:var(--nav-active-bg)}
@@ -531,14 +546,32 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 #cases{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);border:1px solid var(--rule);overflow:hidden}
 .cases-header{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:52px 48px;border-bottom:1px solid var(--rule);align-items:center}
 .cases-right{display:flex;justify-content:flex-end;align-items:flex-start}
-.cases-gallery{display:grid;grid-template-columns:1fr 1.6fr 1fr;grid-template-rows:300px 220px;gap:4px;background:var(--rule)}
-.cg-cell{position:relative;overflow:hidden;background:var(--bg2)}
-.cg-cell:first-child{grid-row:span 2}
-.cg-cell img{width:100%;height:100%;object-fit:cover;filter:brightness(.72) saturate(.8);transition:filter .5s,transform .7s}
-.cg-cell:hover img{filter:brightness(.88) saturate(.95);transform:scale(1.04)}
-.cg-label{position:absolute;bottom:0;left:0;right:0;padding:14px 18px;background:linear-gradient(transparent,rgba(0,0,0,.72))}
-.cg-tag{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:3px}
-.cg-name{font-size:15px;font-weight:700;color:#fff;letter-spacing:-.02em}
+.cases-gallery{display:grid;gap:16px}
+.cases-gallery.cases-count-1{grid-template-columns:minmax(0,1fr)}
+.cases-gallery.cases-count-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cases-gallery.cases-count-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cg-card{
+  position:relative;overflow:hidden;background:var(--bg2);
+  border:1px solid var(--rule);
+  border-radius:28px;
+  box-shadow:0 18px 44px rgba(0,0,0,.12);
+}
+.cg-card-media{
+  position:relative;
+  aspect-ratio:4 / 3;
+  overflow:hidden;
+  background:#121418;
+}
+.cg-card-media img{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.82) saturate(.9);
+  transition:filter .5s,transform .7s;
+}
+.cg-card:hover .cg-card-media img{filter:brightness(.94) saturate(.98);transform:scale(1.03)}
+.cg-card-body{padding:18px 18px 20px}
+.cg-tag{display:inline-flex;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.cg-name{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.04em;line-height:1}
+.cg-text{margin-top:10px;font-size:14px;line-height:1.72;color:var(--mid)}
 
 /* ══════════════════════════════════════
    BRANDS — STICKY SCROLL SECTION
@@ -1860,8 +1893,9 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .leistung-sticky{position:static}
   .cases-header{grid-template-columns:1fr;padding:40px 32px;gap:16px}
   .cases-right{justify-content:flex-start}
-  .cases-gallery{grid-template-columns:1fr 1fr;grid-template-rows:260px}
-  .cg-cell:first-child{grid-row:span 1}
+  .cases-gallery,
+  .cases-gallery.cases-count-2,
+  .cases-gallery.cases-count-3{grid-template-columns:1fr 1fr}
   .brands-header{
     grid-template-columns:1fr;
     width:calc(100% - 40px);
@@ -2371,7 +2405,9 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   /* Rest Mobile */
   .ba-img-row{height:180px}
   .pz-grid{grid-template-columns:1fr}
-  .cases-gallery{grid-template-columns:1fr;grid-template-rows:200px 200px}
+  .cases-gallery,
+  .cases-gallery.cases-count-2,
+  .cases-gallery.cases-count-3{grid-template-columns:1fr}
   .frow{grid-template-columns:1fr}
   .ft-top{grid-template-columns:1fr}
   .kt-left,.kt-right,.contact-preview-card{padding:40px 24px}
@@ -2790,7 +2826,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
       </div>
     </div>
   </div>
-  <div class="why-mosaic">
+  <div class="why-mosaic" data-lightbox-gallery="why-mosaic">
     <div class="wy-img" v-for="image in whyMosaic" :key="image.alt"><img :src="image.src" :alt="image.alt" class="parallax-media" :data-parallax-speed="image.speed"></div>
   </div>
 </div>
@@ -2847,19 +2883,25 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <div id="cases" class="rv glow-section">
   <div class="cases-header">
     <div>
-      <span class="sec-label">Referenzarbeiten</span>
-      <h2 class="sec-h">Unsere<br>Motorprojekte</h2>
-      <p class="sec-sub">Präzise Instandsetzung und Reparatur für alle führenden Fahrzeughersteller.</p>
+      <span class="sec-label">{{ casesSection.label }}</span>
+      <h2 class="sec-h" v-html="casesSection.title"></h2>
+      <p class="sec-sub">{{ casesSection.subtitle }}</p>
     </div>
     <div class="cases-right">
       <a href="pages/projekte.html" class="btn-pill">{{ casesSection.action }}</a>
     </div>
   </div>
-  <div class="cases-gallery stagger rv" style="transition-delay:.08s">
-    <div class="cg-cell" v-for="item in caseGallery" :key="item.name">
-      <img :src="item.src" :alt="item.alt" class="parallax-media" :data-parallax-speed="item.speed">
-      <div class="cg-label"><div class="cg-tag">{{ item.tag }}</div><div class="cg-name">{{ item.name }}</div></div>
-    </div>
+  <div class="cases-gallery stagger rv" data-lightbox-gallery="cases-preview" :class="'cases-count-' + Math.min(Math.max(projectPreviewCards.length, 1), 3)" style="transition-delay:.08s">
+    <article class="cg-card" v-for="item in projectPreviewCards" :key="item.slug">
+      <div class="cg-card-media">
+        <img :src="item.src" :alt="item.alt" class="parallax-media" :data-parallax-speed="item.speed || 10">
+      </div>
+      <div class="cg-card-body">
+        <div class="cg-tag">{{ item.category }}</div>
+        <div class="cg-name">{{ item.title }}</div>
+        <p class="cg-text">{{ item.excerpt }}</p>
+      </div>
+    </article>
   </div>
 </div>
 
@@ -2930,7 +2972,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <!-- ════ ÜBER UNS ════════════════════════ -->
 <section id="ueber-uns">
   <div class="about-wrap rv glow-section">
-    <div class="about-imgs-wrap">
+    <div class="about-imgs-wrap" data-lightbox-gallery="about-preview">
       <div class="a-img" v-if="aboutPreviewImages[0]"><img :src="aboutPreviewImages[0].src" :alt="aboutPreviewImages[0].alt" class="parallax-media" :data-parallax-speed="aboutPreviewImages[0].speed" :style="aboutPreviewImages[0].style"></div>
       <div class="a-img" style="align-self:start" v-if="aboutPreviewImages[1]"><img :src="aboutPreviewImages[1].src" :alt="aboutPreviewImages[1].alt" class="parallax-media" :data-parallax-speed="aboutPreviewImages[1].speed" :style="aboutPreviewImages[1].style"></div>
       <div class="a-img" style="align-self:end" v-if="aboutPreviewImages[2]"><img :src="aboutPreviewImages[2].src" :alt="aboutPreviewImages[2].alt" class="parallax-media" :data-parallax-speed="aboutPreviewImages[2].speed" :style="aboutPreviewImages[2].style"></div>
@@ -3012,15 +3054,17 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 </footer>
 </div>
 
-<script src="content/site-core.js"></script>
-<script src="content/home-content.js"></script>
-<script src="content/about-content.js"></script>
-<script src="content/contact-content.js"></script>
-<script src="content/motoren-content.js"></script>
+  <script src="content/site-core.js"></script>
+  <script src="content/home-content.js"></script>
+  <script src="content/projekte-content.js"></script>
+  <script src="content/about-content.js"></script>
+  <script src="content/contact-content.js"></script>
+  <script src="content/motoren-content.js"></script>
 <script src="assets/ui/mobile-nav.js"></script>
 <script src="assets/ui/scroll-top.js"></script>
 <script src="assets/ui/floating-contact.js"></script>
 <script src="assets/ui/consent-banner.js"></script>
+<script src="assets/ui/gallery-lightbox.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -3062,11 +3106,25 @@ const { createApp } = Vue;
 
 createApp({
   data(){
+    const showcases = Array.isArray(window.projectsPageContent?.showcases) ? window.projectsPageContent.showcases : [];
+    const projectPreviewCards = showcases.slice(0, 3).map((project, index) => {
+      const firstImage = Array.isArray(project.images) && project.images.length ? project.images[0] : null;
+      return {
+        slug: project.slug || `projekt-${index + 1}`,
+        category: project.category || 'Projekt',
+        title: project.title || 'Projekt',
+        excerpt: project.excerpt || '',
+        src: firstImage?.src || 'assets/images/placeholders/placeholder.png',
+        alt: firstImage?.alt || project.title || 'Projektbild',
+        speed: 10 + index * 2
+      };
+    });
     return {
       ...window.siteContent,
       currentBrandSlide: 0,
       brandSlideTimer: null,
-      aboutPreviewImages: []
+      aboutPreviewImages: [],
+      projectPreviewCards
     };
   },
   methods:{
@@ -3116,6 +3174,9 @@ createApp({
       });
 
       document.querySelectorAll('.brand-observe').forEach(el => observer.observe(el));
+      this.$nextTick(() => {
+        window.GalleryLightbox?.bind(document);
+      });
     });
   },
   beforeUnmount(){

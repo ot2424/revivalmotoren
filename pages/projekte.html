@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../assets/ui/consent-banner.css">
   <link rel="stylesheet" href="../assets/ui/shared-footer.css">
   <link rel="stylesheet" href="../assets/ui/floating-contact.css">
+  <link rel="stylesheet" href="../assets/ui/gallery-lightbox.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth;overflow-x:hidden}
@@ -652,20 +653,6 @@
     </main>
   </div>
 
-  <div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
-    <div class="gallery-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Projektbilder">
-      <button class="gallery-lightbox-close" id="galleryLightboxClose" type="button" aria-label="Schließen">×</button>
-      <button class="gallery-lightbox-nav prev" id="galleryLightboxPrev" type="button" aria-label="Vorheriges Bild">‹</button>
-      <button class="gallery-lightbox-nav next" id="galleryLightboxNext" type="button" aria-label="Nächstes Bild">›</button>
-      <div class="gallery-lightbox-stage" id="galleryLightboxStage">
-        <img id="galleryLightboxImage" src="" alt="">
-      </div>
-      <div class="gallery-lightbox-meta">
-        <div class="gallery-lightbox-count" id="galleryLightboxCount"></div>
-      </div>
-    </div>
-  </div>
-
   <script src="../content/site-core.js"></script>
   <script src="../content/projekte-content.js"></script>
   <script src="../assets/ui/mobile-nav.js"></script>
@@ -673,6 +660,7 @@
   <script src="../assets/ui/consent-banner.js"></script>
   <script src="../assets/ui/shared-footer.js"></script>
   <script src="../assets/ui/floating-contact.js"></script>
+  <script src="../assets/ui/gallery-lightbox.js"></script>
   <script>
     window.SharedMobileNav?.bind({ toggleId:'topbarMobileToggle', panelId:'topbarMobilePanel' });
 
@@ -721,11 +709,11 @@
       const placement = project.placement === 'top-right' ? 'is-top-right' : 'is-bottom-right';
       return `
       <article class="project-band ${placement}" data-project-index="${index}">
-        <div class="project-media ${images.length > 1 ? 'has-slideshow' : ''}" ${images.length > 1 ? `data-slideshow-interval="${project.interval || 4200}"` : ''}>
+        <div class="project-media ${images.length > 1 ? 'has-slideshow' : ''}" data-lightbox-gallery="project-${index}" ${images.length > 1 ? `data-slideshow-interval="${project.interval || 4200}"` : ''}>
           ${images.map((image, imageIndex) => `
             <div class="project-frame ${imageIndex === 0 ? 'is-active' : ''}">
-              <img class="project-frame-bg" src="${image.src}" alt="" aria-hidden="true" loading="${index === 0 && imageIndex === 0 ? 'eager' : 'lazy'}" decoding="async">
-              <img class="project-frame-main" src="${image.src}" alt="${image.alt || project.title || 'Projektbild'}" style="${image.style || ''}" loading="${index === 0 && imageIndex === 0 ? 'eager' : 'lazy'}" decoding="async" data-project-index="${index}" data-image-index="${imageIndex}">
+              <img class="project-frame-bg" src="${image.src}" alt="" aria-hidden="true" data-lightbox-ignore loading="${index === 0 && imageIndex === 0 ? 'eager' : 'lazy'}" decoding="async">
+              <img class="project-frame-main" src="${image.src}" alt="${image.alt || project.title || 'Projektbild'}" style="${image.style || ''}" loading="${index === 0 && imageIndex === 0 ? 'eager' : 'lazy'}" decoding="async">
             </div>
           `).join('')}
         </div>
@@ -760,80 +748,7 @@
       }, interval);
     });
 
-    const lightbox = document.getElementById('galleryLightbox');
-    const lightboxDialog = lightbox.querySelector('.gallery-lightbox-dialog');
-    const lightboxImage = document.getElementById('galleryLightboxImage');
-    const lightboxCount = document.getElementById('galleryLightboxCount');
-    const lightboxPrev = document.getElementById('galleryLightboxPrev');
-    const lightboxNext = document.getElementById('galleryLightboxNext');
-    const lightboxClose = document.getElementById('galleryLightboxClose');
-    let activeProjectIndex = 0;
-    let activeImageIndex = 0;
-    let touchStartX = 0;
-
-    function renderLightbox() {
-      const project = normalizedProjects[activeProjectIndex];
-      if (!project || !project.normalizedImages?.length) return;
-      const image = project.normalizedImages[activeImageIndex];
-      if (!image) return;
-      lightboxImage.src = image.src;
-      lightboxImage.alt = image.alt || project.title || 'Projektbild';
-      lightboxImage.style.cssText = image.style || '';
-      lightboxCount.textContent = `${activeImageIndex + 1} / ${project.normalizedImages.length}`;
-      lightboxPrev.style.display = project.normalizedImages.length > 1 ? 'inline-flex' : 'none';
-      lightboxNext.style.display = project.normalizedImages.length > 1 ? 'inline-flex' : 'none';
-    }
-
-    function openLightbox(projectIndex, imageIndex) {
-      activeProjectIndex = Number(projectIndex) || 0;
-      activeImageIndex = Number(imageIndex) || 0;
-      renderLightbox();
-      lightbox.classList.add('is-open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('is-open');
-      lightbox.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    function moveLightbox(step) {
-      const project = normalizedProjects[activeProjectIndex];
-      if (!project || !project.normalizedImages?.length) return;
-      activeImageIndex = (activeImageIndex + step + project.normalizedImages.length) % project.normalizedImages.length;
-      renderLightbox();
-    }
-
-    document.querySelectorAll('.project-frame-main').forEach(image => {
-      image.addEventListener('click', () => {
-        openLightbox(image.dataset.projectIndex, image.dataset.imageIndex);
-      });
-    });
-
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightboxPrev.addEventListener('click', () => moveLightbox(-1));
-    lightboxNext.addEventListener('click', () => moveLightbox(1));
-    lightbox.addEventListener('click', (event) => {
-      if (event.target === lightbox) closeLightbox();
-    });
-    document.addEventListener('keydown', (event) => {
-      if (!lightbox.classList.contains('is-open')) return;
-      if (event.key === 'Escape') closeLightbox();
-      if (event.key === 'ArrowLeft') moveLightbox(-1);
-      if (event.key === 'ArrowRight') moveLightbox(1);
-    });
-    lightboxDialog.addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0]?.clientX || 0;
-    }, { passive: true });
-    lightboxDialog.addEventListener('touchend', (event) => {
-      const touchEndX = event.changedTouches[0]?.clientX || 0;
-      const delta = touchEndX - touchStartX;
-      if (Math.abs(delta) < 40) return;
-      if (delta > 0) moveLightbox(-1);
-      else moveLightbox(1);
-    }, { passive: true });
+    window.GalleryLightbox?.bind(document);
 
     const number = site.business?.whatsappNumber || '';
     const message = site.business?.whatsappMessage || 'Hallo Teuto Motoren';

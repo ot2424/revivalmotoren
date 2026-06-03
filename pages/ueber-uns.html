@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="../assets/ui/consent-banner.css">
 <link rel="stylesheet" href="../assets/ui/shared-footer.css">
 <link rel="stylesheet" href="../assets/ui/floating-contact.css">
+<link rel="stylesheet" href="../assets/ui/gallery-lightbox.css">
 <style>
   .about-hero{
     margin-top:18px;
@@ -333,13 +334,13 @@
       </div>
 
       <aside class="about-sidebar">
-        <div class="about-slider" id="aboutGallerySlider">
+        <div class="about-slider" id="aboutGallerySlider" data-lightbox-gallery="about-workshop">
           <div class="about-slider-copy">
             <strong id="aboutSlideTitle">Einblicke in Werkstatt und Motorenarbeit</strong>
             <div class="about-slider-dots" id="aboutSliderDots" aria-hidden="true"></div>
           </div>
         </div>
-        <div class="about-slider" id="aboutOfficeSlider">
+        <div class="about-slider" id="aboutOfficeSlider" data-lightbox-gallery="about-office">
           <div class="about-slider-copy">
             <strong id="aboutOfficeSlideTitle">Büro & Kundenbereich</strong>
             <div class="about-slider-dots" id="aboutOfficeSliderDots" aria-hidden="true"></div>
@@ -358,6 +359,7 @@
   <script src="../assets/ui/consent-banner.js"></script>
   <script src="../assets/ui/shared-footer.js"></script>
   <script src="../assets/ui/floating-contact.js"></script>
+  <script src="../assets/ui/gallery-lightbox.js"></script>
   <script>
     const site = window.siteContent || {};
     const pageContent = (window.sitePagesContent && window.sitePagesContent.aboutPage) || {};
@@ -451,6 +453,7 @@
         <span>${spec.label}</span>
       </article>
     `).join('');
+    window.GalleryLightbox?.bind(document);
     window.SharedMobileNav?.bind({ toggleId:'topbarMobileToggle', panelId:'topbarMobilePanel' });
   </script>
 </body>
