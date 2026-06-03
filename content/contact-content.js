@@ -32,7 +32,6 @@ Object.assign(window.siteContent, {
   engineOptions: ['R4 – Reihenmotor', 'R6 – Reihenmotor', 'V6 – V-Motor', 'V8 – V-Motor', 'V10 – V-Motor', 'V12 – V-Motor', 'Sonstiges'],
   contactItems: [
     { icon: '📍', label: 'Adresse', value: 'Artur-Ladebeck-Straße 181, 33647 Bielefeld' },
-    { icon: '📞', label: 'Telefon', value: '0521 92373519', href: 'tel:+4952192373519' },
     { icon: '📞', label: 'Telefon', value: '0521 89739151', href: 'tel:+4952189739151' },
     { icon: '💬', label: 'WhatsApp', value: 'Direkt Anfrage senden', href: 'pages/kontakt.html', className: 'js-whatsapp-link' },
     { icon: '✉️', label: 'E-Mail', value: 'info@teutomotoren.de', href: 'mailto:info@teutomotoren.de' }

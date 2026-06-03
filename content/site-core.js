@@ -37,7 +37,6 @@ Object.assign(window.siteContent, {
     { label: 'AGB', href: 'pages/agb.html' }
   ],
   footerContact: [
-    { label: '0521 92373519', href: 'tel:+4952192373519' },
     { label: '0521 89739151', href: 'tel:+4952189739151' },
     { label: 'info@teutomotoren.de', href: 'mailto:info@teutomotoren.de' }
   ]
