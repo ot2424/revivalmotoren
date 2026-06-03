@@ -47,7 +47,7 @@ window.sitePagesContent = {
       {
         title: 'Kontakt',
         paragraphs: [
-          'Telefon 1: 0521 92373519<br>Telefon 2: 0521 89739151<br>E-Mail: info@teutomotoren.de'
+          'Telefon 1: 0521 89739151<br>E-Mail: info@teutomotoren.de'
         ]
       },
       {
@@ -86,7 +86,7 @@ window.sitePagesContent = {
       {
         title: '1. Verantwortlicher',
         paragraphs: [
-          'Verantwortlich für die Datenverarbeitung auf dieser Website ist Teuto Motoren (Einzelunternehmen), Inhaber O.Serif, Artur-Ladebeck-Straße 181, 33647 Bielefeld, E-Mail: info@teutomotoren.de, Telefon: 0521 92373519, weitere Telefonnummer: 0521 89739151.'
+          'Verantwortlich für die Datenverarbeitung auf dieser Website ist Teuto Motoren (Einzelunternehmen), Inhaber O.Serif, Artur-Ladebeck-Straße 181, 33647 Bielefeld, E-Mail: info@teutomotoren.de, Telefon: 0521 89739151.'
         ]
       },
       {
