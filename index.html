@@ -502,8 +502,8 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .wy-img{overflow:hidden;background:var(--bg2)}
 .wy-img:first-child{border-radius:0 0 0 var(--rad2)}
 .wy-img:last-child{border-radius:0 0 var(--rad2) 0}
-.wy-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.82) saturate(.82);transition:filter .5s,transform .6s}
-.wy-img:hover img{filter:brightness(.94) saturate(1);transform:scale(1.04)}
+.wy-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.94) saturate(1);transition:filter .5s,transform .6s}
+.wy-img:hover img{filter:brightness(.94) saturate(1);transform:none}
 
 /* ── LEISTUNGEN ───────────────────────── */
 #leistungen{padding:80px 24px}
@@ -571,10 +571,10 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 }
 .cg-card-media img{
   width:100%;height:100%;object-fit:cover;
-  filter:brightness(.82) saturate(.9);
+  filter:brightness(1) saturate(1);
   transition:filter .5s,transform .7s;
 }
-.cg-card:hover .cg-card-media img{filter:brightness(1) saturate(1);transform:scale(1.03)}
+.cg-card:hover .cg-card-media img{filter:brightness(1) saturate(1);transform:none}
 .cg-card-body{padding:18px 18px 20px}
 .cg-tag{display:inline-flex;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .cg-name{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.04em;line-height:1}
