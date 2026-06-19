@@ -59,7 +59,7 @@ window.sitePagesContent = {
       {
         title: 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV',
         paragraphs: [
-          'O.Serif<br>Bleicherfeldstraße 106<br>33689 Bielefeld'
+          'O.Serif<br>Artur-Ladebeck-Straße 181<br>33647 Bielefeld'
         ]
       },
       {

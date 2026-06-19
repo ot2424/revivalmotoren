@@ -3,8 +3,8 @@ window.siteContent = window.siteContent || {};
 Object.assign(window.siteContent, {
   contactSection: {
     title: 'Angebot<br>anfragen',
-    subtitle: 'Kostenlos & unverbindlich. Wir melden uns innerhalb von 24 Stunden mit einem transparenten Kostenvoranschlag.',
-    responseHint: 'Antwort innerhalb 24 Stunden',
+    subtitle: 'Kostenlos & unverbindlich. Wir bemühen uns um eine schnellstmögliche Bearbeitung Ihrer Anfrage und melden uns mit einem transparenten Kostenvoranschlag bei Ihnen.',
+    responseHint: 'Wir bemühen uns um eine schnellstmögliche Bearbeitung Ihrer Anfrage.',
     formTitle: 'Ihre Anfrage',
     uploadLabel: 'Dateien hochladen',
     uploadHint: 'Optional: Fahrzeugschein, Schadensbilder oder Fotos vom Motor als JPG, PNG, WEBP oder PDF. Maximal 4 Dateien, 3,5 MB pro Datei und 14 MB insgesamt.',

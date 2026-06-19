@@ -55,12 +55,12 @@
     <section class="hero">
       <span class="eyebrow">Kontakt</span>
       <h1 id="contactHeroTitle">Angebot anfragen</h1>
-      <p id="contactHeroSubtitle">Kostenlos & unverbindlich. Wir melden uns innerhalb von 24 Stunden mit einem transparenten Kostenvoranschlag.</p>
+      <p id="contactHeroSubtitle">Kostenlos & unverbindlich. Wir bemühen uns um eine schnellstmögliche Bearbeitung Ihrer Anfrage und melden uns mit einem transparenten Kostenvoranschlag bei Ihnen.</p>
     </section>
 
     <section class="contact-layout">
       <aside class="contact-panel">
-        <span class="response-pill" id="responseHint">Antwort innerhalb 24 Stunden</span>
+        <span class="response-pill" id="responseHint">Wir bemühen uns um eine schnellstmögliche Bearbeitung Ihrer Anfrage.</span>
         <h2 class="side-title" style="margin-top:22px">Direkt Kontakt aufnehmen</h2>
         <p class="contact-intro">Wenn Sie bereits wissen, was Sie benötigen, können Sie uns Ihre Fahrzeugdaten und eine kurze Problembeschreibung direkt senden. So können wir Ihr Anliegen schneller einordnen und gezielter zurückrufen.</p>
         <div class="contact-grid" id="contactItems"></div>
@@ -182,7 +182,7 @@
     document.querySelector('.note').textContent = pageContent.sideNote || '';
     document.getElementById('contactHeroTitle').innerHTML = contactSection.title || 'Angebot anfragen';
     document.getElementById('contactHeroSubtitle').textContent = contactSection.subtitle || '';
-    document.getElementById('responseHint').textContent = contactSection.responseHint || 'Antwort innerhalb 24 Stunden';
+    document.getElementById('responseHint').textContent = contactSection.responseHint || 'Wir bemühen uns um eine schnellstmögliche Bearbeitung Ihrer Anfrage.';
     document.getElementById('formTitle').textContent = contactSection.formTitle || 'Ihre Anfrage';
     document.getElementById('uploadLabel').textContent = contactSection.uploadLabel || 'Dateien hochladen';
     document.getElementById('uploadHint').textContent = contactSection.uploadHint || 'Optional: Fahrzeugschein, Schadensbilder oder Fotos vom Motor als JPG, PNG, WEBP oder PDF.';

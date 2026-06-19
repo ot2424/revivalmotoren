@@ -33,8 +33,7 @@ Object.assign(window.siteContent, {
   ],
   footerLegal: [
     { label: 'Impressum', href: 'pages/impressum.html' },
-    { label: 'Datenschutz', href: 'pages/datenschutz.html' },
-    { label: 'AGB', href: 'pages/agb.html' }
+    { label: 'Datenschutz', href: 'pages/datenschutz.html' }
   ],
   footerContact: [
     { label: '0521 89739151', href: 'tel:+4952189739151' },
