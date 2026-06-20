@@ -92,9 +92,9 @@ Object.assign(window.siteContent, {
     },
     {
       icon: 'assets/icons/services/crankshaft.png',
-      title: 'Kurbelwelle & Lager',
-      body: 'Prüfung, Richten und Schleifen der Kurbelwelle. Austausch aller Haupt- und Pleuellager mit OEM-Teilen.',
-      tags: ['Schleifen', 'Hauptlager', 'Pleuellager']
+      title: 'Kurbelwelle reinigen & polieren',
+      body: 'Gründliche Reinigung und fachgerechtes Polieren der Kurbelwelle zur Optimierung der Laufflächen und Entfernung von Ablagerungen.',
+      tags: ['Reinigen', 'Polieren', 'Kurbelwelle']
     },
     {
       icon: 'assets/icons/services/chain.png',
