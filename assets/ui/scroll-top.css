@@ -5,8 +5,8 @@
   width:42px;
   height:42px;
   border-radius:14px;
-  border:1px solid rgba(255,255,255,.08);
-  background:rgba(38,40,45,.9);
+  border:1px solid rgba(224,71,77,.18);
+  background:linear-gradient(180deg, rgba(54,33,37,.92), rgba(38,40,45,.9));
   color:#ece7de;
   display:none;
   align-items:center;
@@ -26,9 +26,9 @@
   pointer-events:auto;
 }
 .scroll-top-btn:hover{
-  border-color:rgba(255,255,255,.18);
-  background:rgba(44,47,52,.94);
-  box-shadow:0 18px 34px rgba(0,0,0,.24);
+  border-color:rgba(224,71,77,.42);
+  background:linear-gradient(180deg, rgba(90,30,36,.94), rgba(42,43,48,.94));
+  box-shadow:0 18px 34px rgba(0,0,0,.24), 0 0 18px rgba(184,29,36,.16);
 }
 .scroll-top-btn svg{
   width:17px;
@@ -43,5 +43,10 @@
   }
 }
 @media (max-width:768px){
-  .scroll-top-btn{left:12px;bottom:calc(12px + env(safe-area-inset-bottom))}
+  .scroll-top-btn{
+    left:12px;
+    bottom:calc(12px + env(safe-area-inset-bottom));
+    border-color:rgba(224,71,77,.28);
+    box-shadow:0 14px 30px rgba(0,0,0,.2),0 0 16px rgba(184,29,36,.12);
+  }
 }
