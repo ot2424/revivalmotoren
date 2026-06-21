@@ -11,6 +11,11 @@
   --pill-bg:rgba(255,255,255,.05);
   --pill-border:rgba(255,255,255,.08);
   --shadow:0 24px 80px rgba(0,0,0,.35);
+  --accent:#b81d24;
+  --accent-soft:#e0474d;
+  --red-line:linear-gradient(90deg, rgba(224,71,77,1), rgba(224,71,77,.32), rgba(224,71,77,0));
+  --red-line-soft:linear-gradient(90deg, rgba(224,71,77,.70), rgba(224,71,77,.18), rgba(224,71,77,0));
+  --red-shadow:0 0 20px rgba(224,71,77,.18);
   --max:1460px;
 }
 
@@ -101,7 +106,7 @@ img{display:block;max-width:100%}
   transition:background .2s ease,color .2s ease,transform .2s ease;
 }
 .mpg-nav-list a:hover,
-.mpg-nav-list a.is-active{background:rgba(255,255,255,.08);color:var(--text)}
+.mpg-nav-list a.is-active{background:rgba(255,255,255,.06);color:var(--text);box-shadow:inset 0 0 0 1px rgba(224,71,77,.38),0 12px 26px rgba(137,16,22,.24)}
 .mpg-nav-list a:hover{transform:translateY(-1px)}
 
 .mpg-nav-actions{display:flex;align-items:center;gap:10px}
@@ -152,6 +157,18 @@ img{display:block;max-width:100%}
   background:#0d1014;
   box-shadow:var(--shadow);
 }
+.mpg-hero::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:1;
+  width:min(760px,74%);
+  height:2px;
+  background:linear-gradient(90deg, rgba(224,71,77,1), rgba(224,71,77,.34), rgba(224,71,77,0));
+  box-shadow:0 0 12px rgba(224,71,77,.24);
+  pointer-events:none;
+}
 .mpg-hero img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   filter:brightness(.52) saturate(.86);
@@ -159,7 +176,7 @@ img{display:block;max-width:100%}
 .mpg-hero::after{
   content:"";position:absolute;inset:0;
   background:
-    linear-gradient(90deg, rgba(9,11,14,.86) 0%, rgba(9,11,14,.62) 42%, rgba(9,11,14,.24) 100%),
+    linear-gradient(90deg, rgba(9,11,14,.58) 0%, rgba(9,11,14,.28) 26%, rgba(9,11,14,.24) 100%),
     linear-gradient(180deg, rgba(9,11,14,.12) 0%, rgba(9,11,14,.72) 100%);
 }
 .mpg-hero-copy{
@@ -171,7 +188,7 @@ img{display:block;max-width:100%}
 }
 .mpg-eyebrow{
   display:inline-flex;font-size:12px;font-weight:800;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:12px;
+  text-transform:uppercase;color:var(--accent-soft);margin-bottom:12px;
 }
 .mpg-title{
   margin:0;
@@ -198,7 +215,13 @@ img{display:block;max-width:100%}
 .mpg-brand-card{
   position:relative;overflow:hidden;min-height:520px;border-radius:34px;
   border:1px solid var(--line);background:#0d1014;box-shadow:var(--shadow);
+  transition:border-color .25s ease, box-shadow .25s ease;
 }
+.mpg-brand-card::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:2px;z-index:2;
+  background:var(--red-line-soft);opacity:.86;
+}
+.mpg-brand-card:hover{border-color:rgba(224,71,77,.34);box-shadow:var(--shadow),var(--red-shadow)}
 .mpg-brand-card img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   filter:brightness(.6) saturate(.9);
@@ -225,9 +248,10 @@ img{display:block;max-width:100%}
   color:var(--text);font-size:12px;font-weight:700;
 }
 .mpg-pills span.is-active{
-  background:#f3f1ec;
-  color:#111317;
-  border-color:transparent;
+  background:rgba(184,29,36,.22);
+  color:#fff6f4;
+  border-color:rgba(224,71,77,.42);
+  box-shadow:0 0 14px rgba(224,71,77,.20);
 }
 
 .mpg-section{
@@ -237,6 +261,12 @@ img{display:block;max-width:100%}
   border:1px solid var(--line);
   background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
   box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+.mpg-section::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:2px;
+  background:var(--red-line-soft);opacity:.82;
 }
 .mpg-section-head{
   display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:24px;
@@ -249,6 +279,10 @@ img{display:block;max-width:100%}
 .mpg-support{
   position:relative;overflow:hidden;min-height:74vh;border-radius:42px;border:1px solid var(--line);
   background:#0d1014;box-shadow:var(--shadow);margin-top:22px;
+}
+.mpg-support::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:2px;z-index:4;
+  background:var(--red-line);box-shadow:0 0 12px rgba(224,71,77,.22);
 }
 .mpg-support-grid{
   position:absolute;inset:0;display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:repeat(2,1fr);gap:8px;padding:8px;
@@ -291,7 +325,8 @@ img{display:block;max-width:100%}
   transition:transform .22s ease, background .22s ease;
 }
 .mpg-support-dot.is-active{
-  background:#f3f1ec;
+  background:var(--accent-soft);
+  box-shadow:0 0 14px rgba(224,71,77,.34);
   transform:scale(1.1);
 }
 .mpg-support::after{
@@ -344,19 +379,31 @@ img{display:block;max-width:100%}
 @media(max-width:760px){
   .mpg-shell{width:min(calc(100% - 16px), var(--max))}
   .mpg-page{padding-top:8px}
-  .mpg-nav{top:8px;width:min(calc(100% - 12px), 1380px);padding:8px}
+  .mpg-nav{top:8px;width:min(calc(100% - 12px), 1380px);padding:8px;border-color:rgba(224,71,77,.16)}
   .mpg-brand{padding:6px 10px 6px 6px;border-radius:18px;gap:8px}
   .mpg-brand-icon{width:58px;height:58px;border-radius:16px}
   .mpg-brand-name{font-size:16px}
   .mpg-brand-tag{font-size:9px}
   .mpg-hero,.mpg-hero-copy{min-height:620px}
+  .mpg-hero::before{
+    width:min(82%, 520px);
+    height:3px;
+    box-shadow:0 0 20px rgba(224,71,77,.28);
+  }
   .mpg-hero-copy{padding:20px}
   .mpg-title{font-size:clamp(2.4rem,11vw,4rem)}
   .mpg-copy{font-size:14px}
   .mpg-overview{gap:14px}
   .mpg-brand-card,.mpg-brand-card-copy{min-height:380px}
+  .mpg-brand-card{border-color:rgba(224,71,77,.18)}
+  .mpg-brand-card::before,
+  .mpg-section::before,
+  .mpg-support::before{
+    height:3px;
+    opacity:.95;
+  }
   .mpg-brand-card-copy{padding:20px}
-  .mpg-section{padding:20px}
+  .mpg-section{padding:20px;border-color:rgba(224,71,77,.16)}
   .mpg-section-head{display:grid}
   .mpg-support-grid{display:none}
   .mpg-support-slideshow{display:block}
@@ -366,6 +413,8 @@ img{display:block;max-width:100%}
     padding:18px;
     border-radius:24px;
     background:rgba(11,13,16,.66);
+    border:1px solid rgba(224,71,77,.18);
+    box-shadow:0 18px 40px rgba(0,0,0,.28),0 0 18px rgba(184,29,36,.12);
   }
   .mpg-support-card h3{
     font-size:clamp(1.55rem,7vw,2.15rem);

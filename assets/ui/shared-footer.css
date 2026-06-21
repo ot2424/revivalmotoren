@@ -2,12 +2,23 @@
   margin-top:18px;
 }
 .shared-footer-card{
+  position:relative;
   border-radius:30px;
   background:rgba(18,19,21,.86);
   border:1px solid rgba(255,255,255,.08);
   box-shadow:0 22px 60px rgba(0,0,0,.28);
   padding:28px;
   overflow:hidden;
+}
+.shared-footer-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:26px;
+  right:26px;
+  height:2px;
+  background:linear-gradient(90deg, rgba(224,71,77,.82), rgba(224,71,77,.18), rgba(224,71,77,0));
+  box-shadow:0 0 16px rgba(224,71,77,.16);
 }
 .shared-footer-grid{
   display:grid;
@@ -65,12 +76,22 @@
   line-height:1.8;
 }
 .shared-footer-column h5{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
   margin:0 0 14px;
   font-size:12px;
   font-weight:800;
   letter-spacing:.14em;
   text-transform:uppercase;
-  color:rgba(200,194,184,.58);
+  color:#e0474d;
+}
+.shared-footer-column h5::before{
+  content:"";
+  width:24px;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg, rgba(224,71,77,.82), rgba(224,71,77,.16), rgba(224,71,77,0));
 }
 .shared-footer-column ul{
   list-style:none;
@@ -84,12 +105,16 @@
   text-decoration:none;
   font-size:14px;
   line-height:1.6;
+  transition:color .2s ease, text-shadow .2s ease;
 }
-.shared-footer-column a:hover{color:#fff}
+.shared-footer-column a:hover{
+  color:#fff;
+  text-shadow:0 0 14px rgba(224,71,77,.22);
+}
 .shared-footer-copy{
   margin-top:24px;
   padding-top:18px;
-  border-top:1px solid rgba(255,255,255,.08);
+  border-top:1px solid rgba(224,71,77,.14);
   color:rgba(200,194,184,.66);
   font-size:13px;
 }
@@ -99,9 +124,19 @@
 }
 @media(max-width:680px){
   .shared-footer-card{padding:20px 18px;border-radius:22px}
+  .shared-footer-card::before{
+    left:16px;
+    right:16px;
+    height:3px;
+    box-shadow:0 0 20px rgba(224,71,77,.22);
+  }
   .shared-footer-grid{grid-template-columns:1fr;gap:18px}
   .shared-footer-brand-icon{width:58px;height:58px;border-radius:16px}
   .shared-footer-brand-copy strong{font-size:18px}
   .shared-footer-brand-copy span{font-size:11px}
   .shared-footer-description,.shared-footer-column a{font-size:13px}
+  .shared-footer-column h5::before{
+    width:30px;
+    height:3px;
+  }
 }

@@ -16,6 +16,9 @@
 <link rel="stylesheet" href="../assets/ui/gallery-lightbox.css">
 <style>
   .about-hero{
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
     margin-top:18px;
     padding:40px 36px;
     border-radius:34px;
@@ -26,6 +29,17 @@
     grid-template-columns:minmax(0,1fr) minmax(240px,360px);
     gap:32px;
     align-items:center;
+  }
+  .about-hero::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:30px;
+    right:30px;
+    height:2px;
+    background:var(--red-line);
+    box-shadow:var(--red-shadow);
+    z-index:1;
   }
   .about-hero-copy h1{
     font-size:clamp(40px,5vw,68px);
@@ -64,11 +78,24 @@
   }
   .about-card,
   .about-slider{
+    position:relative;
     border-radius:30px;
     background:var(--surface);
     border:1px solid var(--line);
     box-shadow:var(--shadow);
     overflow:hidden;
+  }
+  .about-card::before,
+  .about-slider::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:24px;
+    right:24px;
+    height:2px;
+    background:var(--red-line-soft);
+    box-shadow:0 0 16px rgba(224,71,77,.12);
+    z-index:2;
   }
   .about-card{
     padding:28px;
@@ -160,7 +187,8 @@
     transition:transform .2s ease, background .2s ease;
   }
   .about-slider-dots span.is-active{
-    background:#fff;
+    background:var(--accent-soft);
+    box-shadow:0 0 14px rgba(224,71,77,.45);
     transform:scale(1.18);
   }
   .about-slider-empty{
@@ -189,10 +217,28 @@
     margin-top:18px;
   }
   .feature-card{
+    position:relative;
+    overflow:hidden;
     padding:18px;
     border-radius:20px;
     background:rgba(255,255,255,.03);
     border:1px solid rgba(255,255,255,.08);
+    transition:border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+  }
+  .feature-card::before{
+    content:'';
+    position:absolute;
+    left:0;
+    top:16px;
+    bottom:16px;
+    width:2px;
+    background:linear-gradient(180deg, rgba(224,71,77,.86), rgba(224,71,77,0));
+    opacity:.72;
+  }
+  .feature-card:hover{
+    border-color:rgba(224,71,77,.28);
+    box-shadow:0 18px 38px rgba(184,29,36,.12);
+    transform:translateY(-1px);
   }
   .feature-card strong{
     display:block;
@@ -215,10 +261,27 @@
     margin-top:18px;
   }
   .spec-card{
+    position:relative;
+    overflow:hidden;
     padding:18px;
     border-radius:22px;
     background:rgba(255,255,255,.03);
     border:1px solid rgba(255,255,255,.08);
+    transition:border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+  }
+  .spec-card::before{
+    content:'';
+    position:absolute;
+    left:18px;
+    right:18px;
+    top:0;
+    height:2px;
+    background:var(--red-line-soft);
+  }
+  .spec-card:hover{
+    border-color:rgba(224,71,77,.28);
+    box-shadow:0 18px 38px rgba(184,29,36,.12);
+    transform:translateY(-1px);
   }
   .spec-card strong{
     display:block;
@@ -226,6 +289,7 @@
     line-height:1;
     letter-spacing:-.05em;
     margin-bottom:8px;
+    color:var(--accent-soft);
   }
   .spec-card span{
     display:block;
@@ -242,12 +306,33 @@
   @media(max-width:768px){
     .about-hero,
     .about-card{padding:24px 20px;border-radius:24px}
+    .about-hero{border-color:rgba(224,71,77,.14)}
+    .about-hero::before,
+    .about-card::before,
+    .about-slider::before{
+      left:16px;
+      right:16px;
+      height:3px;
+      box-shadow:0 0 20px rgba(224,71,77,.24);
+    }
     .about-hero-copy h1{font-size:clamp(34px,11vw,48px)}
     .about-hero-copy p{font-size:16px}
     .about-hero-art{display:none}
     .about-story-intro p,
     .about-story-copy p{font-size:16px}
     .about-slider{min-height:240px;border-radius:24px}
+    .feature-card,
+    .spec-card{
+      border-color:rgba(224,71,77,.16);
+    }
+    .feature-card::before{
+      width:3px;
+    }
+    .spec-card::before{
+      left:16px;
+      right:16px;
+      height:3px;
+    }
     .about-slider-copy{
       left:16px;
       right:16px;
