@@ -6,8 +6,8 @@ Object.assign(window.siteContent, {
     title: 'Teuto Motoren –<br>Bielefeld',
     subtitle: 'Spezialisierte Werkstatt für Motorinstandsetzung und Motorreparatur. Traditionelles Handwerk trifft modernste Technik – für langlebige und zuverlässige Ergebnisse.',
     images: [
-      { src: 'assets/images/projects/ueber-uns/block-floor.jpg', alt: 'Werkstatt', speed: 14, style: 'height:100%;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)' },
-      { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter Über uns Bild 2', speed: 10, style: 'height:100%;width:100%;object-fit:cover;filter:brightness(.9) saturate(.2)' },
+      { src: 'assets/images/projects/ueber-uns/front_view.jpg', alt: 'Frontansicht der Werkstatt', speed: 14, style: 'height:100%;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)' },
+      { src: 'assets/images/projects/ueber-uns/block-floor.jpg', alt: 'Werkstatt', speed: 10, style: 'height:100%;width:100%;object-fit:cover;filter:brightness(.9) saturate(.2)' },
       { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter Über uns Bild 3', speed: 8, style: 'height:100%;width:100%;object-fit:cover;filter:brightness(.9) saturate(.2)' }
     ],
     slideshowImages: [ //TODO: replace with real images
