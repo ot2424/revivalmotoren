@@ -17,7 +17,6 @@ Object.assign(window.siteContent, {
     ],
     slideshowTitle: 'Einblicke in Werkstatt und Motorenarbeit',
     officeSlideshowTitle: 'Büro & Kundenbereich',
-    officeSlideshowHint: 'Hier kannst du später einfach Office-Bilder ergänzen.',
     officeSlideshowImages: [
       { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter Büro und Kundenbereich 1' },
       { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter Büro und Kundenbereich 2' },
