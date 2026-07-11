@@ -14,7 +14,7 @@ Object.assign(window.siteContent, {
     copyright: '© 2026 Teuto Motoren'
   },
   business: {
-    whatsappNumber: '',
+    whatsappNumber: '4952189739151',
     whatsappMessage: 'Hallo Teuto Motoren, ich möchte eine Anfrage zur Motorinstandsetzung stellen.'
   },
   navItems: [

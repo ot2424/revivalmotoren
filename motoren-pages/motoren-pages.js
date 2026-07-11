@@ -28,9 +28,10 @@
   const whatsappHref = whatsappNumber
     ? `https://wa.me/${whatsappNumber.replace(/[^\d]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`
     : contactHref;
+  const whatsappAttrs = whatsappNumber ? ' target="_blank" rel="noopener noreferrer"' : '';
   const desktopActions = whatsappNumber
     ? `
-          <a class="mpg-action-wa" href="${whatsappHref}">WhatsApp</a>
+          <a class="mpg-action-wa" href="${whatsappHref}"${whatsappAttrs}>WhatsApp</a>
           <a class="mpg-action-solid" href="${contactHref}">Angebot anfragen</a>
         `
     : `
@@ -202,7 +203,7 @@
             </div>
             <div>
               <h5>Kontakt</h5>
-              <ul>${contactItems.filter(item => item.label !== 'Adresse').slice(0, 4).map(item => `<li><a href="${item.className === 'js-whatsapp-link' ? whatsappHref : resolveHref(item.href || '#')}">${item.value}</a></li>`).join('')}</ul>
+              <ul>${contactItems.filter(item => item.label !== 'Adresse').slice(0, 4).map(item => `<li><a href="${item.className === 'js-whatsapp-link' ? whatsappHref : resolveHref(item.href || '#')}"${item.className === 'js-whatsapp-link' ? whatsappAttrs : ''}>${item.value}</a></li>`).join('')}</ul>
             </div>
           </div>
           <div class="mpg-footer-copy">${site.footer?.copyright || ''}</div>
@@ -308,7 +309,7 @@
             </div>
             <div>
               <h5>Kontakt</h5>
-              <ul>${contactItems.filter(item => item.label !== 'Adresse').slice(0, 4).map(item => `<li><a href="${item.className === 'js-whatsapp-link' ? whatsappHref : resolveHref(item.href || '#')}">${item.value}</a></li>`).join('')}</ul>
+              <ul>${contactItems.filter(item => item.label !== 'Adresse').slice(0, 4).map(item => `<li><a href="${item.className === 'js-whatsapp-link' ? whatsappHref : resolveHref(item.href || '#')}"${item.className === 'js-whatsapp-link' ? whatsappAttrs : ''}>${item.value}</a></li>`).join('')}</ul>
             </div>
           </div>
           <div class="mpg-footer-copy">${site.footer?.copyright || ''}</div>
