@@ -6,9 +6,8 @@ Object.assign(window.siteContent, {
     title: 'Teuto Motoren –<br>Bielefeld',
     subtitle: 'Spezialisierte Werkstatt für Motorinstandsetzung und Motorreparatur. Traditionelles Handwerk trifft modernste Technik – für langlebige und zuverlässige Ergebnisse.',
     images: [
-      { src: 'assets/images/projects/ueber-uns/front_view.png', alt: 'Frontansicht der Werkstatt', speed: 14, style: 'height:100%;width:100%;object-fit:cover;filter:brightness(.8) saturate(.85)' },
-      { src: 'assets/images/projects/ueber-uns/block-floor.jpg', alt: 'Werkstatt', speed: 10, style: 'height:100%;width:100%;object-fit:cover;filter:brightness(.9) saturate(.2)' },
-      { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter Über uns Bild 3', speed: 8, style: 'height:100%;width:100%;object-fit:cover;filter:brightness(.9) saturate(.2)' }
+      { src: 'assets/images/projects/ueber-uns/front_view.png', alt: 'Frontansicht der Werkstatt', speed: 8, style: 'height:100%;width:100%;object-fit:contain;object-position:center;background:#0b0c0e;filter:brightness(.86) saturate(.78);--ps:1' },
+      { src: 'assets/images/projects/ueber-uns/block-floor.jpg', alt: 'Motorblock in der Werkstatt', speed: 10, style: 'height:100%;width:100%;object-fit:cover;object-position:center;filter:brightness(.9) saturate(.22);--ps:1.14' }
     ],
     slideshowImages: [ //TODO: replace with real images
       { src: 'assets/images/projects/ueber-uns/messen.jpg', alt: 'Mess- und Diagnosearbeit in der Werkstatt' },
