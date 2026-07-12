@@ -820,9 +820,9 @@
     window.GalleryLightbox?.bind(document);
 
     const number = site.business?.whatsappNumber || '';
-    const message = site.business?.whatsappMessage || 'Hallo Teuto Motoren';
+    const message = String(site.business?.whatsappMessage || '').trim();
     const cleaned = number.replace(/\D/g, '');
-    const href = cleaned ? `https://wa.me/${cleaned}?text=${encodeURIComponent(message)}` : 'kontakt.html';
+    const href = cleaned ? `https://wa.me/${cleaned}${message ? `?text=${encodeURIComponent(message)}` : ''}` : 'kontakt.html';
     document.querySelectorAll('.js-whatsapp-link').forEach(link => {
       link.setAttribute('href', href);
       if (cleaned) {

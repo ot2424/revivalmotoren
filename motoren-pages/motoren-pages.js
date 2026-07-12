@@ -8,7 +8,7 @@
   const support = site.generalBrandsPanel || {};
   const contactItems = site.contactItems || [];
   const whatsappNumber = site.business?.whatsappNumber || '';
-  const whatsappMessage = site.business?.whatsappMessage || 'Hallo Teuto Motoren';
+  const whatsappMessage = String(site.business?.whatsappMessage || '').trim();
 
   const asset = (path) => {
     if (!path) return '';
@@ -26,7 +26,7 @@
 
   const contactHref = resolveHref('pages/kontakt.html');
   const whatsappHref = whatsappNumber
-    ? `https://wa.me/${whatsappNumber.replace(/[^\d]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`
+    ? `https://wa.me/${whatsappNumber.replace(/[^\d]/g, '')}${whatsappMessage ? `?text=${encodeURIComponent(whatsappMessage)}` : ''}`
     : contactHref;
   const whatsappAttrs = whatsappNumber ? ' target="_blank" rel="noopener noreferrer"' : '';
   const desktopActions = whatsappNumber

@@ -18,9 +18,9 @@
     return `../${path}`;
   };
   const whatsappNumber = site.business?.whatsappNumber || '';
-  const whatsappMessage = site.business?.whatsappMessage || 'Hallo Teuto Motoren';
+  const whatsappMessage = String(site.business?.whatsappMessage || '').trim();
   const whatsappHref = whatsappNumber
-    ? `https://wa.me/${whatsappNumber.replace(/[^\d]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`
+    ? `https://wa.me/${whatsappNumber.replace(/[^\d]/g, '')}${whatsappMessage ? `?text=${encodeURIComponent(whatsappMessage)}` : ''}`
     : 'kontakt.html';
 
   const brandMarkup = `

@@ -15,7 +15,7 @@ Object.assign(window.siteContent, {
   },
   business: {
     whatsappNumber: '4952189739151',
-    whatsappMessage: 'Hallo Teuto Motoren, ich möchte eine Anfrage zur Motorinstandsetzung stellen.'
+    whatsappMessage: ''
   },
   navItems: [
     { label: 'Leistungen', href: '#leistungen' },

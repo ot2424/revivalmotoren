@@ -547,9 +547,9 @@ a{color:inherit}
     }
 
     const whatsappNumber = window.siteContent && window.siteContent.business ? window.siteContent.business.whatsappNumber.replace(/\D/g,'') : '';
-    const whatsappMessage = window.siteContent && window.siteContent.business ? window.siteContent.business.whatsappMessage : '';
+    const whatsappMessage = window.siteContent && window.siteContent.business ? String(window.siteContent.business.whatsappMessage || '').trim() : '';
     if(floatingContact && whatsappNumber){
-      floatingContact.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+      floatingContact.href = `https://wa.me/${whatsappNumber}${whatsappMessage ? `?text=${encodeURIComponent(whatsappMessage)}` : ''}`;
       floatingContact.target = '_blank';
       floatingContact.rel = 'noopener noreferrer';
       floatingContact.textContent = 'WhatsApp Anfrage';

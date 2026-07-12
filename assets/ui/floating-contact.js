@@ -12,8 +12,10 @@
     return `${root}/${path}`;
   };
 
-  const whatsappHref = business.whatsappNumber
-    ? `https://wa.me/${String(business.whatsappNumber).replace(/[^\d]/g, '')}?text=${encodeURIComponent(business.whatsappMessage || 'Hallo Teuto Motoren')}`
+  const whatsappNumber = String(business.whatsappNumber || '').replace(/[^\d]/g, '');
+  const whatsappMessage = String(business.whatsappMessage || '').trim();
+  const whatsappHref = whatsappNumber
+    ? `https://wa.me/${whatsappNumber}${whatsappMessage ? `?text=${encodeURIComponent(whatsappMessage)}` : ''}`
     : resolveHref('pages/kontakt.html');
 
   const existingAnchor = document.querySelector('.desktop-contact-fab, .floating-contact');
@@ -29,7 +31,7 @@
     </button>
     <div class="desktop-contact-panel" aria-hidden="true">
       <a href="${resolveHref('pages/kontakt.html')}" class="desktop-contact-action desktop-contact-action--primary">Kontakt</a>
-      <a href="${whatsappHref}" class="desktop-contact-action desktop-contact-action--ghost"${business.whatsappNumber ? ' target="_blank" rel="noopener"' : ''}>WhatsApp</a>
+      <a href="${whatsappHref}" class="desktop-contact-action desktop-contact-action--ghost"${whatsappNumber ? ' target="_blank" rel="noopener noreferrer"' : ''}>WhatsApp</a>
     </div>
   `;
   document.body.appendChild(wrap);

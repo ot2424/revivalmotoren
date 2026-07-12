@@ -3689,13 +3689,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click
 
 /* ── WHATSAPP ──────────────────────────── */
 const BUSINESS_WHATSAPP_NUMBER = '4952189739151';
-const DEFAULT_WHATSAPP_MESSAGE = 'Hallo Teuto Motoren, ich möchte eine Anfrage zur Motorinstandsetzung stellen.';
+const DEFAULT_WHATSAPP_MESSAGE = '';
 
 function setupWhatsAppLinks(){
   const fallback = 'pages/kontakt.html';
   const cleaned = BUSINESS_WHATSAPP_NUMBER.replace(/\D/g,'');
+  const message = DEFAULT_WHATSAPP_MESSAGE.trim();
   const href = cleaned
-    ? `https://wa.me/${cleaned}?text=${encodeURIComponent(DEFAULT_WHATSAPP_MESSAGE)}`
+    ? `https://wa.me/${cleaned}${message ? `?text=${encodeURIComponent(message)}` : ''}`
     : fallback;
   document.querySelectorAll('.js-whatsapp-link').forEach(link=>{
     link.setAttribute('href', href);

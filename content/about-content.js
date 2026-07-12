@@ -10,14 +10,14 @@ Object.assign(window.siteContent, {
       { src: 'assets/images/projects/ueber-uns/block-floor.jpg', alt: 'Motorblock in der Werkstatt', speed: 10, style: 'height:100%;width:100%;object-fit:cover;object-position:center;filter:brightness(.9) saturate(.2);--ps:1.08' },
       { src: 'assets/images/projects/ueber-uns/Motorblock1.jpg', alt: 'Motorblock Detail in der Werkstatt', speed: 8, style: 'height:100%;width:100%;object-fit:cover;object-position:center;filter:brightness(.9) saturate(.2);--ps:1.06' }
     ],
-    slideshowImages: [ //TODO: replace with real images
+    slideshowImages: [ //TODO: replace with real images !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       { src: 'assets/images/projects/ueber-uns/messen.jpg', alt: 'Mess- und Diagnosearbeit in der Werkstatt' },
       { src: 'assets/images/projects/ueber-uns/Motorblock1.jpg', alt: 'Motorblock in der Werkstatt' },
-      { src: 'assets/images/projects/ueber-uns/Motorblock mit Kette und Ölwannne.jpg', alt: 'Motorblock mit Kette und Ölwanne' }
+      { src: 'assets/images/projects/ueber-uns/Motorblock mit Kette und Ölwannne.jpg', alt: 'Motorblock mit Kette und Ölwanne' }
     ],
     slideshowTitle: 'Einblicke in Werkstatt und Motorenarbeit',
     officeSlideshowTitle: 'Büro & Kundenbereich',
-    officeSlideshowImages: [ // TODO
+    officeSlideshowImages: [ // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter Büro und Kundenbereich 1' },
       { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter Büro und Kundenbereich 2' },
       { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter Büro und Kundenbereich 3' }
