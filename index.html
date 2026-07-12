@@ -589,6 +589,12 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .wy-img:nth-child(n+4){display:none}
 .wy-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.94) saturate(1);transition:filter .5s,transform .6s}
 .wy-img:hover img{filter:brightness(.94) saturate(1);transform:none}
+.why-media-cycle{position:relative;width:100%;height:100%;overflow:hidden}
+.why-media-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity .85s ease}
+.why-media-slide.is-active{opacity:1}
+.why-media-cycle video{display:block;background:#090a0c}
+.why-media-cycle.is-contain{background:#090a0c}
+.why-media-cycle.is-contain .why-media-slide{object-fit:contain;padding:10px;box-sizing:border-box}
 
 /* ── LEISTUNGEN ───────────────────────── */
 #leistungen{padding:80px 24px}
@@ -3091,7 +3097,17 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     </div>
   </div>
   <div class="why-mosaic" data-lightbox-gallery="why-mosaic">
-    <div class="wy-img" v-for="image in whyMosaic" :key="image.alt"><img :src="image.src" :alt="image.alt" class="parallax-media" :data-parallax-speed="image.speed"></div>
+    <div class="wy-img" v-for="image in whyMosaic" :key="image.alt">
+      <div v-if="image.slides && image.slides.length" class="why-media-cycle parallax-media" :class="{ 'is-contain': image.fit === 'contain' }" data-why-media-cycle data-lightbox-ignore :data-parallax-speed="image.speed">
+        <template v-for="(slide, index) in image.slides" :key="slide.src">
+          <video v-if="slide.type === 'video'" class="why-media-slide" :class="{ 'is-active': index === 0 }" data-cycle-slide muted playsinline preload="metadata" :poster="slide.poster || image.src" :aria-label="slide.alt">
+            <source :src="slide.src">
+          </video>
+          <img v-else class="why-media-slide" :class="{ 'is-active': index === 0 }" data-cycle-slide :src="slide.src" :alt="slide.alt || image.alt" loading="lazy" decoding="async">
+        </template>
+      </div>
+      <img v-else :src="image.src" :alt="image.alt" class="parallax-media" :data-parallax-speed="image.speed">
+    </div>
   </div>
 </div>
 
@@ -3323,10 +3339,10 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 </footer>
 </div>
 
-  <script src="content/site-core.js"></script>
-  <script src="content/home-content.js"></script>
-  <script src="content/projekte-content.js"></script>
-  <script src="content/about-content.js"></script>
+  <script src="content/site-core.js?v=20260713-1"></script>
+  <script src="content/home-content.js?v=20260713-1"></script>
+  <script src="content/projekte-content.js?v=20260713-1"></script>
+  <script src="content/about-content.js?v=20260713-1"></script>
   <script src="content/contact-content.js"></script>
   <script src="content/motoren-content.js"></script>
 <script src="assets/ui/mobile-nav.js"></script>
@@ -3409,6 +3425,58 @@ createApp({
         window.clearInterval(this.brandSlideTimer);
         this.brandSlideTimer = null;
       }
+    },
+    setupWhyMediaCycles(){
+      document.querySelectorAll('[data-why-media-cycle]').forEach((cycle) => {
+        if(cycle.dataset.cycleBound === 'true') return;
+        const slides = Array.from(cycle.querySelectorAll('[data-cycle-slide]'));
+        if(!slides.length) return;
+        cycle.dataset.cycleBound = 'true';
+
+        let current = 0;
+        let imageTimer = null;
+        let transitionTimer = null;
+
+        const activateSlide = (index) => {
+          window.clearTimeout(imageTimer);
+          window.clearTimeout(transitionTimer);
+          current = index;
+          slides.forEach((slide, slideIndex) => {
+            const isActive = slideIndex === current;
+            slide.classList.toggle('is-active', isActive);
+            if(slide.tagName === 'VIDEO' && !isActive){
+              slide.pause();
+              slide.currentTime = 0;
+            }
+          });
+
+          const active = slides[current];
+          const next = () => showSlide((current + 1) % slides.length);
+
+          if(active.tagName === 'VIDEO'){
+            active.muted = true;
+            active.playsInline = true;
+            active.currentTime = 0;
+            active.onended = next;
+            active.onerror = next;
+            active.load();
+            active.play().catch(() => {
+              imageTimer = window.setTimeout(next, 4200);
+            });
+          } else {
+            imageTimer = window.setTimeout(next, 3200);
+          }
+        };
+
+        const showSlide = (index) => {
+          window.clearTimeout(imageTimer);
+          window.clearTimeout(transitionTimer);
+          slides[current]?.classList.remove('is-active');
+          transitionTimer = window.setTimeout(() => activateSlide(index), 430);
+        };
+
+        activateSlide(0);
+      });
     }
   },
   mounted(){
@@ -3422,6 +3490,7 @@ createApp({
       if(!reducedMotion){
         this.startBrandPreviewSlider();
       }
+      this.setupWhyMediaCycles();
 
       if(reducedMotion){
         document.querySelectorAll('.brand-observe').forEach(el=>el.classList.add('is-visible'));
