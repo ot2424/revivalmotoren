@@ -459,7 +459,7 @@
     document.getElementById('aboutSubtitle').textContent = about.subtitle || '';
     document.getElementById('aboutStoryEyebrow').textContent = pageContent.story?.eyebrow || 'Werkstatt & Anspruch';
     document.getElementById('aboutStoryTitle').textContent = pageContent.story?.title || 'Wofür Teuto Motoren steht';
-    document.getElementById('aboutStoryIntro').textContent = pageContent.story?.intro || '';
+    document.getElementById('aboutStoryIntro').innerHTML = pageContent.story?.intro || '';
     document.getElementById('aboutStoryCopy').innerHTML = (pageContent.story?.paragraphs || []).map(paragraph => `<p>${paragraph}</p>`).join('');
     document.getElementById('aboutFeaturesEyebrow').textContent = pageContent.features?.eyebrow || 'Warum Kunden zu uns kommen';
     document.getElementById('aboutFeaturesTitle').textContent = pageContent.features?.title || 'Stärken unserer Arbeitsweise';

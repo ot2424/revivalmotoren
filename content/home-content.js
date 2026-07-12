@@ -73,9 +73,8 @@ Object.assign(window.siteContent, {
   ],
   whyMosaic: [
     { src: 'assets/images/projects/img-block.jpg', alt: 'Motorblock Detail', speed: 10 },
-    { src: 'assets/images/projects/Motor.jpg', alt: 'Werkstattmotor', speed: 14 },
-    { src: 'assets/images/projects/Motorteile.jpg', alt: 'Motorteile Werkstatt', speed: 12 },
-    { src: 'assets/images/projects/parked_cars.png', alt: 'Fahrzeuge vor der Werkstatt', speed: 16 }
+    { src: 'assets/images/projects/Motorblock1.jpg', alt: 'Motorblock in der Werkstatt', speed: 12 },
+    { src: 'assets/images/projects/motor-honen.jpg', alt: 'Zylinderbearbeitung in der Werkstatt', speed: 14 }
   ],
   services: [
     {

@@ -6,12 +6,16 @@ Object.assign(window.siteContent, {
     title: 'Teuto Motoren –<br>Bielefeld',
     subtitle: 'Spezialisierte Werkstatt für Motorinstandsetzung und Motorreparatur. Traditionelles Handwerk trifft modernste Technik – für langlebige und zuverlässige Ergebnisse.',
     images: [
-      { src: 'assets/images/placeholders/placeholder.png', alt: 'Frontansicht der Werkstatt', speed: 14, style: 'height:100%;width:100%;object-fit:cover;object-position:center;filter:brightness(.82) saturate(.82)' },
+      { src: 'assets/images/projects/ueber-uns/cars_front_1.png', alt: 'Fahrzeuge vor der Teuto Motoren Werkstatt', speed: 14, style: 'height:100%;width:100%;object-fit:cover;object-position:center;filter:brightness(.86) saturate(.82)', slides: [
+        { src: 'assets/images/projects/ueber-uns/cars_front_1.png', alt: 'Fahrzeuge vor der Teuto Motoren Werkstatt' },
+        { src: 'assets/images/projects/ueber-uns/cars_front_2.png', alt: 'Teuto Motoren Fahrzeuge auf dem Hof' }
+      ] },
       { src: 'assets/images/projects/ueber-uns/block-floor.jpg', alt: 'Motorblock in der Werkstatt', speed: 10, style: 'height:100%;width:100%;object-fit:cover;object-position:center;filter:brightness(.9) saturate(.2);--ps:1.08' },
       { src: 'assets/images/projects/ueber-uns/Motorblock1.jpg', alt: 'Motorblock Detail in der Werkstatt', speed: 8, style: 'height:100%;width:100%;object-fit:cover;object-position:center;filter:brightness(.9) saturate(.2);--ps:1.06' }
     ],
     slideshowImages: [ //TODO: replace with real images !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      { src: 'assets/images/projects/ueber-uns/messen.jpg', alt: 'Mess- und Diagnosearbeit in der Werkstatt' },
+      { src: 'assets/images/projects/ueber-uns/cars_front_1.png', alt: 'Fahrzeuge vor der Teuto Motoren Werkstatt' },
+      { src: 'assets/images/projects/parked_cars.png', alt: 'Parkende Kundenfahrzeuge vor der Teuto Motoren Werkstatt' },
       { src: 'assets/images/projects/ueber-uns/Motorblock1.jpg', alt: 'Motorblock in der Werkstatt' },
       { src: 'assets/images/projects/ueber-uns/Motorblock mit Kette und Ölwannne.jpg', alt: 'Motorblock mit Kette und Ölwanne' }
     ],

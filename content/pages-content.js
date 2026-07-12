@@ -3,12 +3,10 @@ window.sitePagesContent = {
     story: {
       eyebrow: 'Werkstatt & Anspruch',
       title: 'Wofür Teuto Motoren steht',
-      intro: 'Keine laute Selbstdarstellung, sondern saubere Diagnosen, ehrliche Einschätzungen und Reparaturen, die technisch Sinn ergeben und langfristig halten sollen.',
+      intro: '<strong>Der Name ist Programm: Verwurzelt im Teutoburger Wald.</strong>',
       paragraphs: [
-        'Teuto Motoren steht für spezialisierte Motorinstandsetzung mit klarer Diagnose, sauberer Ausführung und nachvollziehbaren Ergebnissen. Unser Fokus liegt auf langlebigen Reparaturen statt kurzfristigen Übergangslösungen.',
-        'Wir verbinden klassisches Werkstatt-Handwerk mit moderner Diagnosetechnik und OEM-orientierter Arbeitsweise. So betreuen wir sowohl Performance-Fahrzeuge als auch Alltagsmodelle mit derselben Sorgfalt und Präzision.',
-        'Von der ersten Schadensanalyse bis zur finalen Prüfung achten wir auf transparente Kommunikation, dokumentierte Arbeitsschritte und einen realistischen Blick auf Aufwand, Teilebedarf und Wirtschaftlichkeit.',
-        'Gerade bei Motorenschäden zählt Vertrauen. Deshalb setzen wir nicht nur auf Technik, sondern auch auf eine verständliche Beratung, klare Rücksprache und Lösungen, die zu Fahrzeug, Zustand und Nutzung passen.'
+        'Unser Name kommt nicht von ungefähr, denn wir sind stolz auf unsere Heimat hier in Bielefeld und die Region rund um den Teutoburger Wald. Genau wie die Menschen hier mögen wir es direkt, verlässlich und bodenständig. Wir setzen auf keine laute Selbstdarstellung, sondern auf saubere Diagnosen, ehrliche Einschätzungen und Reparaturen, die technisch Sinn ergeben und langfristig halten.',
+        'Daraus entsteht unser Anspruch: Wir verbinden klassisches Werkstatt-Handwerk mit moderner Diagnosetechnik, klarer Kommunikation und einem realistischen Blick auf Aufwand, Teilebedarf und Wirtschaftlichkeit. Gerade bei Motorenschäden zählt Vertrauen. Deshalb setzen wir auf ehrliche Rücksprache und Lösungen, die wirklich zu Fahrzeug, Zustand und Nutzung passen.'
       ]
     },
     features: {

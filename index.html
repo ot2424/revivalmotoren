@@ -584,10 +584,9 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .why-feat-icon{font-size:18px;margin-bottom:10px}
 .why-feat-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:-.02em}
 .why-feat-body{font-size:13px;color:var(--mid);line-height:1.65}
-.why-mosaic{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;height:260px}
-.wy-img{overflow:hidden;background:var(--bg2)}
-.wy-img:first-child{border-radius:0 0 0 var(--rad2)}
-.wy-img:last-child{border-radius:0 0 var(--rad2) 0}
+.why-mosaic{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;height:auto;padding:8px}
+.wy-img{overflow:hidden;background:var(--bg2);border-radius:18px;aspect-ratio:16/10}
+.wy-img:nth-child(n+4){display:none}
 .wy-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.94) saturate(1);transition:filter .5s,transform .6s}
 .wy-img:hover img{filter:brightness(.94) saturate(1);transform:none}
 
@@ -1375,6 +1374,19 @@ html[data-theme="dark"] .brand-general-cta{
 .a-img{border-radius:var(--rad);overflow:hidden;background:var(--bg2)}
 .a-img:first-child{grid-row:span 2}
 .a-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.8) saturate(.85)}
+.about-slideshow{position:relative;display:block;width:100%;height:100%;overflow:hidden}
+.about-slideshow img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:none;opacity:0;animation:aboutSlideFade 7s infinite ease-in-out}
+.about-slideshow img.is-active{opacity:1}
+.about-slideshow img:nth-child(2){animation-delay:3.5s}
+@keyframes aboutSlideFade{
+  0%,42%{opacity:1}
+  50%,92%{opacity:0}
+  100%{opacity:1}
+}
+@media (prefers-reduced-motion: reduce){
+  .about-slideshow img{animation:none;opacity:0}
+  .about-slideshow img.is-active{opacity:1}
+}
 .about-text .sec-sub{max-width:100%;margin-bottom:28px}
 .about-preview-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:28px}
 .spec-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
@@ -2017,7 +2029,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .why-top-left{border-right:none;border-bottom:1px solid var(--rule);padding:40px 32px}
   .why-top-left > div:first-child{margin-top:28px}
   .why-top-right{padding:40px 32px}
-  .why-mosaic{grid-template-columns:repeat(2,1fr);height:220px}
+  .why-mosaic{grid-template-columns:repeat(3,minmax(0,1fr));height:auto}
   .leistung-layout{grid-template-columns:1fr}
   .leistung-sticky{position:static}
   .cases-header{grid-template-columns:1fr;padding:40px 32px;gap:16px}
@@ -2168,7 +2180,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     opacity:.095;
   }
   .hero-card img{height:52vh;min-height:320px}
-  .why-mosaic{grid-template-columns:repeat(2,1fr)}
+  .why-mosaic{grid-template-columns:repeat(3,minmax(0,1fr))}
 
   /* ── BRANDS MOBILE: VOLLBILD-STICKY ── */
 
@@ -2864,8 +2876,8 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .hpill{flex:0 0 auto;min-height:40px;padding:0 14px;font-size:12px}
   .why-top-left,.why-top-right,.cases-header,.map-info,.kt-left,.kt-right,footer{padding-left:20px;padding-right:20px}
   .why-top-right{grid-template-columns:1fr;gap:22px}
-  .why-mosaic{height:auto;grid-template-columns:1fr}
-  .wy-img{min-height:180px}
+  .why-mosaic{height:auto;grid-template-columns:1fr;gap:8px;padding:8px}
+  .wy-img{min-height:220px;aspect-ratio:16/10}
   .sec-h{font-size:clamp(26px,9vw,34px)}
   .sec-sub,.lst-intro-body,.map-copy,.kt-sub{font-size:13px}
   .lcard{padding:22px 18px;gap:14px}
@@ -3225,7 +3237,12 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 <section id="ueber-uns">
   <div class="about-wrap rv glow-section">
     <div class="about-imgs-wrap" data-lightbox-gallery="about-preview">
-      <div class="a-img" v-if="aboutPreviewImages[0]"><img :src="aboutPreviewImages[0].src" :alt="aboutPreviewImages[0].alt" class="parallax-media" :data-parallax-speed="aboutPreviewImages[0].speed" :style="aboutPreviewImages[0].style"></div>
+      <div class="a-img" v-if="aboutPreviewImages[0]">
+        <div v-if="aboutPreviewImages[0].slides && aboutPreviewImages[0].slides.length" class="about-slideshow parallax-media" :data-parallax-speed="aboutPreviewImages[0].speed" :style="aboutPreviewImages[0].style">
+          <img v-for="(slide, index) in aboutPreviewImages[0].slides" :key="slide.src" :src="slide.src" :alt="slide.alt || aboutPreviewImages[0].alt" :class="{ 'is-active': index === 0 }">
+        </div>
+        <img v-else :src="aboutPreviewImages[0].src" :alt="aboutPreviewImages[0].alt" class="parallax-media" :data-parallax-speed="aboutPreviewImages[0].speed" :style="aboutPreviewImages[0].style">
+      </div>
       <div class="a-img" style="align-self:start" v-if="aboutPreviewImages[1]"><img :src="aboutPreviewImages[1].src" :alt="aboutPreviewImages[1].alt" class="parallax-media" :data-parallax-speed="aboutPreviewImages[1].speed" :style="aboutPreviewImages[1].style"></div>
       <div class="a-img" style="align-self:end" v-if="aboutPreviewImages[2]"><img :src="aboutPreviewImages[2].src" :alt="aboutPreviewImages[2].alt" class="parallax-media" :data-parallax-speed="aboutPreviewImages[2].speed" :style="aboutPreviewImages[2].style"></div>
     </div>
