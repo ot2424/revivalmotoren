@@ -7,10 +7,15 @@
   justify-content:center;
   padding:22px;
   background:rgba(6,8,10,.88);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
 }
 .gallery-lightbox.is-open{display:flex}
+.gallery-lightbox.is-video-open{
+  background:rgba(5,6,8,.96);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
 .gallery-lightbox-dialog{
   position:relative;
   width:min(100%, 1320px);
@@ -20,6 +25,11 @@
   border:1px solid rgba(255,255,255,.1);
   background:rgba(12,14,18,.9);
   box-shadow:0 30px 100px rgba(0,0,0,.45);
+  contain:layout paint;
+}
+.gallery-lightbox.is-video-open .gallery-lightbox-dialog{
+  background:#050608;
+  box-shadow:none;
 }
 .gallery-lightbox-dialog::before{
   content:"";
@@ -42,11 +52,25 @@
     radial-gradient(circle at top, rgba(255,255,255,.08), transparent 34%),
     linear-gradient(180deg,#0c0e12 0%, #0a0c10 100%);
 }
+.gallery-lightbox.is-video-open .gallery-lightbox-stage{
+  background:#050608;
+}
 .gallery-lightbox-stage img{
   max-width:100%;
   max-height:100%;
   object-fit:contain;
   display:block;
+}
+.gallery-lightbox-stage video{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  display:block;
+  background:#050608;
+}
+.gallery-lightbox-stage img[hidden],
+.gallery-lightbox-stage video[hidden]{
+  display:none;
 }
 .gallery-lightbox-close,
 .gallery-lightbox-nav{
@@ -104,8 +128,8 @@
   border-radius:999px;
   background:rgba(10,12,16,.68);
   border:1px solid rgba(224,71,77,.2);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
   font-size:12px;
   font-weight:800;
   letter-spacing:.12em;
@@ -113,12 +137,17 @@
   color:#e0474d;
   white-space:nowrap;
 }
-[data-lightbox-gallery] img{
+[data-lightbox-gallery] img,
+[data-lightbox-gallery] video{
   cursor:pointer;
 }
 
 @media(max-width:768px){
-  .gallery-lightbox{padding:10px}
+  .gallery-lightbox{
+    padding:10px;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
   .gallery-lightbox-dialog{
     height:min(84vh, 760px);
     border-radius:24px;

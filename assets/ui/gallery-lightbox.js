@@ -3,12 +3,27 @@
   let lightbox;
   let lightboxDialog;
   let lightboxImage;
+  let lightboxVideo;
   let lightboxCount;
   let lightboxPrev;
   let lightboxNext;
   let activeGallery = [];
   let activeIndex = 0;
   let touchStartX = 0;
+  let pausedPageVideos = [];
+
+  function pausePageVideos(){
+    pausedPageVideos = Array.from(document.querySelectorAll('video'))
+      .filter((video) => video !== lightboxVideo && !video.paused);
+    pausedPageVideos.forEach((video) => video.pause());
+  }
+
+  function resumePageVideos(){
+    pausedPageVideos.forEach((video) => {
+      if(document.contains(video)) video.play().catch(() => {});
+    });
+    pausedPageVideos = [];
+  }
 
   function ensureLightbox(){
     if(lightbox) return;
@@ -20,6 +35,7 @@
       <div class="gallery-lightbox-dialog">
         <div class="gallery-lightbox-stage">
           <img id="sharedGalleryLightboxImage" src="" alt="">
+          <video id="sharedGalleryLightboxVideo" controls muted playsinline preload="metadata"></video>
         </div>
         <button class="gallery-lightbox-close" id="sharedGalleryLightboxClose" type="button" aria-label="Galerie schließen">×</button>
         <button class="gallery-lightbox-nav prev" id="sharedGalleryLightboxPrev" type="button" aria-label="Vorheriges Bild">‹</button>
@@ -33,6 +49,7 @@
     lightbox = wrapper;
     lightboxDialog = wrapper.querySelector('.gallery-lightbox-dialog');
     lightboxImage = wrapper.querySelector('#sharedGalleryLightboxImage');
+    lightboxVideo = wrapper.querySelector('#sharedGalleryLightboxVideo');
     lightboxCount = wrapper.querySelector('#sharedGalleryLightboxCount');
     lightboxPrev = wrapper.querySelector('#sharedGalleryLightboxPrev');
     lightboxNext = wrapper.querySelector('#sharedGalleryLightboxNext');
@@ -61,22 +78,46 @@
   }
 
   function normalizeItems(container){
-    return Array.from(container.querySelectorAll('img'))
-      .filter((img) => !img.closest('[data-lightbox-ignore]'))
-      .map((img) => ({
-        src: img.dataset.lightboxSrc || img.currentSrc || img.src,
-        alt: img.getAttribute('alt') || 'Bild',
-        style: img.dataset.lightboxStyle || ''
-      }))
+    return Array.from(container.querySelectorAll('img, video'))
+      .filter((media) => !media.closest('[data-lightbox-ignore]'))
+      .map((media) => {
+        const source = media.tagName === 'VIDEO' ? media.querySelector('source') : null;
+        const src = media.dataset.lightboxSrc || media.currentSrc || media.src || source?.src || source?.dataset.src || media.dataset.src;
+        return {
+          type: media.tagName === 'VIDEO' ? 'video' : 'image',
+          src,
+          poster: media.getAttribute('poster') || '',
+          alt: media.getAttribute('alt') || media.getAttribute('aria-label') || 'Bild',
+          style: media.dataset.lightboxStyle || ''
+        };
+      })
       .filter((item) => item.src);
   }
 
   function render(){
-    const image = activeGallery[activeIndex];
-    if (!image) return;
-    lightboxImage.src = image.src;
-    lightboxImage.alt = image.alt;
-    lightboxImage.style.cssText = image.style || '';
+    const item = activeGallery[activeIndex];
+    if (!item) return;
+    lightbox.classList.toggle('is-video-open', item.type === 'video');
+    lightboxVideo.pause();
+    lightboxVideo.removeAttribute('src');
+    lightboxVideo.removeAttribute('poster');
+    lightboxVideo.load();
+    lightboxImage.removeAttribute('src');
+    lightboxImage.alt = '';
+    lightboxImage.style.cssText = '';
+    lightboxImage.hidden = item.type === 'video';
+    lightboxVideo.hidden = item.type !== 'video';
+
+    if(item.type === 'video'){
+      lightboxVideo.src = item.src;
+      if(item.poster) lightboxVideo.poster = item.poster;
+      lightboxVideo.setAttribute('aria-label', item.alt);
+      lightboxVideo.play().catch(() => {});
+    } else {
+      lightboxImage.src = item.src;
+      lightboxImage.alt = item.alt;
+      lightboxImage.style.cssText = item.style || '';
+    }
     lightboxCount.textContent = `${activeIndex + 1} / ${activeGallery.length}`;
     const showNav = activeGallery.length > 1;
     lightboxPrev.style.display = showNav ? 'inline-flex' : 'none';
@@ -87,17 +128,27 @@
     ensureLightbox();
     activeGallery = gallery;
     activeIndex = index;
-    render();
+    pausePageVideos();
+    document.body.classList.add('is-lightbox-open');
+    window.dispatchEvent(new CustomEvent('gallery-lightbox:open'));
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    render();
   }
 
   function close(){
     if (!lightbox) return;
+    lightboxVideo?.pause();
+    lightboxVideo?.removeAttribute('src');
+    lightboxVideo?.load();
     lightbox.classList.remove('is-open');
+    lightbox.classList.remove('is-video-open');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    document.body.classList.remove('is-lightbox-open');
+    window.dispatchEvent(new CustomEvent('gallery-lightbox:close'));
+    resumePageVideos();
   }
 
   function move(step){
@@ -110,14 +161,14 @@
     ensureLightbox();
     root.querySelectorAll(SELECTOR).forEach((container) => {
       if (container.dataset.lightboxBound === 'true') return;
-      const images = Array.from(container.querySelectorAll('img')).filter((img) => !img.closest('[data-lightbox-ignore]'));
-      if (!images.length) return;
+      const mediaItems = Array.from(container.querySelectorAll('img, video')).filter((media) => !media.closest('[data-lightbox-ignore]'));
+      if (!mediaItems.length) return;
       container.dataset.lightboxBound = 'true';
       container.addEventListener('click', (event) => {
-        const clicked = event.target.closest('img');
+        const clicked = event.target.closest('img, video');
         if (!clicked || !container.contains(clicked) || clicked.closest('[data-lightbox-ignore]')) return;
-        const orderedImages = Array.from(container.querySelectorAll('img')).filter((img) => !img.closest('[data-lightbox-ignore]'));
-        const index = orderedImages.indexOf(clicked);
+        const orderedMedia = Array.from(container.querySelectorAll('img, video')).filter((media) => !media.closest('[data-lightbox-ignore]'));
+        const index = orderedMedia.indexOf(clicked);
         if (index === -1) return;
         open(normalizeItems(container), index);
       });

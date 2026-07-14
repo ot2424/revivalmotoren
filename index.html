@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="assets/ui/scroll-top.css">
 <link rel="stylesheet" href="assets/ui/floating-contact.css">
 <link rel="stylesheet" href="assets/ui/consent-banner.css">
-<link rel="stylesheet" href="assets/ui/gallery-lightbox.css">
+<link rel="stylesheet" href="assets/ui/gallery-lightbox.css?v=20260714-3">
 <script>
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
@@ -587,11 +587,39 @@ html::-webkit-scrollbar-thumb{background:var(--ink)}
 .why-mosaic{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;height:auto;padding:8px}
 .wy-img{overflow:hidden;background:var(--bg2);border-radius:18px;aspect-ratio:16/10}
 .wy-img:nth-child(n+4){display:none}
-.wy-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.94) saturate(1);transition:filter .5s,transform .6s}
-.wy-img:hover img{filter:brightness(.94) saturate(1);transform:none}
+.wy-img > img{width:100%;height:100%;object-fit:cover;filter:brightness(.94) saturate(1);transition:filter .5s,transform .6s}
+.wy-img:hover > img{filter:brightness(.94) saturate(1);transform:none}
 .why-media-cycle{position:relative;width:100%;height:100%;overflow:hidden}
-.why-media-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity .85s ease}
-.why-media-slide.is-active{opacity:1}
+.why-media-cycle .why-media-slide{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  opacity:0;
+  transform:scale(1.035);
+  filter:brightness(.66) saturate(.92) blur(6px);
+  transition:
+    opacity 1.15s cubic-bezier(.22,1,.36,1),
+    filter 1.15s cubic-bezier(.22,1,.36,1),
+    transform 4.8s cubic-bezier(.16,1,.3,1);
+  will-change:opacity,filter,transform;
+}
+.why-media-cycle .why-media-slide.is-active{
+  z-index:2;
+  opacity:1;
+  transform:scale(1);
+  filter:brightness(.96) saturate(1) blur(0);
+}
+.why-media-cycle .why-media-slide.is-fading-out{
+  z-index:3;
+  opacity:0;
+  transform:scale(1.018);
+  filter:brightness(.72) saturate(.92) blur(5px);
+  pointer-events:none;
+}
 .why-media-cycle video{display:block;background:#090a0c}
 .why-media-cycle.is-contain{background:#090a0c}
 .why-media-cycle.is-contain .why-media-slide{object-fit:contain;padding:10px;box-sizing:border-box}
@@ -1356,6 +1384,8 @@ html[data-theme="dark"] .brand-general-cta{
 .ba-card:hover{border-color:rgba(224,71,77,.34);box-shadow:0 14px 34px rgba(0,0,0,.10),var(--red-shadow)}
 .ba-img-row{height:260px;overflow:hidden}
 .ba-img-row img{width:100%;height:100%;object-fit:cover;object-position:center 90%}
+.ba-img-row .why-media-cycle{width:100%;height:100%}
+.ba-img-row .why-media-slide{object-position:center}
 .ba-footer{background:#fff;padding:18px 22px}
 .ba-title{font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--ink);margin-bottom:3px}
 .ba-sub{font-size:13px;color:var(--mid)}
@@ -2882,8 +2912,18 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
   .hpill{flex:0 0 auto;min-height:40px;padding:0 14px;font-size:12px}
   .why-top-left,.why-top-right,.cases-header,.map-info,.kt-left,.kt-right,footer{padding-left:20px;padding-right:20px}
   .why-top-right{grid-template-columns:1fr;gap:22px}
-  .why-mosaic{height:auto;grid-template-columns:1fr;gap:8px;padding:8px}
+  .why-mosaic{height:auto;grid-template-columns:1fr;gap:14px;padding:8px}
   .wy-img{min-height:220px;aspect-ratio:16/10}
+  .wy-img.hide-mobile{display:none}
+  .wy-img.is-media-cycle{
+    min-height:clamp(360px, 96vw, 520px);
+    aspect-ratio:4/5;
+    border-radius:22px;
+  }
+  .wy-img.is-media-cycle .why-media-slide{
+    object-fit:cover;
+    object-position:center;
+  }
   .sec-h{font-size:clamp(26px,9vw,34px)}
   .sec-sub,.lst-intro-body,.map-copy,.kt-sub{font-size:13px}
   .lcard{padding:22px 18px;gap:14px}
@@ -3097,16 +3137,16 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     </div>
   </div>
   <div class="why-mosaic" data-lightbox-gallery="why-mosaic">
-    <div class="wy-img" v-for="image in whyMosaic" :key="image.alt">
-      <div v-if="image.slides && image.slides.length" class="why-media-cycle parallax-media" :class="{ 'is-contain': image.fit === 'contain' }" data-why-media-cycle data-lightbox-ignore :data-parallax-speed="image.speed">
+    <div class="wy-img" v-for="image in whyMosaic" :key="image.alt" :class="{ 'hide-mobile': image.hideOnMobile, 'is-media-cycle': image.slides && image.slides.length }">
+      <div v-if="image.slides && image.slides.length" class="why-media-cycle parallax-media" :class="{ 'is-contain': image.fit === 'contain' }" data-why-media-cycle :data-parallax-speed="image.speed">
         <template v-for="(slide, index) in image.slides" :key="slide.src">
-          <video v-if="slide.type === 'video'" class="why-media-slide" :class="{ 'is-active': index === 0 }" data-cycle-slide muted playsinline preload="metadata" :poster="slide.poster || image.src" :aria-label="slide.alt">
-            <source :src="slide.src">
+          <video v-if="slide.type === 'video'" class="why-media-slide" :class="{ 'is-active': index === 0 }" data-cycle-slide muted playsinline preload="none" :poster="slide.poster || image.src" :aria-label="slide.alt">
+            <source :data-src="slide.src">
           </video>
-          <img v-else class="why-media-slide" :class="{ 'is-active': index === 0 }" data-cycle-slide :src="slide.src" :alt="slide.alt || image.alt" loading="lazy" decoding="async">
+          <img v-else class="why-media-slide" :class="{ 'is-active': index === 0 }" data-cycle-slide :data-src="slide.src" :alt="slide.alt || image.alt" loading="lazy" decoding="async">
         </template>
       </div>
-      <img v-else :src="image.src" :alt="image.alt" class="parallax-media" :data-parallax-speed="image.speed">
+      <img v-else :src="image.src" :alt="image.alt" class="parallax-media" :data-parallax-speed="image.speed" loading="lazy" decoding="async">
     </div>
   </div>
 </div>
@@ -3148,7 +3188,15 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     <div class="ba-card" v-for="card in workshopCards" :key="card.title">
       <div class="ba-img-row" style="grid-template-columns:1fr">
         <div class="ba-img">
-          <img :src="card.src" :alt="card.alt" class="parallax-media" :data-parallax-speed="card.speed" loading="lazy" decoding="async">
+          <div v-if="card.slides && card.slides.length" class="why-media-cycle parallax-media" data-why-media-cycle :data-parallax-speed="card.speed">
+            <template v-for="(slide, index) in card.slides" :key="slide.src">
+              <video v-if="slide.type === 'video'" class="why-media-slide" :class="{ 'is-active': index === 0 }" data-cycle-slide muted playsinline preload="none" :poster="slide.poster || card.src" :aria-label="slide.alt">
+                <source :data-src="slide.src">
+              </video>
+              <img v-else class="why-media-slide" :class="{ 'is-active': index === 0 }" data-cycle-slide :data-src="slide.src" :alt="slide.alt || card.alt" loading="lazy" decoding="async">
+            </template>
+          </div>
+          <img v-else :src="card.src" :alt="card.alt" class="parallax-media" :data-parallax-speed="card.speed" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="ba-footer">
@@ -3339,17 +3387,17 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 </footer>
 </div>
 
-  <script src="content/site-core.js?v=20260713-1"></script>
-  <script src="content/home-content.js?v=20260713-1"></script>
-  <script src="content/projekte-content.js?v=20260713-1"></script>
-  <script src="content/about-content.js?v=20260713-1"></script>
+  <script src="content/site-core.js?v=20260714-1"></script>
+  <script src="content/home-content.js?v=20260714-1"></script>
+  <script src="content/projekte-content.js?v=20260714-1"></script>
+  <script src="content/about-content.js?v=20260714-1"></script>
   <script src="content/contact-content.js"></script>
   <script src="content/motoren-content.js"></script>
 <script src="assets/ui/mobile-nav.js"></script>
 <script src="assets/ui/scroll-top.js"></script>
 <script src="assets/ui/floating-contact.js"></script>
 <script src="assets/ui/consent-banner.js"></script>
-<script src="assets/ui/gallery-lightbox.js"></script>
+<script src="assets/ui/gallery-lightbox.js?v=20260714-3"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -3436,22 +3484,56 @@ createApp({
         let current = 0;
         let imageTimer = null;
         let transitionTimer = null;
+        let hasStarted = false;
+        let isPausedByLightbox = false;
+
+        const pauseCycle = () => {
+          isPausedByLightbox = true;
+          window.clearTimeout(imageTimer);
+          window.clearTimeout(transitionTimer);
+          slides.forEach((slide) => {
+            if(slide.tagName === 'VIDEO') slide.pause();
+          });
+        };
+
+        const resumeCycle = () => {
+          if(!hasStarted) return;
+          isPausedByLightbox = false;
+          activateSlide(current);
+        };
+
+        const hydrateSlide = (slide) => {
+          if(slide.tagName === 'IMG' && slide.dataset.src && !slide.getAttribute('src')){
+            slide.setAttribute('src', slide.dataset.src);
+          }
+          if(slide.tagName === 'VIDEO'){
+            const source = slide.querySelector('source[data-src]');
+            if(source && !source.getAttribute('src')){
+              source.setAttribute('src', source.dataset.src);
+              slide.load();
+            }
+          }
+        };
 
         const activateSlide = (index) => {
           window.clearTimeout(imageTimer);
           window.clearTimeout(transitionTimer);
+          if(isPausedByLightbox || document.body.classList.contains('is-lightbox-open')) return;
+          const previous = slides[current];
           current = index;
           slides.forEach((slide, slideIndex) => {
             const isActive = slideIndex === current;
             slide.classList.toggle('is-active', isActive);
+            if(isActive) slide.classList.remove('is-fading-out');
             if(slide.tagName === 'VIDEO' && !isActive){
               slide.pause();
-              slide.currentTime = 0;
+              if(slide !== previous) slide.currentTime = 0;
             }
           });
 
           const active = slides[current];
           const next = () => showSlide((current + 1) % slides.length);
+          hydrateSlide(active);
 
           if(active.tagName === 'VIDEO'){
             active.muted = true;
@@ -3459,7 +3541,6 @@ createApp({
             active.currentTime = 0;
             active.onended = next;
             active.onerror = next;
-            active.load();
             active.play().catch(() => {
               imageTimer = window.setTimeout(next, 4200);
             });
@@ -3471,11 +3552,41 @@ createApp({
         const showSlide = (index) => {
           window.clearTimeout(imageTimer);
           window.clearTimeout(transitionTimer);
-          slides[current]?.classList.remove('is-active');
-          transitionTimer = window.setTimeout(() => activateSlide(index), 430);
+          if(isPausedByLightbox || document.body.classList.contains('is-lightbox-open')) return;
+          const outgoing = slides[current];
+          const incoming = slides[index];
+          if(!incoming || incoming === outgoing) return;
+          hydrateSlide(incoming);
+          outgoing?.classList.add('is-fading-out');
+          activateSlide(index);
+          transitionTimer = window.setTimeout(() => {
+            outgoing?.classList.remove('is-active', 'is-fading-out');
+            if(outgoing?.tagName === 'VIDEO') outgoing.currentTime = 0;
+          }, 1180);
         };
 
-        activateSlide(0);
+        const startCycle = () => {
+          if(hasStarted) return;
+          hasStarted = true;
+          activateSlide(0);
+        };
+
+        if('IntersectionObserver' in window){
+          const mediaObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+              if(entry.isIntersecting){
+                startCycle();
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { rootMargin:'160px 0px', threshold:.08 });
+          mediaObserver.observe(cycle);
+        } else {
+          startCycle();
+        }
+
+        window.addEventListener('gallery-lightbox:open', pauseCycle);
+        window.addEventListener('gallery-lightbox:close', resumeCycle);
       });
     }
   },
@@ -3494,6 +3605,7 @@ createApp({
 
       if(reducedMotion){
         document.querySelectorAll('.brand-observe').forEach(el=>el.classList.add('is-visible'));
+        window.GalleryLightbox?.bind(document);
         return;
       }
 
