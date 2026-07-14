@@ -75,7 +75,7 @@ Object.assign(window.siteContent, {
     { src: 'assets/images/projects/pistons/pistons-renewed.jpg', alt: 'Kolben vor und nach der Instandsetzung', speed: 10, fit: 'contain', slides: [
       { type: 'video', src: 'assets/images/projects/pistons/piston-damaged.mp4', poster: 'assets/images/projects/pistons/piston-damaged.jpg', alt: 'Beschädigte Kolben vor der Instandsetzung' },
       { type: 'image', src: 'assets/images/projects/pistons/piston-damaged.jpg', alt: 'Beschädigter einzelner Kolben' },
-      { type: 'image', src: 'assets/images/projects/pistons/pistons-renewed.jpg', alt: 'Erneuerte Kolben nach der Instandsetzung' }
+      { type: 'image', src: 'assets/images/projects/pistons/pistons-renewed.png', alt: 'Erneuerte Kolben nach der Instandsetzung' }
     ] },
     { src: 'assets/images/projects/Motorblock1.jpg', alt: 'Motorblock in der Werkstatt', speed: 12 },
     { src: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.jpg', alt: 'Mercedes AMG Motorarbeit in der Werkstatt', speed: 14, slides: [
