@@ -58,6 +58,7 @@ function readPayload(formData) {
     name: String(formData.get('name') || '').trim(),
     email: String(formData.get('email') || '').trim(),
     phone: String(formData.get('phone') || '').trim(),
+    postalCode: String(formData.get('postal_code') || '').trim(),
     mileage: String(formData.get('mileage') || '').trim(),
     vin: String(formData.get('vin') || '').trim(),
     hsnTsn: String(formData.get('hsn_tsn') || '').trim(),
@@ -71,6 +72,7 @@ function validatePayload(payload) {
   if (!payload.name) throw badRequest('Bitte geben Sie Ihren Namen an.');
   if (!payload.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) throw badRequest('Bitte geben Sie eine gültige E-Mail-Adresse an.');
   if (!payload.phone) throw badRequest('Bitte geben Sie Ihre Telefonnummer an.');
+  if (!payload.postalCode) throw badRequest('Bitte geben Sie die Postleitzahl für die Fahrzeugabholung an.');
   if (!payload.vin) throw badRequest('Bitte geben Sie die Fahrgestellnummer an.');
   if (!payload.problem) throw badRequest('Bitte beschreiben Sie Ihr Anliegen.');
   if (!payload.privacyAccepted) throw badRequest('Bitte bestätigen Sie die Datenschutzerklärung.');
@@ -151,6 +153,7 @@ function buildMailContent(payload, attachments) {
     ['Name', payload.name],
     ['E-Mail', payload.email],
     ['Telefon', payload.phone],
+    ['Postleitzahl Abholort', payload.postalCode],
     ['Kilometerstand', payload.mileage || '—'],
     ['VIN', payload.vin],
     ['HSN/TSN', payload.hsnTsn || '—']
