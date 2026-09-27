@@ -78,7 +78,10 @@ Object.assign(window.siteContent, {
       { type: 'image', src: 'assets/images/projects/pistons/pistons-renewed.webp', alt: 'Erneuerte Kolben nach der Instandsetzung' }
     ] },
     { src: 'assets/images/projects/Motorblock1.webp', alt: 'Motorblock in der Werkstatt', speed: 12, hideOnMobile: true },
-    { src: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.webp', alt: 'Mercedes AMG Motorarbeit in der Werkstatt', speed: 14, position: 'center bottom' }
+    { src: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.webp', alt: 'Mercedes AMG Motorarbeit in der Werkstatt', speed: 14, position: 'center bottom', slides: [
+      { type: 'image', src: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.webp', alt: 'Mercedes AMG Motorarbeit in der Werkstatt' },
+      { type: 'video', src: 'assets/images/projects/mercedes-amg/mercedes-amg-720.mp4', poster: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.webp', alt: 'Mercedes AMG Motor in der Werkstatt' }
+    ] }
   ],
   services: [
     {
