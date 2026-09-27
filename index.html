@@ -1384,6 +1384,7 @@ html[data-theme="dark"] .brand-general-cta{
 .ba-card::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:var(--red-line-soft);z-index:2}
 .ba-card:hover{border-color:rgba(224,71,77,.34);box-shadow:0 14px 34px rgba(0,0,0,.10),var(--red-shadow)}
 .ba-img-row{height:260px;overflow:hidden}
+.ba-img-row .ba-img{height:100%}
 .ba-img-row img{width:100%;height:100%;object-fit:cover;object-position:center 90%}
 .ba-img-row .why-media-cycle{width:100%;height:100%}
 .ba-img-row .why-media-slide{object-position:center}
@@ -3141,10 +3142,10 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
     <div class="wy-img" v-for="image in whyMosaic" :key="image.alt" :class="{ 'hide-mobile': image.hideOnMobile, 'is-media-cycle': image.slides && image.slides.length }">
       <div v-if="image.slides && image.slides.length" class="why-media-cycle parallax-media" :class="{ 'is-contain': image.fit === 'contain' }" data-why-media-cycle :data-parallax-speed="image.speed">
         <template v-for="(slide, index) in image.slides" :key="slide.src">
-          <video v-if="slide.type === 'video'" class="why-media-slide" :class="{ 'is-active': index === 0 }" data-cycle-slide muted playsinline preload="none" :poster="slide.poster || image.src" :aria-label="slide.alt">
+          <video v-if="slide.type === 'video'" class="why-media-slide" :class="{ 'is-active': index === 0 }" :style="image.position ? { objectPosition: image.position } : null" data-cycle-slide muted playsinline preload="none" :poster="slide.poster || image.src" :aria-label="slide.alt">
             <source :data-src="slide.src">
           </video>
-          <img v-else class="why-media-slide" :class="{ 'is-active': index === 0 }" data-cycle-slide :data-src="slide.src" :alt="slide.alt || image.alt" loading="lazy" decoding="async">
+          <img v-else class="why-media-slide" :class="{ 'is-active': index === 0 }" :style="image.position ? { objectPosition: image.position } : null" data-cycle-slide :src="index === 0 ? slide.src : null" :data-src="slide.src" :alt="slide.alt || image.alt" loading="lazy" decoding="async">
         </template>
       </div>
       <img v-else :src="image.src" :alt="image.alt" class="parallax-media" :data-parallax-speed="image.speed" loading="lazy" decoding="async">
@@ -3191,10 +3192,10 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
         <div class="ba-img">
           <div v-if="card.slides && card.slides.length" class="why-media-cycle parallax-media" data-why-media-cycle :data-parallax-speed="card.speed">
             <template v-for="(slide, index) in card.slides" :key="slide.src">
-              <video v-if="slide.type === 'video'" class="why-media-slide" :class="{ 'is-active': index === 0 }" data-cycle-slide muted playsinline preload="none" :poster="slide.poster || card.src" :aria-label="slide.alt">
+              <video v-if="slide.type === 'video'" class="why-media-slide" :class="{ 'is-active': index === 0 }" :style="card.position ? { objectPosition: card.position } : null" data-cycle-slide muted playsinline preload="none" :poster="slide.poster || card.src" :aria-label="slide.alt">
                 <source :data-src="slide.src">
               </video>
-              <img v-else class="why-media-slide" :class="{ 'is-active': index === 0 }" data-cycle-slide :data-src="slide.src" :alt="slide.alt || card.alt" loading="lazy" decoding="async">
+              <img v-else class="why-media-slide" :class="{ 'is-active': index === 0 }" :style="card.position ? { objectPosition: card.position } : null" data-cycle-slide :src="index === 0 ? slide.src : null" :data-src="slide.src" :alt="slide.alt || card.alt" loading="lazy" decoding="async">
             </template>
           </div>
           <img v-else :src="card.src" :alt="card.alt" class="parallax-media" :data-parallax-speed="card.speed" loading="lazy" decoding="async">
@@ -3389,7 +3390,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 </div>
 
   <script src="content/site-core.js?v=20260714-1"></script>
-  <script src="content/home-content.js?v=20260714-1"></script>
+  <script src="content/home-content.js?v=20260927-1"></script>
   <script src="content/projekte-content.js?v=20260714-1"></script>
   <script src="content/about-content.js?v=20260714-1"></script>
   <script src="content/contact-content.js"></script>
