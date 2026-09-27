@@ -3148,7 +3148,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
           <img v-else class="why-media-slide" :class="{ 'is-active': index === 0 }" :style="image.position ? { objectPosition: image.position } : null" data-cycle-slide :src="index === 0 ? slide.src : null" :data-src="slide.src" :alt="slide.alt || image.alt" loading="lazy" decoding="async">
         </template>
       </div>
-      <img v-else :src="image.src" :alt="image.alt" class="parallax-media" :data-parallax-speed="image.speed" loading="lazy" decoding="async">
+      <img v-else :src="image.src" :alt="image.alt" :style="image.position ? { objectPosition: image.position } : null" class="parallax-media" :data-parallax-speed="image.speed" loading="lazy" decoding="async">
     </div>
   </div>
 </div>
@@ -3198,7 +3198,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
               <img v-else class="why-media-slide" :class="{ 'is-active': index === 0 }" :style="card.position ? { objectPosition: card.position } : null" data-cycle-slide :src="index === 0 ? slide.src : null" :data-src="slide.src" :alt="slide.alt || card.alt" loading="lazy" decoding="async">
             </template>
           </div>
-          <img v-else :src="card.src" :alt="card.alt" class="parallax-media" :data-parallax-speed="card.speed" loading="lazy" decoding="async">
+          <img v-else :src="card.src" :alt="card.alt" :style="card.position ? { objectPosition: card.position } : null" class="parallax-media" :data-parallax-speed="card.speed" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="ba-footer">
@@ -3390,7 +3390,7 @@ footer{margin:0 24px 24px;background:var(--white);border-radius:var(--rad2);bord
 </div>
 
   <script src="content/site-core.js?v=20260714-1"></script>
-  <script src="content/home-content.js?v=20260927-1"></script>
+  <script src="content/home-content.js?v=20260927-2"></script>
   <script src="content/projekte-content.js?v=20260714-1"></script>
   <script src="content/about-content.js?v=20260714-1"></script>
   <script src="content/contact-content.js"></script>

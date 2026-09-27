@@ -78,10 +78,7 @@ Object.assign(window.siteContent, {
       { type: 'image', src: 'assets/images/projects/pistons/pistons-renewed.webp', alt: 'Erneuerte Kolben nach der Instandsetzung' }
     ] },
     { src: 'assets/images/projects/Motorblock1.webp', alt: 'Motorblock in der Werkstatt', speed: 12, hideOnMobile: true },
-    { src: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.webp', alt: 'Mercedes AMG Motorarbeit in der Werkstatt', speed: 14, position: 'center bottom', slides: [
-      { type: 'image', src: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.webp', alt: 'Mercedes AMG Motorarbeit in der Werkstatt' },
-      { type: 'video', src: 'assets/images/projects/mercedes-amg/mercedes-amg-720.mp4', poster: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.webp', alt: 'Mercedes AMG Motor in der Werkstatt' }
-    ] }
+    { src: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.webp', alt: 'Mercedes AMG Motorarbeit in der Werkstatt', speed: 14, position: 'center bottom' }
   ],
   services: [
     {
@@ -129,10 +126,7 @@ Object.assign(window.siteContent, {
     { src: 'assets/images/placeholders/placeholder.png', alt: 'Platzhalter Mercedes V12 Oberklasse', tag: 'Mercedes · V12', name: 'Oberklasse', speed: 18 }
   ],
   workshopCards: [
-    { src: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.webp', alt: 'Mercedes AMG Motorarbeit', title: 'AMG-Motorarbeit', sub: 'Motorarbeiten an Performance-Fahrzeugen mit sauberer Diagnose, Ausbau und präziser Instandsetzung.', speed: 14, position: 'center bottom', slides: [
-      { type: 'image', src: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.webp', alt: 'Mercedes AMG Motor in der Werkstatt' },
-      { type: 'video', src: 'assets/images/projects/mercedes-amg/mercedes-amg-720.mp4', poster: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.webp', alt: 'Mercedes AMG Motorarbeit in der Werkstatt' }
-    ] },
+    { src: 'assets/images/projects/mercedes-amg/mercedes-amg-motor.webp', alt: 'Mercedes AMG Motorarbeit', title: 'AMG-Motorarbeit', sub: 'Motorarbeiten an Performance-Fahrzeugen mit sauberer Diagnose, Ausbau und präziser Instandsetzung.', speed: 14, position: 'center bottom' },
     { src: 'assets/images/projects/messen.png', alt: 'Motorblock Vermessung', title: 'Motorblock Vermessung', sub: 'Exakte Prüfung aller Bauteile nach OEM-Spezifikationen mit modernen Messverfahren.', speed: 10 },
     { src: 'assets/images/projects/img-zylinder.jpg', alt: 'Zylinderkopf Planen', title: 'Zylinderkopf Planen', sub: 'Präzises Planen der Dichtfläche für optimale Passgenauigkeit und langfristige Betriebssicherheit.', speed: 12 }
   ],
