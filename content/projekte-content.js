@@ -45,20 +45,20 @@ window.projectsPageContent = {
       stats: ['Demontage', 'Befundung', 'Instandsetzung']
     },
     {
-      slug: 'bmw-x5-projekt',
+      slug: 'bmw-x6-projekt',
       placement: 'top-right',
       category: 'BMW · SUV',
-      title: 'BMW X5',
+      title: 'BMW X6',
       excerpt: 'Motor geöffnet, Komponenten geprüft und das Aggregat für die fachgerechte Instandsetzung vorbereitet.',
       images: [
         {
-          src: 'assets/images/projects/projekte/bmw-x5/bmw-x5-project-1.png',
-          alt: 'BMW X5 in der Werkstatt von Teuto Motoren',
+          src: 'assets/images/projects/projekte/bmw-x6/bmw-x6-project-1.png',
+          alt: 'BMW X6 in der Werkstatt von Teuto Motoren',
           style: 'object-fit:contain;object-position:center center;'
         },
         {
-          src: 'assets/images/projects/projekte/bmw-x5/bmw-x5-project-2.png',
-          alt: 'BMW X5 mit geöffnetem Motor und ausgelegten Bauteilen',
+          src: 'assets/images/projects/projekte/bmw-x6/bmw-x6-project-2.png',
+          alt: 'BMW X6 mit geöffnetem Motor und ausgelegten Bauteilen',
           style: 'object-fit:contain;object-position:center center;'
         }
       ],
